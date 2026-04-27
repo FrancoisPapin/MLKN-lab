@@ -255,9 +255,8 @@ document.addEventListener('DOMContentLoaded', function(){
     grid.appendChild(card);
 
     // Draw decorative preview canvas
- setTimeout(function(){ 
-  drawPreview(net.id, net.colors); 
-}, 100 * (NETS.indexOf(net) + 1));
+    requestAnimationFrame(function(){ drawPreview(net.id, net.colors); });
+  });
 
 function drawPreview(id, colors){
     var cv = document.getElementById('prev-'+id);
