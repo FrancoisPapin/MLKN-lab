@@ -142,41 +142,36 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       });
     });
-
-  // ── Intra-links ───────────────────────────────────────────────
-  var intraLinks = simLinks.filter(function (l) { return !l.inter; });
-  var intraG = g.append('g').attr('class', 'intra-group');
-  var intraSel = intraG.selectAll('line').data(intraLinks).enter().append('line')
-    .attr('class', 'intra-link')
-    .attr('stroke', function (d) {
+  
+  // Intra-links
+    intraSel.style('opacity', function (d) {
+      if (bridgesOnly) return 0.03;
+      if (!activeFilter) return 1;
       var sid = typeof d.source === 'object' ? d.source.id : d.source;
-      var nd = data.nodes.find(function (n) { return n.id === sid; });
-      return nd ? (data.disciplines[nd.disc] || { color: '#999' }).color + '28' : '#99999928';
-    })
-    .attr('stroke-width', function (d) { return Math.max(0.5, (d.weight || 1) * 0.45); })
-    .attr('stroke-linecap', 'round');
+      var tid = typeof d.target === 'object' ? d.target.id : d.target;
+      var ns = data.nodes.find(function (n) { return n.id === sid; });
+      var nt = data.nodes.find(function (n) { return n.id === tid; });
+      if (activeLayer === 'disc') {
+        return (ns && ns.disc === activeFilter) || (nt && nt.disc === activeFilter) ? 1 : 0.03;
+      }
+      return 1;
+    });
 
-  // ── Inter-links (bridges) ─────────────────────────────────────
-  var interLinks = simLinks.filter(function (l) { return l.inter; });
-  var interG = g.append('g').attr('class', 'inter-group');
-  var interSel = interG.selectAll('line').data(interLinks).enter().append('line')
-    .attr('class', function (d) { return 'inter-link ' + ((d.weight || 1) >= 4 ? 'inter-major' : 'inter-minor'); })
-    .attr('stroke', function (d) {
-      if (!d.pair || d.pair.length < 2) return '#1A6BAA77';
-      var c1 = (data.disciplines[d.pair[0]] || { color: '#888' }).color;
-      var c2 = (data.disciplines[d.pair[1]] || { color: '#888' }).color;
-      var blended = blendHex(c1, c2);
-      return blended + ((d.weight || 1) >= 4 ? 'bb' : '66');
-    })
-    .attr('stroke-width', function (d) {
-      return (d.weight || 1) >= 4
-        ? Math.max(1.5, (d.weight || 1) * 0.9)
-        : Math.max(0.7, (d.weight || 1) * 0.5);
-    })
-    .attr('stroke-dasharray', function (d) {
-      return (d.weight || 1) >= 4 ? 'none' : '4 3';
-    })
-    .attr('stroke-linecap', 'round');
+    // Inter-links
+    interSel.style('opacity', function (d) {
+      if (!activeFilter) return 1;
+      var sid = typeof d.source === 'object' ? d.source.id : d.source;
+      var tid = typeof d.target === 'object' ? d.target.id : d.target;
+      var ns = data.nodes.find(function (n) { return n.id === sid; });
+      var nt = data.nodes.find(function (n) { return n.id === tid; });
+      if (activeLayer === 'disc') {
+        return (ns && ns.disc === activeFilter) || (nt && nt.disc === activeFilter) ? 1 : 0.03;
+      }
+      return 1;
+    }).style('stroke-width', function (d) {
+      var base = (d.weight || 1) >= 4 ? Math.max(1.5, (d.weight || 1) * 0.9) : Math.max(0.7, (d.weight || 1) * 0.5);
+      return bridgesOnly ? base * 1.4 : base;
+    });
 
   // ── Node groups ───────────────────────────────────────────────
   var nodeG = g.append('g');
