@@ -160,7 +160,6 @@ function initMap(data){
   document.addEventListener('keydown',function(e){
     if(e.key==='Escape'){hideDetail();}
   });
-}
 
 /* Legend */
 function buildLegend(clusters){
@@ -258,6 +257,8 @@ function showDetail(d,data,stats){
   panel.style.display='block';
 }
 function hideDetail(){document.getElementById('detail').style.display='none';}
+  }
+  
 </script>
 </body>
 </html>
