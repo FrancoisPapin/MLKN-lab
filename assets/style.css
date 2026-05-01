@@ -186,7 +186,7 @@ html.map-page-root,body.map-page-root{height:100%;overflow:hidden}
   letter-spacing:.2em;text-transform:uppercase;margin-bottom:26px}
 
 /* Essay */
-.essay{max-width:1400px;margin:0 auto;padding:20px 20px}
+.essay{max-width:1400px;margin:0 auto;padding:20px 20px;text-align: justify}
 .essay h2{font-size:24px;font-weight:700;color:var(--text);margin-bottom:6px}
 .essay .essay-sub{font-family:var(--mono);font-size:10px;color:var(--muted);
   letter-spacing:.2em;text-transform:uppercase;margin-bottom:22px}
