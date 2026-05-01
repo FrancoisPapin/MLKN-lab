@@ -11,7 +11,7 @@
   --r:8px;--sh:0 2px 16px rgba(26,74,122,.08);--sh2:0 8px 40px rgba(26,30,46,.13);
 }
 html{font-size:16px;scroll-behavior:smooth}
-body{font-family:var(--font);background:var(--bg);color:var(--text);margin: 0;padding: 0;height: 100vh;width: 100vw;overflow: hidden;position: relative}
+body{font-family:var(--font);background:var(--bg);color:var(--text);margin: 0;padding: 0;width: 100vw;position: relative}
 a{color:var(--accent);text-decoration:none;transition:opacity .15s}
 a:hover{opacity:.75;text-decoration:underline}
 a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
