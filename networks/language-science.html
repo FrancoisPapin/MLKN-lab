@@ -10,10 +10,28 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/style.css">
 <style>
-html,body{height:100%;overflow:hidden}
-</style>
-</head>
-<body class="network-page">
+      /* --- CONFIGURATION SPÉCIFIQUE À CETTE PAGE --- */
+      
+      /* Sur Ordinateur : On bloque le défilement pour fixer les légendes */
+      @media (min-width: 769px) {
+        html, body {
+          height: 100vh;
+          overflow: hidden;
+        }
+      }
+
+      /* Sur Mobile : On libère le défilement pour pouvoir tout lire */
+      @media (max-width: 768px) {
+        html, body {
+          height: auto;
+          overflow: auto !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="network-page">
+    
 <header id="topnav" class="topnav" role="banner"></header>
 
 <main class="map-page" id="main">
