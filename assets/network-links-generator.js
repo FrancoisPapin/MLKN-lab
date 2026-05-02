@@ -106,7 +106,127 @@ const DISCIPLINE_CONFIG = {
       "Policy Anthropology": ["policy", "government", "recommendations", "impact"]
     }
   }
-  // Ajoutez ici les autres disciplines (Neuroscience, Philosophy, etc.)
+  
+  "Cognitive Psychology": {
+  clusters: [
+    "PERCEPT",   // Perception
+    "MEMORY",    // Mémoire
+    "LANGUAGE",  // Langage
+    "EXEC",      // Fonctions exécutives
+    "EMOTION",   // Émotion
+    "SOCIAL",    // Cognition sociale
+    "JUDGMENT",  // Jugement et prise de décision
+    "METHODS"    // Méthodes
+  ],
+  clusterConnections: {
+    // Connexions logiques entre clusters
+    "PERCEPT": ["MEMORY", "LANGUAGE", "EXEC", "METHODS"],  // La perception influence la mémoire, le langage, les fonctions exécutives et utilise des méthodes
+    "MEMORY": ["PERCEPT", "LANGUAGE", "EXEC", "EMOTION"],    // La mémoire est liée à la perception, au langage, aux fonctions exécutives et aux émotions
+    "LANGUAGE": ["PERCEPT", "MEMORY", "EXEC", "SOCIAL"],    // Le langage dépend de la perception, de la mémoire, des fonctions exécutives et a un rôle social
+    "EXEC": ["PERCEPT", "MEMORY", "LANGUAGE", "JUDGMENT", "EMOTION", "SOCIAL"], // Les fonctions exécutives coordonnent plusieurs processus
+    "EMOTION": ["MEMORY", "EXEC", "SOCIAL", "JUDGMENT"],     // Les émotions influencent la mémoire, les fonctions exécutives, la cognition sociale et le jugement
+    "SOCIAL": ["LANGUAGE", "EXEC", "EMOTION", "JUDGMENT"],  // La cognition sociale implique le langage, les fonctions exécutives, les émotions et le jugement
+    "JUDGMENT": ["EXEC", "EMOTION", "SOCIAL", "METHODS"],    // Le jugement dépend des fonctions exécutives, des émotions, de la cognition sociale et utilise des méthodes
+    "METHODS": ["PERCEPT", "MEMORY", "EXEC", "JUDGMENT"]    // Les méthodes sont appliquées à la perception, la mémoire, les fonctions exécutives et le jugement
+  },
+  expertLinks: [
+    // Liens forts entre concepts clés
+    ["Visual Attention", "Object Recognition", 4],
+    ["Working Memory Model", "Episodic Memory", 4],
+    ["Language Comprehension", "Sentence Processing", 4],
+    ["Cognitive Control", "Inhibitory Control", 4],
+    ["Theory of Mind (Psy)", "Perspective Taking", 4],
+    ["Heuristics & Biases", "Dual-Process Theory", 4],
+    ["Prospect Theory", "Risk Perception", 4],
+
+    // Liens moyens
+    ["Selective Attention", "Perceptual Load Theory", 3],
+    ["Semantic Memory", "Mental Lexicon", 3],
+    ["Planning & Problem Solving", "Goal-Directed Behavior", 3],
+    ["Emotional Appraisal", "Mood & Cognition", 3],
+    ["Attribution Theory", "Stereotypes & Schemas", 3],
+    ["Framing Effects", "Anchoring Effect", 3],
+
+    // Liens entre clusters
+    ["Multisensory Integration", "Object Recognition", 3],
+    ["Memory Consolidation", "Episodic Memory", 3],
+    ["Language Production", "Mental Lexicon", 3],
+    ["Task Switching", "Cognitive Flexibility", 3],
+    ["Self-Regulation", "Intrinsic Motivation", 3],
+    ["Stress & Cognition", "Working Memory Model", 3],
+    ["Moral Psychology", "Theory of Mind (Psy)", 3],
+    ["Signal Detection Theory", "Reaction Time Paradigms", 3]
+  ],
+  conceptKeywords: {
+    // Perception
+    "Visual Attention": ["attention", "visual", "focus", "selective", "gaze"],
+    "Selective Attention": ["attention", "selection", "filtering", "focus"],
+    "Sustained Attention": ["attention", "vigilance", "sustained", "concentration"],
+    "Perceptual Load Theory": ["perception", "load", "attention", "capacity", "theory"],
+    "Change Blindness": ["perception", "change", "blindness", "attention", "visual"],
+    "Object Recognition": ["recognition", "objects", "visual", "perception", "identification"],
+    "Multisensory Integration": ["perception", "senses", "integration", "multimodal", "brain"],
+    "Top-Down Processing": ["perception", "top-down", "expectations", "knowledge", "cognition"],
+
+    // Mémoire
+    "Working Memory Model": ["memory", "working", "short-term", "baddeley", "hitch"],
+    "Episodic Memory": ["memory", "episodic", "events", "personal", "autobiographical"],
+    "Semantic Memory": ["memory", "semantic", "knowledge", "facts", "general"],
+    "Procedural Memory": ["memory", "procedural", "skills", "habits", "automatic"],
+    "Encoding & Retrieval": ["memory", "encoding", "retrieval", "storage", "processes"],
+    "False Memories": ["memory", "false", "distortion", "misinformation", "reconstruction"],
+    "Memory Consolidation": ["memory", "consolidation", "sleep", "long-term", "stabilization"],
+
+    // Langage
+    "Mental Lexicon": ["language", "lexicon", "mental", "words", "vocabulary"],
+    "Sentence Processing": ["language", "sentence", "processing", "parsing", "comprehension"],
+    "Language Comprehension": ["language", "comprehension", "understanding", "meaning", "semantics"],
+    "Language Production": ["language", "production", "speech", "writing", "expression"],
+    "Reading Processes": ["language", "reading", "decoding", "comprehension", "literacy"],
+    "Linguistic Relativity": ["language", "relativity", "sapir-whorf", "thought", "culture"],
+
+    // Fonctions exécutives
+    "Mental Models": ["cognition", "mental-models", "representation", "reasoning", "problem-solving"],
+    "Cognitive Flexibility": ["executive", "flexibility", "adaptation", "switching", "cognition"],
+    "Inhibitory Control": ["executive", "inhibition", "control", "suppression", "self-regulation"],
+    "Planning & Problem Solving": ["executive", "planning", "problem-solving", "strategy", "goals"],
+    "Task Switching": ["executive", "switching", "multitasking", "cognitive-control", "flexibility"],
+    "Cognitive Control": ["executive", "control", "regulation", "attention", "monitoring"],
+    "Goal-Directed Behavior": ["executive", "goals", "behavior", "motivation", "planning"],
+
+    // Émotion
+    "Emotional Appraisal": ["emotion", "appraisal", "evaluation", "cognition", "stimulus"],
+    "Mood & Cognition": ["emotion", "mood", "cognition", "affect", "thinking"],
+    "Intrinsic Motivation": ["emotion", "motivation", "intrinsic", "drive", "interest"],
+    "Self-Regulation": ["emotion", "regulation", "self-control", "management", "coping"],
+    "Stress & Cognition": ["emotion", "stress", "cognition", "performance", "anxiety"],
+
+    // Cognition sociale
+    "Theory of Mind (Psy)": ["social", "theory-of-mind", "empathy", "perspective", "beliefs"],
+    "Attribution Theory": ["social", "attribution", "causality", "explanation", "bias"],
+    "Stereotypes & Schemas": ["social", "stereotypes", "schemas", "categorization", "bias"],
+    "Moral Psychology": ["social", "morality", "ethics", "judgment", "values"],
+    "Perspective Taking": ["social", "perspective", "empathy", "understanding", "others"],
+    "Dual-Process Theory": ["social", "dual-process", "intuition", "reasoning", "cognition"],
+
+    // Jugement et prise de décision
+    "Heuristics & Biases": ["judgment", "heuristics", "biases", "decision-making", "cognitive"],
+    "Prospect Theory": ["judgment", "prospect-theory", "risk", "decision", "kahneman"],
+    "Risk Perception": ["judgment", "risk", "perception", "danger", "uncertainty"],
+    "Framing Effects": ["judgment", "framing", "bias", "decision", "presentation"],
+    "Anchoring Effect": ["judgment", "anchoring", "bias", "decision", "reference"],
+
+    // Méthodes
+    "Reaction Time Paradigms": ["methods", "reaction-time", "speed", "processing", "cognition"],
+    "Eye-Tracking": ["methods", "eye-tracking", "gaze", "attention", "visual"],
+    "Priming Paradigms": ["methods", "priming", "activation", "implicit", "memory"],
+    "Stroop Task": ["methods", "stroop", "interference", "attention", "control"],
+    "N-Back Task": ["methods", "n-back", "working-memory", "updating", "cognition"],
+    "Signal Detection Theory": ["methods", "signal-detection", "sensitivity", "bias", "perception"]
+  }
+}
+
+// Ajoutez ici les autres disciplines (Neuroscience, Philosophy, etc.)
 };
 
   // --- NEUROSCIENCE (Exemple) ---
