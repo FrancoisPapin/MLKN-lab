@@ -482,7 +482,7 @@ window.MAP_DATA = {
       "source": "Human Evolution",
       "target": "Behavioral Ecology",
       "weight": 4
-    }
+    };
 
     // =============================================
 // SCRIPT À COPIER-COLLER ICI :
