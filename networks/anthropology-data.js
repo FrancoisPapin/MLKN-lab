@@ -483,5 +483,99 @@ window.MAP_DATA = {
       "target": "Behavioral Ecology",
       "weight": 4
     }
+
+    // =============================================
+// SCRIPT À COPIER-COLLER ICI :
+// =============================================
+(function() {
+  const data = window.MAP_DATA;
+  const { nodes, links } = data;
+
+  const existingLinks = new Set();
+  links.forEach(link => {
+    const key1 = `${link.source}-${link.target}`;
+    const key2 = `${link.target}-${link.source}`;
+    existingLinks.add(key1);
+    existingLinks.add(key2);
+  });
+
+  function addLinkIfMissing(source, target, weight) {
+    const key1 = `${source}-${target}`;
+    const key2 = `${target}-${source}`;
+    if (!existingLinks.has(key1) && !existingLinks.has(key2)) {
+      links.push({ source, target, weight });
+      existingLinks.add(key1);
+      existingLinks.add(key2);
+    }
+  }
+
+  // 1. Liens intra-cluster
+  const nodesByCluster = {};
+  nodes.forEach(node => {
+    if (!nodesByCluster[node.cluster]) nodesByCluster[node.cluster] = [];
+    nodesByCluster[node.cluster].push(node);
+  });
+
+  Object.values(nodesByCluster).forEach(clusterNodes => {
+    for (let i = 0; i < clusterNodes.length; i++) {
+      for (let j = i + 1; j < clusterNodes.length; j++) {
+        const node1 = clusterNodes[i].id;
+        const node2 = clusterNodes[j].id;
+        const avgSize = (clusterNodes[i].size + clusterNodes[j].size) / 2;
+        let weight = Math.floor(avgSize / 8); // Ajusté pour vos tailles (20-28 → weight 2-3)
+        if (weight < 3) weight = 3;
+        if (weight > 5) weight = 5;
+        addLinkIfMissing(node1, node2, weight);
+      }
+    }
+  });
+
+  // 2. Liens inter-clusters (règles spécifiques pour l'anthropologie)
+  const clusterConnections = {
+    "CULTURAL": ["LINGAUTH", "MEDICAL", "POLITANH"],
+    "BIOANTH": ["ARCHAEO", "MEDICAL"],
+    "LINGAUTH": ["CULTURAL", "POLITANH"],
+    "ARCHAEO": ["BIOANTH", "ECOANTH"],
+    "MEDICAL": ["CULTURAL", "ECOANTH"],
+    "ECOANTH": ["ARCHAEO", "MEDICAL", "POLITANH"],
+    "POLITANH": ["CULTURAL", "LINGAUTH", "ECOANTH"],
+    "APPLIED": ["CULTURAL", "MEDICAL", "POLITANH"]
+  };
+
+  Object.entries(clusterConnections).forEach(([cluster1, connectedClusters]) => {
+    const cluster1Nodes = nodesByCluster[cluster1] || [];
+    connectedClusters.forEach(cluster2 => {
+      const cluster2Nodes = nodesByCluster[cluster2] || [];
+      cluster1Nodes.forEach(node1 => {
+        cluster2Nodes.forEach(node2 => {
+          addLinkIfMissing(node1.id, node2.id, 3); // Poids fixe pour les liens inter-clusters
+        });
+      });
+    });
+  });
+
+  // 3. Liens spécifiques (exemples pour l'anthropologie)
+  const specificLinks = [
+    { source: "Ethnography", target: "Language & Culture", weight: 4 },
+    { source: "Cultural Relativism", target: "Ethnolinguistics", weight: 3 },
+    { source: "Human Evolution", target: "Cultural Ecology", weight: 3 },
+    { source: "Medical Pluralism", target: "Political Ecology", weight: 3 },
+    { source: "Power & Hegemony", target: "Discourse & Power", weight: 4 },
+    { source: "Social Structure", target: "State & Governance", weight: 3 }
+  ];
+
+  specificLinks.forEach(link => {
+    addLinkIfMissing(link.source, link.target, link.weight);
+  });
+
+  console.log(`[Anthropology] Liens initiaux : ${35} → Liens finaux : ${links.length}`);
+})();
+
+// =============================================
+// FIN DU SCRIPT
+// =============================================
+    
   ]
+
+  
 };
