@@ -7,9 +7,17 @@
 // CONFIGURATION PAR DISCIPLINE
 // =============================================
 const DISCIPLINE_CONFIG = {
-  // --- ANTHROPOLOGY ---
   "Anthropology": {
-    clusters: ["CULTURAL", "BIOANTH", "LINGAUTH", "ARCHAEO", "MEDICAL", "ECOANTH", "POLITANH", "APPLIED"],
+    clusters: [
+      "CULTURAL",
+      "BIOANTH",
+      "LINGAUTH",
+      "ARCHAEO",
+      "MEDICAL",
+      "ECOANTH",
+      "POLITANH",
+      "APPLIED"
+    ],
     clusterConnections: {
       "CULTURAL": ["LINGAUTH", "MEDICAL", "POLITANH"],
       "BIOANTH": ["ARCHAEO", "MEDICAL"],
@@ -26,17 +34,80 @@ const DISCIPLINE_CONFIG = {
       ["Human Evolution", "Cultural Ecology", 3],
       ["Medical Pluralism", "Political Ecology", 3],
       ["Power & Hegemony", "Discourse & Power", 4],
-      ["Social Structure", "State & Governance", 3]
+      ["Social Structure", "State & Governance", 3],
+      ["Behavioral Ecology", "Human Evolution", 3],
+      ["Ethnomedicine", "Global Health", 4],
+      ["Settlement Patterns", "Landscape Archaeology", 3],
+      ["Colonialism & Decolonization", "Race & Ethnicity", 4]
     ],
     conceptKeywords: {
-      "Ethnography": ["fieldwork", "culture", "observation", "qualitative"],
-      "Kinship & Marriage": ["family", "social structure", "marriage", "relationships"],
-      "Cultural Relativism": ["diversity", "values", "perspective", "culture"],
-      "Global Health": ["health", "global", "disease", "policy"],
-      "Power & Hegemony": ["power", "control", "domination", "authority"],
-      "Discourse & Power": ["language", "power", "ideology", "communication"]
+      // Cultural Anthropology
+      "Ethnography": ["fieldwork", "culture", "observation", "qualitative", "ethnographic"],
+      "Kinship & Marriage": ["family", "social-structure", "marriage", "relationships", "kinship"],
+      "Ritual & Symbolism": ["ritual", "symbolism", "ceremony", "meaning", "religion"],
+      "Cultural Relativism": ["diversity", "values", "perspective", "culture", "relativism"],
+      "Social Structure": ["society", "hierarchy", "organization", "roles", "institutions"],
+      "Myth & Narrative": ["myth", "story", "narrative", "folklore", "tradition"],
+      "Material Culture": ["artifacts", "objects", "technology", "materials", "crafts"],
+
+      // Biological Anthropology
+      "Human Evolution": ["evolution", "hominids", "fossils", "adaptation", "natural-selection"],
+      "Primatology": ["primates", "apes", "monkeys", "behavior", "ecology"],
+      "Osteology": ["bones", "skeleton", "fossils", "anatomy", "paleopathology"],
+      "Paleoanthropology": ["fossils", "human-ancestors", "prehistory", "excavation"],
+      "Human Genetics": ["DNA", "genes", "heredity", "population", "variation"],
+      "Forensic Anthropology": ["forensics", "skeletons", "identification", "crime", "legal"],
+
+      // Linguistic Anthropology
+      "Language & Culture": ["language", "communication", "culture", "symbols", "meaning"],
+      "Ethnolinguistics": ["language", "culture", "dialects", "linguistic-diversity"],
+      "Discourse & Power": ["language", "power", "ideology", "communication", "authority"],
+      "Language Ideologies": ["beliefs", "language", "values", "attitudes"],
+      "Communicative Practices": ["communication", "interaction", "speech", "gestures"],
+      "Language Endangerment (A)": ["endangered-languages", "preservation", "revitalization"],
+
+      // Archaeology
+      "Stratigraphy": ["layers", "soil", "excavation", "chronology"],
+      "Lithic Analysis": ["stone-tools", "artifacts", "technology", "flint"],
+      "Settlement Patterns": ["villages", "cities", "architecture", "urbanism"],
+      "Mortuary Archaeology": ["burials", "graves", "funerary-practices", "afterlife"],
+      "Landscape Archaeology": ["landscape", "environment", "monuments", "geography"],
+      "Historical Archaeology": ["history", "artifacts", "colonialism", "industrialization"],
+
+      // Medical Anthropology
+      "Medical Pluralism": ["health", "traditional-medicine", "modern-medicine", "pluralism"],
+      "Ethnomedicine": ["traditional-healing", "herbs", "rituals", "health-beliefs"],
+      "Illness Narratives": ["disease", "sickness", "stories", "experience"],
+      "Global Health": ["health", "global", "epidemics", "policy", "inequality"],
+      "Body & Embodiment": ["body", "perception", "identity", "experience"],
+
+      // Ecological Anthropology
+      "Cultural Ecology": ["environment", "adaptation", "subsistence", "ecosystem"],
+      "Political Ecology": ["environment", "power", "resources", "conflict"],
+      "Human-Environment Rel.": ["human", "environment", "interaction", "sustainability"],
+      "Ethnoecology": ["knowledge", "nature", "indigenous", "biodiversity"],
+      "Food & Subsistence": ["food", "agriculture", "hunting", "gathering"],
+      "Climate Anthropology": ["climate", "adaptation", "change", "resilience"],
+
+      // Political Anthropology
+      "Power & Hegemony": ["power", "control", "domination", "authority", "hegemony"],
+      "State & Governance": ["state", "government", "laws", "institutions"],
+      "Social Movements": ["protest", "activism", "change", "resistance"],
+      "Colonialism & Decolonization": ["colonialism", "imperialism", "independence", "postcolonial"],
+      "Race & Ethnicity": ["race", "ethnicity", "identity", "discrimination"],
+      "Violence & Conflict": ["war", "conflict", "peace", "resolution"],
+
+      // Applied Anthropology
+      "Development Anthropology": ["development", "projects", "NGOs", "sustainability"],
+      "Action Research": ["research", "participatory", "community", "change"],
+      "Advocacy Anthropology": ["advocacy", "rights", "justice", "policy"],
+      "Heritage Management": ["heritage", "conservation", "museums", "tourism"],
+      "Corporate Ethnography": ["business", "consumer", "marketing", "workplace"],
+      "Policy Anthropology": ["policy", "government", "recommendations", "impact"]
     }
-  },
+  }
+  // Ajoutez ici les autres disciplines (Neuroscience, Philosophy, etc.)
+};
 
   // --- NEUROSCIENCE (Exemple) ---
   "Neuroscience": {
