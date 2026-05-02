@@ -9,62 +9,43 @@
     button:hover { background: #0056b3; }
     #output { margin-top: 20px; white-space: pre-wrap; }
     .discipline-buttons { margin: 20px 0; }
+    textarea { width: 100%; height: 100px; margin: 10px 0; }
   </style>
 </head>
 <body>
   <h1>Générateur de Configuration pour DISCIPLINE_CONFIG</h1>
-  <p>Cliquez sur un bouton pour générer la configuration d'une discipline.</p>
+  <p>Collez le contenu de votre fichier <code>data.js</code> ci-dessous, puis cliquez sur "Générer la Configuration".</p>
 
-  <h2>Disciplines</h2>
-  <div class="discipline-buttons">
-    <!-- Boutons pour chaque discipline -->
-    <button onclick="generateConfig('Anthropology', '..networks/anthropology-data.js')">Anthropology</button>
-    <button onclick="generateConfig('Neuroscience', '..networks/neuroscience-data.js')">Neuroscience</button>
-    <button onclick="generateConfig('Philosophy', '..networks/philosophy-data.js')">Philosophy</button>
-    <button onclick="generateConfig('Interdisciplinary', '..networks/interdisciplinary-data.js')">Interdisciplinary</button>
-    <button onclick="generateConfig('Education Science', '..networks/education-science-data.js')">Education Science</button>
-    <button onclick="generateConfig('Computer Science', '..networks/computer-science-data.js')">Computer Science</button>
-    <button onclick="generateConfig('Environmental Science', '..networks/environmental-science-data.js')">Environmental Science</button>
-    <button onclick="generateConfig('Human Rights', '..networks/human-rights-data.js')">Human Rights</button>
-    <button onclick="generateConfig('Language Science', '..networks/language-science-data.js')">Language Science</button>
-    <button onclick="generateConfig('Systems Science', '..networks/systems-science-data.js')">Systems Science</button>
-  </div>
+  <h2>Étape 1 : Coller les Données</h2>
+  <textarea id="dataInput" placeholder="Collez ici le contenu de votre fichier data.js (ex: window.MAP_DATA = { ... })"></textarea>
+
+  <h2>Étape 2 : Générer la Configuration</h2>
+  <button onclick="generateConfigFromText()">Générer la Configuration</button>
 
   <h2>Résultat</h2>
   <div id="output">
-    <p>La configuration générée apparaîtra ici. Copiez-la dans <code>DISCIPLINE_CONFIG</code> de <code>network-links-generator.js</code>.</p>
+    <p>La configuration générée apparaîtra ici.</p>
   </div>
 
   <script>
-    // Fonction pour charger un fichier data.js
-    function loadScript(url) {
-      return new Promise((resolve, reject) => {
-        // Supprimer le script s'il existe déjà
-        const existingScript = document.querySelector(`script[src="${url}"]`);
-        if (existingScript) {
-          existingScript.remove();
-        }
-        const script = document.createElement('script');
-        script.src = url;
-        script.onload = () => resolve(window.MAP_DATA);
-        script.onerror = reject;
-        document.head.appendChild(script);
-      });
-    }
+    // Fonction pour générer la configuration à partir du texte collé
+    function generateConfigFromText() {
+      const input = document.getElementById('dataInput').value;
+      const outputDiv = document.getElementById('output');
 
-    // Fonction pour générer la configuration d'une discipline
-    async function generateConfig(disciplineName, dataUrl) {
       try {
-        const outputDiv = document.getElementById('output');
-        outputDiv.innerHTML = `<p>Chargement de ${disciplineName}...</p>`;
-
-        // Charger les données
-        await loadScript(dataUrl);
-        const data = window.MAP_DATA;
-
-        if (!data) {
-          throw new Error(`window.MAP_DATA non défini pour ${disciplineName}`);
+        // Extraire window.MAP_DATA du texte collé
+        const mapDataMatch = input.match(/window\.MAP_DATA\s*=\s*({.*});/s);
+        if (!mapDataMatch) {
+          throw new Error("Impossible de trouver window.MAP_DATA dans le texte collé. Vérifiez que vous avez copié tout le fichier data.js.");
         }
+
+        // Parser le JSON (en remplaçant les guillemets simples par des guillemets doubles si nécessaire)
+        const mapDataStr = mapDataMatch[1]
+          .replace(/(')(\w+)\1\s*:/g, '"$2":')  // Remplacer les clés avec des guillemets simples
+          .replace(/:(')([^']+)\1/g, ':"$2"');   // Remplacer les valeurs avec des guillemets simples
+
+        const data = JSON.parse(mapDataStr);
 
         // Extraire les clusters
         const clusters = Object.keys(data.clusters || {});
@@ -94,6 +75,7 @@
         });
 
         // Générer la configuration
+        const disciplineName = data.title || "Unknown";
         const config = {
           clusters: clusters,
           clusterConnections: clusterConnections,
@@ -116,9 +98,9 @@
         `;
 
       } catch (error) {
-        document.getElementById('output').innerHTML = `
-          <p style="color: red;">Erreur pour ${disciplineName} : ${error.message}</p>
-          <p>Vérifiez que le fichier <code>${dataUrl}</code> existe et que <code>window.MAP_DATA</code> est bien défini.</p>
+        outputDiv.innerHTML = `
+          <p style="color: red;">Erreur : ${error.message}</p>
+          <p>Vérifiez que vous avez bien collé tout le contenu de votre fichier data.js (y compris <code>window.MAP_DATA = { ... };</code>).</p>
         `;
       }
     }
