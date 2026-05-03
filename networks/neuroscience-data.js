@@ -61,7 +61,7 @@ window.MAP_DATA = {
       "size": 24
     },
     {
-      "id": "Dopamine",  // <-- Ajoutez ici
+      "id": "Dopamine",
       "cluster": "MOLCELL",
       "size": 24
     },
@@ -199,6 +199,11 @@ window.MAP_DATA = {
       "id": "Social Brain",
       "cluster": "COGNEURO",
       "size": 18
+    },
+    {
+      "id": "Theory of Mind",
+      "cluster": "COGNEURO",
+      "size": 22
     },
     {
       "id": "Neurogenesis",
