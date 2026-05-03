@@ -51,6 +51,11 @@ window.MAP_DATA = {
       "size": 28
     },
     {
+      "id": "AI",  // <-- Ajoutez ici
+      "cluster": "MACHINE_LEARNING",
+      "size": 28
+    },
+    {
       "id": "Deep Learning",
       "cluster": "AI",
       "size": 26
