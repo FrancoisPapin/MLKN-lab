@@ -1745,7 +1745,7 @@ function generateLinksForDiscipline(disciplineName) {
   }
 
   // 3. Liens spécifiques (experts)
-  if (config.expertLinks && Array.isArray(config.expertLinks)) {
+if (config.expertLinks && Array.isArray(config.expertLinks)) {
   config.expertLinks.forEach(link => {
     // Si c'est un tuple [source, target, weight]
     if (Array.isArray(link) && link.length >= 3) {
@@ -1755,9 +1755,13 @@ function generateLinksForDiscipline(disciplineName) {
     else if (link.source && link.target && link.weight !== undefined) {
       addLink(link.source, link.target, link.weight);
     }
-    // Sinon, ignorez (ou loggez une erreur)
+    // Si c'est un objet personnalisé {s, t, w} (votre cas)
+    else if (link.s && link.t && link.w !== undefined) {
+      addLink(link.s, link.t, link.w);
+    }
+    // Sinon, ignorez (pas de console.warn pour éviter le spam)
     else {
-      console.warn("Format de lien invalide :", link);
+      // Ne rien faire (les liens non reconnus sont ignorés)
     }
   });
 }
