@@ -52,7 +52,7 @@ window.MAP_DATA = {
     },
     {
       "id": "AI",
-      "cluster": "MACHINE_LEARNING",
+      "cluster": "AI",
       "size": 28
     },
     {
@@ -207,7 +207,7 @@ window.MAP_DATA = {
     },
     {
       "id": "Security",
-      "cluster": "CYBERSEC",
+      "cluster": "SECURITY",
       "size": 26
     },
     {
@@ -272,6 +272,16 @@ window.MAP_DATA = {
     }
   ],
   "links": [
+    {
+      "source": "AI",
+      "target": "Machine Learning",
+      "weight": 5
+    },
+    {
+      "source": "Security",
+      "target": "Cybersecurity",
+      "weight": 5
+    },
     {
       "source": "Machine Learning",
       "target": "Deep Learning",
