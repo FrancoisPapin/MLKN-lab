@@ -156,6 +156,11 @@ window.MAP_DATA = {
       "size": 24
     },
     {
+      "id": "Cognitive Flexibility",
+      "cluster": "COGNEURO",
+      "size": 22
+    },
+    {
       "id": "Self-Referential Thought",
       "cluster": "COGNEURO",
       "size": 20
