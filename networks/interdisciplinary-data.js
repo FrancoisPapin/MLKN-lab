@@ -516,4 +516,4 @@ if (typeof DISCIPLINE_CONFIG !== 'undefined') {
   }
 }
   
-})();
+})();)
