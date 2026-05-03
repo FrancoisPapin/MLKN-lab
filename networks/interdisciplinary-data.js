@@ -451,7 +451,7 @@ var INTER = [
   {s:"Material Culture",t:"Self-Organization",w:2,pair:["ANTH","SYS"]},
 
   // ── INTERDISCIPLINARITY Links ↔ INTRADISCIPLINARITY Nodes (central) ──────────────────────────────
-  {s: "Interdisciplinarity", t: "Philosophy of Science", w: 5, pair: ["PHIL", "INTERDISC"]},
+  {s: "Interdisciplinarity", t: "Phil. of Science", w: 5, pair: ["PHIL", "INTERDISC"]},
   {s: "Interdisciplinarity", t: "Machine Learning", w: 5, pair: ["CS", "INTERDISC"]},
   {s: "Interdisciplinarity", t: "Cognitive Control", w: 5, pair: ["NEURO", "INTERDISC"]},
   {s: "Interdisciplinarity", t: "Complex Systems", w: 5, pair: ["SYS", "INTERDISC"]},
