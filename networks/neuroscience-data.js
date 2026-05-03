@@ -91,6 +91,11 @@ window.MAP_DATA = {
       "size": 24
     },
     {
+      "id": "Perception",
+      "cluster": "SENSORY",
+      "size": 24
+    },
+    {
       "id": "Auditory Processing",
       "cluster": "SYSTEMS",
       "size": 20
