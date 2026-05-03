@@ -466,4 +466,54 @@ return {
   interLinks:     INTER.map(function(l){return{source:l.s,target:l.t,weight:l.w,pair:l.pair};})
 };
 
+  // Intégration avec DISCIPLINE_CONFIG
+if (typeof DISCIPLINE_CONFIG !== 'undefined') {
+  const interdisciplinaryConfig = DISCIPLINE_CONFIG["Interdisciplinary Knowledge Network"] ||
+                                 DISCIPLINE_CONFIG["Interdisciplinary"];
+
+  if (interdisciplinaryConfig) {
+    // Fusionner les liens générés avec les données existantes
+    const generatedLinks = [];
+    const config = interdisciplinaryConfig;
+
+    // Générer les liens intra-disciplines (basé sur clusterConnections)
+    for (const [cluster, connections] of Object.entries(config.clusterConnections)) {
+      for (const connectedCluster of connections) {
+        generatedLinks.push({
+          source: cluster,
+          target: connectedCluster,
+          weight: 3, // Poids par défaut pour les connexions entre clusters
+          inter: false
+        });
+      }
+    }
+
+    // Ajouter les expertLinks
+    if (config.expertLinks) {
+      config.expertLinks.forEach(link => {
+        generatedLinks.push({
+          source: link[0],
+          target: link[1],
+          weight: link[2] || 3,
+          inter: true,
+          pair: ["INTERDISCIPLINARY", "INTERDISCIPLINARY"] // Marquer comme interdisciplinaire
+        });
+      });
+    }
+
+    // Fusionner avec les données existantes
+    return {
+      title: "Interdisciplinary Knowledge Network",
+      clusters: DISCIPLINES,
+      nodes: allNodes,
+      links: allLinks.concat(generatedLinks), // Fusionner les liens existants et générés
+      disciplines: DISCIPLINES,
+      epistemic: EPISTEMIC,
+      analysisLevels: ANALYSIS_LEVELS,
+      intraLinks: INTRA,
+      interLinks: INTER
+    };
+  }
+}
+  
 })();
