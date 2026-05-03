@@ -61,6 +61,11 @@ window.MAP_DATA = {
       "size": 24
     },
     {
+      "id": "Dopamine",  // <-- Ajoutez ici
+      "cluster": "MOLCELL",
+      "size": 24
+    },
+    {
       "id": "Synaptic Plasticity",
       "cluster": "MOLCELL",
       "size": 28
