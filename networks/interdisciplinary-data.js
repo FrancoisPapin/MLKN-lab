@@ -466,17 +466,24 @@ var INTER = [
 
   // ── KNOWLEDGE INTEGRATION Links ↔ INTRADISCIPLINARITY Nodes (synthèse) ──────────────────────────────
   {s: "Knowledge Integration", t: "Cognitive Control", w: 5, pair: ["NEURO", "INTERDISC"]},
-  {s: "Knowledge Integration", t: "Decision Neuroscience", w: 4, pair: ["NEURO", "INTERDISC"]},
+  {s: "Knowledge Integration", t: "Decision Neuroscience", w: 5, pair: ["NEURO", "INTERDISC"]},
   {s: "Knowledge Integration", t: "Artificial Intelligence", w: 5, pair: ["CS", "INTERDISC"]},
-  {s: "Knowledge Integration", t: "Ethics", w: 4, pair: ["PHIL", "INTERDISC"]},
-  {s: "Knowledge Integration", t: "Executive Control", w: 4, pair: ["COGPSY", "INTERDISC"]},
+  {s: "Knowledge Integration", t: "Ethics", w: 5, pair: ["PHIL", "INTERDISC"]},
+  {s: "Knowledge Integration", t: "Executive Control", w: 5, pair: ["COGPSY", "INTERDISC"]},
   
   // ── CROSSDISCIPLINARITY Links ↔ INTRADISCIPLINARITY Nodes (synthèse) ──────────────────────────────
   {s: "Cross-Disciplinary", t: "Artificial Intelligence", w: 4, pair: ["CS", "INTERDISC"]},
   {s: "Cross-Disciplinary", t: "Phil. of Science", w: 4, pair: ["PHIL", "INTERDISC"]},
   {s: "Cross-Disciplinary", t: "Predictive Processing", w: 4, pair: ["NEURO", "INTERDISC"]},
   {s: "Cross-Disciplinary", t: "Algorithms", w: 4, pair: ["CS", "INTERDISC"]},
-  {s: "Cross-Disciplinary", t: "Phil. of Mind", w: 4, pair: ["PHIL", "INTERDISC"]}
+  {s: "Cross-Disciplinary", t: "Phil. of Mind", w: 4, pair: ["PHIL", "INTERDISC"]},
+
+  // INTERDISCIPLINARITY Links ↔ INTRADISCIPLINARITY Layers :
+  {s: "Interdisciplinarity", t: "Transdisciplinarity", w: 5, pair: ["INTERDISC", "INTERDISC"]},
+  {s: "Interdisciplinarity", t: "Knowledge Integration", w: 5, pair: ["INTERDISC", "INTERDISC"]},
+  {s: "Knowledge Integration", t: "Transdisciplinarity", w: 5, pair: ["INTERDISC", "INTERDISC"]},
+  {s: "Knowledge Integration", t: "Cross-Disciplinary", w: 5, pair: ["INTERDISC", "INTERDISC"]},
+  {s: "Transdisciplinarity", t: "Cross-Disciplinary", w: 5, pair: ["INTERDISC", "INTERDISC"]}                  
 ];
 
 // ── Build flat nodes/links arrays ─────────────────────────────────
