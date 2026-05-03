@@ -46,6 +46,11 @@ window.MAP_DATA = {
   },
   "nodes": [
     {
+  "id": "Individualized Learning",
+  "cluster": "PEDAGOGY",  // ou "LEARNING" si vous préférez
+  "size": 20
+    },
+    {
       "id": "Constructivism",
       "cluster": "LEARNING",
       "size": 30
