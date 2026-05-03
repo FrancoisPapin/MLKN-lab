@@ -92,7 +92,7 @@ window.MAP_DATA = {
     },
     {
       "id": "Perception",
-      "cluster": "SENSORY",
+      "cluster": "SYSTEMS",
       "size": 24
     },
     {
