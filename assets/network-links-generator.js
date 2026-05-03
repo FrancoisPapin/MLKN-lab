@@ -1511,40 +1511,167 @@ const DISCIPLINE_CONFIG = {
 }
 
       
+"Interdisciplinary": {
+  clusters: [
+    "PHIL",      // Philosophie
+    "EDUC",      // Sciences de l'éducation
+    "HR",        // Droits de l'homme
+    "ENV",       // Sciences environnementales
+    "CS",        // Informatique
+    "NEURO",     // Neurosciences
+    "COGPSY",    // Psychologie cognitive
+    "LANG",      // Sciences du langage
+    "ANTH",      // Anthropologie
+    "SYS"        // Sciences des systèmes
+  ],
+  clusterConnections: {
+    // Connexions entre disciplines (basées sur les liens inter-disciplines dans votre fichier)
+    "PHIL": ["EDUC", "HR", "ENV", "CS", "NEURO", "COGPSY", "LANG", "ANTH", "SYS"],
+    "EDUC": ["PHIL", "HR", "ENV", "CS", "NEURO", "COGPSY", "LANG", "ANTH", "SYS"],
+    "HR": ["PHIL", "EDUC", "ENV", "CS", "NEURO", "COGPSY", "LANG", "ANTH", "SYS"],
+    "ENV": ["PHIL", "EDUC", "HR", "CS", "NEURO", "COGPSY", "LANG", "ANTH", "SYS"],
+    "CS": ["PHIL", "EDUC", "HR", "ENV", "NEURO", "COGPSY", "LANG", "ANTH", "SYS"],
+    "NEURO": ["PHIL", "EDUC", "HR", "ENV", "CS", "COGPSY", "LANG", "ANTH", "SYS"],
+    "COGPSY": ["PHIL", "EDUC", "HR", "ENV", "CS", "NEURO", "LANG", "ANTH", "SYS"],
+    "LANG": ["PHIL", "EDUC", "HR", "ENV", "CS", "NEURO", "COGPSY", "ANTH", "SYS"],
+    "ANTH": ["PHIL", "EDUC", "HR", "ENV", "CS", "NEURO", "COGPSY", "LANG", "SYS"],
+    "SYS": ["PHIL", "EDUC", "HR", "ENV", "CS", "NEURO", "COGPSY", "LANG", "ANTH"]
+  },
+  expertLinks: [
+    // Liens forts (poids 5) - Basés sur les connexions majeures dans votre fichier
+    {s: "Epistemology", t: "Constructivism", w: 5, pair: ["PHIL", "EDUC"]},
+    {s: "Critical Theory", t: "Critical Pedagogy", w: 5, pair: ["PHIL", "EDUC"]},
+    {s: "Ethics", t: "Human Dignity", w: 5, pair: ["PHIL", "HR"]},
+    {s: "Educational Equity", t: "Justice", w: 5, pair: ["EDUC", "HR"]},
+    {s: "Environmental Rights", t: "Sustainability", w: 5, pair: ["HR", "ENV"]},
+    {s: "Climate Change", t: "Machine Learning", w: 5, pair: ["ENV", "CS"]},
+    {s: "Machine Learning", t: "Neural Coding", w: 5, pair: ["CS", "NEURO"]},
+    {s: "Synaptic Plasticity", t: "Working Memory", w: 5, pair: ["NEURO", "COGPSY"]},
+    {s: "Working Memory", t: "Psycholinguistics", w: 5, pair: ["COGPSY", "LANG"]},
+    {s: "Language & Culture", t: "Social Structure", w: 5, pair: ["LANG", "ANTH"]},
+    {s: "Ecosystem Dynamics", t: "Complex Systems", w: 5, pair: ["ENV", "SYS"]},
 
+    // Liens moyens (poids 4) - Autres connexions importantes
+    {s: "Logic", t: "Formal Methods", w: 4, pair: ["PHIL", "CS"]},
+    {s: "Phil. of Mind", t: "Predictive Processing", w: 4, pair: ["PHIL", "NEURO"]},
+    {s: "Metacognition (Ed)", t: "Working Memory", w: 4, pair: ["EDUC", "COGPSY"]},
+    {s: "Digital Rights", t: "Cybersecurity", w: 4, pair: ["HR", "CS"]},
+    {s: "AI in Education", t: "Machine Learning", w: 4, pair: ["EDUC", "CS"]},
+    {s: "Constructivism", t: "Synaptic Plasticity", w: 4, pair: ["EDUC", "NEURO"]},
+    {s: "NLP", t: "Computational Ling.", w: 4, pair: ["CS", "LANG"]},
+    {s: "Neural Coding", t: "Network Theory", w: 4, pair: ["NEURO", "SYS"]},
+    {s: "Political Ecology", t: "Ecosystem Dynamics", w: 4, pair: ["ANTH", "ENV"]},
+    {s: "Social Structure", t: "Complex Systems", w: 4, pair: ["ANTH", "SYS"]},
+
+    // Liens transversaux (poids 3)
+    {s: "Ethics", t: "Educational Equity", w: 3, pair: ["PHIL", "EDUC"]},
+    {s: "Justice", t: "Climate Change", w: 3, pair: ["HR", "ENV"]},
+    {s: "Data Science", t: "Neuroimaging", w: 3, pair: ["CS", "NEURO"]},
+    {s: "Dual-Process Theory", t: "Heuristics & Biases", w: 3, pair: ["COGPSY", "COGPSY"]},
+    {s: "Language Acquisition", t: "Pedagogy", w: 3, pair: ["LANG", "EDUC"]}
+  ],
+  conceptKeywords: {
+    // Philosophie
+    "Epistemology": ["knowledge", "justification", "truth", "belief", "theory-of-knowledge"],
+    "Ethics": ["moral", "values", "right-wrong", "normative", "virtue"],
+    "Logic": ["reasoning", "arguments", "validity", "symbolic", "formal"],
+    "Phil. of Mind": ["consciousness", "mental-states", "mind-body", "intentionality", "qualia"],
+    "Phil. of Science": ["methodology", "explanation", "laws", "theories", "empiricism"],
+    "Critical Theory": ["society", "critique", "ideology", "emancipation", "marxist"],
+    "Ontology": ["being", "existence", "reality", "categories", "metaphysics"],
+    "Phenomenology": ["experience", "consciousness", "lived-experience", "husserl", "perception"],
+
+    // Sciences de l'éducation
+    "Constructivism": ["learning", "knowledge-construction", "piaget", "active", "student-centered"],
+    "Pedagogy": ["teaching", "methods", "instruction", "curriculum", "strategies"],
+    "Self-Reg. Learning": ["metacognition", "autonomy", "goals", "strategies", "motivation"],
+    "Formative Assessment": ["feedback", "evaluation", "progress", "adjustment", "learning"],
+    "Educational Equity": ["fairness", "access", "opportunity", "inclusion", "justice"],
+    "AI in Education": ["technology", "personalization", "adaptive", "tools", "automation"],
+    "Critical Pedagogy": ["empowerment", "social-justice", "freire", "dialogue", "transformation"],
+    "Metacognition (Ed)": ["thinking-about-thinking", "self-regulation", "awareness", "control", "learning"],
+
+    // Droits de l'homme
+    "Human Dignity": ["inherent", "value", "respect", "universal", "inalienable"],
+    "Justice": ["fairness", "equity", "rights", "law", "social-justice"],
+    "International HR Law": ["treaties", "conventions", "un", "protection", "accountability"],
+    "Environmental Rights": ["nature", "protection", "sustainability", "future", "ecology"],
+    "Digital Rights": ["privacy", "access", "freedom", "technology", "surveillance"],
+    "Transitional Justice": ["reconciliation", "accountability", "truth", "reparations", "post-conflict"],
+    "Accountability": ["responsibility", "answerability", "transparency", "justice", "obligation"],
+
+    // Sciences environnementales
+    "Climate Change": ["global-warming", "greenhouse-gases", "impacts", "mitigation", "adaptation"],
+    "Biodiversity": ["species", "ecosystems", "conservation", "richness", "habitats"],
+    "Ecosystem Dynamics": ["interactions", "balance", "resilience", "succession", "stability"],
+    "Sustainability": ["long-term", "balance", "resources", "future", "equity"],
+    "Environmental Policy": ["regulations", "laws", "protection", "management", "governance"],
+    "Renewable Energy": ["solar", "wind", "hydro", "sustainable", "clean"],
+    "Carbon Cycle": ["carbon", "atmosphere", "ocean", "plants", "climate"],
+
+    // Informatique
+    "Machine Learning": ["ai", "algorithms", "training", "models", "prediction"],
+    "NLP": ["language", "processing", "text", "comprehension", "generation"],
+    "Cybersecurity": ["protection", "threats", "encryption", "networks", "privacy"],
+    "Data Science": ["analysis", "big-data", "statistics", "insights", "visualization"],
+    "Human-Comp. Inter.": ["usability", "design", "user-experience", "interface", "accessibility"],
+    "Algorithms": ["computation", "efficiency", "sorting", "searching", "complexity"],
+    "Formal Methods": ["verification", "logic", "proofs", "correctness", "specification"],
+
+    // Neurosciences
+    "Synaptic Plasticity": ["learning", "memory", "neural-connections", "ltp", "hebbian"],
+    "Prefrontal Cortex": ["executive-function", "decision-making", "planning", "working-memory", "attention"],
+    "Neural Coding": ["representation", "neurons", "information", "spikes", "patterns"],
+    "Brain Oscillations": ["rhythms", "gamma", "beta", "theta", "synchronization"],
+    "Neuroimaging": ["fmri", "eeg", "brain-scans", "visualization", "mapping"],
+    "Predictive Processing": ["prediction", "brain", "expectations", "errors", "models"],
+    "Default Mode Network": ["rest", "mind-wandering", "self-referential", "connectivity", "introspection"],
+
+    // Psychologie cognitive
+    "Working Memory": ["short-term", "storage", "manipulation", "capacity", "executive"],
+    "Dual-Process Theory": ["intuition", "reasoning", "fast-slow", "kahneman", "cognition"],
+    "Executive Control": ["regulation", "inhibition", "shifting", "updating", "cognitive-flexibility"],
+    "Heuristics & Biases": ["mental-shortcuts", "errors", "judgment", "decision-making", "tversky"],
+    "Theory of Mind": ["empathy", "perspective-taking", "beliefs", "intentions", "social-cognition"],
+    "Emotion Regulation": ["management", "coping", "strategies", "awareness", "control"],
+    "Attribution Theory": ["causality", "explanations", "locus-of-control", "kelly", "bias"],
+    "Selective Attention": ["focus", "filtering", "distraction", "prioritization", "cognitive-resources"],
+
+    // Sciences du langage
+    "Syntax": ["grammar", "structure", "rules", "sentences", "chomsky"],
+    "Semantics": ["meaning", "words", "phrases", "context", "truth-conditions"],
+    "Language Acquisition": ["learning", "children", "stages", "innateness", "input"],
+    "Sociolinguistics": ["language", "society", "variation", "dialects", "culture"],
+    "Computational Ling.": ["nlp", "algorithms", "parsing", "generation", "models"],
+    "Language & Culture": ["communication", "identity", "norms", "practices", "diversity"],
+    "Psycholinguistics": ["processing", "comprehension", "production", "brain", "language"],
+
+    // Anthropologie
+    "Ethnography": ["fieldwork", "culture", "observation", "qualitative", "participant-observation"],
+    "Cultural Relativism": ["diversity", "values", "perspective", "judgment", "boas"],
+    "Political Ecology": ["environment", "power", "resources", "conflict", "justice"],
+    "Human Evolution": ["origins", "adaptation", "fossils", "hominids", "darwin"],
+    "Social Structure": ["organization", "hierarchy", "roles", "institutions", "networks"],
+    "Medical Anthropology": ["health", "culture", "disease", "healing", "beliefs"],
+    "Material Culture": ["artifacts", "objects", "technology", "symbols", "archaeology"],
+
+    // Sciences des systèmes
+    "Complex Systems": ["networks", "interactions", "emergence", "nonlinearity", "adaptation"],
+    "Emergence": ["novelty", "properties", "whole", "parts", "unpredictability"],
+    "Systems Thinking": ["holism", "interconnections", "feedback", "dynamics", "perspectives"],
+    "Network Theory": ["nodes", "edges", "graphs", "connectivity", "topology"],
+    "Information Theory": ["entropy", "communication", "bits", "channels", "shannon"],
+    "Resilience": ["adaptation", "recovery", "robustness", "stability", "shocks"],
+    "Self-Organization": ["order", "spontaneous", "patterns", "complexity", "dissipation"]
+  }
+}
 
 // Ajoutez ici les autres disciplines (Neuroscience, Philosophy, etc.)
 };
 
 
 
-  // --- INTERDISCIPLINARY (Exemple) ---
-  "Interdisciplinary": {
-    clusters: [
-      "Philosophy", "Education Science", "Human Rights",
-      "Environmental Science", "Computer Science", "Neuroscience",
-      "Cognitive Psychology", "Language Science", "Anthropology", "Systems Science"
-    ],
-    clusterConnections: {
-      "Philosophy": ["Neuroscience", "Cognitive Psychology", "Language Science", "Education Science"],
-      "Neuroscience": ["Philosophy", "Cognitive Psychology", "Computer Science", "Systems Science"],
-      "Computer Science": ["Neuroscience", "Systems Science", "Education Science"],
-      "Anthropology": ["Philosophy", "Education Science", "Human Rights", "Environmental Science"],
-      // Ajoutez toutes les connexions inter-disciplines ici
-    },
-    expertLinks: [
-      ["Epistemology", "Neural Coding", 4],
-      ["Pedagogy", "Machine Learning", 3],
-      ["Human Rights", "Environmental Policy", 3],
-      ["Systems Thinking", "Network Theory", 5]
-    ],
-    conceptKeywords: {
-      "Epistemology": ["knowledge", "theory", "science", "truth"],
-      "Neural Coding": ["brain", "neurons", "signals", "information"],
-      "Machine Learning": ["AI", "algorithms", "data", "models"],
-      "Human Rights": ["justice", "equality", "law", "ethics"]
-    }
-  }
+
   // --- AJOUTEZ LES AUTRES DISCIPLINES ICI ---
   // Exemple pour Philosophy, Education Science, etc.
 };
