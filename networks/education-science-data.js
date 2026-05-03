@@ -46,11 +46,6 @@ window.MAP_DATA = {
   },
   "nodes": [
     {
-  "id": "Individualized Learning",
-  "cluster": "PEDAGOGY",  // ou "LEARNING" si vous préférez
-  "size": 20
-    },
-    {
       "id": "Constructivism",
       "cluster": "LEARNING",
       "size": 30
@@ -109,6 +104,11 @@ window.MAP_DATA = {
       "id": "Motivation (Ed)",
       "cluster": "LEARNING",
       "size": 22
+    },
+    {
+      "id": "Individualized Learning",
+      "cluster": "PEDAGOGY",  // ou "LEARNING" si vous préférez
+      "size": 20
     },
     {
       "id": "Differentiated Instruction",
