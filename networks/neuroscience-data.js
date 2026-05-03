@@ -151,6 +151,11 @@ window.MAP_DATA = {
       "size": 22
     },
     {
+      "id": "Cognitive Control",
+      "cluster": "COGNEURO",
+      "size": 24
+    },
+    {
       "id": "Emotion Regulation (Neural)",
       "cluster": "COGNEURO",
       "size": 20
