@@ -458,7 +458,7 @@ var INTER = [
   {s: "Knowledge Integration", t: "Cognitive Control", w: 5, pair: ["NEURO", "INTERDISC"]},
   {s: "Knowledge Integration", t: "Decision Neuroscience", w: 4, pair: ["NEURO", "INTERDISC"]},
   {s: "Cross-Disciplinary", t: "Artificial Intelligence", w: 4, pair: ["CS", "INTERDISC"]},
-  {s: "Cross-Disciplinary", t: "Philosophy of Science", w: 4, pair: ["PHIL", "INTERDISC"]}
+  {s: "Cross-Disciplinary", t: "Phil. of Science", w: 4, pair: ["PHIL", "INTERDISC"]}
 ];
 
 // ── Build flat nodes/links arrays ─────────────────────────────────
