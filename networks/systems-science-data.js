@@ -289,6 +289,16 @@ window.MAP_DATA = {
   ],
   "links": [
     {
+      "source": "Criticality",
+      "target": "Phase Transitions",
+      "weight": 5
+    },
+    {
+      "source": "Criticality",
+      "target": "Emergence",
+      "weight": 4
+    },
+    {
       "source": "Complex Adaptive Systems",
       "target": "Nonlinear Dynamics",
       "weight": 5
