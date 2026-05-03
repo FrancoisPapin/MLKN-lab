@@ -100,6 +100,7 @@ var NODES = [
   {id:"Neuroimaging",          disc:"NEURO",  size:24, er:"METHODOLOGICAL",  al:"INDIVIDUAL"},
   {id:"Predictive Processing", disc:"NEURO",  size:24, er:"THEORETICAL",     al:"MOLECULAR"},
   {id:"Default Mode Network",  disc:"NEURO",  size:20, er:"EMPIRICAL",       al:"INDIVIDUAL"},
+  {id: "Cognitive Control",    disc:"NEURO", size: 24, er:"THEORETICAL",     al: "INDIVIDUAL"},
 
   // COGNITIVE PSYCHOLOGY
   {id:"Working Memory",        disc:"COGPSY", size:26, er:"EMPIRICAL",       al:"INDIVIDUAL"},
