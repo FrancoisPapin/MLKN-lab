@@ -1666,14 +1666,6 @@ const DISCIPLINE_CONFIG = {
   }
 }
 
-// Ajoutez ici les autres disciplines (Neuroscience, Philosophy, etc.)
-};
-
-
-
-
-  // --- AJOUTEZ LES AUTRES DISCIPLINES ICI ---
-  // Exemple pour Philosophy, Education Science, etc.
 };
 
 // =============================================
