@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Générateur de Configuration pour MLKN.lab</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+    pre { background: #f4f4f4; padding: 10px; border-radius: 5px; overflow-x: auto; }
+    button { padding: 10px 15px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+    button:hover { background: #0056b3; }
+    #output { margin-top: 20px; white-space: pre-wrap; }
+    .discipline-buttons { margin: 20px 0; }
+    textarea { width: 100%; height: 100px; margin: 10px 0; }
+  </style>
+</head>
+<body>
+  <h1>Générateur de Configuration pour DISCIPLINE_CONFIG</h1>
+  <p>Collez le contenu de votre fichier <code>data.js</code> ci-dessous, puis cliquez sur "Générer la Configuration".</p>
+
+  <h2>Étape 1 : Coller les Données</h2>
+  <textarea id="dataInput" placeholder="Collez ici le contenu de votre fichier data.js (ex: window.MAP_DATA = { ... })"></textarea>
+  
+  <h2>Étape 2 : Générer la Configuration</h2>
+  <button onclick="generateConfigFromText()">Générer la Configuration</button>
+
+  <h2>Résultat</h2>
+  <div id="output">
+    <p>La configuration générée apparaîtra ici.</p>
+  </div>
+
+  <script>
+    // Fonction pour générer la configuration à partir du texte collé
+    function generateConfigFromText() {
+      const input = document.getElementById('dataInput').value;
+      const outputDiv = document.getElementById('output');
+
+      try {
+        // Extraire window.MAP_DATA du texte collé
+        const mapDataMatch = input.match(/window\.MAP_DATA\s*=\s*({.*});/s);
+        if (!mapDataMatch) {
+          throw new Error("Impossible de trouver window.MAP_DATA dans le texte collé. Vérifiez que vous avez copié tout le fichier data.js.");
+        }
+
+        // Parser le JSON (en remplaçant les guillemets simples par des guillemets doubles si nécessaire)
+        const mapDataStr = mapDataMatch[1]
+          .replace(/(')(\w+)\1\s*:/g, '"$2":')  // Remplacer les clés avec des guillemets simples
+          .replace(/:(')([^']+)\1/g, ':"$2"');   // Remplacer les valeurs avec des guillemets simples
+
+        const data = JSON.parse(mapDataStr);
+
+        // Extraire les clusters
+        const clusters = Object.keys(data.clusters || {});
+
+        // Extraire les nœuds par cluster
+        const nodesByCluster = {};
+        data.nodes.forEach(node => {
+          if (!nodesByCluster[node.cluster]) {
+            nodesByCluster[node.cluster] = [];
+          }
+          nodesByCluster[node.cluster].push(node.id);
+        });
+
+        // Générer les connexions entre clusters (par défaut, tous les clusters sont connectés)
+        const clusterConnections = {};
+        clusters.forEach(cluster => {
+          clusterConnections[cluster] = clusters.filter(c => c !== cluster);
+        });
+
+        // Générer les mots-clés par concept (simplifiés)
+        const conceptKeywords = {};
+        data.nodes.forEach(node => {
+          const keyword = node.id.toLowerCase()
+            .replace(/[&]/g, 'and')
+            .replace(/[ ]/g, '-');
+          conceptKeywords[node.id] = [keyword];
+        });
+
+        // Générer la configuration
+        const disciplineName = data.title || "Unknown";
+        const config = {
+          clusters: clusters,
+          clusterConnections: clusterConnections,
+          expertLinks: [], // À compléter manuellement
+          conceptKeywords: conceptKeywords
+        };
+
+        // Afficher le résultat
+        outputDiv.innerHTML = `
+          <h3>Configuration pour ${disciplineName}</h3>
+          <p>Copiez ce code dans <code>DISCIPLINE_CONFIG</code> de <code>network-links-generator.js</code> :</p>
+          <pre>
+"${disciplineName}": {
+  clusters: ${JSON.stringify(config.clusters, null, 2)},
+  clusterConnections: ${JSON.stringify(config.clusterConnections, null, 2)},
+  expertLinks: [], // À compléter manuellement
+  conceptKeywords: ${JSON.stringify(config.conceptKeywords, null, 2)}
+}</pre>
+          <p><strong>Prochaine étape</strong> : Ajoutez manuellement les <code>expertLinks</code> et améliorez les <code>conceptKeywords</code>.</p>
+        `;
+
+      } catch (error) {
+        outputDiv.innerHTML = `
+          <p style="color: red;">Erreur : ${error.message}</p>
+          <p>Vérifiez que vous avez bien collé tout le contenu de votre fichier data.js (y compris <code>window.MAP_DATA = { ... };</code>).</p>
+        `;
+      }
+    }
+  </script>
+</body>
+</html>
