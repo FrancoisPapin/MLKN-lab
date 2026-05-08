@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="description" content="Interdisciplinary Knowledge Network — 10 disciplines, 3 analytical layers — MLKN.lab by François Papin">
+<meta name="author" content="François Papin">
+<title>Interdisciplinary Knowledge Network — MLKN.lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+html,body{height:100%;overflow:hidden}
+
+/* Layer tabs */
+.layer-tabs{display:flex;gap:4px;padding:6px 14px;background:var(--bg);
+  border-bottom:1.5px solid var(--border);flex-shrink:0;flex-wrap:wrap;align-items:center}
+.ltab{font-family:var(--mono);font-size:9px;padding:4px 11px;border-radius:20px;
+  border:1.5px solid var(--border);background:transparent;color:var(--muted);
+  cursor:pointer;transition:all .15s;letter-spacing:.06em;text-transform:uppercase}
+.ltab:hover{border-color:var(--accent);color:var(--accent);background:#EBF4FB}
+.ltab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.tabs-sep{width:1px;height:18px;background:var(--border);margin:0 4px}
+.ltab.bridge-btn{background:transparent;color:var(--accent2)}
+.ltab.bridge-btn.active{background:var(--accent2);color:#fff;border-color:var(--accent2)}
+
+/* Bridge link types */
+.inter-major{stroke-dasharray:none !important;opacity:1 !important}
+.inter-minor{stroke-dasharray:4 3 !important}
+
+/* Epistemic role legend colours embedded via CSS vars */
+</style>
+</head>
+<body class="network-page">
+
+<header id="topnav" class="topnav" role="banner"></header>
+
+<main class="map-page" id="main">
+
+  <!-- Map header -->
+  <div class="map-header">
+    <div class="mh-left">
+      <div class="accent-bar" id="abar"></div>
+      <div>
+        <div class="mh-eyebrow">INTERDISCIPLINARY · 10 DISCIPLINES · 3 LAYERS · MLKN.lab</div>
+        <h1 class="mh-title">Interdisciplinary Knowledge Network <span>— Cross-Disciplinary Bridges</span></h1>
+      </div>
+    </div>
+    <div class="mh-right">
+      <div class="srch">
+        <span class="srch-icon">⌕</span>
+        <input type="search" id="srch-input" placeholder="search concepts…" autocomplete="off">
+      </div>
+      <div class="mh-meta">
+        <div id="mh-stats">— nodes · — bridges</div>
+        <div>François Papin · April 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Layer tabs -->
+  <div class="layer-tabs" role="toolbar" aria-label="Analytical layers">
+    <button class="ltab active" id="tab-disc"   aria-pressed="true">⬡ Disciplines</button>
+    <button class="ltab"        id="tab-epist"  aria-pressed="false">◈ Epistemic Roles</button>
+    <button class="ltab"        id="tab-level"  aria-pressed="false">◎ Analysis Levels</button>
+    <div class="tabs-sep"></div>
+    <button class="ltab bridge-btn" id="tab-bridges" aria-pressed="false">⇄ Bridges Only</button>
+  </div>
+
+  <!-- Canvas -->
+  <div class="canvas-wrap" id="canvas-wrap">
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+      <p>RENDERING INTERDISCIPLINARY NETWORK…</p>
+    </div>
+    <div id="sigma-mount"></div>
+
+    <!-- Legend panel (dynamic) -->
+    <div class="legend" id="legend" role="complementary" aria-label="Layer legend"></div>
+
+    <!-- Toolbar -->
+    <div class="toolbar" role="toolbar" aria-label="Graph controls">
+      <button class="tbtn" id="tb-zi"    title="Zoom in"       aria-label="Zoom in">+</button>
+      <button class="tbtn" id="tb-zo"    title="Zoom out"      aria-label="Zoom out">−</button>
+      <button class="tbtn" id="tb-reset" title="Reset view"    aria-label="Reset view">⊙</button>
+      <div class="tbtn-sep"></div>
+      <button class="tbtn" id="tb-hubs"  title="Highlight hubs" aria-label="Highlight hubs">★</button>
+      <button class="tbtn" id="tb-stats" title="Toggle stats"   aria-label="Toggle stats">≡</button>
+    </div>
+
+    <!-- Stats panel -->
+    <div class="stats-panel" id="stats-panel"></div>
+
+    <!-- Detail panel -->
+    <div class="detail" id="detail" role="dialog" aria-modal="false" aria-label="Concept details"></div>
+
+    <!-- Tooltip -->
+    <div class="tip" id="tip"></div>
+
+    <!-- Footer -->
+    <div class="map-footer" id="map-footer"></div>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="../assets/mlkn.js"></script>
+<script src="../assets/graph-stats.js"></script>
+<script src="./interdisciplinary-data.js"></script>
+<script src="../assets/network-links-generator.js"></script>
+<script src="./interdisciplinary-renderer.js"></script>
+</body>
+</html>

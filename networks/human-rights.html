@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="author" content="François Papin">
+<title>Human Rights — MLKN.lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+      /* --- CONFIGURATION SPÉCIFIQUE À CETTE PAGE --- */
+      
+      /* Sur Ordinateur : On bloque le défilement pour fixer les légendes */
+      @media (min-width: 769px) {
+        html, body {
+          height: 100vh;
+          overflow: hidden;
+        }
+      }
+
+      /* Sur Mobile : On libère le défilement pour pouvoir tout lire */
+      @media (max-width: 768px) {
+        html, body {
+          height: auto;
+          overflow: auto !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="network-page">
+    
+<header id="topnav" class="topnav" role="banner"></header>
+
+<main class="map-page" id="main">
+  <!-- Header bar -->
+  <div class="map-header">
+    <div class="mh-left">
+      <div class="accent-bar" id="abar"></div>
+      <div>
+        <div class="mh-eyebrow">KNOWLEDGE NETWORK · D3 · MLKN.lab</div>
+        <h1 class="mh-title" id="mh-title">Loading… <span>— Academic Concepts</span></h1>
+      </div>
+    </div>
+    <div class="mh-right">
+      <div class="srch" role="search">
+        <label for="srch-input" class="sr-only">Search concepts</label>
+        <span class="srch-icon">⌕</span>
+        <input type="search" id="srch-input" placeholder="search concepts…" autocomplete="off">
+      </div>
+      <div class="mh-meta">
+        <div id="mh-stats">— nodes · — edges</div>
+        <div>François Papin · April 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Canvas -->
+  <div class="canvas-wrap" id="canvas-wrap">
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+      <p>RENDERING NETWORK…</p>
+    </div>
+    <div id="sigma-mount"></div>
+
+    <!-- Legend -->
+    <div class="legend" id="legend" role="complementary" aria-label="Domain filter"></div>
+
+    <!-- Toolbar -->
+    <div class="toolbar" role="toolbar" aria-label="Graph controls">
+      <button class="tbtn" id="tb-zoom-in"  title="Zoom in"     aria-label="Zoom in">+</button>
+      <button class="tbtn" id="tb-zoom-out" title="Zoom out"    aria-label="Zoom out">−</button>
+      <button class="tbtn" id="tb-reset"    title="Reset view"  aria-label="Reset view">⊙</button>
+      <div class="tbtn-sep"></div>
+      <button class="tbtn" id="tb-hubs"     title="Highlight hubs" aria-label="Highlight hubs">★</button>
+      <button class="tbtn" id="tb-stats"    title="Toggle stats"   aria-label="Toggle stats">≡</button>
+    </div>
+
+    <!-- Stats panel -->
+    <div class="stats-panel" id="stats-panel"></div>
+
+    <!-- Detail panel -->
+    <div class="detail" id="detail" role="dialog" aria-modal="false" aria-label="Concept details"></div>
+
+    <!-- Tooltip -->
+    <div class="tip" id="tip"></div>
+
+    <!-- Footer watermark -->
+    <div class="map-footer" id="map-footer"></div>
+  </div>
+</main>
+
+<!-- D3 v7 via CDN with SRI -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<!-- Shared utilities (relative path) -->
+<script src="../assets/mlkn.js"></script>
+<script src="../assets/graph-stats.js"></script>
+<!-- Network data (set per page) -->
+<script src="./human-rights-data.js"></script>
+<script src="../assets/network-links-generator.js"></script>
+        
+<script>
+'use strict';
+document.addEventListener('DOMContentLoaded',function(){
+  MLKN.renderNav(false);
+  MLKN.renderFooterWatermark('map-footer');
+  if(!window.MAP_DATA){
+    document.getElementById('loading').innerHTML='<p style="color:#C0392B">Data file not loaded.</p>';
+    return;
+  }
+  initMap(window.MAP_DATA);
+});
+
+function initMap(data){
+  /* Header */
+  var titleEl=document.getElementById('mh-title');
+  titleEl.innerHTML=data.title+' <span>— Academic Concepts</span>';
+  document.title=data.title+' — MLKN.lab';
+  document.getElementById('mh-stats').textContent=
+    data.nodes.length+' concepts · '+data.links.length+' connections';
+
+  /* Accent bar */
+  var colors=Object.values(data.clusters).map(function(c){return c.color;});
+  document.getElementById('abar').style.background='linear-gradient(180deg,'+colors.join(',')+')';
+
+  /* Compute statistics */
+  var stats=GraphStats.networkStats(data.nodes,data.links);
+  GraphStats.renderStats(document.getElementById('stats-panel'),stats);
+
+  /* Build legend */
+  buildLegend(data.clusters);
+
+  /* State */
+  var activeCluster=null,hubsOn=false,statsVisible=true;
+  var graph=null;
+
+  /* Create D3 graph */
+  var mount=document.getElementById('sigma-mount');
+  graph=MLKN.createGraph({
+    mountId:'sigma-mount',
+    nodes:data.nodes,
+    links:data.links,
+    clusters:data.clusters,
+    onHover:function(d,e){
+      showTip(d,e);
+    },
+    onHoverOut:function(){hideTip();},
+    onClick:function(d){showDetail(d,data,stats);},
+    onClickBg:function(){hideDetail();}
+  });
+
+  document.getElementById('loading').style.display='none';
+
+  /* Toolbar */
+  document.getElementById('tb-zoom-in').addEventListener('click',function(){graph.zoomIn();});
+  document.getElementById('tb-zoom-out').addEventListener('click',function(){graph.zoomOut();});
+  document.getElementById('tb-reset').addEventListener('click',function(){graph.zoomReset();});
+  document.getElementById('tb-hubs').addEventListener('click',function(){
+    hubsOn=!hubsOn;
+    this.classList.toggle('active',hubsOn);
+    graph.highlightHubs(hubsOn,stats.hubs);
+  });
+  document.getElementById('tb-stats').addEventListener('click',function(){
+    statsVisible=!statsVisible;
+    this.classList.toggle('active',statsVisible);
+    document.getElementById('stats-panel').style.display=statsVisible?'':'none';
+  });
+
+  /* Search */
+  var srch=document.getElementById('srch-input'),srchT;
+  srch.addEventListener('input',function(){
+    clearTimeout(srchT);
+    srchT=setTimeout(function(){graph.filterSearch(srch.value.trim());},150);
+  });
+
+  /* Keyboard */
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){hideDetail();}
+  });
+
+/* Legend */
+function buildLegend(clusters){
+  var leg=document.getElementById('legend');
+  leg.innerHTML='<div class="legend-title">Domains</div>';
+  var activeK=null;
+  Object.keys(clusters).forEach(function(k){
+    var cl=clusters[k];
+    var item=document.createElement('div');
+    item.className='legend-item';
+    item.setAttribute('role','button');item.setAttribute('tabindex','0');
+    item.innerHTML='<div class="legend-dot" style="background:'+cl.color+';box-shadow:0 0 0 2px '+cl.color+'33"></div>'+
+      '<span class="legend-label">'+cl.label+'</span>';
+    var toggle=function(){
+      var was=activeK===k;
+      activeK=was?null:k;
+      leg.querySelectorAll('.legend-item').forEach(function(el){
+        el.classList.remove('active');
+        el.style.background='transparent';el.style.borderColor='transparent';
+        el.querySelector('.legend-label').style.color='';
+      });
+      clearBtn.style.display='none';
+      if(!was){
+        item.classList.add('active');
+        item.style.background=cl.color+'14';item.style.borderColor=cl.color+'55';
+        item.querySelector('.legend-label').style.color=cl.color;
+        clearBtn.style.display='block';
+      }
+      if(window.graph)window.graph.filterCluster(activeK);
+      // access graph via closure
+      if(typeof graph!=='undefined')graph.filterCluster(activeK);
+    };
+    item.addEventListener('click',toggle);
+    item.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
+    leg.appendChild(item);
+  });
+  var clearBtn=document.createElement('div');
+  clearBtn.className='legend-clear';clearBtn.textContent='[ show all ]';
+  clearBtn.style.display='none';
+  clearBtn.addEventListener('click',function(){
+    activeK=null;
+    leg.querySelectorAll('.legend-item').forEach(function(el){
+      el.classList.remove('active');el.style.background='transparent';el.style.borderColor='transparent';
+      el.querySelector('.legend-label').style.color='';
+    });
+    clearBtn.style.display='none';
+    if(typeof graph!=='undefined')graph.filterCluster(null);
+  });
+  leg.appendChild(clearBtn);
+}
+
+/* Tooltip */
+function showTip(d,e){
+  var tip=document.getElementById('tip');
+  tip.textContent=d.label||d.id;
+  tip.style.display='block';
+  tip.style.left=e.clientX+'px';tip.style.top=e.clientY+'px';
+}
+function hideTip(){document.getElementById('tip').style.display='none';}
+
+/* Detail panel */
+function showDetail(d,data,stats){
+  var panel=document.getElementById('detail');
+  var cl=data.clusters[d.cluster]||{label:'',color:'#333'};
+  var ns=GraphStats.nodeStats(d.id,data.nodes,data.links);
+  // Neighbors
+  var nbrs=new Set();
+  data.links.forEach(function(l){
+    var s=l.source,t=l.target;
+    if(s===d.id)nbrs.add(t);if(t===d.id)nbrs.add(s);
+  });
+  var tags=Array.from(nbrs).map(function(id){
+    var nd=data.nodes.find(function(x){return x.id===id;});
+    if(!nd)return'';
+    var nc=data.clusters[nd.cluster]||{color:'#333'};
+    return'<span class="dtag" style="color:'+nc.color+';border-color:'+nc.color+'44">'+id+'</span>';
+  }).join('');
+
+  panel.innerHTML=
+    '<div class="detail-badge">'+
+      '<div class="detail-dot" style="background:'+cl.color+'"></div>'+
+      '<span class="detail-cluster" style="color:'+cl.color+'">'+cl.label+'</span>'+
+    '</div>'+
+    '<div class="detail-name">'+(d.label||d.id)+'</div>'+
+    '<div class="detail-metrics">'+
+      '<div class="dmet"><div class="dmet-val">'+ns.deg+'</div><div class="dmet-lbl">Degree</div></div>'+
+      '<div class="dmet"><div class="dmet-val">'+GraphStats.fmt(ns.wDeg,1)+'</div><div class="dmet-lbl">Wt. Degree</div></div>'+
+      '<div class="dmet"><div class="dmet-val">'+GraphStats.fmt(ns.cc,3)+'</div><div class="dmet-lbl">Clustering</div></div>'+
+      '<div class="dmet"><div class="dmet-val">'+GraphStats.fmt(ns.egoDensity,3)+'</div><div class="dmet-lbl">Ego Density</div></div>'+
+    '</div>'+
+    '<div class="detail-nbr-lbl">Connected concepts ('+nbrs.size+')</div>'+
+    '<div class="detail-tags">'+tags+'</div>';
+
+  panel.style.borderLeftColor=cl.color;
+  panel.style.display='block';
+}
+function hideDetail(){document.getElementById('detail').style.display='none';}
+  }
+  
+</script>
+</body>
+</html>
