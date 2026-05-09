@@ -1,6 +1,7 @@
 // =============================================
 // MLKN.lab - Network Links Generator (5-Layer Structure)
 // Author: François Papin (adapted for 26 disciplines + 5 layers + 5 Core Domains)
+// May 2026 | MIT License
 // =============================================
 
 // =============================================
@@ -11,13 +12,8 @@ const DISCIPLINE_CONFIG = {
 
   // ========== CORE DOMAIN 1: FORMAL SCIENCES ==========
   "Mathematical Science": {
-    domain: "FORMAL", // Layer 1: Core Discipline Domain
-    clusters: [
-      "ALGEBRA",    // Layer 3: Subdisciplines
-      "CALCULUS",
-      "STATISTICS",
-      "TOPOLOGY"
-    ],
+    domain: "FORMAL",
+    clusters: ["ALGEBRA", "CALCULUS", "STATISTICS", "TOPOLOGY"],
     clusterConnections: {
       "ALGEBRA": ["CALCULUS", "STATISTICS"],
       "CALCULUS": ["ALGEBRA", "STATISTICS", "TOPOLOGY"],
@@ -25,31 +21,23 @@ const DISCIPLINE_CONFIG = {
       "TOPOLOGY": ["CALCULUS"]
     },
     expertLinks: [
-      // Layer 3 → Layer 4 (Subdiscipline → Thematic Domain)
       ["algebra", "abstract_algebra", 4],
       ["calculus", "differential_equations", 4],
       ["statistics", "probability_theory", 4],
       ["topology", "algebraic_topology", 4],
-
-      // Layer 4 → Layer 5 (Thematic Domain → Main Thematic)
       ["abstract_algebra", "groups", 3],
       ["differential_equations", "partial_differential_equations", 3],
       ["probability_theory", "stochastic_processes", 3]
     ],
     conceptKeywords: {
-      // Layer 3: Subdisciplines
       "algebra": ["groups", "rings", "fields", "modules", "vector-spaces"],
       "calculus": ["limits", "derivatives", "integrals", "series", "multivariable"],
       "statistics": ["probability", "distributions", "hypothesis-testing", "regression", "bayesian"],
       "topology": ["spaces", "continuity", "compactness", "connectedness", "manifolds"],
-
-      // Layer 4: Thematic Domains
       "abstract_algebra": ["groups", "rings", "fields", "modules", "vector-spaces"],
       "differential_equations": ["ode", "pde", "linear", "nonlinear", "numerical"],
       "probability_theory": ["distributions", "expectation", "variance", "stochastic", "markov"],
       "algebraic_topology": ["homotopy", "homology", "cohomology", "fundamental-group", "manifolds"],
-
-      // Layer 5: Main Thematics
       "groups": ["abelian", "non-abelian", "finite", "infinite", "lie-groups"],
       "partial_differential_equations": ["heat", "wave", "laplace", "navier-stokes", "schrodinger"],
       "stochastic_processes": ["markov", "brownian", "poisson", "diffusion", "martingale"]
@@ -58,12 +46,7 @@ const DISCIPLINE_CONFIG = {
 
   "Logic": {
     domain: "FORMAL",
-    clusters: [
-      "SYMBOLIC",    // Layer 3
-      "MATHLOGIC",
-      "COMPLOGIC",
-      "PHILLOGIC"
-    ],
+    clusters: ["SYMBOLIC", "MATHLOGIC", "COMPLOGIC", "PHILLOGIC"],
     clusterConnections: {
       "SYMBOLIC": ["MATHLOGIC", "COMPLOGIC", "PHILLOGIC"],
       "MATHLOGIC": ["SYMBOLIC", "COMPLOGIC"],
@@ -96,16 +79,7 @@ const DISCIPLINE_CONFIG = {
 
   "Computer Science": {
     domain: "FORMAL",
-    clusters: [
-      "AI",         // Layer 3
-      "THEORY",
-      "SYSTEMS",
-      "DATA",
-      "HCI",
-      "SECURITY",
-      "EMERGING",
-      "SE"
-    ],
+    clusters: ["AI", "THEORY", "SYSTEMS", "DATA", "HCI", "SECURITY", "EMERGING", "SE"],
     clusterConnections: {
       "AI": ["THEORY", "DATA", "SYSTEMS", "HCI", "EMERGING"],
       "THEORY": ["AI", "SYSTEMS", "DATA", "SECURITY"],
@@ -163,16 +137,7 @@ const DISCIPLINE_CONFIG = {
 
   "Systems Science": {
     domain: "FORMAL",
-    clusters: [
-      "COMPLEX",    // Layer 3
-      "CYBERN",
-      "SYSTHINK",
-      "NETWORKS",
-      "DYNAMIC",
-      "INFOTHE",
-      "EMERGE",
-      "APPLIED"
-    ],
+    clusters: ["COMPLEX", "CYBERN", "SYSTHINK", "NETWORKS", "DYNAMIC", "INFOTHE", "EMERGE", "APPLIED"],
     clusterConnections: {
       "COMPLEX": ["CYBERN", "SYSTHINK", "NETWORKS", "DYNAMIC", "EMERGE", "APPLIED"],
       "CYBERN": ["COMPLEX", "SYSTHINK", "DYNAMIC", "INFOTHE", "APPLIED"],
@@ -232,16 +197,7 @@ const DISCIPLINE_CONFIG = {
   // ========== CORE DOMAIN 2: NATURAL SCIENCES ==========
   "Neuroscience": {
     domain: "NATURAL",
-    clusters: [
-      "MOLCELL",    // Layer 3
-      "SYSTEMS",
-      "COGNEURO",
-      "DEVNEURO",
-      "CLINICAL",
-      "COMPUT",
-      "METHODS",
-      "TRANSLA"
-    ],
+    clusters: ["MOLCELL", "SYSTEMS", "COGNEURO", "DEVNEURO", "CLINICAL", "COMPUT", "METHODS", "TRANSLA"],
     clusterConnections: {
       "MOLCELL": ["SYSTEMS", "DEVNEURO", "CLINICAL", "COMPUT", "METHODS"],
       "SYSTEMS": ["MOLCELL", "COGNEURO", "DEVNEURO", "CLINICAL", "COMPUT", "METHODS"],
@@ -253,48 +209,53 @@ const DISCIPLINE_CONFIG = {
       "TRANSLA": ["MOLCELL", "SYSTEMS", "COGNEURO", "DEVNEURO", "CLINICAL", "COMPUT", "METHODS"]
     },
     expertLinks: [
-      ["cognitive_neuroscience", "brain_imaging", 4],
       ["molecular_neuroscience", "neural_coding", 4],
-      ["neuroscience", "synaptic_plasticity", 4],
-      ["clinical_medicine", "neurological_disorders", 4],
+      ["systems_neuroscience", "brain_imaging", 4],
+      ["cognitive_neuroscience", "executive_control", 4],
+      ["developmental_neuroscience", "neurogenesis", 4],
+      ["clinical_neuroscience", "alzheimers_disease", 4],
       ["computational_neuroscience", "neural_networks", 4],
-      ["brain_imaging", "fMRI", 3],
+      ["neuro_methods", "fMRI", 4],
+      ["translational_neuroscience", "neuroprotection", 4],
       ["neural_coding", "action_potential", 3],
-      ["synaptic_plasticity", "long_term_potentiation", 3],
-      ["neurological_disorders", "alzheimers_disease", 3],
-      ["neural_networks", "deep_learning", 3]
+      ["brain_imaging", "EEG", 3],
+      ["executive_control", "prefrontal_networks", 3],
+      ["neurogenesis", "synaptic_pruning", 3],
+      ["alzheimers_disease", "brain_aging", 3],
+      ["neural_networks", "deep_learning", 3],
+      ["fMRI", "diffusion_tensor_imaging", 3],
+      ["neuroprotection", "drug_target_discovery", 3]
     ],
     conceptKeywords: {
-      "cognitive_neuroscience": ["brain", "cognition", "memory", "attention", "perception"],
       "molecular_neuroscience": ["neurons", "synapses", "neurotransmitters", "ion-channels", "receptors"],
-      "neuroscience": ["brain", "nervous-system", "neurons", "glia", "neurochemistry"],
-      "clinical_medicine": ["diagnosis", "treatment", "neurological-exam", "neuroimaging", "therapy"],
+      "systems_neuroscience": ["circuits", "pathways", "networks", "integration", "behavior"],
+      "cognitive_neuroscience": ["brain", "cognition", "memory", "attention", "perception"],
+      "developmental_neuroscience": ["growth", "plasticity", "maturation", "critical-periods", "aging"],
+      "clinical_neuroscience": ["diagnosis", "treatment", "disease-management", "clinical-trials", "patient-care"],
       "computational_neuroscience": ["models", "simulations", "neural-networks", "machine-learning", "brain-machine-interfaces"],
-      "brain_imaging": ["fMRI", "EEG", "MEG", "PET", "DTI"],
-      "fMRI": ["bold", "hemodynamic", "spatial-resolution", "functional", "neuroimaging"],
+      "neuro_methods": ["fMRI", "EEG", "MEG", "PET", "DTI"],
+      "translational_neuroscience": ["therapeutics", "biomarkers", "animal-models", "clinical-trials", "drug-development"],
       "neural_coding": ["spike-trains", "rate-coding", "temporal-coding", "information-theory", "decoding"],
       "action_potential": ["neuron", "depolarization", "repolarization", "threshold", "voltage-gated"],
-      "synaptic_plasticity": ["ltp", "ltd", "hebbian", "synaptic-strength", "learning"],
-      "long_term_potentiation": ["hippocampus", "synaptic-strengthening", "ampa", "nmda", "calcium"],
-      "neurological_disorders": ["alzheimers", "parkinsons", "epilepsy", "multiple-sclerosis", "stroke"],
+      "brain_imaging": ["fMRI", "EEG", "MEG", "PET", "DTI"],
+      "EEG": ["electroencephalography", "brainwaves", "alpha", "beta", "gamma"],
+      "executive_control": ["inhibition", "shifting", "updating", "cognitive-flexibility", "go-no-go"],
+      "prefrontal_networks": ["planning", "decision-making", "working-memory", "attention", "goal-directed"],
+      "neurogenesis": ["hippocampus", "subventricular-zone", "adult", "stem-cells", "plasticity"],
+      "synaptic_pruning": ["adolescence", "development", "refinement", "elimination", "maturation"],
       "alzheimers_disease": ["amyloid", "tau", "dementia", "memory-loss", "neurodegeneration"],
+      "brain_aging": ["cognitive-decline", "neurodegeneration", "memory", "processing-speed", "volume-loss"],
       "neural_networks": ["nodes", "weights", "activation", "backpropagation", "architecture"],
-      "deep_learning": ["neural-networks", "layers", "training", "gpu", "big-data"]
+      "deep_learning": ["neural-networks", "layers", "training", "gpu", "big-data"],
+      "diffusion_tensor_imaging": ["white-matter", "tractography", "anisotropy", "connectivity", "fiber-tracking"],
+      "neuroprotection": ["antioxidants", "anti-inflammatory", "neurotrophic", "apoptosis", "therapeutics"],
+      "drug_target_discovery": ["pharmacology", "receptors", "pathways", "screening", "biomarkers"]
     }
   },
 
   "Environmental Science": {
     domain: "NATURAL",
-    clusters: [
-      "CLIMATE",    // Layer 3
-      "ECOLOGY",
-      "HYDRO",
-      "ATMOS",
-      "EARTH",
-      "POLLUT",
-      "CONSERV",
-      "ENERGY"
-    ],
+    clusters: ["CLIMATE", "ECOLOGY", "HYDRO", "ATMOS", "EARTH", "POLLUT", "CONSERV", "ENERGY"],
     clusterConnections: {
       "CLIMATE": ["ECOLOGY", "HYDRO", "ATMOS", "EARTH", "POLLUT", "ENERGY"],
       "ECOLOGY": ["CLIMATE", "HYDRO", "EARTH", "POLLUT", "CONSERV"],
@@ -352,13 +313,7 @@ const DISCIPLINE_CONFIG = {
 
   "Biology": {
     domain: "NATURAL",
-    clusters: [
-      "GENETICS",    // Layer 3
-      "CELLBIO",
-      "EVOBIO",
-      "ECOLOGY",
-      "PHYSBIO"
-    ],
+    clusters: ["GENETICS", "CELLBIO", "EVOBIO", "ECOLOGY", "PHYSBIO"],
     clusterConnections: {
       "GENETICS": ["CELLBIO", "EVOBIO", "ECOLOGY"],
       "CELLBIO": ["GENETICS", "EVOBIO", "PHYSBIO"],
@@ -400,13 +355,7 @@ const DISCIPLINE_CONFIG = {
   // ========== CORE DOMAIN 3: HEALTH SCIENCES ==========
   "Medicine": {
     domain: "HEALTH",
-    clusters: [
-      "CLINICAL",     // Layer 3
-      "INTERNAL",
-      "SURGERY",
-      "PEDIATRICS",
-      "PUBLICMED"
-    ],
+    clusters: ["CLINICAL", "INTERNAL", "SURGERY", "PEDIATRICS", "PUBLICMED"],
     clusterConnections: {
       "CLINICAL": ["INTERNAL", "SURGERY", "PEDIATRICS", "PUBLICMED"],
       "INTERNAL": ["CLINICAL", "SURGERY", "PEDIATRICS"],
@@ -447,13 +396,7 @@ const DISCIPLINE_CONFIG = {
 
   "Public Health": {
     domain: "HEALTH",
-    clusters: [
-      "EPIDEMIO",    // Layer 3
-      "BIOSTATS",
-      "ENVHEALTH",
-      "HEALTHPOLICY",
-      "GLOBALHEALTH"
-    ],
+    clusters: ["EPIDEMIO", "BIOSTATS", "ENVHEALTH", "HEALTHPOLICY", "GLOBALHEALTH"],
     clusterConnections: {
       "EPIDEMIO": ["BIOSTATS", "ENVHEALTH", "HEALTHPOLICY", "GLOBALHEALTH"],
       "BIOSTATS": ["EPIDEMIO", "ENVHEALTH", "HEALTHPOLICY"],
@@ -494,13 +437,7 @@ const DISCIPLINE_CONFIG = {
 
   "Bioethics": {
     domain: "HEALTH",
-    clusters: [
-      "MEDETHICS",    // Layer 3
-      "RESETHICS",
-      "ENVETHICS",
-      "DIGETHICS",
-      "BIOLAW"
-    ],
+    clusters: ["MEDETHICS", "RESETHICS", "ENVETHICS", "DIGETHICS", "BIOLAW"],
     clusterConnections: {
       "MEDETHICS": ["RESETHICS", "ENVETHICS", "DIGETHICS", "BIOLAW"],
       "RESETHICS": ["MEDETHICS", "ENVETHICS", "DIGETHICS"],
@@ -542,16 +479,7 @@ const DISCIPLINE_CONFIG = {
   // ========== CORE DOMAIN 4: SOCIAL SCIENCES ==========
   "Anthropology": {
     domain: "SOCIAL",
-    clusters: [
-      "CULTURAL",      // Layer 3
-      "BIOANTH",
-      "LINGAUTH",
-      "ARCHAEO",
-      "MEDICAL",
-      "ECOANTH",
-      "POLITANH",
-      "APPLIED"
-    ],
+    clusters: ["CULTURAL", "BIOANTH", "LINGAUTH", "ARCHAEO", "MEDICAL", "ECOANTH", "POLITANH", "APPLIED"],
     clusterConnections: {
       "CULTURAL": ["LINGAUTH", "MEDICAL", "POLITANH"],
       "BIOANTH": ["ARCHAEO", "MEDICAL"],
@@ -605,13 +533,7 @@ const DISCIPLINE_CONFIG = {
 
   "Law": {
     domain: "SOCIAL",
-    clusters: [
-      "INTLAW",      // Layer 3
-      "CONSTLAW",
-      "CRIMLAW",
-      "CIVLAW",
-      "HUMRIGHTS"
-    ],
+    clusters: ["INTLAW", "CONSTLAW", "CRIMLAW", "CIVLAW", "HUMRIGHTS"],
     clusterConnections: {
       "INTLAW": ["CONSTLAW", "CRIMLAW", "CIVLAW", "HUMRIGHTS"],
       "CONSTLAW": ["INTLAW", "CRIMLAW", "CIVLAW", "HUMRIGHTS"],
@@ -651,16 +573,7 @@ const DISCIPLINE_CONFIG = {
 
   "Education Science": {
     domain: "SOCIAL",
-    clusters: [
-      "LEARNING",    // Layer 3
-      "PEDAGOGY",
-      "CURRICUL",
-      "ASSESS",
-      "SPECIAL",
-      "TECH",
-      "SOCIAL",
-      "POLICY"
-    ],
+    clusters: ["LEARNING", "PEDAGOGY", "CURRICUL", "ASSESS", "SPECIAL", "TECH", "SOCIAL", "POLICY"],
     clusterConnections: {
       "LEARNING": ["PEDAGOGY", "CURRICUL", "ASSESS", "SPECIAL", "TECH", "SOCIAL"],
       "PEDAGOGY": ["LEARNING", "CURRICUL", "ASSESS", "SPECIAL", "TECH", "SOCIAL"],
@@ -673,57 +586,58 @@ const DISCIPLINE_CONFIG = {
     },
     expertLinks: [
       ["constructivism", "situated_learning", 4],
-      ["pedagogy", "active_learning", 4],
-      ["curriculum", "competency_based_education", 4],
-      ["assessment", "formative_assessment", 4],
-      ["special_education", "inclusive_education", 4],
-      ["edtech", "blended_learning", 4],
-      ["social_dimensions", "educational_equity", 4],
-      ["policy", "education_policy", 4],
+      ["behaviorism", "direct_instruction", 4],
+      ["cognitivism", "metacognition", 4],
+      ["social_learning_theory", "cooperative_learning", 4],
+      ["zone_of_proximal_dev", "scaffolding", 4],
+      ["self_regulated_learning", "metacognition", 4],
+      ["curriculum_design", "standards_based_education", 4],
+      ["formative_assessment", "feedback", 4],
+      ["inclusive_education", "universal_design_for_learning", 4],
+      ["edtech", "e_learning", 4],
+      ["ai_in_education", "adaptive_learning", 4],
       ["situated_learning", "authentic_assessment", 3],
-      ["active_learning", "flipped_classroom", 3],
-      ["competency_based_education", "outcome_based_education", 3],
-      ["formative_assessment", "feedback", 3],
-      ["inclusive_education", "universal_design", 3],
-      ["blended_learning", "online_learning", 3],
-      ["educational_equity", "social_justice", 3],
-      ["education_policy", "school_reform", 3]
+      ["direct_instruction", "differentiated_instruction", 3],
+      ["metacognition", "self_regulated_learning", 3],
+      ["cooperative_learning", "inquiry_based_learning", 3],
+      ["scaffolding", "zone_of_proximal_dev", 3],
+      ["feedback", "formative_assessment", 3],
+      ["universal_design_for_learning", "inclusive_education", 3],
+      ["e_learning", "blended_learning", 3],
+      ["adaptive_learning", "personalized_learning", 3]
     ],
     conceptKeywords: {
       "constructivism": ["learning", "construction", "knowledge", "piaget", "active"],
-      "pedagogy": ["teaching", "methods", "strategies", "instructional-design", "andragogy"],
-      "curriculum": ["design", "development", "evaluation", "standards", "alignment"],
-      "assessment": ["formative", "summative", "authentic", "rubrics", "feedback"],
-      "special_education": ["iep", "accommodations", "modifications", "inclusion", "differentiation"],
-      "edtech": ["digital", "online", "blended", "adaptive", "gamification"],
-      "social_dimensions": ["equity", "access", "participation", "community", "culture"],
-      "policy": ["regulation", "financing", "standards", "accountability", "reform"],
-      "situated_learning": ["context", "authentic", "real-world", "apprenticeship", "communities-of-practice"],
-      "active_learning": ["engagement", "interaction", "collaboration", "problem-solving", "inquiry"],
-      "competency_based_education": ["outcomes", "mastery", "progression", "assessment", "standards"],
-      "formative_assessment": ["feedback", "progress", "adjustment", "self-assessment", "peer-assessment"],
-      "inclusive_education": ["diversity", "equity", "access", "participation", "universal-design"],
-      "blended_learning": ["online", "face-to-face", "hybrid", "flipped", "synchronous"],
+      "behaviorism": ["learning", "stimulus", "response", "skinner", "conditioning"],
+      "cognitivism": ["learning", "cognition", "mental-processes", "information-processing", "memory"],
+      "social_learning_theory": ["learning", "observation", "imitation", "bandura", "modeling"],
+      "zone_of_proximal_dev": ["learning", "vygotsky", "potential", "scaffolding", "development"],
+      "self_regulated_learning": ["learning", "self-direction", "metacognition", "strategies", "goals"],
+      "curriculum_design": ["curriculum", "planning", "objectives", "content", "alignment"],
+      "formative_assessment": ["assessment", "feedback", "progress", "adjustment", "learning"],
+      "inclusive_education": ["education", "diversity", "access", "equity", "participation"],
+      "edtech": ["technology", "education", "tools", "innovation", "digital"],
+      "ai_in_education": ["technology", "ai", "personalization", "adaptive", "tools"],
+      "situated_learning": ["context", "authentic", "real-world", "lave", "wenger"],
       "authentic_assessment": ["real-world", "performance", "portfolios", "projects", "reflection"],
-      "flipped_classroom": ["video-lectures", "active-classroom", "homework-in-class", "self-paced", "collaboration"],
-      "outcome_based_education": ["competencies", "skills", "knowledge", "values", "performance"],
+      "direct_instruction": ["teaching", "explicit", "structured", "scripted", "mastery"],
+      "differentiated_instruction": ["teaching", "diversity", "adaptation", "needs", "flexibility"],
+      "metacognition": ["thinking", "learning", "awareness", "monitoring", "regulation"],
+      "cooperative_learning": ["learning", "group", "collaboration", "interdependence", "teamwork"],
+      "inquiry_based_learning": ["learning", "questions", "investigation", "discovery", "exploration"],
+      "scaffolding": ["support", "learning", "guidance", "temporary", "vygotsky"],
       "feedback": ["communication", "improvement", "specific", "timely", "actionable"],
-      "universal_design": ["accessibility", "flexibility", "multiple-means", "inclusive", "barrier-free"],
-      "online_learning": ["e-learning", "distance-education", "moocs", "lms", "synchronous"],
-      "social_justice": ["equity", "fairness", "access", "opportunity", "advocacy"],
-      "school_reform": ["change", "improvement", "policy", "innovation", "accountability"]
+      "universal_design_for_learning": ["design", "accessibility", "flexibility", "multiple-means", "udl"],
+      "e_learning": ["online", "distance-education", "moocs", "lms", "synchronous"],
+      "blended_learning": ["online", "face-to-face", "hybrid", "flipped", "synchronous"],
+      "adaptive_learning": ["personalized", "technology", "adjustment", "pace", "automation"],
+      "personalized_learning": ["individualized", "tailored", "adaptive", "student-centered", "differentiation"]
     }
   },
 
   "Economics": {
     domain: "SOCIAL",
-    clusters: [
-      "MICRO",       // Layer 3
-      "MACRO",
-      "BEHAV",
-      "DEVECON",
-      "INTECON"
-    ],
+    clusters: ["MICRO", "MACRO", "BEHAV", "DEVECON", "INTECON"],
     clusterConnections: {
       "MICRO": ["MACRO", "BEHAV", "DEVECON", "INTECON"],
       "MACRO": ["MICRO", "BEHAV", "DEVECON", "INTECON"],
@@ -764,13 +678,7 @@ const DISCIPLINE_CONFIG = {
 
   "Psychology": {
     domain: "SOCIAL",
-    clusters: [
-      "COGPSY",      // Layer 3
-      "CLINPSY",
-      "SOCPSY",
-      "DEVPSY",
-      "NEUROPSY"
-    ],
+    clusters: ["COGPSY", "CLINPSY", "SOCPSY", "DEVPSY", "NEUROPSY"],
     clusterConnections: {
       "COGPSY": ["CLINPSY", "SOCPSY", "DEVPSY", "NEUROPSY"],
       "CLINPSY": ["COGPSY", "SOCPSY", "DEVPSY"],
@@ -811,13 +719,7 @@ const DISCIPLINE_CONFIG = {
 
   "Sociology": {
     domain: "SOCIAL",
-    clusters: [
-      "SOCTHEORY",    // Layer 3
-      "CULTURE",
-      "ECONSOC",
-      "POLITICSOC",
-      "URBANSOC"
-    ],
+    clusters: ["SOCTHEORY", "CULTURE", "ECONSOC", "POLITICSOC", "URBANSOC"],
     clusterConnections: {
       "SOCTHEORY": ["CULTURE", "ECONSOC", "POLITICSOC", "URBANSOC"],
       "CULTURE": ["SOCTHEORY", "ECONSOC", "POLITICSOC"],
@@ -858,13 +760,7 @@ const DISCIPLINE_CONFIG = {
 
   "Digital Geopolitics": {
     domain: "SOCIAL",
-    clusters: [
-      "CYBERSEC",     // Layer 3
-      "DIGGOV",
-      "AIGEO",
-      "DATAGEO",
-      "PLATFORM"
-    ],
+    clusters: ["CYBERSEC", "DIGGOV", "AIGEO", "DATAGEO", "PLATFORM"],
     clusterConnections: {
       "CYBERSEC": ["DIGGOV", "AIGEO", "DATAGEO", "PLATFORM"],
       "DIGGOV": ["CYBERSEC", "AIGEO", "DATAGEO", "PLATFORM"],
@@ -906,16 +802,7 @@ const DISCIPLINE_CONFIG = {
   // ========== CORE DOMAIN 5: HUMANITIES ==========
   "Philosophy": {
     domain: "HUMANITIES",
-    clusters: [
-      "ONTOL",       // Layer 3
-      "KNOW",
-      "ETHVAL",
-      "LANGLOG",
-      "MINDCON",
-      "SCITEC",
-      "SOCIALPOL",
-      "HISTPHIL"
-    ],
+    clusters: ["ONTOL", "KNOW", "ETHVAL", "LANGLOG", "MINDCON", "SCITEC", "SOCIALPOL", "HISTPHIL"],
     clusterConnections: {
       "ONTOL": ["KNOW", "ETHVAL", "LANGLOG", "MINDCON", "SCITEC", "SOCIALPOL", "HISTPHIL"],
       "KNOW": ["ONTOL", "ETHVAL", "LANGLOG", "MINDCON", "SCITEC", "SOCIALPOL"],
@@ -970,16 +857,7 @@ const DISCIPLINE_CONFIG = {
 
   "Language Science": {
     domain: "HUMANITIES",
-    clusters: [
-      "PHONET",       // Layer 3
-      "MORPHSYN",
-      "SEMANPRAG",
-      "SOCIOLIN",
-      "PSYCHOLIN",
-      "HISTCOMP",
-      "ACQUIS",
-      "COMPLIN"
-    ],
+    clusters: ["PHONET", "MORPHSYN", "SEMANPRAG", "SOCIOLIN", "PSYCHOLIN", "HISTCOMP", "ACQUIS", "COMPLIN"],
     clusterConnections: {
       "PHONET": ["MORPHSYN", "SEMANPRAG", "PSYCHOLIN", "ACQUIS"],
       "MORPHSYN": ["PHONET", "SEMANPRAG", "PSYCHOLIN", "HISTCOMP", "ACQUIS"],
@@ -1036,12 +914,7 @@ const DISCIPLINE_CONFIG = {
 
   "Social Epistemology": {
     domain: "HUMANITIES",
-    clusters: [
-      "KNOWPROD",     // Layer 3
-      "SOCKNOW",
-      "EXPERTISE",
-      "TRUST"
-    ],
+    clusters: ["KNOWPROD", "SOCKNOW", "EXPERTISE", "TRUST"],
     clusterConnections: {
       "KNOWPROD": ["SOCKNOW", "EXPERTISE", "TRUST"],
       "SOCKNOW": ["KNOWPROD", "EXPERTISE", "TRUST"],
@@ -1076,12 +949,7 @@ const DISCIPLINE_CONFIG = {
 
   "History of Science": {
     domain: "HUMANITIES",
-    clusters: [
-      "SCIREV",      // Layer 3
-      "INSTHIST",
-      "SOCSCI",
-      "PHILSCI"
-    ],
+    clusters: ["SCIREV", "INSTHIST", "SOCSCI", "PHILSCI"],
     clusterConnections: {
       "SCIREV": ["INSTHIST", "SOCSCI", "PHILSCI"],
       "INSTHIST": ["SCIREV", "SOCSCI", "PHILSCI"],
@@ -1116,13 +984,7 @@ const DISCIPLINE_CONFIG = {
 
   "Art and Design": {
     domain: "HUMANITIES",
-    clusters: [
-      "VISUAL",      // Layer 3
-      "DIGITAL",
-      "DESIGNTHINK",
-      "AESTHETICS",
-      "CULTURAL"
-    ],
+    clusters: ["VISUAL", "DIGITAL", "DESIGNTHINK", "AESTHETICS", "CULTURAL"],
     clusterConnections: {
       "VISUAL": ["DIGITAL", "DESIGNTHINK", "AESTHETICS", "CULTURAL"],
       "DIGITAL": ["VISUAL", "DESIGNTHINK", "AESTHETICS"],
@@ -1163,13 +1025,7 @@ const DISCIPLINE_CONFIG = {
   // ========== CORE DOMAIN 6: APPLIED SCIENCES ==========
   "Engineering": {
     domain: "APPLIED",
-    clusters: [
-      "CIVIL",       // Layer 3
-      "MECH",
-      "ELEC",
-      "CHEM",
-      "SOFTWARE"
-    ],
+    clusters: ["CIVIL", "MECH", "ELEC", "CHEM", "SOFTWARE"],
     clusterConnections: {
       "CIVIL": ["MECH", "ELEC", "CHEM", "SOFTWARE"],
       "MECH": ["CIVIL", "ELEC", "CHEM"],
@@ -1210,12 +1066,7 @@ const DISCIPLINE_CONFIG = {
 
   "Design": {
     domain: "APPLIED",
-    clusters: [
-      "UX",          // Layer 3
-      "INDUSTRIAL",
-      "GRAPHIC",
-      "INTERACTION"
-    ],
+    clusters: ["UX", "INDUSTRIAL", "GRAPHIC", "INTERACTION"],
     clusterConnections: {
       "UX": ["INDUSTRIAL", "GRAPHIC", "INTERACTION"],
       "INDUSTRIAL": ["UX", "GRAPHIC"],
@@ -1250,13 +1101,7 @@ const DISCIPLINE_CONFIG = {
 
   "Urban Planning": {
     domain: "APPLIED",
-    clusters: [
-      "TRANSPORT",    // Layer 3
-      "LANDUSE",
-      "ENVPLAN",
-      "HOUSING",
-      "SMART"
-    ],
+    clusters: ["TRANSPORT", "LANDUSE", "ENVPLAN", "HOUSING", "SMART"],
     clusterConnections: {
       "TRANSPORT": ["LANDUSE", "ENVPLAN", "HOUSING", "SMART"],
       "LANDUSE": ["TRANSPORT", "ENVPLAN", "HOUSING"],
@@ -1297,13 +1142,7 @@ const DISCIPLINE_CONFIG = {
 
   "Architecture": {
     domain: "APPLIED",
-    clusters: [
-      "DESIGN",      // Layer 3
-      "HISTORY",
-      "TECHNOLOGY",
-      "URBAN",
-      "SUSTAINABLE"
-    ],
+    clusters: ["DESIGN", "HISTORY", "TECHNOLOGY", "URBAN", "SUSTAINABLE"],
     clusterConnections: {
       "DESIGN": ["HISTORY", "TECHNOLOGY", "URBAN", "SUSTAINABLE"],
       "HISTORY": ["DESIGN", "TECHNOLOGY", "URBAN"],
@@ -1343,18 +1182,9 @@ const DISCIPLINE_CONFIG = {
 
   // ========== INTERDISCIPLINARY NETWORK ==========
   "Interdisciplinary Knowledge Network": {
-    domain: "INTERDISC", // Special domain for interdisciplinarity
-    clusters: [
-      "FORMAL",      // Core Domain 1
-      "NATURAL",      // Core Domain 2
-      "HEALTH",       // Core Domain 3
-      "SOCIAL",       // Core Domain 4
-      "HUMANITIES",   // Core Domain 5
-      "APPLIED",      // Core Domain 6
-      "INTERDISC"     // Interdisciplinary Nodes
-    ],
+    domain: "INTERDISC",
+    clusters: ["FORMAL", "NATURAL", "HEALTH", "SOCIAL", "HUMANITIES", "APPLIED", "INTERDISC"],
     clusterConnections: {
-      // All Core Domains are interconnected
       "FORMAL": ["NATURAL", "HEALTH", "SOCIAL", "HUMANITIES", "APPLIED", "INTERDISC"],
       "NATURAL": ["FORMAL", "HEALTH", "SOCIAL", "HUMANITIES", "APPLIED", "INTERDISC"],
       "HEALTH": ["FORMAL", "NATURAL", "SOCIAL", "HUMANITIES", "APPLIED", "INTERDISC"],
@@ -1442,42 +1272,42 @@ const DISCIPLINE_CONFIG = {
       ["usability", "user_friendly", 3],
 
       // Cross-Domain Connections (Layer 2 ↔ Layer 2)
-      ["computer_science", "neuroscience", 4], // AI ↔ Neuroscience
-      ["psychology", "neuroscience", 4], // Cognitive Psychology ↔ Neuroscience
-      ["medicine", "public_health", 4], // Medicine ↔ Public Health
-      ["education_science", "psychology", 4], // Education ↔ Psychology
-      ["environmental_science", "public_health", 4], // Environmental Science ↔ Public Health
-      ["law", "human_rights", 4], // Law ↔ Human Rights (already in your original)
-      ["digital_geopolitics", "computer_science", 4], // Digital Geopolitics ↔ Computer Science
-      ["philosophy", "social_epistemology", 4], // Philosophy ↔ Social Epistemology
-      ["language_science", "psychology", 4], // Language Science ↔ Psychology
-      ["engineering", "computer_science", 4], // Engineering ↔ Computer Science
+      ["computer_science", "neuroscience", 4],
+      ["psychology", "neuroscience", 4],
+      ["medicine", "public_health", 4],
+      ["education_science", "psychology", 4],
+      ["environmental_science", "public_health", 4],
+      ["law", "human_rights", 4],
+      ["digital_geopolitics", "computer_science", 4],
+      ["philosophy", "social_epistemology", 4],
+      ["language_science", "psychology", 4],
+      ["engineering", "computer_science", 4],
 
       // Cross-Domain Connections (Layer 3 ↔ Layer 3)
-      ["ai", "cognitive_neuroscience", 4], // AI ↔ Cognitive Neuroscience
-      ["machine_learning", "neural_coding", 4], // Machine Learning ↔ Neural Coding
-      ["cognitive_psychology", "neuroscience", 4], // Cognitive Psychology ↔ Neuroscience
-      ["clinical_medicine", "public_health", 4], // Clinical Medicine ↔ Public Health
-      ["epidemiology", "environmental_science", 4], // Epidemiology ↔ Environmental Science
-      ["cultural_anthropology", "language_science", 4], // Cultural Anthropology ↔ Language Science
-      ["international_law", "human_rights", 4], // International Law ↔ Human Rights
-      ["pedagogy", "cognitive_psychology", 4], // Pedagogy ↔ Cognitive Psychology
-      ["microeconomics", "psychology", 4], // Microeconomics ↔ Psychology (Behavioral Economics)
-      ["ethics", "bioethics", 4], // Ethics ↔ Bioethics
-      ["linguistics", "cognitive_psychology", 4], // Linguistics ↔ Cognitive Psychology
-      ["civil_engineering", "urban_planning", 4], // Civil Engineering ↔ Urban Planning
+      ["ai", "cognitive_neuroscience", 4],
+      ["machine_learning", "neural_coding", 4],
+      ["cognitive_psychology", "neuroscience", 4],
+      ["clinical_medicine", "public_health", 4],
+      ["epidemiology", "environmental_science", 4],
+      ["cultural_anthropology", "language_science", 4],
+      ["international_law", "human_rights", 4],
+      ["pedagogy", "cognitive_psychology", 4],
+      ["microeconomics", "psychology", 4],
+      ["ethics", "bioethics", 4],
+      ["linguistics", "cognitive_psychology", 4],
+      ["civil_engineering", "urban_planning", 4],
 
       // Cross-Domain Connections (Layer 4 ↔ Layer 4)
-      ["machine_learning", "brain_imaging", 4], // Machine Learning ↔ Brain Imaging
-      ["memory", "neural_coding", 4], // Memory ↔ Neural Coding
-      ["disease_surveillance", "environmental_health", 4], // Disease Surveillance ↔ Environmental Health
-      ["ethnography", "language_and_culture", 4], // Ethnography ↔ Language & Culture
-      ["justice", "human_dignity", 4], // Justice ↔ Human Dignity
-      ["constructivism", "synaptic_plasticity", 4], // Constructivism ↔ Synaptic Plasticity
-      ["supply_and_demand", "heuristics", 4], // Supply & Demand ↔ Heuristics (Behavioral Economics)
-      ["moral_philosophy", "bioethics", 4], // Moral Philosophy ↔ Bioethics
-      ["phonetics", "language_acquisition", 4], // Phonetics ↔ Language Acquisition
-      ["structural_engineering", "urban_design", 4], // Structural Engineering ↔ Urban Design
+      ["machine_learning", "brain_imaging", 4],
+      ["memory", "neural_coding", 4],
+      ["disease_surveillance", "environmental_health", 4],
+      ["ethnography", "language_and_culture", 4],
+      ["justice", "human_dignity", 4],
+      ["constructivism", "synaptic_plasticity", 4],
+      ["supply_and_demand", "heuristics", 4],
+      ["moral_philosophy", "bioethics", 4],
+      ["phonetics", "language_acquisition", 4],
+      ["structural_engineering", "urban_design", 4],
 
       // Interdisciplinary Nodes (Layer 1)
       ["Interdisciplinarity", "Transdisciplinarity", 5],
@@ -1548,4 +1378,162 @@ const DISCIPLINE_CONFIG = {
       "cultural_anthropology": ["ethnography", "cultural-relativism", "symbolic-anthropology", "ethnolinguistics", "medical-anthropology"],
       "international_law": ["treaty-law", "human-rights", "international-criminal-law", "diplomatic-law", "trade-law"],
       "pedagogy": ["constructivism", "behaviorism", "cognitivism", "social-learning-theory", "active-learning"],
-      "microeconomics": ["supply-and-demand", "
+      "microeconomics": ["supply-and-demand", "market-structure", "consumer-theory", "firm-theory", "equilibrium"],
+      "cognitive_psychology": ["perception", "attention", "memory", "language", "problem-solving"],
+      "ethics": ["moral-philosophy", "applied-ethics", "normative-ethics", "meta-ethics", "virtue-ethics"],
+      "linguistics": ["phonetics", "morphology", "semantics", "syntax", "pragmatics"],
+      "civil_engineering": ["structural-engineering", "transportation", "hydraulics", "geotechnical", "environmental"],
+      "user_experience_design": ["usability", "accessibility", "user-research", "prototyping", "testing"],
+
+      // Thematic Domains (Layer 4)
+      "machine_learning": ["supervised-learning", "unsupervised-learning", "reinforcement-learning", "neural-networks", "deep-learning"],
+      "brain_imaging": ["fMRI", "EEG", "MEG", "PET", "DTI"],
+      "biodiversity": ["species-diversity", "ecosystem-diversity", "genetic-diversity", "functional-diversity", "phylogenetic-diversity"],
+      "diagnosis": ["symptom-analysis", "laboratory-tests", "imaging", "clinical-examination", "differential-diagnosis"],
+      "disease_surveillance": ["case-reporting", "outbreak-detection", "epidemic-intelligence", "public-health-response", "monitoring"],
+      "ethnography": ["fieldwork", "participant-observation", "interviews", "case-studies", "ethnographic-methods"],
+      "justice": ["fairness", "equity", "impartiality", "rule-of-law", "social-justice"],
+      "constructivism": ["learning-theory", "knowledge-construction", "piaget", "vygotsky", "scaffolding"],
+      "supply_and_demand": ["market-equilibrium", "elasticity", "consumer-surplus", "producer-surplus", "price-mechanism"],
+      "memory": ["short-term-memory", "long-term-memory", "working-memory", "episodic-memory", "semantic-memory"],
+      "moral_philosophy": ["utilitarianism", "deontology", "virtue-ethics", "consequentialism", "normative-ethics"],
+      "phonetics": ["articulation", "acoustics", "phonation", "prosody", "transcription"],
+      "structural_engineering": ["load-bearing", "stress-analysis", "deflection", "stability", "material-science"],
+      "usability": ["user-friendly", "learnability", "efficiency", "memorability", "satisfaction"],
+
+      // Main Thematics (Layer 5)
+      "supervised_learning": ["classification", "regression", "training-data", "validation", "overfitting"],
+      "fMRI": ["functional-mri", "bold-signal", "neuroimaging", "brain-activity", "hemodynamic-response"],
+      "species_diversity": ["richness", "evenness", "shannon-index", "simpson-index", "biodiversity-metrics"],
+      "symptom_analysis": ["history-taking", "physical-exam", "laboratory-tests", "differential-diagnosis", "clinical-reasoning"],
+      "case_reporting": ["individual-cases", "aggregate-data", "mandatory-reporting", "voluntary-reporting", "electronic-systems"],
+      "fieldwork": ["observation", "interviews", "surveys", "participant-observation", "ethnographic-fieldnotes"],
+      "fairness": ["equity", "impartiality", "justice", "bias-mitigation", "algorithmic-fairness"],
+      "metacognition": ["thinking-about-thinking", "self-regulation", "awareness", "monitoring", "control"],
+      "market_equilibrium": ["supply", "demand", "price", "quantity", "competitive-equilibrium"],
+      "short_term_memory": ["working-memory", "central-executive", "phonological-loop", "visuospatial-sketchpad", "episodic-buffer"],
+      "utilitarianism": ["greatest-happiness", "consequentialism", "bentham", "mill", "hedonism"],
+      "articulation": ["tongue", "lips", "palate", "manners-of-articulation", "places-of-articulation"],
+      "load_bearing": ["compression", "tension", "shear", "bending", "buckling"],
+      "user_friendly": ["intuitive", "simple", "clear", "consistent", "forgiving"]
+    }
+  }
+};
+
+// =============================================
+// FONCTIONS COMMUNES
+// =============================================
+function generateLinksForDiscipline(disciplineName) {
+  // Trouver la configuration pour cette discipline
+  const config = DISCIPLINE_CONFIG[disciplineName];
+  if (!config) {
+    console.warn(`[MLKN.lab] Configuration non trouvée pour ${disciplineName}. Utilisation des paramètres par défaut.`);
+    return;
+  }
+
+  // Vérifier que window.MAP_DATA existe
+  if (!window.MAP_DATA) {
+    console.error(`[MLKN.lab] window.MAP_DATA non défini pour ${disciplineName}.`);
+    return;
+  }
+
+  const { nodes, links } = window.MAP_DATA;
+  const existingLinks = new Set();
+
+  // Enregistrer les liens existants pour éviter les doublons
+  links.forEach(link => {
+    const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+    const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+    existingLinks.add(`${sourceId}-${targetId}`);
+    existingLinks.add(`${targetId}-${sourceId}`);
+  });
+
+  // Fonction pour ajouter un lien si inexistant
+  function addLink(source, target, weight) {
+    const key1 = `${source}-${target}`;
+    const key2 = `${target}-${source}`;
+    if (!existingLinks.has(key1) && !existingLinks.has(key2)) {
+      links.push({ source, target, weight });
+      existingLinks.add(key1);
+      existingLinks.add(key2);
+    }
+  }
+
+  // 1. Liens intra-cluster (tous les nœuds d'un même cluster sont connectés)
+  const nodesByCluster = {};
+  nodes.forEach(node => {
+    if (!nodesByCluster[node.cluster]) {
+      nodesByCluster[node.cluster] = [];
+    }
+    nodesByCluster[node.cluster].push(node);
+  });
+
+  // Connecter tous les nœuds au sein de chaque cluster
+  Object.values(nodesByCluster).forEach(clusterNodes => {
+    for (let i = 0; i < clusterNodes.length; i++) {
+      for (let j = i + 1; j < clusterNodes.length; j++) {
+        const node1 = clusterNodes[i].id;
+        const node2 = clusterNodes[j].id;
+        const avgSize = (clusterNodes[i].size + clusterNodes[j].size) / 2;
+        let weight = Math.min(5, Math.max(3, Math.floor(avgSize / 8)));
+        addLink(node1, node2, weight);
+      }
+    }
+  });
+
+  // 2. Liens inter-clusters (basés sur config.clusterConnections)
+  if (config.clusterConnections) {
+    Object.entries(config.clusterConnections).forEach(([cluster1, connectedClusters]) => {
+      const cluster1Nodes = nodesByCluster[cluster1] || [];
+      connectedClusters.forEach(cluster2 => {
+        const cluster2Nodes = nodesByCluster[cluster2] || [];
+        cluster1Nodes.forEach(node1 => {
+          cluster2Nodes.forEach(node2 => {
+            addLink(node1.id, node2.id, 3);
+          });
+        });
+      });
+    });
+  }
+
+  // 3. Liens spécifiques (experts)
+  if (config.expertLinks && Array.isArray(config.expertLinks)) {
+    config.expertLinks.forEach(link => {
+      if (Array.isArray(link) && link.length >= 3) {
+        addLink(link[0], link[1], link[2]);
+      } else if (link.s && link.t && link.w !== undefined) {
+        addLink(link.s, link.t, link.w);
+      }
+    });
+  }
+
+  // 4. Liens sémantiques (basés sur config.conceptKeywords)
+  if (config.conceptKeywords) {
+    Object.keys(config.conceptKeywords).forEach(concept1 => {
+      Object.keys(config.conceptKeywords).forEach(concept2 => {
+        if (concept1 === concept2) return;
+        const keywords1 = config.conceptKeywords[concept1] || [];
+        const keywords2 = config.conceptKeywords[concept2] || [];
+        const commonKeywords = keywords1.filter(kw => keywords2.includes(kw));
+        if (commonKeywords.length >= 3) {
+          const weight = Math.min(5, 2 + commonKeywords.length);
+          addLink(concept1, concept2, weight);
+        }
+      });
+    });
+  }
+
+  // Log pour vérification
+  console.log(`[MLKN.lab] ${disciplineName}: ${links.length} liens générés.`);
+}
+
+// =============================================
+// EXÉCUTION AUTOMATIQUE
+// =============================================
+// Détecter la discipline actuelle à partir du titre de window.MAP_DATA
+if (window.MAP_DATA && window.MAP_DATA.title) {
+  const discipline = window.MAP_DATA.title;
+  generateLinksForDiscipline(discipline);
+} else {
+  console.error("[MLKN.lab] Impossible de détecter la discipline. Vérifiez window.MAP_DATA.title.");
+}
