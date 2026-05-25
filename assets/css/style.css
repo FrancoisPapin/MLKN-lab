@@ -367,6 +367,41 @@ img {
 }
 
 /* =============================================
+   HORIZONTAL BOXES (Unified Styling)
+   ============================================= */
+.essay-box,
+.featured {
+    background: linear-gradient(135deg, #EBF4FB, #F5EEF8);
+    border: 2px solid #BBCFE8;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 15px 0;
+    text-align: center;
+}
+
+/* Unified font color for all horizontal boxes */
+.essay-box h3,
+.essay-box p,
+.featured p,
+.featured .feat-eyebrow,
+.featured .feat-title,
+.featured .feat-desc {
+    color: var(--text); /* Same as core domains box */
+    font-family: var(--font);
+}
+
+/* Ensure chips in horizontal boxes match the style */
+.essay-box .chips .chip,
+.featured .chips .chip {
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 700;
+    border: 1.5px solid currentColor;
+    padding: 3px 9px;
+    border-radius: 20px;
+}
+
+/* =============================================
    LAYERS GRID
    ============================================= */
 .layers-grid {
