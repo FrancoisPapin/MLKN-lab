@@ -1,1 +1,308 @@
+/* =============================================
+   MLKN-labV2 Global Stylesheet
+   ============================================= */
 
+/* --- Base Styles --- */
+:root {
+  --primary-color: #2c3e50;    /* Dark blue */
+  --secondary-color: #3498db;  /* Bright blue */
+  --accent-color: #f1c40f;      /* Yellow */
+  --light-color: #ecf0f1;       /* Light gray */
+  --dark-color: #2c3e50;        /* Dark blue */
+  --text-color: #333;          /* Dark gray */
+  --text-light: #7f8c8d;       /* Light gray */
+  --background: #f9f9f9;        /* Off-white */
+  --white: #ffffff;
+  --border-radius: 5px;
+  --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--background);
+  padding: 0;
+  margin: 0;
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4 {
+  color: var(--dark-color);
+  margin-bottom: 15px;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+h2 {
+  font-size: 2em;
+  border-bottom: 2px solid var(--accent-color);
+  padding-bottom: 10px;
+  margin-top: 20px;
+}
+
+h3 {
+  font-size: 1.5em;
+  color: var(--secondary-color);
+}
+
+p {
+  margin-bottom: 15px;
+}
+
+a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+ul, ol {
+  margin-bottom: 15px;
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+/* --- Layout --- */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background: var(--white);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  background: var(--light-color);
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: var(--border-radius);
+}
+
+.stat-item {
+  text-align: center;
+  flex: 1;
+  min-width: 200px;
+  margin: 10px;
+}
+
+.stat-number {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+/* --- Header --- */
+header {
+  background: var(--primary-color);
+  color: var(--white);
+  padding: 30px 20px;
+  text-align: center;
+  margin-bottom: 20px;
+  border-radius: var(--border-radius);
+}
+
+header h1 {
+  color: var(--white);
+  margin-bottom: 10px;
+}
+
+header p {
+  color: var(--light-color);
+  font-size: 1.2em;
+}
+
+/* --- Navigation --- */
+nav {
+  background: var(--secondary-color);
+  padding: 15px;
+  text-align: center;
+  margin-bottom: 20px;
+  border-radius: var(--border-radius);
+}
+
+nav a {
+  color: var(--white);
+  margin: 0 15px;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+nav a:hover {
+  background: rgba(255, 255, 255, 0.2);
+  text-decoration: none;
+}
+
+/* --- Buttons --- */
+.button {
+  display: inline-block;
+  background: var(--secondary-color);
+  color: var(--white);
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  font-weight: bold;
+  transition: var(--transition);
+  border: none;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+.button:hover {
+  background: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+/* --- Tables --- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 0.9em;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--text-light);
+}
+
+th {
+  background: var(--light-color);
+  font-weight: bold;
+}
+
+tr:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* --- Info Boxes --- */
+.info {
+  background: var(--light-color);
+  padding: 15px;
+  margin: 20px 0;
+  border-radius: var(--border-radius);
+  border-left: 5px solid var(--accent-color);
+}
+
+.highlight {
+  background: var(--accent-color);
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+/* --- Essays Page --- */
+.essay-type {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.applied {
+  background: var(--secondary-color);
+  color: var(--white);
+}
+
+.meta {
+  background: var(--primary-color);
+  color: var(--white);
+}
+
+.essay-list {
+  list-style: none;
+  padding: 0;
+}
+
+.essay-list li {
+  margin: 20px 0;
+  padding: 20px;
+  background: var(--light-color);
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+.essay-list li:hover {
+  background: rgba(0, 0, 0, 0.05);
+  transform: translateX(5px);
+}
+
+/* --- Footer --- */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: var(--primary-color);
+  color: var(--white);
+  margin-top: 40px;
+  border-radius: var(--border-radius);
+}
+
+footer a {
+  color: var(--light-color);
+}
+
+footer a:hover {
+  color: var(--white);
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+  .stats {
+    flex-direction: column;
+  }
+
+  .stat-item {
+    margin: 10px 0;
+  }
+
+  nav a {
+    display: block;
+    margin: 10px 0;
+  }
+
+  .container {
+    padding: 10px;
+  }
+}
+
+/* --- Utility Classes --- */
+.text-center {
+  text-align: center;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.padding-20 {
+  padding: 20px;
+}
