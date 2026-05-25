@@ -21,11 +21,10 @@
             </a>
             <div class="nav-links">
                 <a href="index.html" class="nav-link"><i class="fas fa-home"></i></a>
-                <a href="hierarchy/hierarchy.html" class="nav-link"><i class="fas fa-sitemap"></i></a>
-                <a href="method/method.html" class="nav-link"><i class="fas fa-book"></i></a>
-                <a href="data/data.html" class="nav-link"><i class="fas fa-database"></i></a>
-                <a href="essay/essay.html" class="nav-link"><i class="fas fa-file-alt"></i></a>
-                <a href="knowledge_network/interdisciplinary.html" class="nav-link"><i class="fas fa-project-diagram"></i></a>
+                <a href="#hierarchy" class="nav-link"><i class="fas fa-sitemap"></i></a>
+                <a href="#data" class="nav-link"><i class="fas fa-database"></i></a>
+                <a href="#essays" class="nav-link"><i class="fas fa-file-alt"></i></a>
+                <a href="#network" class="nav-link"><i class="fas fa-project-diagram"></i></a>
             </div>
         </div>
     </header>
@@ -66,7 +65,7 @@
             </div>
 
             <div class="hero-acts">
-                <a href="knowledge_network/interdisciplinary.html" class="btn btn-p">
+                <a href="#network" class="btn btn-p">
                     <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
                         <circle cx="8" cy="3" r="1.5"/><circle cx="3" cy="12" r="1.5"/><circle cx="13" cy="12" r="1.5"/>
                         <circle cx="8" cy="20" r="1.5"/>
@@ -86,56 +85,14 @@
             </div>
         </section>
 
-        <!-- Featured Section -->
-        <section class="section" style="padding-top:0" aria-labelledby="featured-title">
-            <a href="knowledge_network/interdisciplinary.html" class="featured" aria-label="Open Interdisciplinary Knowledge Network">
-                <div class="feat-icon">
-                    <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-                        <circle cx="20" cy="5" r="3"/><circle cx="5" cy="32" r="3"/><circle cx="35" cy="32" r="3"/>
-                        <circle cx="20" cy="20" r="3"/><circle cx="20" cy="35" r="3"/>
-                        <line x1="20" y1="8" x2="20" y2="17"/><line x1="8" y1="30" x2="17" y2="22"/>
-                        <line x1="32" y1="30" x2="23" y2="22"/><line x1="7" y1="32" x2="33" y2="32"/>
-                        <line x1="20" y1="5" x2="5" y2="32"/><line x1="20" y1="5" x2="35" y2="32"/>
-                        <line x1="20" y1="35" x2="5" y2="32"/><line x1="20" y1="35" x2="35" y2="32"/>
-                    </svg>
-                </div>
-                <div>
-                    <p class="feat-eyebrow">★ Featured — Centrepiece Map</p>
-                    <p class="feat-title" id="featured-title">Interdisciplinary Knowledge Network</p>
-                    <p class="feat-desc">
-                        All <strong>25 disciplines</strong> simultaneously, organized into <strong>6 Core Discipline Domains</strong> (Formal Sciences, Natural Sciences, Health Sciences, Social Sciences, Humanities, Applied Sciences),
-                        with <strong>5 Ontological Knowledge Layers</strong> and <strong>4 Epistemological Meta-Layers</strong>.
-                    </p>
-                    <div class="chips">
-                        <!-- Formal Sciences -->
-                        <span class="chip" style="color:#FF6347;border-color:#FF634755">Math. Science</span>
-                        <span class="chip" style="color:#0A7E8C;border-color:#0A7E8C55">Computer Sci.</span>
+        <!-- ========== NEW SECTIONS ========== -->
 
-                        <!-- Natural Sciences -->
-                        <span class="chip" style="color:#2ECC71;border-color:#2ECC7155">Neuroscience</span>
-                        <span class="chip" style="color:#1A8A4A;border-color:#1A8A4A55">Env. Sci.</span>
+        <!-- Hierarchy Section (with Ontological Layers + Core Domains nested) -->
+        <section id="hierarchy" class="section" aria-labelledby="hierarchy-title">
+            <h2 class="sec-h" id="hierarchy-title">Hierarchy</h2>
+            <p class="sec-sub">Explore the 5 Ontological Layers and 6 Core Discipline Domains</p>
 
-                        <!-- Health Sciences -->
-                        <span class="chip" style="color:#3498DB;border-color:#3498DB55">Medicine</span>
-
-                        <!-- Social Sciences -->
-                        <span class="chip" style="color:#9B59B6;border-color:#9B59B655">Psychology</span>
-                        <span class="chip" style="color:#8E44AD;border-color:#8E44AD55">Anthropology</span>
-
-                        <!-- Humanities -->
-                        <span class="chip" style="color:#E74C3C;border-color:#E74C3C55">Philosophy</span>
-
-                        <!-- Applied Sciences -->
-                        <span class="chip" style="color:#F39C12;border-color:#F39C1255">Engineering</span>
-                    </div>
-                </div>
-            </a>
-        </section>
-
-        <!-- Five Ontological Layers -->
-        <section class="section" style="padding-top:0" aria-labelledby="layers-title">
-            <h2 class="sec-h" id="layers-title">Five Ontological Layers</h2>
-            <p class="sec-sub">Core Discipline Domains · Academic Disciplines · Academic Subdisciplines · Core Thematic Domains · Main Thematics</p>
+            <!-- Ontological Layers -->
             <div class="layers-grid">
                 <div class="layer-card">
                     <div class="licon">⬡</div>
@@ -163,11 +120,9 @@
                     <p><strong>Layer 5</strong> includes fundamental thematics and concepts (e.g., Supervised Learning within Machine Learning).</p>
                 </div>
             </div>
-        </section>
 
-        <!-- Core Discipline Domains -->
-        <section class="section" style="padding-top:0" aria-labelledby="domains-title">
-            <h2 class="sec-h" id="domains-title">Core Discipline Domains</h2>
+            <!-- Core Discipline Domains -->
+            <h3 class="sec-h" style="margin-top: 30px;">Core Discipline Domains</h3>
             <p class="sec-sub">6 High-Level Scientific Domains</p>
             <div class="layers-grid">
                 <div class="layer-card">
@@ -233,6 +188,86 @@
                     </ul>
                 </div>
             </div>
+        </section>
+
+        <!-- Data Section -->
+        <section id="data" class="section" aria-labelledby="data-title">
+            <h2 class="sec-h" id="data-title">Data</h2>
+            <p class="sec-sub">Access the datasets and reports powering MLKN.lab</p>
+            <p>
+                All our reports and datasets are available below. These include the full hierarchy, network edges, and validation reports.
+            </p>
+            <div class="chips">
+                <a href="assets/datasets/hierarchy_6domains.csv" class="chip" style="color:#1A6BAA;border-color:#1A6BAA55">6-Domain Hierarchy</a>
+                <a href="assets/datasets/nodes_6domains.csv" class="chip" style="color:#4A90E2;border-color:#4A90E255">Network Nodes</a>
+                <a href="assets/datasets/edges_6domains.csv" class="chip" style="color:#50C878;border-color:#50C87855">Network Edges</a>
+                <a href="assets/datasets/MLKN_Hierarchy_Validation_Report.txt" class="chip" style="color:#FFD700;border-color:#FFD70055">Validation Report</a>
+                <a href="assets/datasets/MLKN_Subdiscipline_Deep_Dive_Report.txt" class="chip" style="color:#FF6347;border-color:#FF634755">Subdiscipline Report</a>
+            </div>
+        </section>
+
+        <!-- Essays Section -->
+        <section id="essays" class="section" aria-labelledby="essays-title">
+            <h2 class="sec-h" id="essays-title">Essays</h2>
+            <p class="sec-sub">Scientific and Meta-Essays on Interdisciplinarity</p>
+            <p>
+                Explore our collection of essays on the intersections of knowledge, interdisciplinarity, and the future of science.
+            </p>
+            <div class="chips">
+                <a href="essay/essays/essay1_cognitive_mapping.html" class="chip" style="color:#1A6BAA;border-color:#1A6BAA55">Cognitive Mapping</a>
+                <a href="essay/essays/essay2_interdisciplinarity.html" class="chip" style="color:#4A90E2;border-color:#4A90E255">Interdisciplinarity</a>
+                <a href="essay/essays/essay3_ai_ethics.html" class="chip" style="color:#50C878;border-color:#50C87855">AI Ethics</a>
+            </div>
+        </section>
+
+        <!-- Network Section (with Interdisciplinary Networks nested) -->
+        <section id="network" class="section" aria-labelledby="network-title">
+            <h2 class="sec-h" id="network-title">Network</h2>
+            <p class="sec-sub">Interdisciplinary Knowledge Networks</p>
+
+            <!-- Featured Interdisciplinary Network -->
+            <a href="knowledge_network/interdisciplinary.html" class="featured" aria-label="Open Interdisciplinary Knowledge Network">
+                <div class="feat-icon">
+                    <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                        <circle cx="20" cy="5" r="3"/><circle cx="5" cy="32" r="3"/><circle cx="35" cy="32" r="3"/>
+                        <circle cx="20" cy="20" r="3"/><circle cx="20" cy="35" r="3"/>
+                        <line x1="20" y1="8" x2="20" y2="17"/><line x1="8" y1="30" x2="17" y2="22"/>
+                        <line x1="32" y1="30" x2="23" y2="22"/><line x1="7" y1="32" x2="33" y2="32"/>
+                        <line x1="20" y1="5" x2="5" y2="32"/><line x1="20" y1="5" x2="35" y2="32"/>
+                        <line x1="20" y1="35" x2="5" y2="32"/><line x1="20" y1="35" x2="35" y2="32"/>
+                    </svg>
+                </div>
+                <div>
+                    <p class="feat-eyebrow">★ Featured — Centrepiece Map</p>
+                    <p class="feat-title">Interdisciplinary Knowledge Network</p>
+                    <p class="feat-desc">
+                        All <strong>25 disciplines</strong> simultaneously, organized into <strong>6 Core Discipline Domains</strong> (Formal Sciences, Natural Sciences, Health Sciences, Social Sciences, Humanities, Applied Sciences),
+                        with <strong>5 Ontological Knowledge Layers</strong> and <strong>4 Epistemological Meta-Layers</strong>.
+                    </p>
+                    <div class="chips">
+                        <!-- Formal Sciences -->
+                        <span class="chip" style="color:#FF6347;border-color:#FF634755">Math. Science</span>
+                        <span class="chip" style="color:#0A7E8C;border-color:#0A7E8C55">Computer Sci.</span>
+
+                        <!-- Natural Sciences -->
+                        <span class="chip" style="color:#2ECC71;border-color:#2ECC7155">Neuroscience</span>
+                        <span class="chip" style="color:#1A8A4A;border-color:#1A8A4A55">Env. Sci.</span>
+
+                        <!-- Health Sciences -->
+                        <span class="chip" style="color:#3498DB;border-color:#3498DB55">Medicine</span>
+
+                        <!-- Social Sciences -->
+                        <span class="chip" style="color:#9B59B6;border-color:#9B59B655">Psychology</span>
+                        <span class="chip" style="color:#8E44AD;border-color:#8E44AD55">Anthropology</span>
+
+                        <!-- Humanities -->
+                        <span class="chip" style="color:#E74C3C;border-color:#E74C3C55">Philosophy</span>
+
+                        <!-- Applied Sciences -->
+                        <span class="chip" style="color:#F39C12;border-color:#F39C1255">Engineering</span>
+                    </div>
+                </div>
+            </a>
         </section>
     </main>
 
