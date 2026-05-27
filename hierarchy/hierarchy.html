@@ -3,62 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hierarchy - MLKN-lab</title>
+    <title>Hierarchy - MLKN.lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <header>
-        <h1>🌐 MLKN-lab Hierarchy</h1>
-        <p>6 Core Domains → 25 Disciplines → 235 Subdisciplines → Topics & Concepts</p>
+    <!-- Top Navigation Bar -->
+    <header class="topnav" role="banner">
+        <div class="topnav-inner">
+            <a href="../index.html" class="topnav-logo">
+                <div class="logo-mark">ML</div>
+                <span class="logo-text">MLKN.lab</span>
+            </a>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link" data-tooltip="Home"><i class="fas fa-home"></i></a>
+                <a href="../research/research.html" class="nav-link" data-tooltip="Research"><i class="fas fa-microscope"></i></a>
+                <a href="../method/method.html" class="nav-link" data-tooltip="Method"><i class="fas fa-book"></i></a>
+                <a href="hierarchy.html" class="nav-link" data-tooltip="Hierarchy"><i class="fas fa-sitemap"></i></a>
+                <a href="../knowledge_network/interdisciplinary.html" class="nav-link" data-tooltip="Network"><i class="fas fa-project-diagram"></i></a>
+                <a href="../data/data.html" class="nav-link" data-tooltip="Data"><i class="fas fa-database"></i></a>
+                <a href="../essay/essay.html" class="nav-link" data-tooltip="Essays"><i class="fas fa-file-alt"></i></a>
+                <a href="../applications/applications.html" class="nav-link" data-tooltip="Applications"><i class="fas fa-lightbulb"></i></a>
+                <a href="../about/about.html" class="nav-link" data-tooltip="About"><i class="fas fa-info-circle"></i></a>
+            </div>
+        </div>
     </header>
 
-    <nav>
-        <a href="../index.html">Home</a>
-        <a href="hierarchy.html">Hierarchy</a>
-        <a href="../method/method.html">Methodology</a>
-        <a href="../data/data.html">Data</a>
-        <a href="../essay/essay.html">Essays</a>
-        <a href="../knowledge_network/interdisciplinary.html">Network</a>
-    </nav>
-
-    <div class="container">
-        <h2>🔹 Hierarchy Overview</h2>
-        <p>
-            The MLKN-lab hierarchy organizes scientific knowledge into **5 layers**:
-        </p>
-        <ol>
-            <li><strong>Core Domains</strong>: 6 broad categories (e.g., Social Sciences & Humanities, Natural Sciences).</li>
-            <li><strong>Academic Disciplines</strong>: 25 fields (e.g., Psychology, Computer Science).</li>
-            <li><strong>Subdisciplines</strong>: 235 specialized areas (e.g., Cognitive Psychology, AI Ethics).</li>
-            <li><strong>Core Thematic Domains</strong>: Thematic groupings within subdisciplines.</li>
-            <li><strong>Main Concepts</strong>: Specific topics or ideas (e.g., "Attention", "Neural Networks").</li>
-        </ol>
-
-        <h2>📊 Visualization</h2>
-        <div class="info">
-            <p>
-                Below is a static preview of the hierarchy. An interactive version is coming soon!
+    <main>
+        <!-- Hero Section for Hierarchy Page -->
+        <section class="hero" aria-labelledby="hierarchy-title">
+            <p class="hero-eyebrow">MLKN.lab · Hierarchy</p>
+            <h1 class="hero-title" id="hierarchy-title"><em>Hierarchy</em></h1>
+            <p class="hero-subtitle">
+                6 Core Domains → 25 Disciplines → 235 Subdisciplines → Topics & Concepts
             </p>
-            <!-- Replace with your actual image path -->
-            <img src="../assets/images/hierarchy_preview.png" alt="MLKN-lab Hierarchy Preview" style="width: 100%; margin-top: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+        </section>
+
+        <!-- Hierarchy Overview -->
+        <section class="section" aria-labelledby="overview-title">
+            <h2 class="sec-h" id="overview-title">Hierarchy Overview</h2>
+            <p class="sec-sub">A Polyhierarchical Framework of Scientific Knowledge</p>
+            <p>
+                The MLKN-lab hierarchy organizes scientific knowledge into <strong>5 layers</strong>:
+            </p>
+            <div class="layers-grid">
+                <div class="layer-card">
+                    <div class="licon">⬡</div>
+                    <h3>Core Domains</h3>
+                    <p><strong>Layer 1</strong>: 6 broad categories (e.g., Social Sciences & Humanities, Natural Sciences).</p>
+                </div>
+                <div class="layer-card">
+                    <div class="licon">⬢</div>
+                    <h3>Academic Disciplines</h3>
+                    <p><strong>Layer 2</strong>: 25 fields (e.g., Psychology, Computer Science).</p>
+                </div>
+                <div class="layer-card">
+                    <div class="licon">◈</div>
+                    <h3>Subdisciplines</h3>
+                    <p><strong>Layer 3</strong>: 235 specialized areas (e.g., Cognitive Psychology, AI Ethics).</p>
+                </div>
+                <div class="layer-card">
+                    <div class="licon">◎</div>
+                    <h3>Core Thematic Domains</h3>
+                    <p><strong>Layer 4</strong>: Thematic groupings within subdisciplines.</p>
+                </div>
+                <div class="layer-card">
+                    <div class="licon">⚡</div>
+                    <h3>Main Concepts</h3>
+                    <p><strong>Layer 5</strong>: Specific topics or ideas (e.g., "Attention", "Neural Networks").</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Visualization -->
+        <section class="section" aria-labelledby="visualization-title">
+            <h2 class="sec-h" id="visualization-title">Visualization</h2>
+            <p class="sec-sub">Static Preview of the Hierarchy</p>
+            <div class="essay-box">
+                <p>
+                    Below is a static preview of the hierarchy. An interactive version is coming soon!
+                </p>
+                <!-- Replace with your actual image path -->
+                <img src="../assets/images/hierarchy_preview.png" alt="MLKN-lab Hierarchy Preview" style="width: 100%; margin-top: 20px; border-radius: var(--r); box-shadow: var(--sh);">
+            </div>
+        </section>
+
+        <!-- Explore the Hierarchy -->
+        <section class="section" aria-labelledby="explore-title">
+            <h2 class="sec-h" id="explore-title">🔍 Explore the Hierarchy</h2>
+            <p class="sec-sub">Click on a core domain below to see its disciplines and subdisciplines:</p>
+            <div class="chips">
+                <a href="#" class="chip" style="color:#9B59B6;border-color:#9B59B655">Social Sciences & Humanities</a>
+                <a href="#" class="chip" style="color:#2ECC71;border-color:#2ECC7155">Natural Sciences</a>
+                <a href="#" class="chip" style="color:#50C878;border-color:#50C87855">Life Sciences</a>
+                <a href="#" class="chip" style="color:#3498DB;border-color:#3498DB55">Health & Medical Sciences</a>
+                <a href="#" class="chip" style="color:#F39C12;border-color:#F39C1255">Engineering & Technology</a>
+                <a href="#" class="chip" style="color:#FF6347;border-color:#FF634755">Formal Sciences</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="sf-logo">MLKN.lab</div>
+        <p class="sf-tag">MultiLayer Knowledge Network Ideas Laboratory</p>
+        <div class="sf-links">
+            <a href="https://www.linkedin.com/in/francoispapin/" class="sf-link" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/FrancoisPapin" class="sf-link" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="mailto:your-email@example.com" class="sf-link">
+                <i class="fas fa-envelope"></i>
+            </a>
         </div>
-
-        <h2>🔍 Explore the Hierarchy</h2>
-        <p>
-            Click on a core domain below to see its disciplines and subdisciplines:
-        </p>
-        <ul>
-            <li><a href="#">Social Sciences & Humanities</a></li>
-            <li><a href="#">Natural Sciences</a></li>
-            <li><a href="#">Life Sciences</a></li>
-            <li><a href="#">Health & Medical Sciences</a></li>
-            <li><a href="#">Engineering & Technology</a></li>
-            <li><a href="#">Formal Sciences</a></li>
-        </ul>
-    </div>
-
-    <footer>
-        <p>© 2026 MLKN-lab | François Papin | <a href="https://github.com/your-username/MLKN-labV2">GitHub Repository</a></p>
+        <p class="sf-legal">© François Papin · May 2026 · MIT License · MLKN.lab</p>
     </footer>
 </body>
 </html>
