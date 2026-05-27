@@ -1,1 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Method - MLKN.lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <header class="topnav" role="banner">
+        <div class="topnav-inner">
+            <a href="../index.html" class="topnav-logo">
+                <div class="logo-mark">ML</div>
+                <span class="logo-text">MLKN.lab</span>
+            </a>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link" data-tooltip="Home"><i class="fas fa-home"></i></a>
+                <a href="../research/research.html" class="nav-link" data-tooltip="Research"><i class="fas fa-microscope"></i></a>
+                <a href="method.html" class="nav-link" data-tooltip="Method"><i class="fas fa-book"></i></a>
+                <a href="../hierarchy/hierarchy.html" class="nav-link" data-tooltip="Hierarchy"><i class="fas fa-sitemap"></i></a>
+                <a href="../data/data.html" class="nav-link" data-tooltip="Data"><i class="fas fa-database"></i></a>
+                <a href="../essay/essay.html" class="nav-link" data-tooltip="Essays"><i class="fas fa-file-alt"></i></a>
+                <a href="../knowledge_network/interdisciplinary.html" class="nav-link" data-tooltip="Network"><i class="fas fa-project-diagram"></i></a>
+                <a href="../applications/applications.html" class="nav-link" data-tooltip="Applications"><i class="fas fa-lightbulb"></i></a>
+                <a href="../inspirations.html" class="nav-link" data-tooltip="Inspirations"><i class="fas fa-infinity"></i></a>
+                <a href="../about/about.html" class="nav-link" data-tooltip="About"><i class="fas fa-info-circle"></i></a>
+            </div>
+        </div>
+    </header>
 
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" aria-labelledby="method-title">
+            <p class="hero-eyebrow">MLKN.lab · Method</p>
+            <h1 class="hero-title" id="method-title"><em>Method</em></h1>
+            <p class="hero-subtitle">
+                How we <strong>build</strong>, <strong>classify</strong>, and <strong>model</strong> the knowledge networks.
+            </p>
+        </section>
+
+        <!-- Overview -->
+        <section class="section" aria-labelledby="overview-title">
+            <h2 class="sec-h" id="overview-title">Overview</h2>
+            <p class="sec-sub">A Polyhierarchical, Data-Driven Approach</p>
+            <p>
+                MLKN-lab’s methodology combines <strong>bibliometrics</strong>, <strong>network science</strong>, and
+                <strong>hierarchical classification</strong> to map the structure of scientific knowledge. Our approach is:
+            </p>
+            <div class="chips" style="margin-top: 15px;">
+                <span class="chip" style="color:#1A6BAA;border-color:#1A6BAA55">Data-Driven</span>
+                <span class="chip" style="color:#2ECC71;border-color:#2ECC7155">Reproducible</span>
+                <span class="chip" style="color:#FF6347;border-color:#FF634755">Open</span>
+                <span class="chip" style="color:#9B59B6;border-color:#9B59B655">Interdisciplinary</span>
+            </div>
+        </section>
+
+        <!-- Data Collection -->
+        <section class="section" aria-labelledby="collection-title">
+            <h2 class="sec-h" id="collection-title">Data Collection</h2>
+            <p class="sec-sub">Sources and Preprocessing</p>
+            <div class="layers-grid">
+                <div class="layer-card">
+                    <div class="licon" style="color: #1A6BAA;">⬢</div>
+                    <h3>Primary Data Source: OpenAlex</h3>
+                    <p>
+                        We use <strong>OpenAlex</strong>, a free and open catalog of scholarly papers, authors, venues, and institutions.
+                        OpenAlex provides:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> Over <strong>200M works</strong> (papers, preprints, etc.).</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Metadata</strong> (titles, abstracts, authors, venues, citations).</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Concepts and topics</strong> extracted from papers.</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 0.9em; color: var(--text2);">
+                        <a href="https://openalex.org/" target="_blank" style="color: var(--accent);">Visit OpenAlex</a>
+                    </p>
+                </div>
+                <div class="layer-card">
+                    <div class="licon" style="color: #2ECC71;">⬢</div>
+                    <h3>Supplementary Data Sources</h3>
+                    <p>
+                        To enrich our dataset, we supplement OpenAlex with:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Scopus</strong>: For citation and thematic data.</li>
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>MeSH</strong>: For biomedical classifications.</li>
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>IEEE Thesaurus</strong>: For engineering and computer science.</li>
+                    </ul>
+                </div>
+                <div class="layer-card">
+                    <div class="licon" style="color: #FF6347;">⬢</div>
+                    <h3>Data Preprocessing</h3>
+                    <p>
+                        Raw data is cleaned and standardized to ensure consistency:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Deduplication</strong>: Removing duplicate entries.</li>
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Normalization</strong>: Standardizing names, terms, and classifications.</li>
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Disambiguation</strong>: Resolving ambiguous author or venue names.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Classification -->
+        <section class="section" aria-labelledby="classification-title">
+            <h2 class="sec-h" id="classification-title">Classification</h2>
+            <p class="sec-sub">Organizing Knowledge into Hierarchies</p>
+            <div class="layers-grid">
+                <div class="layer-card">
+                    <div class="licon" style="color: #1A6BAA;">⬢</div>
+                    <h3>Ontological Layers</h3>
+                    <p>
+                        We organize knowledge into <strong>5 ontological layers</strong>:
+                    </p>
+                    <ol class="discipline-list">
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Core Discipline Domains</strong>: 6 high-level domains (e.g., Natural Sciences, Social Sciences).</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Academic Disciplines</strong>: 25 fields (e.g., Psychology, Computer Science).</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Subdisciplines</strong>: 235 specialized areas (e.g., Cognitive Psychology, AI Ethics).</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Core Thematic Domains</strong>: Thematic groupings within subdisciplines.</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Main Concepts</strong>: Specific topics or ideas (e.g., "Attention", "Neural Networks").</li>
+                    </ol>
+                </div>
+                <div class="layer-card">
+                    <div class="licon" style="color: #2ECC71;">⬢</div>
+                    <h3>Classification Standards</h3>
+                    <p>
+                        Our hierarchy aligns with global standards:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>OECD Frascati Manual</strong>: For discipline classifications.</li>
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>UNESCO Fields of Science</strong>: For broad domain groupings.</li>
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>MeSH and IEEE Thesaurus</strong>: For specialized fields.</li>
+                    </ul>
+                </div>
+                <div class="layer-card">
+                    <div class="licon" style="color: #FF6347;">⬢</div>
+                    <h3>Polyhierarchical Design</h3>
+                    <p>
+                        Unlike traditional hierarchies, our structure is <strong>polyhierarchical</strong>:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> A concept can belong to <strong>multiple disciplines</strong> (e.g., AI Ethics → Computer Science + Philosophy).</li>
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> Disciplines can be grouped under <strong>multiple domains</strong> (e.g., Neuroscience → Natural Sciences + Health Sciences).</li>
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> This reflects the <strong>interdisciplinary nature</strong> of modern science.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Network Construction -->
+        <section class="section" aria-labelledby="network-title">
+            <h2 class="sec-h" id="network-title">Network Construction</h2>
+            <p class="sec-sub">Mapping Connections Between Disciplines</p>
+            <div class="layers-grid">
+                <div class="layer-card">
+                    <div class="licon" style="color: #1A6BAA;">⬢</div>
+                    <h3>Co-Occurrence Analysis</h3>
+                    <p>
+                        We identify connections between disciplines by analyzing:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Shared concepts</strong>: Topics that appear in multiple disciplines.</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Citation networks</strong>: How often papers from one discipline cite another.</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Author collaborations</strong>: Researchers working across disciplines.</li>
+                    </ul>
+                </div>
+                <div class="layer-card">
+                    <div class="licon" style="color: #2ECC71;">⬢</div>
+                    <h3>Network Metrics</h3>
+                    <p>
+                        We use <strong>graph theory</strong> to quantify the structure of knowledge:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Centrality</strong>: Identifying key disciplines and concepts.</li>
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Modularity</strong>: Detecting communities or clusters.</li>
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Bridges</strong>: Mapping connections between fields.</li>
+                    </ul>
+                </div>
+                <div class="layer-card">
+                    <div class="licon" style="color: #FF6347;">⬢</div>
+                    <h3>Visualization</h3>
+                    <p>
+                        Networks are visualized using <strong>interactive tools</strong>:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Force-directed layouts</strong>: For exploring connections.</li>
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Hierarchical views</strong>: For navigating layers.</li>
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Color-coding</strong>: By domain, discipline, or subdiscipline.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Validation -->
+        <section class="section" aria-labelledby="validation-title">
+            <h2 class="sec-h" id="validation-title">Validation</h2>
+            <p class="sec-sub">Ensuring Accuracy and Relevance</p>
+            <div class="layers-grid">
+                <div class="layer-card">
+                    <div class="licon" style="color: #1A6BAA;">⬢</div>
+                    <h3>Expert Review</h3>
+                    <p>
+                        Our hierarchy and networks are reviewed by <strong>domain experts</strong> to ensure:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Accuracy</strong>: Disciplines and subdisciplines are correctly classified.</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Relevance</strong>: Connections reflect real-world interdisciplinary links.</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Completeness</strong>: No major fields or connections are missing.</li>
+                    </ul>
+                </div>
+                <div class="layer-card">
+                    <div class="licon" style="color: #2ECC71;">⬢</div>
+                    <h3>Network Metrics</h3>
+                    <p>
+                        We validate the structure using:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Modularity scores</strong>: To assess the strength of disciplinary clusters.</li>
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Centrality measures</strong>: To identify key disciplines.</li>
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Path analysis</strong>: To trace connections between fields.</li>
+                    </ul>
+                </div>
+                <div class="layer-card">
+                    <div class="licon" style="color: #FF6347;">⬢</div>
+                    <h3>Reproducibility</h3>
+                    <p>
+                        All our methods and datasets are <strong>open and reproducible</strong>:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Code</strong>: Available on GitHub.</li>
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Data</strong>: Publicly accessible datasets.</li>
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Documentation</strong>: Detailed methodologies and tutorials.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tools and Code -->
+        <section class="section" aria-labelledby="tools-title">
+            <h2 class="sec-h" id="tools-title">Tools and Code</h2>
+            <p class="sec-sub">Software for Building and Analyzing Knowledge Networks</p>
+            <div class="layers-grid">
+                <div class="layer-card">
+                    <div class="licon" style="color: #1A6BAA;">⬢</div>
+                    <h3>Data Processing Pipeline</h3>
+                    <p>
+                        A <strong>Python-based pipeline</strong> for cleaning, classifying, and structuring raw data from OpenAlex and other sources.
+                    </p>
+                    <p style="margin-top: 15px;">
+                        <a href="#" class="btn btn-s"><i class="fab fa-github"></i> View on GitHub</a>
+                    </p>
+                </div>
+                <div class="layer-card">
+                    <div class="licon" style="color: #2ECC71;">⬢</div>
+                    <h3>Network Analysis Scripts</h3>
+                    <p>
+                        Scripts for analyzing knowledge networks, including <strong>centrality metrics</strong>, <strong>community detection</strong>, and <strong>visualization</strong>.
+                    </p>
+                    <p style="margin-top: 15px;">
+                        <a href="#" class="btn btn-s"><i class="fab fa-github"></i> View on GitHub</a>
+                    </p>
+                </div>
+                <div class="layer-card">
+                    <div class="licon" style="color: #FF6347;">⬢</div>
+                    <h3>Interactive Visualization Tools</h3>
+                    <p>
+                        Tools for exploring knowledge networks, including <strong>force-directed layouts</strong> and <strong>hierarchical views</strong>.
+                    </p>
+                    <p style="margin-top: 15px;">
+                        <a href="#" class="btn btn-s"><i class="fab fa-github"></i> View on GitHub</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="section" style="text-align: center;">
+            <h2 class="sec-h">Explore Our Methodology</h2>
+            <p class="sec-sub">
+                Dive deeper into our <strong>data</strong>, <strong>code</strong>, and <strong>tools</strong>.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
+                <a href="../data/data.html" class="btn btn-p">
+                    <i class="fas fa-database"></i> View Data
+                </a>
+                <a href="https://github.com/FrancoisPapin" class="btn btn-p" target="_blank">
+                    <i class="fab fa-github"></i> View Code
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="sf-logo">MLKN.lab</div>
+        <p class="sf-tag">MultiLayer Knowledge Network Ideas Laboratory</p>
+        <div class="sf-links">
+            <a href="https://www.linkedin.com/in/francoispapin/" class="sf-link" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/FrancoisPapin" class="sf-link" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="mailto:your-email@example.com" class="sf-link">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+        <p class="sf-legal">© François Papin · May 2026 · MIT License · MLKN.lab</p>
+    </footer>
+</body>
+</html>
