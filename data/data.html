@@ -1,1 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data - MLKN.lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <header class="topnav" role="banner">
+        <div class="topnav-inner">
+            <a href="../index.html" class="topnav-logo">
+                <div class="logo-mark">ML</div>
+                <span class="logo-text">MLKN.lab</span>
+            </a>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link" data-tooltip="Home"><i class="fas fa-home"></i></a>
+                <a href="../research/research.html" class="nav-link" data-tooltip="Research"><i class="fas fa-microscope"></i></a>
+                <a href="../method/method.html" class="nav-link" data-tooltip="Method"><i class="fas fa-book"></i></a>
+                <a href="../hierarchy/hierarchy.html" class="nav-link" data-tooltip="Hierarchy"><i class="fas fa-sitemap"></i></a>
+                <a href="../knowledge_network/interdisciplinary.html" class="nav-link" data-tooltip="Network"><i class="fas fa-project-diagram"></i></a>
+                <a href="data.html" class="nav-link" data-tooltip="Data"><i class="fas fa-database"></i></a>
+                <a href="../essay/essay.html" class="nav-link" data-tooltip="Essays"><i class="fas fa-file-alt"></i></a>
+                <a href="../applications/applications.html" class="nav-link" data-tooltip="Applications"><i class="fas fa-lightbulb"></i></a>
+                <a href="../inspirations.html" class="nav-link" data-tooltip="Inspirations"><i class="fas fa-infinity"></i></a>
+                <a href="../about/about.html" class="nav-link" data-tooltip="About"><i class="fas fa-info-circle"></i></a>
+            </div>
+        </div>
+    </header>
 
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" aria-labelledby="data-title">
+            <p class="hero-eyebrow">MLKN.lab · Data</p>
+            <h1 class="hero-title" id="data-title"><em>Data</em></h1>
+            <p class="hero-subtitle">
+                The datasets, methodologies, and tools behind MLKN-lab’s knowledge networks.
+            </p>
+        </section>
+
+        <!-- Data Sources -->
+        <section class="section" aria-labelledby="sources-title">
+            <h2 class="sec-h" id="sources-title">Data Sources</h2>
+            <p class="sec-sub">Where Our Knowledge Comes From</p>
+            <div class="layers-grid">
+                <div class="layer-card">
+                    <div class="licon" style="color: #1A6BAA;">⬢</div>
+                    <h3>OpenAlex</h3>
+                    <p>
+                        The <strong>primary data source</strong> for MLKN-lab. OpenAlex is a <strong>free, open catalog</strong> of
+                        scholarly papers, authors, venues, and institutions, with over <strong>200M works</strong>.
+                    </p>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: var(--text2);">
+                        <a href="https://openalex.org/" target="_blank" style="color: var(--accent);">Visit OpenAlex</a>
+                    </p>
+                </div>
+                <div class="layer-card">
+                    <div class="licon" style="color: #2ECC71;">⬢</div>
+                    <h3>Scopus</h3>
+                    <p>
+                        A <strong>comprehensive abstract and citation database</strong> of peer-reviewed literature, used to supplement
+                        OpenAlex data for <strong>thematic and conceptual mappings</strong>.
+                    </p>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: var(--text2);">
+                        <a href="https://www.scopus.com/" target="_blank" style="color: var(--accent);">Visit Scopus</a>
+                    </p>
+                </div>
+                <div class="layer-card">
+                    <div class="licon" style="color: #FF6347;">⬢</div>
+                    <h3>MeSH (Medical Subject Headings)</h3>
+                    <p>
+                        A <strong>controlled vocabulary thesaurus</strong> produced by the U.S. National Library of Medicine. Used for
+                        <strong>biomedical and health science classifications</strong>.
+                    </p>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: var(--text2);">
+                        <a href="https://meshb.nlm.nih.gov/" target="_blank" style="color: var(--accent);">Visit MeSH</a>
+                    </p>
+                </div>
+                <div class="layer-card">
+                    <div class="licon" style="color: #9B59B6;">⬢</div>
+                    <h3>IEEE Thesaurus</h3>
+                    <p>
+                        A <strong>controlled vocabulary</strong> for indexing and retrieving engineering, computing, and technology
+                        literature. Used for <strong>technical and applied science classifications</strong>.
+                    </p>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: var(--text2);">
+                        <a href="https://ieeexplore.ieee.org/Xplore/home.jsp" target="_blank" style="color: var(--accent);">Visit IEEE Thesaurus</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Methodology -->
+        <section class="section" aria-labelledby="methodology-title">
+            <h2 class="sec-h" id="methodology-title">Methodology</h2>
+            <p class="sec-sub">How We Process and Structure Data</p>
+            <div class="layers-grid">
+                <div class="layer-card">
+                    <div class="licon" style="color: #1A6BAA;">⬢</div>
+                    <h3>Data Cleaning</h3>
+                    <p>
+                        Raw data from OpenAlex and other sources is <strong>cleaned, deduplicated, and standardized</strong> to ensure
+                        consistency across disciplines.
+                    </p>
+                </div>
+                <div class="layer-card">
+                    <div class="licon" style="color: #2ECC71;">⬢</div>
+                    <h3>Classification</h3>
+                    <p>
+                        Disciplines and subdisciplines are classified using <strong>OECD Frascati Manual</strong> and
+                        <strong>UNESCO Fields of Science</strong> standards.
+                    </p>
+                </div>
+                <div class="layer-card">
+                    <div class="licon" style="color: #FF6347;">⬢</div>
+                    <h3>Network Construction</h3>
+                    <p>
+                        We map <strong>connections between disciplines</strong> using <strong>co-occurrence analysis</strong> and
+                        <strong>citation networks</strong> to reveal interdisciplinary links.
+                    </p>
+                </div>
+                <div class="layer-card">
+                    <div class="licon" style="color: #9B59B6;">⬢</div>
+                    <h3>Validation</h3>
+                    <p>
+                        Our hierarchy is validated through <strong>network metrics</strong> (e.g., centrality, modularity) and
+                        <strong>expert review</strong> to ensure accuracy.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Datasets -->
+        <section class="section" aria-labelledby="datasets-title">
+            <h2 class="sec-h" id="datasets-title">Datasets</h2>
+            <p class="sec-sub">Access Our Data</p>
+            <div class="layers-grid">
+                <div class="layer-card">
+                    <div class="licon" style="color: #1A6BAA;">⬢</div>
+                    <h3>Full Mastery Knowledge Network</h3>
+                    <p>
+                        The complete dataset for the <strong>interdisciplinary knowledge network</strong>, including all 25 disciplines,
+                        235 subdisciplines, and 320K+ connections.
+                    </p>
+                    <p style="margin-top: 10px;">
+                        <a href="#" class="btn btn-s"><i class="fas fa-download"></i> Download CSV</a>
+                        <a href="#" class="btn btn-s"><i class="fas fa-file-code"></i> Download JSON</a>
+                    </p>
+                </div>
+                <div class="layer-card">
+                    <div class="licon" style="color: #2ECC71;">⬢</div>
+                    <h3>Disciplinary Networks</h3>
+                    <p>
+                        Individual datasets for each of the <strong>25 disciplinary networks</strong>, including nodes (concepts) and
+                        edges (connections).
+                    </p>
+                    <p style="margin-top: 10px;">
+                        <a href="#" class="btn btn-s"><i class="fas fa-download"></i> Download All</a>
+                    </p>
+                </div>
+                <div class="layer-card">
+                    <div class="licon" style="color: #FF6347;">⬢</div>
+                    <h3>Metadata and Documentation</h3>
+                    <p>
+                        Detailed <strong>metadata</strong> and <strong>documentation</strong> for all datasets, including field descriptions,
+                        data sources, and processing steps.
+                    </p>
+                    <p style="margin-top: 10px;">
+                        <a href="#" class="btn btn-s"><i class="fas fa-file-pdf"></i> Download PDF</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tools -->
+        <section class="section" aria-labelledby="tools-title">
+            <h2 class="sec-h" id="tools-title">🛠️ Tools</h2>
+            <p class="sec-sub">Software and Scripts for Working with Our Data</p>
+            <div class="layers-grid">
+                <div class="layer-card">
+                    <div class="licon" style="color: #1A6BAA;">⬢</div>
+                    <h3>Network Analysis Scripts</h3>
+                    <p>
+                        Python scripts for analyzing the knowledge networks, including <strong>centrality metrics</strong>,
+                        <strong>community detection</strong>, and <strong>visualization</strong>.
+                    </p>
+                    <p style="margin-top: 10px;">
+                        <a href="#" class="btn btn-s"><i class="fab fa-github"></i> View on GitHub</a>
+                    </p>
+                </div>
+                <div class="layer-card">
+                    <div class="licon" style="color: #2ECC71;">⬢</div>
+                    <h3>Data Processing Pipeline</h3>
+                    <p>
+                        A <strong>modular pipeline</strong> for cleaning, classifying, and structuring raw data from OpenAlex and other
+                        sources.
+                    </p>
+                    <p style="margin-top: 10px;">
+                        <a href="#" class="btn btn-s"><i class="fab fa-github"></i> View on GitHub</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="section" style="text-align: center;">
+            <h2 class="sec-h">Collaborate with Us</h2>
+            <p class="sec-sub">
+                Interested in using our data or tools? <strong>Let’s work together.</strong>
+            </p>
+            <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
+                <a href="mailto:your-email@example.com" class="btn btn-p">
+                    <i class="fas fa-envelope"></i> Contact Us
+                </a>
+                <a href="https://github.com/FrancoisPapin" class="btn btn-p" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="sf-logo">MLKN.lab</div>
+        <p class="sf-tag">MultiLayer Knowledge Network Ideas Laboratory</p>
+        <div class="sf-links">
+            <a href="https://www.linkedin.com/in/francoispapin/" class="sf-link" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/FrancoisPapin" class="sf-link" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="mailto:your-email@example.com" class="sf-link">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+        <p class="sf-legal">© François Papin · May 2026 · MIT License · MLKN.lab</p>
+    </footer>
+</body>
+</html>
