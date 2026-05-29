@@ -355,11 +355,74 @@
                     <p><a href="#" class="btn btn-s"><i class="fas fa-balance-scale"></i> Learn More</a></p>
                 </div>
             </div>
-        </section>
+        
+   </section>
+
+        <p style="margin-top: 20px; text-align: center;">
+            <a href="https://www.linkedin.com/in/francoispapin/" target="_blank" rel="noopener noreferrer" style="color: var(--accent); margin: 0 10px;">LinkedIn</a>
+        |
+            <a href="https://github.com/FrancoisPapin" target="_blank" rel="noopener noreferrer" style="color: var(--accent); margin: 0 10px;">GitHub</a>
+        |
+            <a href="mailto:your-email@example.com" style="color: var(--accent); margin: 0 10px;">Email</a>
+        </p>
+        
     </main>
 
+    <!-- Bottom Bar with Icons -->
     <footer class="site-footer" role="contentinfo">
-        <!-- Same footer as homepage -->
+        <div class="sf-logo">MLKN.lab</div>
+        <p class="sf-tag">MultiLayer Knowledge Network Ideas Laboratory</p>
+        <div class="sf-links">
+            <a href="https://www.linkedin.com/in/francoispapin/" class="sf-link" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/FrancoisPapin" class="sf-link" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="mailto:your-email@example.com" class="sf-link">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+        <p class="sf-legal">© François Papin · May 2026 · MIT License · MLKN.lab</p>
     </footer>
+
+    <!-- JavaScript to highlight active section in nav boxes -->
+    <script>
+        // Highlight the active section in the nav boxes
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navBoxes = document.querySelectorAll('.nav-box');
+
+            // Function to update active links in all nav boxes
+            function updateActiveLinks() {
+                let currentSection = '';
+
+                // Check which section is in view
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.scrollY >= (sectionTop - 200)) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+
+                // Update active class in all nav boxes
+                navBoxes.forEach(navBox => {
+                    const links = navBox.querySelectorAll('a');
+                    links.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${currentSection}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                });
+            }
+
+            // Update on scroll
+            window.addEventListener('scroll', updateActiveLinks);
+            // Update on load
+            updateActiveLinks();
+        });
+    </script>
 </body>
 </html>
