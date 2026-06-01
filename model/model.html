@@ -355,6 +355,316 @@
             </div>
         </section>
 
+        <section class="section" aria-labelledby="math-title">
+            <h2 class="sec-h" id="math-title">Mathematical Foundations 2</h2>
+            <p class="sec-sub">Formalizing Knowledge as a Dynamic, Multi-Layered Hypergraph</p>
+
+            <!-- Introduction to Formalization -->
+            <div class="essay-box">
+                <p>
+                MLKN.model formalizes knowledge as a <strong>dynamic, multi-layered hypergraph</strong> where:
+                </p>
+                <ul class="discipline-list">
+                    <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Nodes</strong> represent <em>disciplines, subdisciplines, concepts, or themes</em>.</li>
+                    <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Hyperedges</strong> represent <em>relationships</em> (hierarchical, interdisciplinary, thematic) between <em>any number of nodes</em>.</li>
+                    <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Layers</strong> represent <em>levels of abstraction</em> (e.g., Core Domains → Concepts).</li>
+                    <li><span class="discipline-square" style="background: #9B59B6;"></span> <strong>Dynamics</strong> represent <em>temporal evolution</em> (e.g., emergence of new disciplines).</li>
+                </ul>
+                <p>
+                This formalization enables <strong>rigorous analysis, simulation, and prediction</strong> of knowledge systems.
+                </p>
+            </div>
+
+            <!-- Hypergraph Definition -->
+            <div class="layer-card">
+            <div class="licon" style="color: #1A6BAA;">⬢</div>
+            <h3>📌 Hypergraph Definition</h3>
+            <p>
+            Let <strong>H = (V, E, L, W, T)</strong> be a <strong>multi-layered hypergraph</strong> where:
+            </p>
+            <ul class="discipline-list">
+               <li>
+                <span class="discipline-square" style="background: #1A6BAA;"></span>
+                <strong>V</strong> = {<em>v<sub>1</sub>, v<sub>2</sub>, ..., v<sub>n</sub></em>} is the set of <strong>nodes</strong>, where each node <em>v<sub>i</sub></em> represents a
+                <strong>discipline, subdiscipline, or concept</strong> with attributes:
+                <ul style="margin-top: 5px; padding-left: 20px;">
+                    <li><em>v<sub>i</sub>.id</em>: Unique identifier (e.g., <code>"computer_science"</code>).</li>
+                    <li><em>v<sub>i</sub>.name</em>: Human-readable name (e.g., <code>"Computer Science"</code>).</li>
+                    <li><em>v<sub>i</sub>.layer</em> ∈ {1, 2, 3, 4, 5}: Ontological layer (1=Core Domains, 5=Concepts).</li>
+                    <li><em>v<sub>i</sub>.domain</em>: Parent domain (e.g., <code>"Formal Sciences"</code>).</li>
+                    <li><em>v<sub>i</sub>.metadata</em>: Additional attributes (e.g., description, citations, timestamps).</li>
+                </ul>
+              </li>
+              <li>
+                <span class="discipline-square" style="background: #2ECC71;"></span>
+                <strong>E</strong> = {<em>e<sub>1</sub>, e<sub>2</sub>, ..., e<sub>m</sub></em>} is the set of <strong>hyperedges</strong>, where each hyperedge <em>e<sub>j</sub></em> connects
+                <strong>any subset of nodes</strong> <em>S ⊆ V</em> with attributes:
+                <ul style="margin-top: 5px; padding-left: 20px;">
+                    <li><em>e<sub>j</sub>.nodes</em>: Set of nodes connected by the hyperedge (e.g., <code>{"computer_science", "ai", "neuroscience"}</code>).</li>
+                    <li><em>e<sub>j</sub>.type</em> ∈ {<code>"hierarchical"</code>, <code>"interdisciplinary"</code>, <code>"thematic"</code>}: Type of relationship.</li>
+                    <li><em>e<sub>j</sub>.weight</em> ∈ [0, 1]: Strength of the connection (e.g., derived from co-citation frequency).</li>
+                    <li><em>e<sub>j</sub>.metadata</em>: Additional attributes (e.g., timestamp, source).</li>
+                </ul>
+              </li>
+              <li>
+                <span class="discipline-square" style="background: #FF6347;"></span>
+                <strong>L</strong>: <em>V → {1, 2, 3, 4, 5}</em> is the <strong>layer assignment function</strong>, mapping each node to its ontological layer.
+              </li>
+              <li>
+                <span class="discipline-square" style="background: #9B59B6;"></span>
+                <strong>W</strong>: <em>E → [0, 1]</em> is the <strong>weight function</strong>, assigning a strength to each hyperedge.
+              </li>
+              <li>
+                <span class="discipline-square" style="background: #F39C12;"></span>
+                <strong>T</strong>: <em>V × E → ℝ<sup>+</sup></em> is the <strong>temporal function</strong>, assigning timestamps to nodes/edges (for dynamic analysis).
+              </li>
+              </ul>
+           </div>
+
+           <!-- Layered Structure -->
+           <div class="layer-card">
+           <div class="licon" style="color: #2ECC71;">⬢</div>
+           <h3>📚 Layered Structure (Ontological Hierarchy)</h3>
+           <p>
+            The hypergraph <strong>H</strong> is organized into <strong>5 ontological layers</strong>, forming a <strong>polyhierarchy</strong>:
+           </p>
+           <ol class="discipline-list">
+              <li>
+                <span class="discipline-square" style="background: #FF6347;"></span>
+                <strong>Layer 1: Core Domains</strong> (e.g., Formal Sciences, Natural Sciences).
+                <ul style="margin-top: 5px; padding-left: 20px;">
+                    <li><em>V<sub>1</sub></em> = {<em>v | L(v) = 1</em>}.</li>
+                    <li>Represents the <strong>highest level of abstraction</strong>.</li>
+                </ul>
+              </li>
+              <li>
+                <span class="discipline-square" style="background: #2ECC71;"></span>
+                <strong>Layer 2: Disciplines</strong> (e.g., Computer Science, Psychology).
+                <ul style="margin-top: 5px; padding-left: 20px;">
+                    <li><em>V<sub>2</sub></em> = {<em>v | L(v) = 2</em>}.</li>
+                    <li>Connected to Layer 1 via <strong>hierarchical hyperedges</strong>.</li>
+                </ul>
+              </li>
+              <li>
+                <span class="discipline-square" style="background: #50C878;"></span>
+                <strong>Layer 3: Subdisciplines</strong> (e.g., AI, Cognitive Psychology).
+                <ul style="margin-top: 5px; padding-left: 20px;">
+                    <li><em>V<sub>3</sub></em> = {<em>v | L(v) = 3</em>}.</li>
+                    <li>Connected to Layer 2 via <strong>hierarchical hyperedges</strong>.</li>
+                </ul>
+              </li>
+              <li>
+                <span class="discipline-square" style="background: #F39C12;"></span>
+                <strong>Layer 4: Thematic Domains</strong> (e.g., Machine Learning, Attention).
+                <ul style="margin-top: 5px; padding-left: 20px;">
+                    <li><em>V<sub>4</sub></em> = {<em>v | L(v) = 4</em>}.</li>
+                    <li>Connected to Layer 3 via <strong>hierarchical hyperedges</strong>.</li>
+                </ul>
+              </li>
+              <li>
+                <span class="discipline-square" style="background: #9B59B6;"></span>
+                <strong>Layer 5: Concepts</strong> (e.g., Neural Networks, Memory).
+                <ul style="margin-top: 5px; padding-left: 20px;">
+                    <li><em>V<sub>5</sub></em> = {<em>v | L(v) = 5</em>}.</li>
+                    <li>Connected to Layer 4 via <strong>hierarchical hyperedges</strong>.</li>
+                </ul>
+              </li>
+             </ol>
+                 <p style="margin-top: 15px;">
+                 <strong>Polyhierarchy Property:</strong> A node in Layer <em>i</em> can belong to <strong>multiple parent nodes</strong> in Layer <em>i-1</em>.
+                 For example, <code>"AI Ethics"</code> (Layer 3) may belong to both <code>"Computer Science"</code> and <code>"Philosophy"</code> (Layer 2).
+             </p>
+          </div>
+
+         <!-- Hypergraph Properties -->
+         <div class="layer-card">
+         <div class="licon" style="color: #FF6347;">⬢</div>
+         <h3>🔗 Hypergraph Properties</h3>
+         <p>
+            The hypergraph <strong>H</strong> exhibits the following properties:
+         </p>
+         <ul class="discipline-list">
+            <li>
+                <span class="discipline-square" style="background: #FF6347;"></span>
+                <strong>Multi-Layered:</strong> Nodes are organized into <strong>5 ontological layers</strong> (Core Domains → Concepts).
+            </li>
+            <li>
+                <span class="discipline-square" style="background: #2ECC71;"></span>
+                <strong>Polyhierarchical:</strong> Nodes can have <strong>multiple parents</strong> (e.g., a subdiscipline can belong to multiple disciplines).
+            </li>
+            <li>
+                <span class="discipline-square" style="background: #50C878;"></span>
+                <strong>Weighted:</strong> Hyperedges have <strong>weights</strong> representing connection strength (e.g., co-citation frequency).
+            </li>
+            <li>
+                <span class="discipline-square" style="background: #F39C12;"></span>
+                <strong>Directed:</strong> Hyperedges can be <strong>directed</strong> (e.g., hierarchical relationships) or <strong>undirected</strong> (e.g., thematic connections).
+            </li>
+            <li>
+                <span class="discipline-square" style="background: #9B59B6;"></span>
+                <strong>Dynamic:</strong> Nodes and hyperedges have <strong>timestamps</strong> to track evolution over time.
+            </li>
+            <li>
+                <span class="discipline-square" style="background: #1ABC9C;"></span>
+                <strong>Attributed:</strong> Nodes and hyperedges carry <strong>metadata</strong> (e.g., descriptions, citations, domains).
+            </li>
+         </ul>
+         </div>
+
+         <!-- Mathematical Operations -->
+         <div class="layer-card">
+         <div class="licon" style="color: #9B59B6;">⬢</div>
+         <h3>⚙️ Mathematical Operations</h3>
+         <p>
+            MLKN.model supports the following <strong>mathematical operations</strong> on the hypergraph <strong>H</strong>:
+         </p>
+          <ul class="discipline-list">
+            <li>
+                <span class="discipline-square" style="background: #9B59B6;"></span>
+                <strong>Centrality Measures:</strong>
+                <ul style="margin-top: 5px; padding-left: 20px;">
+                    <li><strong>Degree Centrality:</strong> <em>C<sub>D</sub>(v) = |{e ∈ E | v ∈ e.nodes}|</em> (number of hyperedges connected to <em>v</em>).</li>
+                    <li><strong>Betweenness Centrality:</strong> <em>C<sub>B</sub>(v) = Σ (σ<sub>st</sub>(v) / σ<sub>st</sub>)</em>, where <em>σ<sub>st</sub>(v)</em> is the number of shortest paths from <em>s</em> to <em>t</em> passing through <em>v</em>.</li>
+                    <li><strong>Eigenvector Centrality:</strong> <em>C<sub>E</sub>(v) = (1/λ) Σ<sub>u∈N(v)</sub> A<sub>uv</sub> C<sub>E</sub>(u)</em>, where <em>A</em> is the adjacency matrix and <em>λ</em> is the largest eigenvalue.</li>
+                </ul>
+            </li>
+            <li>
+                <span class="discipline-square" style="background: #FF6347;"></span>
+                <strong>Community Detection:</strong>
+                <ul style="margin-top: 5px; padding-left: 20px;">
+                    <li><strong>Modularity:</strong> <em>Q = (1/2m) Σ<sub>ij</sub> [A<sub>ij</sub> - (k<sub>i</sub>k<sub>j</sub>/2m)] δ(c<sub>i</sub>, c<sub>j</sub>)</em>, where <em>m</em> is the total weight of hyperedges, <em>k<sub>i</sub></em> is the weighted degree of node <em>i</em>, and <em>c<sub>i</sub></em> is the community of node <em>i</em>.</li>
+                    <li><strong>Louvain Method:</strong> Optimizes modularity via greedy optimization.</li>
+                    <li><strong>Leiden Algorithm:</strong> Improves Louvain by ensuring communities are well-connected.</li>
+                </ul>
+            </li>
+            <li>
+                <span class="discipline-square" style="background: #2ECC71;"></span>
+                <strong>Path Analysis:</strong>
+                <ul style="margin-top: 5px; padding-left: 20px;">
+                    <li><strong>Shortest Path:</strong> <em>d(s, t) = min |P|</em>, where <em>P</em> is a path from <em>s</em> to <em>t</em>.</li>
+                    <li><strong>Random Walks:</strong> Simulate diffusion processes to model knowledge spread.</li>
+                    <li><strong>Persistent Homology:</strong> Identify topological features (e.g., holes, connected components) in the hypergraph.</li>
+                </ul>
+            </li>
+            <li>
+                <span class="discipline-square" style="background: #F39C12;"></span>
+                <strong>Dynamic Analysis:</strong>
+                <ul style="margin-top: 5px; padding-left: 20px;">
+                    <li><strong>Temporal Slices:</strong> Analyze the hypergraph at different time points <em>H<sub>t</sub> = (V<sub>t</sub>, E<sub>t</sub>)</em>.</li>
+                    <li><strong>Evolution Metrics:</strong> Track changes in centrality, modularity, and connectivity over time.</li>
+                    <li><strong>Predictive Modeling:</strong> Use machine learning to forecast the emergence of new nodes/edges.</li>
+                </ul>
+            </li>
+          </ul>
+         </div>
+
+         <!-- Example: Knowledge Diffusion -->
+         <div class="layer-card">
+         <div class="licon" style="color: #1ABC9C;">⬢</div>
+         <h3>📈 Example: Modeling Knowledge Diffusion</h3>
+         <p>
+            To model how a new concept (e.g., <code>"Transformers"</code>) diffuses across disciplines:
+         </p>
+         <ol class="discipline-list">
+            <li>
+                <span class="discipline-square" style="background: #1ABC9C;"></span>
+                <strong>Step 1: Represent the Concept</strong>
+                <p style="margin-top: 5px;">
+                    Add a new node <em>v<sub>new</sub></em> = <code>"Transformers"</code> to Layer 5 (Concepts) with:
+                    <ul style="margin-top: 5px; padding-left: 20px;">
+                        <li><em>v<sub>new</sub>.layer = 5</em>.</li>
+                        <li><em>v<sub>new</sub>.domain = "Machine Learning"</em>.</li>
+                        <li><em>v<sub>new</sub>.timestamp = 2017</em> (year of introduction).</li>
+                    </ul>
+                </p>
+            </li>
+            <li>
+                <span class="discipline-square" style="background: #1ABC9C;"></span>
+                <strong>Step 2: Connect to Existing Nodes</strong>
+                <p style="margin-top: 5px;">
+                    Add hyperedges to connect <em>v<sub>new</sub></em> to related nodes:
+                    <ul style="margin-top: 5px; padding-left: 20px;">
+                        <li><em>e<sub>1</sub>.nodes = {"Transformers", "Neural Networks", "NLP"}</em> (interdisciplinary connection).</li>
+                        <li><em>e<sub>1</sub>.type = "thematic"</em>.</li>
+                        <li><em>e<sub>1</sub>.weight = 0.95</em> (strong connection).</li>
+                    </ul>
+                </p>
+            </li>
+            <li>
+                <span class="discipline-square" style="background: #1ABC9C;"></span>
+                <strong>Step 3: Simulate Diffusion</strong>
+                <p style="margin-top: 5px;">
+                    Use a <strong>random walk</strong> to simulate how researchers "discover" <em>v<sub>new</sub></em>:
+                    <ul style="margin-top: 5px; padding-left: 20px;">
+                        <li>Start at a random node (e.g., <code>"Computer Science"</code>).</li>
+                        <li>Traverse hyperedges with probability proportional to their weights.</li>
+                        <li>Measure the <strong>time to reach</strong> <em>v<sub>new</sub></em> from other nodes.</li>
+                    </ul>
+                </p>
+            </li>
+            <li>
+                <span class="discipline-square" style="background: #1ABC9C;"></span>
+                <strong>Step 4: Predict Adoption</strong>
+                <p style="margin-top: 5px;">
+                    Use <strong>centrality measures</strong> to predict which disciplines will adopt <em>v<sub>new</sub></em>:
+                    <ul style="margin-top: 5px; padding-left: 20px;">
+                        <li>Disciplines with high <em>C<sub>B</sub>(v)</em> (betweenness centrality) are likely to adopt early.</li>
+                        <li>Disciplines in the same <strong>community</strong> as <em>v<sub>new</sub></em> (via modularity) are likely to adopt first.</li>
+                    </ul>
+                </p>
+            </li>
+          </ol>
+        </div>
+
+        <!-- Formal Definitions -->
+        <div class="layer-card">
+        <div class="licon" style="color: #F39C12;">⬢</div>
+        <h3>📜 Formal Definitions</h3>
+        <p>
+            Below are the <strong>formal definitions</strong> of key concepts in MLKN.model:
+        </p>
+        <ul class="discipline-list">
+            <li>
+                <span class="discipline-square" style="background: #F39C12;"></span>
+                <strong>Knowledge Hypergraph:</strong>
+                <p style="margin-top: 5px;">
+                    A tuple <strong>H = (V, E, L, W, T)</strong> where:
+                    <ul style="margin-top: 5px; padding-left: 20px;">
+                        <li><em>V</em> is the set of nodes (disciplines, concepts, etc.).</li>
+                        <li><em>E</em> is the set of hyperedges (relationships).</li>
+                        <li><em>L: V → {1, 2, 3, 4, 5}</em> is the layer assignment function.</li>
+                        <li><em>W: E → [0, 1]</em> is the weight function.</li>
+                        <li><em>T: V × E → ℝ<sup>+</sup></em> is the temporal function.</li>
+                    </ul>
+                </p>
+            </li>
+            <li>
+                <span class="discipline-square" style="background: #F39C12;"></span>
+                <strong>Polyhierarchy:</strong>
+                <p style="margin-top: 5px;">
+                    A hypergraph is <strong>polyhierarchical</strong> if for some <em>v ∈ V</em>, there exist <em>u, w ∈ V</em> such that:
+                    <ul style="margin-top: 5px; padding-left: 20px;">
+                        <li><em>L(u) = L(v) - 1</em> and <em>u</em> is a parent of <em>v</em>.</li>
+                        <li><em>L(w) = L(v) - 1</em> and <em>w</em> is a parent of <em>v</em>.</li>
+                        <li><em>u ≠ w</em>.</li>
+                    </ul>
+                    In other words, a node can have <strong>multiple parents</strong> in the layer above it.
+                </p>
+            </li>
+            <li>
+                <span class="discipline-square" style="background: #F39C12;"></span>
+                <strong>Knowledge Diffusion:</strong>
+                <p style="margin-top: 5px;">
+                    A <strong>stochastic process</strong> on <strong>H</strong> where a random walker traverses hyperedges with probability:
+                    <ul style="margin-top: 5px; padding-left: 20px;">
+                        <li><em>P(v → u | e) = W(e) / Σ<sub>e' ∋ v</sub> W(e')</em>, where <em>e</em> is a hyperedge containing <em>v</em> and <em>u</em>.</li>
+                    </ul>
+                </p>
+            </li>
+          </ul>
+        </div>
+        </section>
+        
         <!-- Applications -->
         <section class="section" aria-labelledby="applications-title">
             <h2 class="sec-h" id="applications-title">Applications</h2>
