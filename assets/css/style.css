@@ -1,16 +1,8 @@
 /* =============================================
-   MLKN-labV2 — MultiLayer Knowledge Network
+   MLKN.labV2 — MultiLayer Knowledge Network
    Author: François Papin | May 2026 | MIT License
    Modern, Minimal, Scientific, and Technological Design
    ============================================= */
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
 
 :root {
   /* Base Colors */
@@ -33,14 +25,24 @@
   --sh2: 0 4px 12px rgba(26, 30, 46, 0.1);
 
   /* Layer Colors */
-  --layer1: #808080; /* Core Domains */
-  --layer2: #4A90E2; /* Disciplines */
-  --layer3: #50C878; /* Subdisciplines */
-  --layer4: #FFD700; /* Thematic Domains */
-  --layer5: #E0FFFF; /* Main Thematics */
+  --layer1: #808080;
+  --layer2: #4A90E2;
+  --layer3: #50C878;
+  --layer4: #FFD700;
+  --layer5: #E0FFFF;
 }
 
-/* Base Styles */
+/* =============================================
+   BASE STYLES
+   ============================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 html {
   font-size: 16px;
   scroll-behavior: smooth;
@@ -56,7 +58,6 @@ body {
   line-height: 1.6;
 }
 
-/* Links */
 a {
   color: var(--accent);
   text-decoration: none;
@@ -74,7 +75,6 @@ a:focus-visible {
   border-radius: 3px;
 }
 
-/* Images */
 img {
   max-width: 100%;
   height: auto;
@@ -149,18 +149,19 @@ img {
 /* Nav link base styles */
 .nav-link {
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 12px; /* Larger for better tapping */
   color: var(--text2);
   text-decoration: none;
-  padding: 4px 10px;
-  border-radius: 16px;
+  padding: 8px 12px; /* Larger tap target */
+  border-radius: var(--r);
   border: 1px solid transparent;
   transition: all 0.15s;
   white-space: nowrap;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 5px;
-  position: relative; /* For tooltips (optional) */
+  height: 100%; /* Fill the topnav height */
+  position: relative;
 }
 
 .nav-link:hover {
@@ -168,30 +169,6 @@ img {
   background: #EBF4FB;
   border-color: #BBCFE8;
   text-decoration: none;
-  opacity: 1;
-}
-
-/* Tooltip for nav icons (optional - remove if not needed) */
-.nav-link[data-tooltip]::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(26, 30, 46, 0.9);
-  color: white;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 8px;
-  font-family: var(--mono);
-  white-space: nowrap;
-  opacity: 0;
-  transition: opacity 0.2s;
-  pointer-events: none;
-  z-index: 1002; /* Above dropdowns */
-}
-
-.nav-link[data-tooltip]:hover::after {
   opacity: 1;
 }
 
@@ -231,9 +208,30 @@ img {
   display: block;
 }
 
-/* Hide tooltip for dropdown links (optional) */
-.dropdown .nav-link::after {
-  display: none;
+/* =============================================
+   TOOLTIPS (Optional)
+   ============================================= */
+.nav-link[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(26, 30, 46, 0.9);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 8px;
+  font-family: var(--mono);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+  z-index: 1002;
+}
+
+.nav-link[data-tooltip]:hover::after {
+  opacity: 1;
 }
 
 /* =============================================
@@ -317,7 +315,6 @@ img {
   margin-top: 3px;
 }
 
-/* Colored circles for stats */
 .stat-circle {
   width: 14px;
   height: 14px;
@@ -418,6 +415,9 @@ img {
   max-width: 540px;
 }
 
+/* =============================================
+   CHIP STYLES
+   ============================================= */
 .chips {
   display: flex;
   gap: 6px;
@@ -435,38 +435,36 @@ img {
 }
 
 /* =============================================
-   HORIZONTAL BOXES (Unified Styling)
+   HORIZONTAL BOXES (Essay Box + Featured)
    ============================================= */
 .essay-box,
 .featured {
-    background: linear-gradient(135deg, #EBF4FB, #F5EEF8);
-    border: 2px solid #BBCFE8;
-    border-radius: 10px;
-    padding: 15px;
-    margin: 15px 0;
-    text-align: center;
+  background: linear-gradient(135deg, #EBF4FB, #F5EEF8);
+  border: 2px solid #BBCFE8;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 15px 0;
+  text-align: center;
 }
 
-/* Unified font color for all horizontal boxes */
 .essay-box h3,
 .essay-box p,
 .featured p,
 .featured .feat-eyebrow,
 .featured .feat-title,
 .featured .feat-desc {
-    color: var(--text); /* Same as core domains box */
-    font-family: var(--font);
+  color: var(--text);
+  font-family: var(--font);
 }
 
-/* Ensure chips in horizontal boxes match the style */
 .essay-box .chips .chip,
 .featured .chips .chip {
-    font-family: var(--mono);
-    font-size: 9px;
-    font-weight: 700;
-    border: 1.5px solid currentColor;
-    padding: 3px 9px;
-    border-radius: 20px;
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 700;
+  border: 1.5px solid currentColor;
+  padding: 3px 9px;
+  border-radius: 20px;
 }
 
 /* =============================================
@@ -577,6 +575,44 @@ img {
 }
 
 /* =============================================
+   NAVIGATION BOXES (Internal Page Nav)
+   ============================================= */
+.nav-box {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.nav-box a {
+  background: var(--panel);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 15px;
+  color: var(--text);
+  text-decoration: none;
+  font-family: var(--mono);
+  font-size: 10px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-box a:hover {
+  background: #EBF4FB;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.nav-box a.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+/* =============================================
    BOTTOM BAR WITH ICONS
    ============================================= */
 .site-footer {
@@ -661,145 +697,19 @@ img {
     gap: 12px;
   }
 
-  /* Mobile Drop-Down Adjustments */
+  .nav-link {
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+
   .dropdown-content {
     min-width: 180px;
     font-size: 13px;
     left: 50%;
-    transform: translateX(-50%); /* Center perfectly */
+    transform: translateX(-50%);
   }
 
-  /* Make topnav taller for easier tapping */
   .topnav {
     height: 50px;
   }
-
-  /* Increase nav-link size for touch */
-  .nav-link {
-    padding: 10px 12px;
-    font-size: 10px;
-  }
 }
-
-/* =============================================
-   TOOLTIPS (Moved from inline <style>)
-   ============================================= */
-.nav-link[data-tooltip]::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(26, 30, 46, 0.9);
-  color: white;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 8px;
-  font-family: var(--mono);
-  white-space: nowrap;
-  opacity: 0;
-  transition: opacity 0.2s;
-  pointer-events: none;
-  z-index: 1002;
-}
-
-.nav-link[data-tooltip]:hover::after {
-  opacity: 1;
-}
-
-/* =============================================
-   NAVIGATION BOXES (Moved from inline <style>)
-   ============================================= */
-.nav-box {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.nav-box a {
-  background: var(--panel);
-  border: 1.5px solid var(--border);
-  border-radius: 8px;
-  padding: 8px 15px;
-  color: var(--text);
-  text-decoration: none;
-  font-family: var(--mono);
-  font-size: 10px;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.nav-box a:hover {
-  background: #EBF4FB;
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-.nav-box a.active {
-  background: var(--accent);
-  color: white;
-  border-color: var(--accent);
-}
-
-/* =============================================
-   ESSAY BOXES (Moved from inline <style>)
-   ============================================= */
-.essay-box {
-  background: linear-gradient(135deg, #EBF4FB, #F5EEF8);
-  border: 2px solid #BBCFE8;
-  border-radius: 10px;
-  padding: 15px;
-  margin: 15px 0;
-  text-align: center;
-}
-
-.essay-box h3 {
-  margin-bottom: 10px;
-  color: var(--text);
-}
-
-.essay-box p {
-  font-size: 0.9em;
-  color: var(--text2);
-}
-
-/* =============================================
-   DISCIPLINARY GRID (Moved from inline <style>)
-   ============================================= */
-.disciplinary-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 15px;
-  margin-top: 20px;
-}
-
-.disciplinary-card {
-  background: #fff;
-  border: 1.5px solid var(--border);
-  border-radius: 10px;
-  padding: 15px;
-  text-align: center;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.disciplinary-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--sh2);
-}
-
-.disciplinary-card h4 {
-  font-size: 14px;
-  color: var(--text);
-  margin-bottom: 5px;
-}
-
-.disciplinary-card p {
-  font-size: 12px;
-  color: var(--text2);
-  line-height: 1.4;
-}
-
