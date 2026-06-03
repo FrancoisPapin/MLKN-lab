@@ -12,114 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- D3.js for future network visualization (optional) -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <style>
-        /* Tooltip for nav icons */
-        .nav-link {
-            position: relative;
-        }
-        .nav-link::after {
-            content: attr(data-tooltip);
-            position: absolute;
-            bottom: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(26, 30, 46, 0.9);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 8px;
-            font-family: var(--mono);
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.2s;
-            pointer-events: none;
-        }
-        .nav-link:hover::after {
-            opacity: 1;
-        }
-        /* Navigation boxes for homepage sections */
-        .nav-box {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .nav-box a {
-            background: var(--panel);
-            border: 1.5px solid var(--border);
-            border-radius: 8px;
-            padding: 8px 15px;
-            color: var(--text);
-            text-decoration: none;
-            font-family: var(--mono);
-            font-size: 10px;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .nav-box a:hover {
-            background: #EBF4FB;
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-        .nav-box a i {
-            font-size: 12px;
-        }
-        /* Highlight the current section in the nav box */
-        .nav-box a.active {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-        }
-        /* Horizontal boxes for essays */
-        .essay-box {
-            background: linear-gradient(135deg, #EBF4FB, #F5EEF8);
-            border: 2px solid #BBCFE8;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 15px 0;
-            text-align: center;
-        }
-        .essay-box h3 {
-            margin-bottom: 10px;
-            color: var(--text);
-        }
-        .essay-box p {
-            font-size: 0.9em;
-            color: var(--text2);
-        }
-        /* Disciplinary networks grid */
-        .disciplinary-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-        .disciplinary-card {
-            background: #fff;
-            border: 1.5px solid var(--border);
-            border-radius: 10px;
-            padding: 15px;
-            text-align: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .disciplinary-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--sh2);
-        }
-        .disciplinary-card h4 {
-            font-size: 14px;
-            color: var(--text);
-            margin-bottom: 5px;
-        }
-        .disciplinary-card p {
-            font-size: 12px;
-            color: var(--text2);
-            line-height: 1.4;
-        }
-    </style>
 </head>
 <body>
     <!-- ======================
@@ -545,27 +437,23 @@
     </script>
 
     
-    <!-- JavaScript for Drop-Down Menu -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Get all dropdown elements
         const dropdowns = document.querySelectorAll('.dropdown');
 
-        // Add click event to each dropdown
+        // Toggle dropdown on click
         dropdowns.forEach(dropdown => {
             const link = dropdown.querySelector('.nav-link');
+            if (!link) return; // Skip if no link found
 
-            // Toggle dropdown on click
             link.addEventListener('click', function(e) {
-                e.preventDefault(); // Prevent following the link
-
+                e.preventDefault();
                 // Close all other dropdowns
-                dropdowns.forEach(otherDropdown => {
-                    if (otherDropdown !== dropdown) {
-                        otherDropdown.classList.remove('active');
+                dropdowns.forEach(other => {
+                    if (other !== dropdown) {
+                        other.classList.remove('active');
                     }
                 });
-
                 // Toggle current dropdown
                 dropdown.classList.toggle('active');
             });
