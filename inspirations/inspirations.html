@@ -120,28 +120,60 @@
     </style>
 </head>
 <body>
-    <!-- Top Navigation Bar -->
+    <!-- Top Navigation Bar (for external HTML pages) -->
     <header class="topnav" role="banner">
+        <!-- Same top nav as other pages -->
         <div class="topnav-inner">
             <a href="../index.html" class="topnav-logo">
                 <div class="logo-mark">ML</div>
                 <span class="logo-text">MLKN.lab</span>
             </a>
             <div class="nav-links">
-                <a href="../index.html" class="nav-link" data-tooltip="Home"><i class="fas fa-home"></i></a>
-                <a href="../research/research.html" class="nav-link" data-tooltip="Research"><i class="fas fa-microscope"></i></a>
-                <a href="../model/model.html" class="nav-link" data-tooltip="MLKN.model"><i class="fas fa-cog"></i></a>
-                <a href="../method/method.html" class="nav-link" data-tooltip="Method"><i class="fas fa-book"></i></a>
-                <a href="../hierarchy/hierarchy.html" class="nav-link" data-tooltip="Hierarchy"><i class="fas fa-sitemap"></i></a>
-                <a href="../knowledge_network/interdisciplinary.html" class="nav-link" data-tooltip="MLKN.hypergraph"><i class="fas fa-project-diagram"></i></a>
-                <a href="../data/data.html" class="nav-link" data-tooltip="Data"><i class="fas fa-database"></i></a>
-                <a href="../applications/applications.html" class="nav-link" data-tooltip="Applications"><i class="fas fa-lightbulb"></i></a>
-                <a href="../essay/essay.html" class="nav-link" data-tooltip="Essays"><i class="fas fa-file-alt"></i></a>
-                <a href="inspirations.html" class="nav-link" data-tooltip="Inspirations"><i class="fas fa-infinity"></i></a>
-                <a href="../about/about.html" class="nav-link" data-tooltip="About"><i class="fas fa-info-circle"></i></a>
+        <!-- Home -->
+            <a href="../index.html" class="nav-link" data-tooltip="Home"><i class="fas fa-home"></i></a>
+
+        <!-- Research Drop-Down -->
+        <div class="dropdown nav-link" data-tooltip="Research">
+            <i class="fas fa-microscope"></i>
+            <div class="dropdown-content">
+                <a href="../research/research.html">Research Focus</a>
+                <a href="../model/model.html">MLKN.model</a>
+                <a href="../model/model-mathematical-foundations.html">MLKN.model Mathematical Foundations</a>
+                <a href="../method/method.html">Method</a>
             </div>
         </div>
+
+        <!-- Knowledge Drop-Down -->
+        <div class="dropdown nav-link" data-tooltip="Knowledge">
+            <i class="fas fa-sitemap"></i>
+            <div class="dropdown-content">
+                <a href="../hierarchy/hierarchy.html">Hierarchy</a>
+                <a href="../knowledge-network/interdisciplinary.html">MLKN.hypergraph</a>
+                <a href="../data/data.html">Data</a>
+            </div>
+        </div>
+
+        <!-- Applications Drop-Down -->
+        <div class="dropdown nav-link" data-tooltip="Applications">
+            <i class="fas fa-lightbulb"></i>
+            <div class="dropdown-content">
+                <a href="../applications/applications.html">Applications</a>
+                <a href="../essay/essay.html">Essays</a>
+            </div>
+        </div>
+
+        <!-- About Drop-Down -->
+        <div class="dropdown nav-link" data-tooltip="About">
+            <i class="fas fa-info-circle"></i>
+            <div class="dropdown-content">
+                <a href="inspirations.html">Inspirations</a>
+                <a href="../about/about.html">About</a>
+            </div>
+        </div>
+        </div>    
+        </div>
     </header>
+
 
     <main>
         <!-- Hero Section -->
