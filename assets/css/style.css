@@ -82,6 +82,52 @@ img {
 }
 
 /* =============================================
+   DROP-DOWN MENU
+   ============================================= */
+/* Drop-down menu styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--panel);
+    min-width: 200px;
+    box-shadow: var(--sh2);
+    border-radius: var(--r);
+    z-index: 1;
+    top: 100%;
+    left: 0;
+    margin-top: 5px;
+    border: 1.5px solid var(--border);
+}
+
+.dropdown-content a {
+    color: var(--text);
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.dropdown-content a:hover {
+    background-color: #EBF4FB;
+    color: var(--accent);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Adjust nav-link hover for dropdowns */
+.nav-link.dropdown::after {
+    display: none; /* Hide tooltip for dropdowns (optional) */
+}
+
+/* =============================================
    TOP NAVIGATION BAR
    ============================================= */
 .topnav {
