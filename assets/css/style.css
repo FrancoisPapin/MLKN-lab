@@ -82,7 +82,7 @@ img {
 }
 
 /* =============================================
-   DROP-DOWN MENU (Tap-Friendly)
+   DROP-DOWN MENU (Simplified and Reliable)
    ============================================= */
 .dropdown {
     position: relative;
@@ -99,11 +99,7 @@ img {
     z-index: 1001;
     top: 100%;
     left: 0;
-    margin-top: 0;
     border: 1.5px solid var(--border);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s, visibility 0.2s;
 }
 
 .dropdown-content a {
@@ -112,7 +108,6 @@ img {
     text-decoration: none;
     display: block;
     font-size: 14px;
-    transition: background-color 0.15s;
 }
 
 .dropdown-content a:hover {
@@ -123,15 +118,12 @@ img {
 /* Show drop-down when .active class is added (via JS) */
 .dropdown.active .dropdown-content {
     display: block;
-    opacity: 1;
-    visibility: visible;
 }
 
 /* Hide tooltip for dropdowns */
 .nav-link.dropdown::after {
     display: none;
 }
-
 
 /* =============================================
    TOP NAVIGATION BAR
