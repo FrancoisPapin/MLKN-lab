@@ -547,38 +547,37 @@
     
     <!-- JavaScript for Drop-Down Menu -->
     <script>
-        // Fix drop-down menus for touch devices and improve desktop reliability
-        document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get all dropdown elements
         const dropdowns = document.querySelectorAll('.dropdown');
 
-        // Add click event for touch devices (iPhone)
+        // Add click event to each dropdown
         dropdowns.forEach(dropdown => {
             const link = dropdown.querySelector('.nav-link');
-            const content = dropdown.querySelector('.dropdown-content');
 
-            // Toggle drop-down on click (for touch devices)
+            // Toggle dropdown on click
             link.addEventListener('click', function(e) {
-                // Prevent following the link if it's a dropdown
-                if (window.innerWidth <= 768 || !('ontouchstart' in window)) {
-                    e.preventDefault();
-                }
+                e.preventDefault(); // Prevent following the link
+
+                // Close all other dropdowns
+                dropdowns.forEach(otherDropdown => {
+                    if (otherDropdown !== dropdown) {
+                        otherDropdown.classList.remove('active');
+                    }
+                });
+
+                // Toggle current dropdown
                 dropdown.classList.toggle('active');
             });
+        });
 
-            // Close drop-down when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!dropdown.contains(e.target)) {
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown')) {
+                dropdowns.forEach(dropdown => {
                     dropdown.classList.remove('active');
-                }
-            });
-
-            // Keep drop-down open when hovering over it (desktop)
-            dropdown.addEventListener('mouseenter', function() {
-                dropdown.classList.add('active');
-            });
-            dropdown.addEventListener('mouseleave', function() {
-                dropdown.classList.remove('active');
-            });
+                });
+            }
         });
       });
     </script>
