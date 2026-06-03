@@ -368,5 +368,84 @@
         </div>
         <p class="sf-legal">© François Papin · May 2026 · MIT License · MLKN.lab</p>
     </footer>
+
+    <!-- JavaScript to highlight active section in nav boxes -->
+    <script>
+        // Highlight the active section in the nav boxes
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navBoxes = document.querySelectorAll('.nav-box');
+
+            // Function to update active links in all nav boxes
+            function updateActiveLinks() {
+                let currentSection = '';
+
+                // Check which section is in view
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.scrollY >= (sectionTop - 200)) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+
+                // Update active class in all nav boxes
+                navBoxes.forEach(navBox => {
+                    const links = navBox.querySelectorAll('a');
+                    links.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${currentSection}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                });
+            }
+
+            // Update on scroll
+            window.addEventListener('scroll', updateActiveLinks);
+            // Update on load
+            updateActiveLinks();
+        });
+    </script>
+
+    
+    <!-- JavaScript for Drop-Down Menu -->
+    <script>
+        // Fix drop-down menus for touch devices and improve desktop reliability
+        document.addEventListener('DOMContentLoaded', function() {
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        // Add click event for touch devices (iPhone)
+        dropdowns.forEach(dropdown => {
+            const link = dropdown.querySelector('.nav-link');
+            const content = dropdown.querySelector('.dropdown-content');
+
+            // Toggle drop-down on click (for touch devices)
+            link.addEventListener('click', function(e) {
+                // Prevent following the link if it's a dropdown
+                if (window.innerWidth <= 768 || !('ontouchstart' in window)) {
+                    e.preventDefault();
+                }
+                dropdown.classList.toggle('active');
+            });
+
+            // Close drop-down when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+
+            // Keep drop-down open when hovering over it (desktop)
+            dropdown.addEventListener('mouseenter', function() {
+                dropdown.classList.add('active');
+            });
+            dropdown.addEventListener('mouseleave', function() {
+                dropdown.classList.remove('active');
+            });
+        });
+      });
+    </script>
+    
 </body>
 </html>
