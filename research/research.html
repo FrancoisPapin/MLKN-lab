@@ -759,24 +759,27 @@
         });
     </script>
 
-    
     <!-- JavaScript for Drop-Down Menu -->
     <script>
-        // Fix drop-down menus for touch devices and improve desktop reliability
-        document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
         const dropdowns = document.querySelectorAll('.dropdown');
 
-        // Add click event for touch devices (iPhone)
         dropdowns.forEach(dropdown => {
             const link = dropdown.querySelector('.nav-link');
-            const content = dropdown.querySelector('.dropdown-content');
 
-            // Toggle drop-down on click (for touch devices)
+            // Toggle drop-down on click (for all devices)
             link.addEventListener('click', function(e) {
                 // Prevent following the link if it's a dropdown
-                if (window.innerWidth <= 768 || !('ontouchstart' in window)) {
-                    e.preventDefault();
-                }
+                e.preventDefault();
+
+                // Close all other drop-downs
+                dropdowns.forEach(otherDropdown => {
+                    if (otherDropdown !== dropdown) {
+                        otherDropdown.classList.remove('active');
+                    }
+                });
+
+                // Toggle current drop-down
                 dropdown.classList.toggle('active');
             });
 
@@ -785,14 +788,6 @@
                 if (!dropdown.contains(e.target)) {
                     dropdown.classList.remove('active');
                 }
-            });
-
-            // Keep drop-down open when hovering over it (desktop)
-            dropdown.addEventListener('mouseenter', function() {
-                dropdown.classList.add('active');
-            });
-            dropdown.addEventListener('mouseleave', function() {
-                dropdown.classList.remove('active');
             });
         });
       });
