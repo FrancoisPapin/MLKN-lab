@@ -762,33 +762,36 @@
     <!-- JavaScript for Drop-Down Menu -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Get all dropdown elements
         const dropdowns = document.querySelectorAll('.dropdown');
 
+        // Add click event to each dropdown
         dropdowns.forEach(dropdown => {
             const link = dropdown.querySelector('.nav-link');
 
-            // Toggle drop-down on click (for all devices)
+            // Toggle dropdown on click
             link.addEventListener('click', function(e) {
-                // Prevent following the link if it's a dropdown
-                e.preventDefault();
+                e.preventDefault(); // Prevent following the link
 
-                // Close all other drop-downs
+                // Close all other dropdowns
                 dropdowns.forEach(otherDropdown => {
                     if (otherDropdown !== dropdown) {
                         otherDropdown.classList.remove('active');
                     }
                 });
 
-                // Toggle current drop-down
+                // Toggle current dropdown
                 dropdown.classList.toggle('active');
             });
+        });
 
-            // Close drop-down when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!dropdown.contains(e.target)) {
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown')) {
+                dropdowns.forEach(dropdown => {
                     dropdown.classList.remove('active');
-                }
-            });
+                });
+            }
         });
       });
     </script>
