@@ -82,7 +82,7 @@ img {
 }
 
 /* =============================================
-   DROP-DOWN MENU (Fixed for Desktop + Mobile)
+   DROP-DOWN MENU (Tap-Friendly)
    ============================================= */
 .dropdown {
     position: relative;
@@ -96,10 +96,10 @@ img {
     min-width: 220px;
     box-shadow: var(--sh2);
     border-radius: var(--r);
-    z-index: 1001; /* Higher than topnav z-index (1000) */
+    z-index: 1001;
     top: 100%;
     left: 0;
-    margin-top: 0; /* Remove gap to prevent hover loss */
+    margin-top: 0;
     border: 1.5px solid var(--border);
     opacity: 0;
     visibility: hidden;
@@ -120,8 +120,8 @@ img {
     color: var(--accent);
 }
 
-/* Show drop-down on hover (desktop) */
-.dropdown:hover .dropdown-content {
+/* Show drop-down when .active class is added (via JS) */
+.dropdown.active .dropdown-content {
     display: block;
     opacity: 1;
     visibility: visible;
@@ -132,12 +132,6 @@ img {
     display: none;
 }
 
-/* Mobile: Show drop-down when .dropdown is active */
-.dropdown.active .dropdown-content {
-    display: block;
-    opacity: 1;
-    visibility: visible;
-}
 
 /* =============================================
    TOP NAVIGATION BAR
@@ -678,4 +672,25 @@ img {
     left: -50px; /* Center the drop-down over the icon */
   }
 }
+
+@media (max-width: 768px) {
+    /* Mobile-specific drop-down adjustments */
+    .dropdown-content {
+        min-width: 180px;
+        font-size: 13px;
+        left: -50px; /* Center over the icon */
+    }
+
+    /* Increase tap target size */
+    .nav-link {
+        padding: 10px 12px !important;
+        font-size: 10px !important;
+    }
+
+    /* Prevent double-tap zoom */
+    .topnav {
+        touch-action: manipulation;
+    }
+}
+
 
