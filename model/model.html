@@ -601,27 +601,23 @@
     </script>
 
     
-    <!-- JavaScript for Drop-Down Menu -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Get all dropdown elements
         const dropdowns = document.querySelectorAll('.dropdown');
 
-        // Add click event to each dropdown
+        // Toggle dropdown on click
         dropdowns.forEach(dropdown => {
             const link = dropdown.querySelector('.nav-link');
+            if (!link) return; // Skip if no link found
 
-            // Toggle dropdown on click
             link.addEventListener('click', function(e) {
-                e.preventDefault(); // Prevent following the link
-
+                e.preventDefault();
                 // Close all other dropdowns
-                dropdowns.forEach(otherDropdown => {
-                    if (otherDropdown !== dropdown) {
-                        otherDropdown.classList.remove('active');
+                dropdowns.forEach(other => {
+                    if (other !== dropdown) {
+                        other.classList.remove('active');
                     }
                 });
-
                 // Toggle current dropdown
                 dropdown.classList.toggle('active');
             });
