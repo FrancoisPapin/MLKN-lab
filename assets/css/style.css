@@ -772,6 +772,25 @@ img {
             }
         }
 
+        /* Mobile Alert for Mathematical Pages */
+        .mobile-alert {
+           background: #FFF8E1;
+           border-left: 4px solid #FFC107;
+           padding: 12px 16px;
+           margin-bottom: 20px;
+           font-family: var(--mono);
+           font-size: 12px;
+           color: var(--text2);
+           display: flex;
+           align-items: center;
+           gap: 10px;
+        }
+       
+        .mobile-alert i {
+           color: #FFC107;
+        }
+
+
 /* =============================================
    HOMEPAGE NAV GRID
    ============================================= */
