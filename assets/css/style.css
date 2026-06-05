@@ -729,46 +729,48 @@ img {
     }
 }
 
-@media (max-width: 768px) {
-    /* Force wrapping for long lines in mathematical foundations */
-    .layer-card p,
-    .layer-card li,
-    .essay-box p,
-    .essay-box li {
-        word-break: break-word; /* Breaks long words if needed */
-        overflow-wrap: break-word; /* Ensures text wraps */
-        white-space: normal; /* Default, but explicit for safety */
-    }
+/* =============================================
+   Ajustments for MLKN.model - Mathematical Foundations
+   ============================================= */
 
-    /* Reduce font size for mathematical expressions on mobile */
-    .layer-card p em,
-    .layer-card li em {
-        font-size: 0.9em; /* Slightly smaller for mobile */
-    }
+        /* Override for mathematical expressions to ensure proper wrapping */
+        .math-container {
+            display: inline-block;
+            white-space: pre-wrap;
+            word-break: break-all;
+            line-height: 1.6;
+            max-width: 100%;
+        }
 
-    /* Ensure mathematical symbols don't overflow */
-    code, pre {
-        word-break: break-all; /* Breaks long code/math expressions */
-        white-space: pre-wrap; /* Preserves spacing but allows wrapping */
-    }
-}
+        /* Ensure subscripts and superscripts don't cause overflow */
+        sub, sup {
+            font-size: 0.8em;
+            line-height: 1;
+            vertical-align: baseline;
+        }
 
-    /* Add Containes for MLKN.model - Mathematical Foundations Page */
-    .math-container {
-    display: inline-block; /* Allows wrapping within text */
-    white-space: pre-wrap; /* Preserves manual line breaks */
-    word-break: normal; /* Prevents awkward breaks */
-    line-height: 1.6; /* Improves readability */
-    max-width: 100%; /* Ensures it doesn't overflow */
-    }
-   
-   /* Responsive Design for MLKN.model - Mathematical Foundations Page */
-@media (max-width: 768px) {
-    .math-container {
-        font-size: 0.9em; /* Slightly smaller for mobile */
-        line-height: 1.5; /* Tighter line height for mobile */
-    }
-}
+        /* Fix for long words in mathematical contexts */
+        .layer-card p,
+        .layer-card li,
+        .essay-box p,
+        .essay-box li {
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* Mobile-specific adjustments */
+        @media (max-width: 768px) {
+            .math-container {
+                font-size: 0.9em;
+                line-height: 1.5;
+            }
+
+            /* Force wrapping for long inline code */
+            code {
+                word-break: break-all;
+                white-space: pre-wrap;
+            }
+        }
 
 
 /* =============================================
