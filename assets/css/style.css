@@ -1077,16 +1077,6 @@ img {
     margin-right: 5px;
 }
 
-.reference-core .reference-category {
-    border-left: 3px solid var(--accent);
-    background: rgba(26, 107, 170, 0.03);
-}
-
-.reference-extended .reference-category {
-    border-left: 3px solid var(--accent2);
-    background: rgba(10, 126, 140, 0.03);
-}
-
 /* No Results Message */
 .no-results {
     text-align: center;
