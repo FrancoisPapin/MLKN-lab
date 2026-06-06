@@ -1013,6 +1013,24 @@ img {
     border-radius: 2px;
 }
 
+/* Reference Subcategories */
+.reference-subcategory {
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.reference-subtitle {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--border);
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
 .reference-list {
     list-style: none;
     padding: 0;
