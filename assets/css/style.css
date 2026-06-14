@@ -1257,5 +1257,120 @@ h1, h2, h3 {
     font-weight: 500;
 }
 
+/* Monographs Overview Section */
+.overview-section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: left;
+}
+
+.overview-section h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.overview-section .subtitle {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+}
+
+.overview-content {
+    line-height: 1.6;
+    color: #34495e;
+    margin-bottom: 2rem;
+}
+
+/* Featured Monographs Section */
+.featured-monographs {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: left;
+}
+
+.featured-monographs h2 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.featured-monographs p {
+    line-height: 1.6;
+    color: #34495e;
+    margin-bottom: 2rem;
+}
+
+.monograph-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.monograph-block {
+    border: 1px solid #ecf0f1;
+    border-radius: 8px;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.monograph-block:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.monograph-year {
+    font-weight: bold;
+    color: #e74c3c;
+    margin-bottom: 0.5rem;
+}
+
+.monograph-title {
+    font-size: 1rem;
+    color: #2c3e50;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+}
+
+.monograph-links {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.monograph-links a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.monograph-links a:hover {
+    text-decoration: underline;
+}
+
+.open-access {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.explore-link {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.explore-link a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.explore-link a:hover {
+    text-decoration: underline;
+}
+
 
 
