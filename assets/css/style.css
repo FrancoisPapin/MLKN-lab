@@ -1542,3 +1542,133 @@ h1, h2, h3 {
         padding: 1rem;
     }
 }
+
+/* =============================================
+   HOMEPAGE: SCIENTIFIC REFERENCES vs. MONOGRAPHS
+   ============================================= */
+
+/* Scientific References Grid (Blue Accent) */
+.reference-highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.reference-highlight {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 1.2rem;
+    transition: all 0.2s;
+    box-shadow: var(--sh);
+    border-left: 4px solid var(--accent); /* Blue border for Scientific References */
+}
+
+.reference-highlight:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--sh2);
+    border-color: var(--accent);
+    border-left-color: var(--accent);
+}
+
+.reference-meta {
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+}
+
+.reference-content {
+    font-size: 1rem;
+    color: var(--text);
+    line-height: 1.4;
+}
+
+.reference-content p {
+    margin: 0;
+}
+
+.reference-content a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.reference-content a:hover {
+    color: var(--accent2);
+    text-decoration: underline;
+}
+
+/* Monographs Grid (Teal Accent) */
+.monograph-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.monograph-block {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 1.2rem;
+    transition: all 0.2s;
+    box-shadow: var(--sh);
+    border-left: 4px solid var(--accent2); /* Teal border for Monographs */
+}
+
+.monograph-block:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--sh2);
+    border-color: var(--accent2);
+    border-left-color: var(--accent2);
+}
+
+.monograph-year {
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    color: var(--accent2);
+    margin-bottom: 0.5rem;
+}
+
+.monograph-title {
+    font-size: 1rem;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+}
+
+.monograph-links {
+    display: flex;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+    font-family: var(--mono);
+}
+
+.monograph-links a {
+    color: var(--accent2);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.monograph-links a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+.open-access {
+    color: var(--layer3);
+    font-weight: 600;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .reference-highlights,
+    .monograph-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
