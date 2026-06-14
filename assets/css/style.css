@@ -1544,63 +1544,11 @@ h1, h2, h3 {
 }
 
 /* =============================================
-   HOMEPAGE: SCIENTIFIC REFERENCES vs. MONOGRAPHS
+   HOMEPAGE: UNIFIED STYLES FOR REFERENCES & MONOGRAPHS
    ============================================= */
 
-/* Scientific References Grid (Blue Accent) */
-.reference-highlights {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1.5rem;
-    margin: 2rem 0;
-}
-
-.reference-highlight {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: var(--r);
-    padding: 1.2rem;
-    transition: all 0.2s;
-    box-shadow: var(--sh);
-    border-left: 4px solid var(--accent); /* Blue border for Scientific References */
-}
-
-.reference-highlight:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--sh2);
-    border-color: var(--accent);
-    border-left-color: var(--accent);
-}
-
-.reference-meta {
-    font-family: var(--mono);
-    font-size: 0.9rem;
-    color: var(--muted);
-    margin-bottom: 0.5rem;
-}
-
-.reference-content {
-    font-size: 1rem;
-    color: var(--text);
-    line-height: 1.4;
-}
-
-.reference-content p {
-    margin: 0;
-}
-
-.reference-content a {
-    color: var(--accent);
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-.reference-content a:hover {
-    color: var(--accent2);
-    text-decoration: underline;
-}
-
-/* Monographs Grid (Teal Accent) */
+/* Shared Grid Layout */
+.reference-highlights,
 .monograph-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -1608,6 +1556,8 @@ h1, h2, h3 {
     margin: 2rem 0;
 }
 
+/* Shared Card Styles */
+.reference-highlight,
 .monograph-block {
     background: var(--panel);
     border: 1px solid var(--border);
@@ -1615,9 +1565,23 @@ h1, h2, h3 {
     padding: 1.2rem;
     transition: all 0.2s;
     box-shadow: var(--sh);
-    border-left: 4px solid var(--accent2); /* Teal border for Monographs */
 }
 
+/* Scientific References: Blue Accent */
+.reference-highlight {
+    border-left: 4px solid var(--accent);
+}
+.reference-highlight:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--sh2);
+    border-color: var(--accent);
+    border-left-color: var(--accent);
+}
+
+/* Open Access Monographs: Teal Accent */
+.monograph-block {
+    border-left: 4px solid var(--accent2);
+}
 .monograph-block:hover {
     transform: translateY(-3px);
     box-shadow: var(--sh2);
@@ -1625,40 +1589,58 @@ h1, h2, h3 {
     border-left-color: var(--accent2);
 }
 
+/* Unified Year/Meta Styles */
+.reference-meta,
 .monograph-year {
     font-family: var(--mono);
-    font-size: 0.9rem;
-    color: var(--accent2);
+    font-size: 0.9rem; /* Same size for both */
+    color: var(--muted); /* Same muted color for both */
     margin-bottom: 0.5rem;
 }
 
+/* Unified Content Styles */
+.reference-content,
 .monograph-title {
-    font-size: 1rem;
+    font-size: 1rem; /* Same size for both */
     color: var(--text);
-    margin-bottom: 0.75rem;
     line-height: 1.4;
+    margin-bottom: 0.75rem;
 }
 
+/* Reference Content (Articles) */
+.reference-content p {
+    margin: 0;
+}
+.reference-content a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.reference-content a:hover {
+    color: var(--accent2);
+    text-decoration: underline;
+}
+
+/* Monograph Links */
 .monograph-links {
     display: flex;
     gap: 0.75rem;
     font-size: 0.85rem;
     font-family: var(--mono);
 }
-
 .monograph-links a {
     color: var(--accent2);
     text-decoration: none;
     transition: color 0.2s;
 }
-
 .monograph-links a:hover {
     color: var(--accent);
     text-decoration: underline;
 }
 
+/* Open Access Tag (Monographs Only) */
 .open-access {
-    color: var(--layer3);
+    color: var(--layer3); /* Green for Open Access tag */
     font-weight: 600;
     font-family: var(--mono);
     font-size: 0.8rem;
@@ -1671,4 +1653,3 @@ h1, h2, h3 {
         grid-template-columns: 1fr;
     }
 }
-
