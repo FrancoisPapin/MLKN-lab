@@ -85,142 +85,576 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" aria-labelledby="nkf-title">
-        <p class="hero-eyebrow">MLKN.lab · Normative Foundations</p>
-        <h1 class="hero-title" id="nkf-title"><em>The Normative Foundations of MLKN.lab</em></h1>
-        <p class="hero-subtitle">
-            Principles, Values, and Societal Dreams for a Connected Knowledge Ecosystem.
-        </p>
-        <div class="hero-description">
-            <p>
-                Knowledge is not just about <strong>what we know</strong>—it’s about <strong>how we should act</strong>.
-                The <strong>Normative Foundations of MLKN.lab</strong> is a <strong>meta-layer</strong> that maps
-                <strong>values, principles, ethics, laws, and norms</strong> to our polyhierarchical knowledge network.
-            </p>
-            <p>
-                This page explores the <strong>philosophical, ethical, and societal dimensions</strong> of MLKN.lab,
-                contextualizing our research focus within a <strong>broader movement</strong> to build a more
-                <strong>connected, ethical, and knowledgeable society</strong>.
-            </p>
-            <p>Here, you’ll find:</p>
-            <ul>
-                <li><strong>Great publications</strong> that define our normative framework.</li>
-                <li><strong>Principles and values</strong> that guide MLKN.lab’s vision.</li>
-                <li><strong>Societal dreams</strong> that inspire our work.</li>
-                <li><strong>Connections</strong> between knowledge, ethics, and action.</li>
-            </ul>
-        </div>
-        <div class="hero-visualization">
-            <div class="mermaid">
-                graph TD
-                    A[MLKN.lab] --> B[Normative Foundations]
-                    B --> C[Principles]
-                    B --> D[Values]
-                    B --> E[Ethics]
-                    B --> F[Laws]
-                    B --> G[Norms]
-                    B --> H[Societal Dreams]
-                    C --> I[Polyhierarchy]
-                    C --> J[Open Science]
-                    C --> K[Interdisciplinarity]
-                    D --> L[Democracy]
-                    D --> M[Human Rights]
-                    D --> N[Fairness]
-                    E --> O[AI Ethics]
-                    E --> P[Knowledge Governance]
-                    F --> Q[Human Rights Law]
-                    F --> R[AI Regulation]
-                    G --> S[Scientific Norms]
-                    G --> T[Digital Citizenship]
-                    H --> U[Connected Society]
-                    H --> V[Ethical AI]
-                    H --> W[Knowledge for All]
-            </div>
-        </div>
-    </section>
-
-    <!-- Nav-Box for Normative Foundations -->
-    <div class="nav-box">
-        <a href="#principles">Principles and Values</a>
-        <a href="#publications">Great Publications</a>
-        <a href="#dreams">Societal Dreams</a>
-        <a href="#contact">Get in Touch</a>
-    </div>
-
-    <!-- Main Content -->
     <main>
-        <!-- Principles and Values Section -->
-        <section id="principles" class="section">
-            <h2 class="sec-h">Principles and Values of MLKN.lab</h2>
-            <p class="sec-sub">
-                MLKN.lab is built on a foundation of <strong>principles and values</strong> that guide our research,
-                design, and vision for the future of knowledge.
+        <!-- NKF Hero Section -->
+        <section class="hero" aria-labelledby="nkf-title">
+            <p class="hero-eyebrow">MLKN.lab · Normative Foundations</p>
+            <h1 class="hero-title" id="nkf-title"><em>The Normative Foundations of MLKN.lab</em></h1>
+            <p class="hero-subtitle">
+                Principles, Values, and Societal Dreams for a Connected Knowledge Ecosystem.
             </p>
+            <div class="hero-description">
+                <p>
+                    Knowledge is not just about <strong>what we know</strong>—it’s about <strong>how we should act</strong>.
+                    The <strong>Normative Foundations of MLKN.lab</strong> is a <strong>meta-layer</strong> that maps
+                    <strong>values, principles, ethics, laws, and norms</strong> to our polyhierarchical knowledge network.
+                </p>
+                <p>
+                    This page explores the <strong>philosophical, ethical, and societal dimensions</strong> of MLKN.lab,
+                    contextualizing our research focus within a <strong>broader movement</strong> to build a more
+                    <strong>connected, ethical, and knowledgeable society</strong>.
+                </p>
+                <p>
+                    Here, you’ll find:
+                </p>
+                <ul>
+                    <li><strong>Great publications</strong> that define our normative framework.</li>
+                    <li><strong>Principles and values</strong> that guide MLKN.lab’s vision.</li>
+                    <li><strong>Societal dreams</strong> that inspire our work.</li>
+                    <li><strong>Connections</strong> between knowledge, ethics, and action.</li>
+                </ul>
+            </div>
+            <div class="hero-visualization">
+                <!-- Fixed Mermaid diagram -->
+                <div class="mermaid">
+                    graph TD
+                        A[MLKN.lab] --> B[Normative Foundations]
+                        B --> C[Principles]
+                        B --> D[Values]
+                        B --> E[Ethics]
+                        B --> F[Laws]
+                        B --> G[Norms]
+                        B --> H[Societal Dreams]
+                        C --> I[Polyhierarchy]
+                        C --> J[Open Science]
+                        C --> K[Interdisciplinarity]
+                        D --> L[Democracy]
+                        D --> M[Human Rights]
+                        D --> N[Fairness]
+                        E --> O[AI Ethics]
+                        E --> P[Knowledge Governance]
+                        F --> Q[Human Rights Law]
+                        F --> R[AI Regulation]
+                        G --> S[Scientific Norms]
+                        G --> T[Digital Citizenship]
+                        H --> U[Connected Society]
+                        H --> V[Ethical AI]
+                        H --> W[Knowledge for All]
+                </div>
+            </div>
+        </section>
+
+        <!-- Nav-Box for Normative Foundations -->
+        <div class="nav-box">
+            <a href="#principles">Principles and Values</a>
+            <a href="#publications">Great Publications</a>
+            <a href="#dreams">Societal Dreams</a>
+            <a href="#contact">Get in Touch</a>
+        </div>
+
+        <!-- =============================================
+             SECTION 2: PRINCIPLES AND VALUES
+             ============================================= -->
+        <section id="principles" class="nkf-principles">
+            <h2>Principles and Values of MLKN.lab</h2>
+            <p>
+                MLKN.lab is built on a foundation of <strong>principles and values</strong> that guide our research,
+                design, and vision for the future of knowledge. These principles are not just abstract ideals—they
+                are <strong>actionable frameworks</strong> that shape how we structure, share, and apply knowledge.
+            </p>
+
             <div class="principles-grid">
-                <!-- Principle Blocks (from your original code) -->
+                <!-- Principle 1: Polyhierarchy -->
                 <div class="principle-block">
                     <div class="principle-icon"></div>
                     <h3>Polyhierarchy</h3>
-                    <p>Knowledge is not linear or flat—it’s <strong>multidimensional and interconnected</strong>.</p>
+                    <p>
+                        Knowledge is not linear or flat—it’s <strong>multidimensional and interconnected</strong>.
+                        MLKN.lab’s <strong>polyhierarchical model</strong> allows us to represent knowledge as a
+                        <strong>dynamic, layered network</strong>, where disciplines, concepts, and ideas are
+                        connected in complex ways.
+                    </p>
                     <div class="principle-connections">
                         <strong>Connected to:</strong>
                         <ul>
                             <li><strong>Research Focus:</strong> Computational epistemology, network science.</li>
                             <li><strong>Normative Layer:</strong> Systems thinking, complexity.</li>
+                            <li><strong>Societal Dream:</strong> A world where knowledge is <strong>connected and accessible</strong>.</li>
                         </ul>
                     </div>
                 </div>
-                <!-- Add other principle blocks here -->
+
+                <!-- Principle 2: Open Science -->
+                <div class="principle-block">
+                    <div class="principle-icon"></div>
+                    <h3>Open Science</h3>
+                    <p>
+                        Knowledge should be <strong>accessible, transparent, and reproducible</strong>. MLKN.lab is
+                        committed to <strong>open access</strong>, ensuring that our resources are freely available to
+                        everyone, everywhere.
+                    </p>
+                    <div class="principle-connections">
+                        <strong>Connected to:</strong>
+                        <ul>
+                            <li><strong>Research Focus:</strong> Open Access Monographs, Scientific References.</li>
+                            <li><strong>Normative Layer:</strong> Transparency, collaboration.</li>
+                            <li><strong>Societal Dream:</strong> A world where knowledge is a <strong>public good</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Principle 3: Interdisciplinarity -->
+                <div class="principle-block">
+                    <div class="principle-icon"></div>
+                    <h3>Interdisciplinarity</h3>
+                    <p>
+                        The most pressing challenges of our time—from climate change to AI ethics—require
+                        <strong>interdisciplinary solutions</strong>. MLKN.lab breaks down silos between disciplines,
+                        fostering connections between <strong>AI, education, human rights, and more</strong>.
+                    </p>
+                    <div class="principle-connections">
+                        <strong>Connected to:</strong>
+                        <ul>
+                            <li><strong>Research Focus:</strong> Multilayer networks, hypergraphs.</li>
+                            <li><strong>Normative Layer:</strong> Collaboration, diversity.</li>
+                            <li><strong>Societal Dream:</strong> A world where disciplines <strong>work together</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Principle 4: Ethical Knowledge -->
+                <div class="principle-block">
+                    <div class="principle-icon"></div>
+                    <h3>Ethical Knowledge</h3>
+                    <p>
+                        Knowledge is not neutral—it has <strong>ethical implications</strong>. MLKN.lab integrates
+                        <strong>ethical frameworks</strong> into our knowledge network, ensuring that our work aligns
+                        with <strong>human rights, fairness, and responsibility</strong>.
+                    </p>
+                    <div class="principle-connections">
+                        <strong>Connected to:</strong>
+                        <ul>
+                            <li><strong>Research Focus:</strong> Human-AI Interaction, Cognitive Architectures.</li>
+                            <li><strong>Normative Layer:</strong> Ethics, human rights.</li>
+                            <li><strong>Societal Dream:</strong> A world where knowledge is <strong>used for good</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Principle 5: Societal Impact -->
+                <div class="principle-block">
+                    <div class="principle-icon"></div>
+                    <h3>Societal Impact</h3>
+                    <p>
+                        Knowledge should not exist in a vacuum—it should <strong>serve society</strong>. MLKN.lab is
+                        designed to have a <strong>real-world impact</strong>, from informing policy to inspiring
+                        education to fostering innovation.
+                    </p>
+                    <div class="principle-connections">
+                        <strong>Connected to:</strong>
+                        <ul>
+                            <li><strong>Research Focus:</strong> Knowledge Infrastructure, Applications.</li>
+                            <li><strong>Normative Layer:</strong> Justice, equity, sustainability.</li>
+                            <li><strong>Societal Dream:</strong> A world where knowledge <strong>transforms lives</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Great Publications Section -->
-        <section id="publications" class="section">
-            <h2 class="sec-h">Great Publications: The Normative Library</h2>
-            <p class="sec-sub">A curated collection of publications that define the normative foundations of MLKN.lab.</p>
+        <!-- =============================================
+             SECTION 3: GREAT PUBLICATIONS
+             ============================================= -->
+        <section id="publications" class="nkf-publications">
+            <h2>Great Publications: The Normative Library</h2>
+            <p>
+                Below is a curated collection of <strong>publications</strong> that define the <strong>normative foundations</strong>
+                of MLKN.lab. These works span <strong>philosophy, ethics, law, and societal movements</strong>, providing the
+                <strong>intellectual and ethical bedrock</strong> for our project.
+            </p>
+
             <div class="publication-categories">
-                <!-- Publication Categories (from your original code) -->
+                <!-- Category 1: Philosophy -->
                 <div class="publication-category">
                     <h3>Philosophy</h3>
+                    <p>
+                        Foundational works that explore the <strong>nature of knowledge, cognition, and reality</strong>.
+                    </p>
                     <div class="publication-grid">
+                        <!-- Example: Gunkel's Work -->
                         <div class="publication-block">
                             <div class="publication-year">2023</div>
-                            <div class="publication-title">Gunkel, D. <em>Person, Thing, Robot</em>. MIT Press.</div>
+                            <div class="publication-title">
+                                Gunkel, D. <em>Person, Thing, Robot: A Moral and Legal Ontology for the 21st Century and Beyond</em>. MIT Press.
+                            </div>
+                            <div class="publication-meta">
+                                <span class="publisher">MIT Press</span> |
+                                <span class="relevance">Relevant to: Human-AI Interaction, Ethics, Philosophy</span>
+                            </div>
                             <div class="publication-links">
                                 <a href="https://direct.mit.edu/books/oa-monograph/5120" target="_blank">DOI</a> |
-                                <a href="https://direct.mit.edu/books/oa-monograph/5120/book.pdf" target="_blank">PDF</a>
+                                <a href="https://direct.mit.edu/books/oa-monograph/5120/book.pdf" target="_blank">PDF</a> |
+                                <span class="open-access">Open Access</span>
+                            </div>
+                            <div class="publication-insights">
+                                <strong>Why It Matters for MLKN.lab:</strong>
+                                <p>
+                                    This monograph explores the <strong>moral and legal status of AI</strong>, asking fundamental
+                                    questions about <strong>what it means to be human, a person, or a thing</strong> in the age of AI.
+                                    These questions are central to MLKN.lab’s <strong>Layer 2 (Human-AI Interaction)</strong> and
+                                    <strong>Layer 5 (Ethics)</strong>.
+                                </p>
+                            </div>
+                            <div class="publication-nkf-tags">
+                                <strong>Normative Foundations:</strong>
+                                <span class="nkf-tag">Ethics: Moral Ontology</span>
+                                <span class="nkf-tag">Philosophy: Human-AI Interaction</span>
+                            </div>
+                        </div>
+
+                        <!-- Example: Hidalgo's Work -->
+                        <div class="publication-block">
+                            <div class="publication-year">2021</div>
+                            <div class="publication-title">
+                                Hidalgo, C. A. <em>How Humans Judge Machines</em>. MIT Press.
+                            </div>
+                            <div class="publication-meta">
+                                <span class="publisher">MIT Press</span> |
+                                <span class="relevance">Relevant to: Human-AI Interaction, Cognitive Science, Ethics</span>
+                            </div>
+                            <div class="publication-links">
+                                <a href="https://direct.mit.edu/books/oa-monograph/5120" target="_blank">DOI</a> |
+                                <a href="https://direct.mit.edu/books/oa-monograph/5120/book.pdf" target="_blank">PDF</a> |
+                                <span class="open-access">Open Access</span>
+                            </div>
+                            <div class="publication-insights">
+                                <strong>Why It Matters for MLKN.lab:</strong>
+                                <p>
+                                    This monograph explores <strong>how humans perceive and judge AI systems</strong>, providing
+                                    insights into the <strong>cognitive and ethical dimensions</strong> of human-AI interaction.
+                                    It aligns with MLKN.lab’s <strong>Layer 2 (Human-AI Interaction)</strong> and
+                                    <strong>Layer 3 (Cognitive Architectures)</strong>.
+                                </p>
+                            </div>
+                            <div class="publication-nkf-tags">
+                                <strong>Normative Foundations:</strong>
+                                <span class="nkf-tag">Ethics: Human Judgment</span>
+                                <span class="nkf-tag">Cognitive Science: Bias and Fairness</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Add other categories here -->
-            </div>
-        </section>
 
-        <!-- Societal Dreams Section -->
-        <section id="dreams" class="section">
-            <h2 class="sec-h">Societal Dreams: Building a Better Future</h2>
-            <p class="sec-sub">How MLKN.lab contributes to societal progress.</p>
-            <div class="dreams-grid">
-                <!-- Dream Blocks (from your original code) -->
-                <div class="dream-block">
-                    <h3>A Connected Society</h3>
-                    <p><strong>Dream:</strong> A world where knowledge is interconnected.</p>
+                <!-- Category 2: Ethics -->
+                <div class="publication-category">
+                    <h3>Ethics</h3>
+                    <p>
+                        Frameworks for evaluating the <strong>moral implications</strong> of knowledge and technology.
+                    </p>
+                    <div class="publication-grid">
+                        <!-- Example: Council of Europe AI Ethics -->
+                        <div class="publication-block">
+                            <div class="publication-year">2023</div>
+                            <div class="publication-title">
+                                Council of Europe. <em>Ethical Principles for Artificial Intelligence</em>.
+                            </div>
+                            <div class="publication-meta">
+                                <span class="publisher">Council of Europe</span> |
+                                <span class="relevance">Relevant to: Human-AI Interaction, Ethics, Policy</span>
+                            </div>
+                            <div class="publication-links">
+                                <a href="https://www.coe.int/en/web/human-rights-and-ai" target="_blank">PDF</a> |
+                                <span class="open-access">Open Access</span>
+                            </div>
+                            <div class="publication-insights">
+                                <strong>Why It Matters for MLKN.lab:</strong>
+                                <p>
+                                    This report outlines <strong>ethical principles for AI</strong>, such as transparency, fairness,
+                                    and accountability. These principles align with MLKN.lab’s <strong>Layer 5 (Ethics)</strong>
+                                    and <strong>Layer 2 (Human-AI Interaction)</strong>.
+                                </p>
+                            </div>
+                            <div class="publication-nkf-tags">
+                                <strong>Normative Foundations:</strong>
+                                <span class="nkf-tag">Ethics: Transparency</span>
+                                <span class="nkf-tag">Ethics: Fairness</span>
+                                <span class="nkf-tag">Policy: AI Governance</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- Add other dreams here -->
+
+                <!-- Category 3: Values -->
+                <div class="publication-category">
+                    <h3>Values</h3>
+                    <p>
+                        Foundational ideals that guide <strong>knowledge, society, and action</strong>.
+                    </p>
+                    <div class="publication-grid">
+                        <!-- Example: RFCDC -->
+                        <div class="publication-block">
+                            <div class="publication-year">2018</div>
+                            <div class="publication-title">
+                                Council of Europe. <em>Reference Framework of Competences for Democratic Culture (RFCDC)</em>.
+                            </div>
+                            <div class="publication-meta">
+                                <span class="publisher">Council of Europe</span> |
+                                <span class="relevance">Relevant to: Education, Ethics, Systems Science</span>
+                            </div>
+                            <div class="publication-links">
+                                <a href="https://www.coe.int/en/web/reference-framework-of-competences-for-democratic-culture" target="_blank">PDF</a> |
+                                <span class="open-access">Open Access</span>
+                            </div>
+                            <div class="publication-insights">
+                                <strong>Why It Matters for MLKN.lab:</strong>
+                                <p>
+                                    The RFCDC defines <strong>20 competences for democratic culture</strong>, such as critical
+                                    thinking, empathy, and cooperation. These competences align with MLKN.lab’s
+                                    <strong>Layer 1 (Education)</strong> and <strong>Layer 5 (Ethics)</strong>.
+                                </p>
+                            </div>
+                            <div class="publication-nkf-tags">
+                                <strong>Normative Foundations:</strong>
+                                <span class="nkf-tag">Values: Democracy</span>
+                                <span class="nkf-tag">Values: Critical Thinking</span>
+                                <span class="nkf-tag">Values: Empathy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 4: Laws and Norms -->
+                <div class="publication-category">
+                    <h3>Laws and Norms</h3>
+                    <p>
+                        Legal and cultural frameworks that shape <strong>knowledge and society</strong>.
+                    </p>
+                    <div class="publication-grid">
+                        <!-- Example: Human Rights Law -->
+                        <div class="publication-block">
+                            <div class="publication-year">2024</div>
+                            <div class="publication-title">
+                                Council of Europe. <em>Human Rights in the Digital Age: A Legal Framework</em>.
+                            </div>
+                            <div class="publication-meta">
+                                <span class="publisher">Council of Europe</span> |
+                                <span class="relevance">Relevant to: Ethics, Human-AI Interaction, Policy</span>
+                            </div>
+                            <div class="publication-links">
+                                <a href="https://www.coe.int/en/web/human-rights" target="_blank">PDF</a> |
+                                <span class="open-access">Open Access</span>
+                            </div>
+                            <div class="publication-insights">
+                                <strong>Why It Matters for MLKN.lab:</strong>
+                                <p>
+                                    This report explores <strong>how human rights apply in the digital age</strong>, providing a
+                                    legal framework for <strong>AI, data protection, and digital citizenship</strong>. It aligns
+                                    with MLKN.lab’s <strong>Layer 5 (Ethics)</strong> and <strong>Layer 4 (Systems Science)</strong>.
+                                </p>
+                            </div>
+                            <div class="publication-nkf-tags">
+                                <strong>Normative Foundations:</strong>
+                                <span class="nkf-tag">Laws: Human Rights</span>
+                                <span class="nkf-tag">Norms: Digital Citizenship</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 5: Societal Dreams -->
+                <div class="publication-category">
+                    <h3>Societal Dreams</h3>
+                    <p>
+                        Visionary works that inspire <strong>a better future</strong> for knowledge, society, and technology.
+                    </p>
+                    <div class="publication-grid">
+                        <!-- Example: Open Science Manifesto -->
+                        <div class="publication-block">
+                            <div class="publication-year">2012</div>
+                            <div class="publication-title">
+                                Suber, P. <em>Open Access</em>. MIT Press.
+                            </div>
+                            <div class="publication-meta">
+                                <span class="publisher">MIT Press</span> |
+                                <span class="relevance">Relevant to: Knowledge Infrastructure, Ethics, Open Science</span>
+                            </div>
+                            <div class="publication-links">
+                                <a href="https://direct.mit.edu/books/oa-monograph/2450" target="_blank">DOI</a> |
+                                <a href="https://direct.mit.edu/books/oa-monograph/2450/book.pdf" target="_blank">PDF</a> |
+                                <span class="open-access">Open Access</span>
+                            </div>
+                            <div class="publication-insights">
+                                <strong>Why It Matters for MLKN.lab:</strong>
+                                <p>
+                                    This monograph is a <strong>manifesto for open science</strong>, arguing that knowledge
+                                    should be <strong>freely available to all</strong>. This aligns with MLKN.lab’s commitment to
+                                    <strong>open access</strong> and our <strong>Layer 5 (Ethics)</strong>.
+                                </p>
+                            </div>
+                            <div class="publication-nkf-tags">
+                                <strong>Normative Foundations:</strong>
+                                <span class="nkf-tag">Societal Dreams: Open Knowledge</span>
+                                <span class="nkf-tag">Values: Transparency</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Get in Touch Section -->
+        <!-- =============================================
+             SECTION 4: SOCIETAL DREAMS
+             ============================================= -->
+        <section id="dreams" class="nkf-dreams">
+            <h2>Societal Dreams: Building a Better Future</h2>
+            <p>
+                MLKN.lab is not just a research project—it’s a <strong>contribution to a broader movement</strong>
+                to build a more <strong>connected, ethical, and knowledgeable society</strong>. Below are some of the
+                <strong>societal dreams</strong> that inspire our work, along with how MLKN.lab is helping to
+                <strong>turn these dreams into reality</strong>.
+            </p>
+
+            <div class="dreams-grid">
+                <!-- Dream 1: A Connected Society -->
+                <div class="dream-block">
+                    <div class="dream-icon"></div>
+                    <h3>A Connected Society</h3>
+                    <p>
+                        <strong>Dream:</strong> A world where <strong>knowledge is interconnected</strong>, and disciplines,
+                        cultures, and ideas are <strong>no longer siloed</strong>.
+                    </p>
+                    <div class="dream-connections">
+                        <strong>How MLKN.lab Contributes:</strong>
+                        <ul>
+                            <li><strong>Polyhierarchical Model:</strong> Represents knowledge as a <strong>dynamic network</strong>.</li>
+                            <li><strong>Interdisciplinary Focus:</strong> Breaks down silos between <strong>AI, education, human rights</strong>.</li>
+                            <li><strong>Open Access:</strong> Makes knowledge <strong>accessible to all</strong>.</li>
+                        </ul>
+                    </div>
+                    <div class="dream-publications">
+                        <strong>Key Publications:</strong>
+                        <ul>
+                            <li><a href="#">Boccaletti, S., et al. (2014). The Structure and Dynamics of Multilayer Networks</a></li>
+                            <li><a href="#">Nersessian, N. J. (2022). Interdisciplinarity in the Making</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Dream 2: Ethical AI -->
+                <div class="dream-block">
+                    <div class="dream-icon"></div>
+                    <h3>Ethical AI</h3>
+                    <p>
+                        <strong>Dream:</strong> A world where <strong>AI systems are designed and used ethically</strong>,
+                        aligning with <strong>human rights, fairness, and transparency</strong>.
+                    </p>
+                    <div class="dream-connections">
+                        <strong>How MLKN.lab Contributes:</strong>
+                        <ul>
+                            <li><strong>Normative Knowledge Framework:</strong> Provides a <strong>framework for ethical AI</strong>.</li>
+                            <li><strong>Human-AI Interaction Focus:</strong> Explores how humans and AI can <strong>collaborate responsibly</strong>.</li>
+                            <li><strong>Ethics Layer:</strong> Integrates <strong>ethical principles</strong> into our knowledge network.</li>
+                        </ul>
+                    </div>
+                    <div class="dream-publications">
+                        <strong>Key Publications:</strong>
+                        <ul>
+                            <li><a href="#">Gunkel, D. (2023). Person, Thing, Robot</a></li>
+                            <li><a href="#">Council of Europe. (2023). Ethical Principles for AI</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Dream 3: Knowledge for All -->
+                <div class="dream-block">
+                    <div class="dream-icon"></div>
+                    <h3>Knowledge for All</h3>
+                    <p>
+                        <strong>Dream:</strong> A world where <strong>knowledge is a public good</strong>, freely accessible
+                        to everyone, everywhere.
+                    </p>
+                    <div class="dream-connections">
+                        <strong>How MLKN.lab Contributes:</strong>
+                        <ul>
+                            <li><strong>Open Access Monographs:</strong> A <strong>curated library</strong> of open-access resources.</li>
+                            <li><strong>Scientific References:</strong> A <strong>dynamic, filterable</strong> collection of references.</li>
+                            <li><strong>Open Science Commitment:</strong> Aligns with the <strong>principles of open science</strong>.</li>
+                        </ul>
+                    </div>
+                    <div class="dream-publications">
+                        <strong>Key Publications:</strong>
+                        <ul>
+                            <li><a href="#">Suber, P. (2012). Open Access</a></li>
+                            <li><a href="#">Karaganis, J. (Ed.). (2018). Shadow Libraries</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Dream 4: Democratic Knowledge -->
+                <div class="dream-block">
+                    <div class="dream-icon"></div>
+                    <h3>Democratic Knowledge</h3>
+                    <p>
+                        <strong>Dream:</strong> A world where <strong>knowledge empowers democracy</strong>, fostering
+                        <strong>critical thinking, civic engagement, and social justice</strong>.
+                    </p>
+                    <div class="dream-connections">
+                        <strong>How MLKN.lab Contributes:</strong>
+                        <ul>
+                            <li><strong>RFCDC Integration:</strong> Uses the <strong>Reference Framework of Competences for Democratic Culture</strong>.</li>
+                            <li><strong>Education Focus:</strong> Aligns with <strong>democratic values</strong>.</li>
+                            <li><strong>Cognitive Interfaces:</strong> Designs tools that <strong>empower users</strong>.</li>
+                        </ul>
+                    </div>
+                    <div class="dream-publications">
+                        <strong>Key Publications:</strong>
+                        <ul>
+                            <li><a href="#">Council of Europe. (2018). Reference Framework of Competences for Democratic Culture</a></li>
+                            <li><a href="#">Van Noorden, R. (2015). Interdisciplinary Research by the Numbers</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Dream 5: A Sustainable Future -->
+                <div class="dream-block">
+                    <div class="dream-icon"></div>
+                    <h3>A Sustainable Future</h3>
+                    <p>
+                        <strong>Dream:</strong> A world where <strong>knowledge helps address global challenges</strong>,
+                        such as <strong>climate change, inequality, and geopolitical crises</strong>.
+                    </p>
+                    <div class="dream-connections">
+                        <strong>How MLKN.lab Contributes:</strong>
+                        <ul>
+                            <li><strong>Systems Science Focus:</strong> Models knowledge as a <strong>complex system</strong>.</li>
+                            <li><strong>Interdisciplinary Connections:</strong> Links <strong>environmental science, AI, and policy</strong>.</li>
+                            <li><strong>Societal Impact:</strong> Designs tools that <strong>address real-world problems</strong>.</li>
+                        </ul>
+                    </div>
+                    <div class="dream-publications">
+                        <strong>Key Publications:</strong>
+                        <ul>
+                            <li><a href="#">Bertalanffy, L. von. (1968). General System Theory</a></li>
+                            <li><a href="#">UNESCO. (2021). Recommendation on Open Science</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =============================================
+             SECTION 5: GET IN TOUCH
+             ============================================= -->
         <section id="contact" class="section" style="text-align: center;">
             <h2 class="sec-h">Get in Touch</h2>
-            <p class="sec-sub">Connect with François Papin to collaborate or learn more.</p>
+            <p class="sec-sub">
+                Connect with François Papin to collaborate or learn more about MLKN.lab.
+            </p>
             <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
-                <a href="https://www.linkedin.com/in/francoispapin/" class="btn btn-p" target="_blank">
+                <a href="https://www.linkedin.com/in/francoispapin/" class="btn btn-p" target="_blank" rel="noopener noreferrer">
                     <i class="fab fa-linkedin"></i> LinkedIn
                 </a>
-                <a href="https://github.com/FrancoisPapin" class="btn btn-p" target="_blank">
+                <a href="https://github.com/FrancoisPapin" class="btn btn-p" target="_blank" rel="noopener noreferrer">
                     <i class="fab fa-github"></i> GitHub
                 </a>
                 <a href="mailto:your-email@example.com" class="btn btn-p">
@@ -235,10 +669,10 @@
         <div class="sf-logo">MLKN.lab</div>
         <p class="sf-tag">Multi-Layered Knowledge Network Ideas Laboratory</p>
         <div class="sf-links">
-            <a href="https://www.linkedin.com/in/francoispapin/" class="sf-link" target="_blank">
+            <a href="https://www.linkedin.com/in/francoispapin/" class="sf-link" target="_blank" rel="noopener noreferrer">
                 <i class="fab fa-linkedin"></i>
             </a>
-            <a href="https://github.com/FrancoisPapin" class="sf-link" target="_blank">
+            <a href="https://github.com/FrancoisPapin" class="sf-link" target="_blank" rel="noopener noreferrer">
                 <i class="fab fa-github"></i>
             </a>
             <a href="mailto:your-email@example.com" class="sf-link">
@@ -252,20 +686,31 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const dropdowns = document.querySelectorAll('.dropdown');
+
+            // Toggle dropdown on click
             dropdowns.forEach(dropdown => {
                 const link = dropdown.querySelector('.nav-link');
                 if (!link) return;
+
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
+                    // Close all other dropdowns
                     dropdowns.forEach(other => {
-                        if (other !== dropdown) other.classList.remove('active');
+                        if (other !== dropdown) {
+                            other.classList.remove('active');
+                        }
                     });
+                    // Toggle current dropdown
                     dropdown.classList.toggle('active');
                 });
             });
+
+            // Close dropdowns when clicking outside
             document.addEventListener('click', function(e) {
                 if (!e.target.closest('.dropdown')) {
-                    dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
+                    dropdowns.forEach(dropdown => {
+                        dropdown.classList.remove('active');
+                    });
                 }
             });
         });
