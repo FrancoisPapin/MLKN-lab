@@ -1655,14 +1655,6 @@ h1, h2, h3 {
 }
 
 /* Normative Foundations Page Styles */
-.nkf-hero {
-            padding: 4rem 2rem;
-            text-align: center;
-            background: var(--panel);
-            border-radius: var(--r);
-            margin: 2rem auto;
-            max-width: 1200px;
-        }
 
         .nkf-principles,
         .nkf-publications,
