@@ -11,10 +11,9 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Add Mermaid.js to the head -->
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({ startOnLoad: true });</script>
-    
+    <!-- Add this to the <head> section -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
 </head>
 <body>
     <!-- Top Navigation Bar -->
@@ -101,7 +100,6 @@
             <div class="hero-visualization">
                 <!-- Mermaid.js diagram -->
                 <div class="mermaid">
-                    ```mermaid
                     graph TD
                         A[MLKN.lab] --> B[Normative Foundations]
                         B --> C[Principles]
@@ -125,7 +123,6 @@
                         H --> U[Connected Society]
                         H --> V[Ethical AI]
                         H --> W[Knowledge for All]
-                    ```
                 </div>
             </div>
         </section>
