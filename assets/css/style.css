@@ -1653,3 +1653,65 @@ h1, h2, h3 {
         grid-template-columns: 1fr;
     }
 }
+
+/* Normative Foundations Page Styles */
+.nkf-hero {
+    padding: 4rem 2rem;
+    text-align: center;
+    background: var(--panel);
+    border-radius: var(--r);
+    margin: 2rem auto;
+    max-width: 1200px;
+}
+
+.nkf-principles,
+.nkf-publications,
+.nkf-dreams {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+}
+
+.principles-grid,
+.publication-categories,
+.dreams-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.principle-block,
+.publication-block,
+.dream-block {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 1.5rem;
+    box-shadow: var(--sh);
+    transition: all 0.2s;
+}
+
+.principle-block:hover,
+.publication-block:hover,
+.dream-block:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--sh2);
+}
+
+.publication-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.nkf-tag {
+    display: inline-block;
+    background: var(--layer2);
+    color: var(--bg);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--r);
+    font-size: 0.8rem;
+    margin: 0.25rem;
+    font-family: var(--mono);
+}
