@@ -1656,73 +1656,84 @@ h1, h2, h3 {
 
 /* Normative Foundations Page Styles */
 .nkf-hero {
-    padding: 4rem 2rem;
-    text-align: center;
-    background: var(--panel);
-    border-radius: var(--r);
-    margin: 2rem auto;
-    max-width: 1200px;
-}
+            padding: 4rem 2rem;
+            text-align: center;
+            background: var(--panel);
+            border-radius: var(--r);
+            margin: 2rem auto;
+            max-width: 1200px;
+        }
 
-.nkf-principles,
-.nkf-publications,
-.nkf-dreams {
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 2rem auto;
-}
+        .nkf-principles,
+        .nkf-publications,
+        .nkf-dreams {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
 
-.principles-grid,
-.publication-categories,
-.dreams-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-}
+        .principles-grid,
+        .publication-categories,
+        .dreams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
 
-.principle-block,
-.publication-block,
-.dream-block {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: var(--r);
-    padding: 1.5rem;
-    box-shadow: var(--sh);
-    transition: all 0.2s;
-}
+        .principle-block,
+        .publication-block,
+        .dream-block {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 1.5rem;
+            box-shadow: var(--sh);
+            transition: all 0.2s;
+        }
 
-.principle-block:hover,
-.publication-block:hover,
-.dream-block:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--sh2);
-}
+        .principle-block:hover,
+        .publication-block:hover,
+        .dream-block:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--sh2);
+        }
 
-.publication-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-}
+        .publication-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
 
-.nkf-tag {
-    display: inline-block;
-    background: var(--layer2);
-    color: var(--bg);
-    padding: 0.25rem 0.75rem;
-    border-radius: var(--r);
-    font-size: 0.8rem;
-    margin: 0.25rem;
-    font-family: var(--mono);
-}
+        .nkf-tag {
+            display: inline-block;
+            background: var(--layer2);
+            color: var(--bg);
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--r);
+            font-size: 0.8rem;
+            margin: 0.25rem;
+            font-family: var(--mono);
+        }
 
-/* Mermaid Diagram Font Size */
-.mermaid {
-    font-size: 16px !important;
-    max-width: 100%;
-    margin: 2rem auto;
-}
+        /* Mermaid Diagram Font Size */
+        .mermaid {
+            font-size: 16px !important;
+            max-width: 100%;
+            margin: 2rem auto;
+        }
 
-.mermaid text {
-    font-size: 16px !important;
-}
+        .mermaid text {
+            font-size: 16px !important;
+        }
+
+        /* Ensure sections are visible */
+        .nkf-principles, .nkf-publications, .nkf-dreams {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            color: var(--text) !important;
+            height: auto !important;
+            overflow: visible !important;
+        }
+
