@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scientific References - MLKN.lab</title>
+    <title>Normative References - MLKN.lab</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -94,53 +94,53 @@
         </div>
 
         <!-- Example structure for normativeref.html -->
-<section class="section">
-    <h2 class="sec-h">Normative References</h2>
-    <p class="sec-sub">
-        A curated collection of <strong>normative frameworks, ethical guidelines, and policy documents</strong>
-        that underpin MLKN.lab’s research.
-    </p>
+        <section class="section">
+            <h2 class="sec-h">Normative References</h2>
+            <p class="sec-sub">
+                A curated collection of <strong>normative frameworks, ethical guidelines, and policy documents</strong>
+                that underpin MLKN.lab’s research.
+            </p>
 
-    <!-- Filter Controls (same as references.html) -->
-    <div class="filter-controls">
-        <input type="text" id="normativereferences-search" placeholder="Search normative references...">
-        <select id="normativereferences-category">
-            <option value="all">All Categories</option>
-            <option value="ethics">Ethics</option>
-            <option value="laws">Laws</option>
-            <option value="values">Values</option>
-            <option value="principles">Principles</option>
-        </select>
-    </div>
+            <!-- Filter Controls (same as references.html) -->
+            <div class="filter-controls">
+                <input type="text" id="normativereferences-search" placeholder="Search normative references...">
+                <select id="normativereferences-category">
+                    <option value="all">All Categories</option>
+                    <option value="ethics">Ethics</option>
+                    <option value="laws">Laws</option>
+                    <option value="values">Values</option>
+                    <option value="principles">Principles</option>
+                </select>
+            </div>
 
-    <!-- Normative References Table -->
-    <div class="table-container">
-        <table id="normativereferences-table">
-            <thead>
-                <tr>
-                    <th>Year</th>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Category</th>
-                    <th>Links</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Example Row -->
-                <tr>
-                    <td>2023</td>
-                    <td>Ethical Principles for Artificial Intelligence</td>
-                    <td>Council of Europe</td>
-                    <td>Ethics, Laws</td>
-                    <td>
-                        <a href="https://www.coe.int/en/web/human-rights-and-ai" target="_blank">PDF</a>
-                    </td>
-                </tr>
-                <!-- Add more rows -->
-            </tbody>
-        </table>
-    </div>
-</section>
+            <!-- Normative References Table -->
+            <div class="table-container">
+                <table id="normativereferences-table">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Category</th>
+                            <th>Links</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Example Row -->
+                        <tr>
+                            <td>2023</td>
+                            <td>Ethical Principles for Artificial Intelligence</td>
+                            <td>Council of Europe</td>
+                            <td>Ethics, Laws</td>
+                            <td>
+                                <a href="https://www.coe.int/en/web/human-rights-and-ai" target="_blank">PDF</a>
+                            </td>
+                        </tr>
+                        <!-- Add more rows -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
         <!-- Get in Touch Section -->
         <section id="contact" class="section" style="text-align: center;">
@@ -160,8 +160,170 @@
                 </a>
             </div>
         </section>
+        
     </main>
+    
+<!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="sf-logo">MLKN.lab</div>
+        <p class="sf-tag">Multi-Layered Knowledge Network Ideas Laboratory</p>
+        <div class="sf-links">
+            <a href="https://www.linkedin.com/in/francoispapin" class="sf-link" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/FrancoisPapin" class="sf-link" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="mailto:your-email@example.com" class="sf-link">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+        <p class="sf-legal">© François Papin · May 2026 · MIT License · MLKN.lab</p>
+    </footer>
 
-    <!-- Standard footer and JavaScript -->
+    <!-- JavaScript for Search and Filter -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all elements
+            const searchInput = document.getElementById('reference-search');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const referenceItems = document.querySelectorAll('.reference-item');
+            const referenceCategories = document.querySelectorAll('.reference-category');
+            const resultsCount = document.getElementById('results-count');
+
+            // Initialize results count
+            updateResultsCount();
+
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                filterReferences(searchTerm, getActiveFilter());
+            });
+
+            // Filter functionality
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    // Filter references
+                    filterReferences(searchInput.value.toLowerCase(), this.dataset.filter);
+                });
+            });
+
+            // Filter references based on search term and category
+            function filterReferences(searchTerm, filter) {
+                let visibleCount = 0;
+
+                referenceCategories.forEach(category => {
+                    const categoryVisible = filter === 'all' || category.dataset.category === filter;
+                    category.style.display = categoryVisible ? 'block' : 'none';
+
+                    if (categoryVisible) {
+                        const items = category.querySelectorAll('.reference-item');
+                        items.forEach(item => {
+                            const itemText = item.textContent.toLowerCase();
+                            const itemTags = item.dataset.tags ? item.dataset.tags.toLowerCase() : '';
+                            const isVisible = (searchTerm === '' || itemText.includes(searchTerm) || itemTags.includes(searchTerm)) &&
+                                            (filter === 'all' || category.dataset.category === filter);
+
+                            item.style.display = isVisible ? 'flex' : 'none';
+                            if (isVisible) visibleCount++;
+                        });
+                    }
+                });
+
+                updateResultsCount(visibleCount);
+            }
+
+            // Update results count
+            function updateResultsCount(count = referenceItems.length) {
+                resultsCount.textContent = `Showing ${count} reference${count !== 1 ? 's' : ''}`;
+            }
+
+            // Get active filter
+            function getActiveFilter() {
+                const activeBtn = document.querySelector('.filter-btn.active');
+                return activeBtn ? activeBtn.dataset.filter : 'all';
+            }
+        });
+    </script>
+
+    <!-- JavaScript to highlight active section in nav boxes -->
+    <script>
+        // Highlight the active section in the nav boxes
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navBoxes = document.querySelectorAll('.nav-box');
+
+            // Function to update active links in all nav boxes
+            function updateActiveLinks() {
+                let currentSection = '';
+
+                // Check which section is in view
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.scrollY >= (sectionTop - 200)) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+
+                // Update active class in all nav boxes
+                navBoxes.forEach(navBox => {
+                    const links = navBox.querySelectorAll('a');
+                    links.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${currentSection}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                });
+            }
+
+            // Update on scroll
+            window.addEventListener('scroll', updateActiveLinks);
+            // Update on load
+            updateActiveLinks();
+        });
+    </script>
+
+    
+    <!-- JavaScript for Drop-Down Menu -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        // Toggle dropdown on click
+        dropdowns.forEach(dropdown => {
+            const link = dropdown.querySelector('.nav-link');
+            if (!link) return; // Skip if no link found
+
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Close all other dropdowns
+                dropdowns.forEach(other => {
+                    if (other !== dropdown) {
+                        other.classList.remove('active');
+                    }
+                });
+                // Toggle current dropdown
+                dropdown.classList.toggle('active');
+            });
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown')) {
+                dropdowns.forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                });
+            }
+        });
+      });
+    </script>
+    
 </body>
 </html>
+
