@@ -160,10 +160,10 @@ h1, h2, h3 {
 /* Nav link base styles */
 .nav-link {
   font-family: var(--mono);
-  font-size: 12px; /* Larger for better tapping */
+  font-size: 12px;
   color: var(--text2);
   text-decoration: none;
-  padding: 8px 12px; /* Larger tap target */
+  padding: 8px 12px;
   border-radius: var(--r);
   border: 1px solid transparent;
   transition: all 0.15s;
@@ -171,7 +171,7 @@ h1, h2, h3 {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  height: 100%; /* Fill the topnav height */
+  height: 100%;
   position: relative;
 }
 
@@ -724,6 +724,7 @@ h1, h2, h3 {
     height: 50px;
   }
 
+  /* Fix for layers-grid on mobile: single column */
   .layers-grid {
     grid-template-columns: 1fr;
     gap: 12px;
@@ -734,8 +735,8 @@ h1, h2, h3 {
   }
 
   .nav-link {
-    padding: 10px 12px;
-    font-size: 12px;
+    padding: 8px 10px; /* Reduced padding for mobile */
+    font-size: 11px; /* Slightly smaller font */
   }
 
   .dropdown-content {
@@ -748,32 +749,255 @@ h1, h2, h3 {
   .topnav {
     height: 50px;
   }
+
+  /* Fix for nav-grid on mobile */
+  .nav-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .nav-grid-case-horizontal {
+    grid-column: span 1;
+  }
+
+  .nav-grid-list-horizontal {
+    flex-direction: column;
+    gap: 8px;
+  }
 }
 
-@media (max-width: 768px) {
-    .nav-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .nav-grid-case-horizontal {
-        grid-column: span 1;
-    }
-
-    .nav-grid-list-horizontal {
-        flex-direction: column;
-        gap: 8px;
-    }
-}
-
-/* Dark mode styles */
+/* =============================================
+   DARK MODE STYLES (FULLY UPDATED)
+   ============================================= */
 @media (prefers-color-scheme: dark) {
-    body {
-        background: #121212;
-        color: #e0e0e0;
+    /* Base Colors */
+    :root {
+        --bg: #121212;
+        --panel: rgba(30, 30, 30, 0.97);
+        --border: #333333;
+        --text: #e0e0e0;
+        --text2: #b0b0b0;
+        --muted: #8a8a8a;
     }
-    .layer-card, .essay-box {
-        background: #1e1e1e;
-        border-color: #333;
+
+    /* Body and Global Text */
+    body {
+        background: var(--bg);
+        color: var(--text);
+    }
+
+    /* Navigation Bar */
+    .topnav {
+        background: var(--panel);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .nav-link {
+        color: var(--text2) !important;
+    }
+
+    .nav-link:hover {
+        background: rgba(255, 255, 255, 0.05) !important;
+        border-color: var(--border) !important;
+        color: var(--text) !important;
+    }
+
+    .dropdown-content {
+        background: var(--panel);
+        border: 1.5px solid var(--border);
+    }
+
+    .dropdown-content a {
+        color: var(--text) !important;
+    }
+
+    .dropdown-content a:hover {
+        background: rgba(255, 255, 255, 0.05) !important;
+        color: var(--accent) !important;
+    }
+
+    /* Hero Section */
+    .hero {
+        background: var(--bg);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .hero::before {
+        background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(235, 244, 251, 0.1), transparent);
+    }
+
+    .hero-eyebrow {
+        color: var(--accent) !important;
+        opacity: 0.8;
+    }
+
+    .hero-title {
+        color: var(--text) !important;
+    }
+
+    .hero-title em {
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .hero-subtitle {
+        color: var(--text2) !important;
+    }
+
+    .hero-description {
+        color: var(--text) !important;
+    }
+
+    /* Sections */
+    .section {
+        background: transparent;
+    }
+
+    .sec-h {
+        color: var(--text) !important;
+    }
+
+    .sec-sub {
+        color: var(--muted) !important;
+    }
+
+    /* Layer Cards */
+    .layer-card {
+        background: var(--panel);
+        border: 1.5px solid var(--border);
+    }
+
+    .layer-card h3 {
+        color: var(--text) !important;
+    }
+
+    .layer-card p {
+        color: var(--text2) !important;
+    }
+
+    /* Featured and Essay Boxes */
+    .featured, .essay-box {
+        background: var(--panel);
+        border: 2px solid var(--border);
+    }
+
+    .feat-eyebrow, .feat-title, .feat-desc {
+        color: var(--text) !important;
+    }
+
+    /* Chips */
+    .chip {
+        color: var(--text) !important;
+        border-color: var(--border) !important;
+    }
+
+    /* Buttons */
+    .btn-p {
+        background: var(--accent) !important;
+        color: #fff !important;
+        border-color: var(--accent) !important;
+    }
+
+    .btn-s {
+        background: transparent !important;
+        color: var(--accent) !important;
+        border-color: var(--border) !important;
+    }
+
+    .btn:hover, .chip:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Footer */
+    .site-footer {
+        background: var(--panel);
+        border-top: 1px solid var(--border);
+    }
+
+    .sf-logo {
+        color: var(--text) !important;
+    }
+
+    .sf-tag {
+        color: var(--muted) !important;
+    }
+
+    .sf-links {
+        color: var(--text2) !important;
+    }
+
+    .sf-legal {
+        color: var(--muted) !important;
+    }
+
+    /* Mermaid Diagrams */
+    .mermaid {
+        background: var(--panel) !important;
+        color: var(--text) !important;
+    }
+
+    /* Links */
+    a {
+        color: var(--accent) !important;
+    }
+
+    a:hover {
+        opacity: 0.85 !important;
+        text-decoration: underline !important;
+    }
+
+    /* Reference and Monograph Styles */
+    .reference-highlight, .monograph-block {
+        background: var(--panel);
+        border: 1px solid var(--border);
+    }
+
+    .reference-meta, .monograph-year {
+        color: var(--muted) !important;
+    }
+
+    .reference-content, .monograph-title {
+        color: var(--text) !important;
+    }
+
+    .reference-links a, .monograph-links a {
+        color: var(--accent) !important;
+    }
+
+    .open-access {
+        color: var(--layer3) !important;
+    }
+
+    /* Search and Filter Controls */
+    .search-box input, .monographs-search input {
+        background: var(--panel);
+        border: 1.5px solid var(--border);
+        color: var(--text);
+    }
+
+    .filter-btn, .monographs-filter-btn {
+        background: var(--panel);
+        border: 1.5px solid var(--border);
+        color: var(--text2);
+    }
+
+    .filter-btn:hover, .filter-btn.active,
+    .monographs-filter-btn:hover, .monographs-filter-btn.active {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--accent);
+        color: var(--accent);
+    }
+
+    /* Discipline List */
+    .discipline-list li {
+        color: var(--text2) !important;
+    }
+
+    .discipline-square {
+        box-shadow: 0 0 0 1px var(--border);
     }
 }
 
@@ -841,15 +1065,16 @@ h1, h2, h3 {
 /* =============================================
    HOMEPAGE NAV GRID
    ============================================= */
+/* Homepage Nav Grid */
 .nav-grid-container {
-    max-width: 1200px;
+    max-width: 100%;
     margin: 30px auto;
-    padding: 0 20px;
+    padding: 0 10px;
     font-family: var(--mono);
     font-size: 12px;
+    overflow: hidden;
 }
 
-/* Main Title (Horizontal Case at the Top) */
 .nav-grid-title {
     text-align: center;
     margin-bottom: 20px;
@@ -860,15 +1085,13 @@ h1, h2, h3 {
     border-bottom: 1px solid var(--border);
 }
 
-/* Grid Structure: 2x2 */
 .nav-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 15px;
     margin-bottom: 20px;
 }
 
-/* Individual Cases */
 .nav-grid-case {
     background: var(--panel);
     border: 1px solid var(--border);
@@ -891,7 +1114,6 @@ h1, h2, h3 {
     letter-spacing: 0.05em;
 }
 
-/* List of Links in Each Case */
 .nav-grid-list {
     list-style: none;
     padding: 0;
@@ -913,7 +1135,6 @@ h1, h2, h3 {
     border-bottom: none;
 }
 
-/* Text Links (Smooth Scroll) */
 .nav-grid-list a:first-child {
     color: var(--text2);
     text-decoration: none;
@@ -926,7 +1147,6 @@ h1, h2, h3 {
     cursor: pointer;
 }
 
-/* Arrow Links (Direct to Page) */
 .nav-arrow {
     color: var(--muted);
     font-size: 12px;
@@ -940,7 +1160,6 @@ h1, h2, h3 {
     color: var(--accent);
 }
 
-/* Horizontal Case for "About" */
 .nav-grid-case-horizontal {
     grid-column: span 2;
     text-align: center;
@@ -964,13 +1183,13 @@ h1, h2, h3 {
 
 /* Search and Filter Bar */
 #reference-results {
-    padding: 0 24px; /* Adds horizontal padding */
+    padding: 0 24px;
     max-width: 1400px;
     margin: 0 auto;
 }
 
 .references-controls {
-    padding: 0 24px; /* Adds horizontal padding */
+    padding: 0 24px;
     max-width: 1400px;
     margin: 0 auto 25px;
     display: flex;
@@ -1047,7 +1266,6 @@ h1, h2, h3 {
 }
 
 /* Reference Categories */
-
 .reference-category {
     margin-bottom: 30px;
     padding-bottom: 20px;
@@ -1593,15 +1811,15 @@ h1, h2, h3 {
 .reference-meta,
 .monograph-year {
     font-family: var(--mono);
-    font-size: 0.9rem; /* Same size for both */
-    color: var(--muted); /* Same muted color for both */
+    font-size: 0.9rem;
+    color: var(--muted);
     margin-bottom: 0.5rem;
 }
 
 /* Unified Content Styles */
 .reference-content,
 .monograph-title {
-    font-size: 1rem; /* Same size for both */
+    font-size: 1rem;
     color: var(--text);
     line-height: 1.4;
     margin-bottom: 0.75rem;
@@ -1640,7 +1858,7 @@ h1, h2, h3 {
 
 /* Open Access Tag (Monographs Only) */
 .open-access {
-    color: var(--layer3); /* Green for Open Access tag */
+    color: var(--layer3);
     font-weight: 600;
     font-family: var(--mono);
     font-size: 0.8rem;
@@ -1653,4 +1871,3 @@ h1, h2, h3 {
         grid-template-columns: 1fr;
     }
 }
-
