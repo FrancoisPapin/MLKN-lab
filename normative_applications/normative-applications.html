@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Normative References - MLKN.lab</title>
+    <title>Normative Applications - MLKN.lab</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -249,8 +249,100 @@
                 </a>
             </div>
         </section>
+    
     </main>
+    
+<footer class="site-footer" role="contentinfo">
+        <!-- Same footer as other pages -->
+        <div class="sf-logo">MLKN.lab</div>
+        <p class="sf-tag">Multi-Layered Knowledge Network Ideas Laboratory</p>
+        <div class="sf-links">
+            <a href="https://www.linkedin.com/in/francoispapin/" class="sf-link" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/FrancoisPapin" class="sf-link" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="mailto:your-email@example.com" class="sf-link">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+        <p class="sf-legal">© François Papin · May 2026 · MIT License · MLKN.lab</p>
+    </footer>
 
-    <!-- Standard footer and JavaScript -->
+    <!-- JavaScript to highlight active section in nav boxes -->
+    <script>
+        // Highlight the active section in the nav boxes
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navBoxes = document.querySelectorAll('.nav-box');
+
+            // Function to update active links in all nav boxes
+            function updateActiveLinks() {
+                let currentSection = '';
+
+                // Check which section is in view
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.scrollY >= (sectionTop - 200)) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+
+                // Update active class in all nav boxes
+                navBoxes.forEach(navBox => {
+                    const links = navBox.querySelectorAll('a');
+                    links.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${currentSection}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                });
+            }
+
+            // Update on scroll
+            window.addEventListener('scroll', updateActiveLinks);
+            // Update on load
+            updateActiveLinks();
+        });
+    </script>
+
+    
+    <!-- JavaScript for Drop-Down Menu -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        // Toggle dropdown on click
+        dropdowns.forEach(dropdown => {
+            const link = dropdown.querySelector('.nav-link');
+            if (!link) return; // Skip if no link found
+
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Close all other dropdowns
+                dropdowns.forEach(other => {
+                    if (other !== dropdown) {
+                        other.classList.remove('active');
+                    }
+                });
+                // Toggle current dropdown
+                dropdown.classList.toggle('active');
+            });
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown')) {
+                dropdowns.forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                });
+            }
+        });
+      });
+    </script>
+    
 </body>
 </html>
