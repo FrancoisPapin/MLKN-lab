@@ -705,7 +705,7 @@ h1, h2, h3 {
 }
 
 /* =============================================
-   HOMEPAGE NAV GRID - FULLY MOBILE-OPTIMIZED
+   HOMEPAGE NAV GRID - FIXED TEXT WRAPPING
    ============================================= */
 .nav-grid-container {
   max-width: 100%;
@@ -787,17 +787,18 @@ h1, h2, h3 {
   border-bottom: none;
 }
 
+/* FIX: Ensure text wraps as words, not letters */
 .nav-grid-list a:first-child {
   color: var(--text2);
   text-decoration: none;
   transition: color 0.2s;
   flex-grow: 1;
   white-space: normal !important;
-  overflow: visible !important;
-  text-overflow: clip !important;
-  word-break: break-word;
-  font-size: 11px;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  font-size: 12px;
   line-height: 1.4;
+  text-align: left;
 }
 
 .nav-arrow {
@@ -911,13 +912,14 @@ h1, h2, h3 {
     font-size: 12px;
   }
 
+  /* FIX: Force text to wrap as words, not letters */
   .nav-grid-list a:first-child {
     white-space: normal !important;
-    overflow: visible !important;
-    text-overflow: clip !important;
-    word-break: break-word;
-    font-size: 11px;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    font-size: 12px;
     line-height: 1.4;
+    text-align: left;
   }
 
   .nav-grid-list-horizontal {
