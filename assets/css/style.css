@@ -309,17 +309,18 @@ h1, h2, h3 {
   text-align: center;
 }
 
-/* Hero Stats - Single Line on Mobile, Highlighted on Desktop */
+/* =============================================
+   HERO STATS - SINGLE LINE ON MOBILE
+   ============================================= */
 .hero-stats {
   display: flex;
   justify-content: center;
   gap: 20px;
-  flex-wrap: nowrap;
+  flex-wrap: nowrap; /* Force single line */
   margin: 0 auto 32px;
   width: 100%;
   max-width: 600px;
-  overflow-x: auto;
-  padding-bottom: 10px;
+  overflow: hidden; /* Hide overflow */
 }
 
 .hero-stats > div {
@@ -329,38 +330,11 @@ h1, h2, h3 {
   white-space: nowrap;
 }
 
-.hstat-num {
-  font-family: var(--mono);
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--accent);
-  line-height: 1;
-}
-
-.hstat-lbl {
-  font-family: var(--mono);
-  font-size: 8px;
-  color: var(--muted);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-top: 3px;
-}
-
-.stat-circle {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  margin: 0 auto 6px;
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.7);
-}
-
 /* Desktop-only hero stats enhancements */
 @media (min-width: 769px) {
   .hero-stats {
     gap: 24px;
     margin-bottom: 40px;
-    overflow-x: visible;
-    padding-bottom: 0;
   }
 
   .hero-stats > div {
@@ -393,9 +367,8 @@ h1, h2, h3 {
 @media (max-width: 768px) {
   .hero-stats {
     gap: 10px;
-    justify-content: flex-start;
-    padding-left: 20px;
-    padding-right: 20px;
+    justify-content: center;
+    padding: 0 10px;
   }
 
   .hero-stats > div {
@@ -408,6 +381,7 @@ h1, h2, h3 {
 
   .hstat-lbl {
     font-size: 7px;
+    white-space: nowrap;
   }
 
   .stat-circle {
@@ -416,6 +390,7 @@ h1, h2, h3 {
     margin: 0 auto 4px;
   }
 }
+
 
 /* =============================================
    SECTIONS
@@ -512,6 +487,9 @@ h1, h2, h3 {
 /* =============================================
    HOMEPAGE NAV GRID - FIXED TEXT VISIBILITY AND COLORED BORDERS
    ============================================= */
+/* =============================================
+   NAVIGATION GRID - FIXED TEXT AND ARROWS
+   ============================================= */
 .nav-grid-container {
   max-width: 100%;
   margin: 30px auto;
@@ -519,16 +497,6 @@ h1, h2, h3 {
   font-family: var(--mono);
   font-size: 12px;
   overflow: visible;
-}
-
-.nav-grid-title {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text);
-  padding: 10px 0;
-  border-bottom: 1px solid var(--border);
 }
 
 .nav-grid {
@@ -572,6 +540,7 @@ h1, h2, h3 {
   letter-spacing: 0.05em;
 }
 
+/* FIX: Force single line for webpage names and left-align text */
 .nav-grid-list {
   list-style: none;
   padding: 0;
@@ -593,31 +562,40 @@ h1, h2, h3 {
   border-bottom: none;
 }
 
-/* FIX: Restore text visibility and prevent vertical stacking */
+/* FIX: Webpage names - single line, left-aligned, no cut-off */
 .nav-grid-list a:first-child {
   color: var(--text2);
   text-decoration: none;
   transition: color 0.2s;
   flex-grow: 1;
-  white-space: normal !important;
-  word-break: normal !important;
-  overflow-wrap: break-word !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
   text-align: left !important;
   line-height: 1.4;
-  font-size: 12px;
+  font-size: 12px !important;
+  max-width: calc(100% - 25px); /* Leave space for arrow */
 }
 
+/* FIX: Arrow - larger, properly positioned, highlighted on hover */
 .nav-arrow {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 16px !important; /* Increased size */
   text-decoration: none;
   transition: color 0.2s;
   margin-left: 10px;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
 }
 
+/* FIX: Highlight links (webpage names + arrow) on hover */
+.nav-grid-list li:hover .nav-grid-list a:first-child,
 .nav-grid-list li:hover .nav-arrow {
-  color: var(--accent);
+  color: var(--accent) !important;
 }
 
 /* Make entire card clickable */
@@ -629,23 +607,6 @@ h1, h2, h3 {
   color: inherit;
 }
 
-.nav-grid-case-horizontal {
-  grid-column: span 2;
-  text-align: center;
-}
-
-.nav-grid-list-horizontal {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  padding: 0 5px;
-}
-
-.nav-grid-list-horizontal li {
-  border-bottom: none;
-  padding: 0 5px;
-}
 
 /* =============================================
    CHIP STYLES
