@@ -1,6 +1,7 @@
 /* =============================================
    MLKN.labV2 — MultiLayer Knowledge Network
    Author: François Papin | May 2026 | MIT License
+   Updated: June 2026
    Modern, Minimal, Scientific, and Technological Design
    ============================================= */
 
@@ -286,7 +287,8 @@ h1, h2, h3 {
   color: var(--text);
   line-height: 1.05;
   letter-spacing: -0.025em;
-  margin-bottom: 10px;
+  margin: 0 auto 10px;
+  text-align: center;
 }
 
 .hero-title em {
@@ -304,20 +306,32 @@ h1, h2, h3 {
   margin: 0 auto 30px;
   line-height: 1.65;
   font-weight: 300;
+  text-align: center;
 }
 
-/* Hero Stats */
+/* Hero Stats - Single Line on Mobile, Highlighted on Desktop */
 .hero-stats {
   display: flex;
   justify-content: center;
-  gap: 28px;
-  flex-wrap: wrap;
-  margin-bottom: 32px;
+  gap: 20px;
+  flex-wrap: nowrap;
+  margin: 0 auto 32px;
+  width: 100%;
+  max-width: 600px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.hero-stats > div {
+  flex: 0 0 auto;
+  min-width: 70px;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .hstat-num {
   font-family: var(--mono);
-  font-size: 26px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--accent);
   line-height: 1;
@@ -325,7 +339,7 @@ h1, h2, h3 {
 
 .hstat-lbl {
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 8px;
   color: var(--muted);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -333,11 +347,74 @@ h1, h2, h3 {
 }
 
 .stat-circle {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  margin: 0 auto 8px;
+  margin: 0 auto 6px;
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.7);
+}
+
+/* Desktop-only hero stats enhancements */
+@media (min-width: 769px) {
+  .hero-stats {
+    gap: 24px;
+    margin-bottom: 40px;
+    overflow-x: visible;
+    padding-bottom: 0;
+  }
+
+  .hero-stats > div {
+    min-width: 100px;
+  }
+
+  .hstat-num {
+    font-size: 32px !important;
+  }
+
+  .hstat-lbl {
+    font-size: 11px !important;
+    letter-spacing: 0.15em;
+  }
+
+  .stat-circle {
+    width: 16px !important;
+    height: 16px !important;
+    margin: 0 auto 10px !important;
+  }
+
+  /* Highlight 320K+ Connections */
+  .hero-stats > div:last-child .hstat-num {
+    font-size: 36px !important;
+    color: #FFD700 !important;
+  }
+}
+
+/* Mobile-specific hero stats fixes */
+@media (max-width: 768px) {
+  .hero-stats {
+    gap: 10px;
+    justify-content: flex-start;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .hero-stats > div {
+    min-width: 60px;
+  }
+
+  .hstat-num {
+    font-size: 18px;
+  }
+
+  .hstat-lbl {
+    font-size: 7px;
+  }
+
+  .stat-circle {
+    width: 10px;
+    height: 10px;
+    margin: 0 auto 4px;
+  }
 }
 
 /* =============================================
@@ -431,6 +508,145 @@ h1, h2, h3 {
   line-height: 1.6;
   max-width: 540px;
 }
+
+/* =============================================
+   HOMEPAGE NAV GRID - FIXED TEXT VISIBILITY AND COLORED BORDERS
+   ============================================= */
+.nav-grid-container {
+  max-width: 100%;
+  margin: 30px auto;
+  padding: 0 15px;
+  font-family: var(--mono);
+  font-size: 12px;
+  overflow: visible;
+}
+
+.nav-grid-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.nav-grid-case {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 15px;
+  transition: all 0.2s;
+  min-width: 0;
+  box-sizing: border-box;
+  min-height: 100px; /* Prevent text overflow */
+}
+
+/* Colored top borders for each grid case */
+.nav-grid-case:nth-child(1) { border-top: 3px solid #ff6b6b; } /* Vision (red) */
+.nav-grid-case:nth-child(2) { border-top: 3px solid #4ecdc4; } /* Research (teal) */
+.nav-grid-case:nth-child(3) { border-top: 3px solid #45b7d1; } /* Knowledge Network (blue) */
+.nav-grid-case:nth-child(4) { border-top: 3px solid #f9ca24; } /* Knowledge Library (yellow) */
+.nav-grid-case:nth-child(5) { border-top: 3px solid #a55eea; } /* Applications (purple) */
+.nav-grid-case:nth-child(6) { border-top: 3px solid #ff9f43; } /* About (orange) */
+
+.nav-grid-case:hover {
+  border-color: var(--accent);
+  box-shadow: var(--sh2);
+}
+
+.nav-grid-case-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.nav-grid-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nav-grid-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(26, 30, 46, 0.05);
+}
+
+.nav-grid-list li:last-child {
+  border-bottom: none;
+}
+
+/* FIX: Restore text visibility and prevent vertical stacking */
+.nav-grid-list a:first-child {
+  color: var(--text2);
+  text-decoration: none;
+  transition: color 0.2s;
+  flex-grow: 1;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  text-align: left !important;
+  line-height: 1.4;
+  font-size: 12px;
+}
+
+.nav-arrow {
+  color: var(--muted);
+  font-size: 12px;
+  text-decoration: none;
+  transition: color 0.2s;
+  margin-left: 10px;
+  flex-shrink: 0;
+}
+
+.nav-grid-list li:hover .nav-arrow {
+  color: var(--accent);
+}
+
+/* Make entire card clickable */
+.nav-grid-case a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav-grid-case-horizontal {
+  grid-column: span 2;
+  text-align: center;
+}
+
+.nav-grid-list-horizontal {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 0 5px;
+}
+
+.nav-grid-list-horizontal li {
+  border-bottom: none;
+  padding: 0 5px;
+}
+
 
 /* =============================================
    CHIP STYLES
