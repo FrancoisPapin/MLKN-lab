@@ -99,7 +99,7 @@ h1, h2, h3 {
 }
 
 /* =============================================
-   TOP NAVIGATION BAR + DROP-DOWN MENU
+   TOP NAVIGATION BAR + DROP-DOWN MENU + THEME TOGGLE
    ============================================= */
 .topnav {
   position: sticky;
@@ -160,10 +160,10 @@ h1, h2, h3 {
   display: flex;
   align-items: center;
   gap: 3px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* Prevent wrapping */
 }
 
-/* Nav link base styles */
+/* Nav link base styles /
 .nav-link {
   font-family: var(--mono);
   font-size: 12px;
@@ -179,6 +179,7 @@ h1, h2, h3 {
   gap: 5px;
   height: 100%;
   position: relative;
+  flex-shrink: 0; / Prevent shrinking */
 }
 
 .nav-link:hover {
@@ -189,10 +190,11 @@ h1, h2, h3 {
   opacity: 1;
 }
 
-/* Drop-down menu styles */
+/* Drop-down menu styles /
 .dropdown {
   position: relative;
   display: inline-block;
+  flex-shrink: 0; / Prevent shrinking */
 }
 
 .dropdown-content {
@@ -223,6 +225,41 @@ h1, h2, h3 {
 
 .dropdown.active .dropdown-content {
   display: block;
+}
+
+/* Theme Toggle Button /
+.theme-toggle-btn {
+  background: transparent;
+  border: none;
+  color: var(--text2);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 8px 10px;
+  border-radius: var(--r);
+  transition: color 0.2s, background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  flex-shrink: 0; / Prevent wrapping */
+}
+
+.theme-toggle-btn:hover {
+  color: var(--accent);
+  background: rgba(26, 107, 170, 0.1);
+}
+
+.theme-toggle-btn i {
+  font-size: 14px;
+}
+
+/* Dark mode toggle button icon */
+.dark-mode .theme-toggle-btn i.fa-moon {
+  display: none;
+}
+
+.dark-mode .theme-toggle-btn i.fa-sun {
+  display: inline;
 }
 
 /* =============================================
@@ -744,14 +781,14 @@ h1, h2, h3 {
 
 /* =============================================
    HOMEPAGE NAV GRID - FIXED TEXT VISIBILITY AND COLORED BORDERS
-   ============================================= /
+   ============================================= */
 .nav-grid-container {
   max-width: 100%;
   margin: 30px auto;
   padding: 0 10px;
   font-family: var(--mono);
   font-size: 12px;
-  overflow: visible; / Ensure no clipping */
+  overflow: visible;
 }
 
 .nav-grid-title {
@@ -780,7 +817,7 @@ h1, h2, h3 {
   transition: all 0.2s;
   min-width: 0;
   box-sizing: border-box;
-  min-height: 80px; /* Ensure minimum height for text */
+  min-height: 80px;
 }
 
 /* Colored top borders for each grid case - RESTORED /
@@ -826,15 +863,15 @@ h1, h2, h3 {
   border-bottom: none;
 }
 
-/* FIX: Restore text visibility /
+/* FIX: Restore text visibility */
 .nav-grid-list a:first-child {
   color: var(--text2);
   text-decoration: none;
   transition: color 0.2s;
   flex-grow: 1;
-  white-space: normal !important; / Allow text to wrap /
-  word-break: break-word !important; / Break long words if needed /
-  overflow: visible !important; / Ensure text is visible */
+  white-space: normal !important;
+  word-break: break-word !important;
+  overflow: visible !important;
   font-size: 12px;
   line-height: 1.4;
   text-align: left;
@@ -970,7 +1007,7 @@ h1, h2, h3 {
 
   .nav-grid-case {
     padding: 10px;
-    min-height: auto; /* Reset for mobile */
+    min-height: auto;
   }
 
   .nav-grid-case-title {
@@ -988,9 +1025,32 @@ h1, h2, h3 {
     min-width: 16px;
   }
 
+  /* Top Navigation Bar - Mobile Fixes */
+  .topnav {
+    height: 50px;
+  }
+
+  .topnav-inner {
+    gap: 6px;
+    padding: 0 10px;
+  }
+
+  .logo-mark {
+    width: 24px;
+    height: 24px;
+  }
+
+  .logo-text {
+    font-size: 10px;
+  }
+
+  .nav-links {
+    gap: 2px;
+  }
+
   .nav-link {
-    padding: 8px 10px;
-    font-size: 11px;
+    padding: 6px 8px;
+    font-size: 10px;
   }
 
   .dropdown-content {
@@ -1000,8 +1060,14 @@ h1, h2, h3 {
     transform: translateX(-50%);
   }
 
-  .topnav {
-    height: 50px;
+  /* Theme Toggle Button - Mobile */
+  .theme-toggle-btn {
+    padding: 6px 8px;
+    margin-left: 4px;
+  }
+
+  .theme-toggle-btn i {
+    font-size: 12px;
   }
 }
 
@@ -1018,28 +1084,40 @@ h1, h2, h3 {
   }
 
   .nav-grid-case {
-    min-height: 80px; /* Ensure minimum height for Safari */
+    min-height: 80px;
   }
 
   .nav-grid-list a:first-child {
     white-space: normal !important;
     overflow: visible !important;
   }
+
+  /* Top Navigation Bar - Safari Fix */
+  .topnav-inner {
+    flex-wrap: nowrap !important;
+    overflow: hidden;
+  }
+
+  .nav-links {
+    flex-wrap: nowrap !important;
+  }
+
+  .theme-toggle-btn {
+    flex-shrink: 0;
+  }
 }
 
 /* =============================================
-   DARK MODE STYLES (FULLY UPDATED)
+   DARK MODE STYLES - CLASS-BASED (for Toggle)
    ============================================= /
-@media (prefers-color-scheme: dark) {
+.dark-mode {
   / Base Colors */
-  :root {
-    --bg: #121212;
-    --panel: rgba(30, 30, 30, 0.97);
-    --border: #333333;
-    --text: #e0e0e0;
-    --text2: #b0b0b0;
-    --muted: #8a8a8a;
-  }
+  --bg: #121212;
+  --panel: rgba(30, 30, 30, 0.97);
+  --border: #333333;
+  --text: #e0e0e0;
+  --text2: #b0b0b0;
+  --muted: #8a8a8a;
 
   /* Body and Global Text */
   body {
@@ -1314,6 +1392,16 @@ h1, h2, h3 {
   .nav-grid-case:nth-child(4) { border-top: 3px solid #f9ca24 !important; }
   .nav-grid-case:nth-child(5) { border-top: 3px solid #a55eea !important; }
   .nav-grid-case:nth-child(6) { border-top: 3px solid #ff9f43 !important; }
+
+  /* Theme Toggle Button - Dark Mode */
+  .theme-toggle-btn {
+    color: var(--text2) !important;
+  }
+
+  .theme-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: var(--accent) !important;
+  }
 }
 
 /* =============================================
@@ -1336,7 +1424,7 @@ h1, h2, h3 {
 }
 
 /* =============================================
-   Ajustments for MLKN.model - Mathematical Foundations
+   Adjustments for MLKN.model - Mathematical Foundations
    ============================================= */
 .math-container {
   display: inline-block;
