@@ -72,6 +72,10 @@
                     </div>
                 </div>
             </div>
+        <!-- Toggle button (right side) -->
+                  <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                  </button>
         </div>
         
         <br>
@@ -1766,5 +1770,46 @@
       });
     </script>
 
+    <script>
+      // Check for saved user preference or use system preference
+      function initializeTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+          document.documentElement.classList.add('dark-mode');
+        }
+      }
+
+      // Toggle theme manually
+      function toggleTheme() {
+        document.documentElement.classList.toggle('dark-mode');
+        const isDark = document.documentElement.classList.contains('dark-mode');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        updateToggleIcon();
+      }
+
+      // Update toggle icon based on current theme
+      function updateToggleIcon() {
+        const isDark = document.documentElement.classList.contains('dark-mode');
+        const toggleBtn = document.getElementById('theme-toggle');
+        if (toggleBtn) {
+          toggleBtn.innerHTML = isDark ? '<i class=\"fas fa-sun\"></i>' : '<i class=\"fas fa-moon\"></i>';
+        }
+      }
+
+      // Initialize theme on load
+      document.addEventListener('DOMContentLoaded', function() {
+        initializeTheme();
+        updateToggleIcon();
+
+        // Add click event to toggle button
+        const toggleBtn = document.getElementById('theme-toggle');
+        if (toggleBtn) {
+          toggleBtn.addEventListener('click', toggleTheme);
+        }
+      });
+    </script>
+    
 </body>
 </html>
