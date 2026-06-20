@@ -948,9 +948,9 @@ h1, h2, h3 {
 
 /* =============================================
    DARK MODE STYLES (FULLY UPDATED)
-   ============================================= /
+   ============================================= */
 @media (prefers-color-scheme: dark) {
-  / Base Colors */
+  /* Base Colors */
   :root {
     --bg: #121212;
     --panel: rgba(30, 30, 30, 0.97);
@@ -1024,6 +1024,19 @@ h1, h2, h3 {
 
   .hero-subtitle {
     color: var(--text2) !important;
+  }
+
+  /* Hero Stats Dark Mode */
+  .hstat-num {
+    color: var(--accent) !important;
+  }
+
+  .hstat-lbl {
+    color: var(--muted) !important;
+  }
+
+  .stat-circle {
+    box-shadow: 0 0 0 2px var(--border) !important;
   }
 
   /* Sections */
