@@ -2201,3 +2201,66 @@ sub, sup {
     text-decoration: underline;
   }
 }
+
+/* =============================================
+   MOBILE DROPDOWN FIX
+   ============================================= */
+@media (max-width: 768px) {
+  /* Ensure dropdown content is visible */
+  .dropdown-content {
+    position: static !important;
+    display: none !important;
+    background: var(--panel);
+    border: 1.5px solid var(--border);
+    box-shadow: var(--sh2);
+    margin-top: 5px;
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .dropdown.active .dropdown-content {
+    display: block !important;
+    position: static !important;
+  }
+
+  /* Fix dropdown content links */
+  .dropdown-content a {
+    padding: 8px 12px !important;
+    font-size: 12px !important;
+    display: block;
+    white-space: nowrap;
+  }
+
+  /* Ensure dropdown stays open when active */
+  .dropdown:hover .dropdown-content,
+  .dropdown.active .dropdown-content {
+    display: block !important;
+  }
+}
+
+/* =============================================
+   HERO STATS MOBILE CENTERING
+   ============================================= */
+@media (max-width: 768px) {
+  .hero-stats {
+    justify-content: center !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    gap: 15px !important;
+  }
+
+  .hero-stats > div {
+    min-width: 70px !important;
+  }
+
+  /* Center the entire stats container */
+  .hero {
+    text-align: center;
+  }
+
+  .hero-stats {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
