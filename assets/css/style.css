@@ -310,23 +310,49 @@ h1, h2, h3 {
 }
 
 /* =============================================
-   HERO STATS - SINGLE LINE ON MOBILE
+   HERO STATS - CIRCLE ICONS + SINGLE LINE
    ============================================= */
 .hero-stats {
   display: flex;
   justify-content: center;
   gap: 20px;
-  flex-wrap: nowrap; /* Force single line */
+  flex-wrap: nowrap;
   margin: 0 auto 32px;
   width: 100%;
   max-width: 600px;
-  overflow: hidden; /* Hide overflow */
 }
 
 .hero-stats > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   flex: 0 0 auto;
   min-width: 70px;
-  text-align: center;
+}
+
+.stat-circle {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin: 0 auto 6px;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.7);
+}
+
+.hstat-num {
+  font-family: var(--mono);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.hstat-lbl {
+  font-family: var(--mono);
+  font-size: 8px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 3px;
   white-space: nowrap;
 }
 
@@ -381,7 +407,6 @@ h1, h2, h3 {
 
   .hstat-lbl {
     font-size: 7px;
-    white-space: nowrap;
   }
 
   .stat-circle {
@@ -390,7 +415,6 @@ h1, h2, h3 {
     margin: 0 auto 4px;
   }
 }
-
 
 /* =============================================
    SECTIONS
@@ -515,16 +539,18 @@ h1, h2, h3 {
   transition: all 0.2s;
   min-width: 0;
   box-sizing: border-box;
-  min-height: 100px; /* Prevent text overflow */
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Colored top borders for each grid case */
-.nav-grid-case:nth-child(1) { border-top: 3px solid #ff6b6b; } /* Vision (red) */
-.nav-grid-case:nth-child(2) { border-top: 3px solid #4ecdc4; } /* Research (teal) */
-.nav-grid-case:nth-child(3) { border-top: 3px solid #45b7d1; } /* Knowledge Network (blue) */
-.nav-grid-case:nth-child(4) { border-top: 3px solid #f9ca24; } /* Knowledge Library (yellow) */
-.nav-grid-case:nth-child(5) { border-top: 3px solid #a55eea; } /* Applications (purple) */
-.nav-grid-case:nth-child(6) { border-top: 3px solid #ff9f43; } /* About (orange) */
+.nav-grid-case:nth-child(1) { border-top: 3px solid #ff6b6b; }
+.nav-grid-case:nth-child(2) { border-top: 3px solid #4ecdc4; }
+.nav-grid-case:nth-child(3) { border-top: 3px solid #45b7d1; }
+.nav-grid-case:nth-child(4) { border-top: 3px solid #f9ca24; }
+.nav-grid-case:nth-child(5) { border-top: 3px solid #a55eea; }
+.nav-grid-case:nth-child(6) { border-top: 3px solid #ff9f43; }
 
 .nav-grid-case:hover {
   border-color: var(--accent);
@@ -540,7 +566,7 @@ h1, h2, h3 {
   letter-spacing: 0.05em;
 }
 
-/* FIX: Force single line for webpage names and left-align text */
+/* FIX: Grid list layout */
 .nav-grid-list {
   list-style: none;
   padding: 0;
@@ -548,6 +574,7 @@ h1, h2, h3 {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  flex: 1;
 }
 
 .nav-grid-list li {
@@ -569,21 +596,21 @@ h1, h2, h3 {
   transition: color 0.2s;
   flex-grow: 1;
   white-space: nowrap !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
   text-align: left !important;
   line-height: 1.4;
   font-size: 12px !important;
-  max-width: calc(100% - 25px); /* Leave space for arrow */
+  display: block;
+  width: calc(100% - 25px);
 }
 
-/* FIX: Arrow - larger, properly positioned, highlighted on hover */
+/* FIX: Arrow - larger, properly positioned */
 .nav-arrow {
   color: var(--muted);
-  font-size: 16px !important; /* Increased size */
+  font-size: 16px !important;
   text-decoration: none;
   transition: color 0.2s;
-  margin-left: 10px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -592,7 +619,7 @@ h1, h2, h3 {
   height: 20px;
 }
 
-/* FIX: Highlight links (webpage names + arrow) on hover */
+/* FIX: Highlight links on hover */
 .nav-grid-list li:hover .nav-grid-list a:first-child,
 .nav-grid-list li:hover .nav-arrow {
   color: var(--accent) !important;
@@ -600,13 +627,13 @@ h1, h2, h3 {
 
 /* Make entire card clickable */
 .nav-grid-case a {
-  display: block;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
   text-decoration: none;
   color: inherit;
 }
-
 
 /* =============================================
    CHIP STYLES
