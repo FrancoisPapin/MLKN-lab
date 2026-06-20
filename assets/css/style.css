@@ -647,7 +647,6 @@ h1, h2, h3 {
   padding: 0 5px;
 }
 
-
 /* =============================================
    CHIP STYLES
    ============================================= */
@@ -665,10 +664,64 @@ h1, h2, h3 {
   font-size: 9px;
   font-weight: 700;
   border: 1.5px solid currentColor;
+  transition: all 0.2s ease;
 }
 
-.btn, .chip {
-  transition: all 0.2s ease;
+.chip:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* =============================================
+   BUTTONS
+   ============================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  border-radius: var(--r);
+  font-family: var(--font);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.18s;
+  border: 2px solid;
+}
+
+.btn-p {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.btn-p:hover {
+  background: #1558A0;
+  border-color: #1558A0;
+  color: #fff;
+  text-decoration: none;
+  opacity: 1;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 18px rgba(26, 107, 170, 0.3);
+}
+
+.btn-s {
+  background: transparent;
+  color: var(--accent);
+  border-color: #BBCFE8;
+}
+
+.btn-s:hover {
+  background: #EBF4FB;
+  border-color: var(--accent);
+  text-decoration: none;
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* =============================================
@@ -744,6 +797,7 @@ h1, h2, h3 {
   margin-bottom: 7px;
 }
 
+
 /* =============================================
    DISCIPLINE LIST WITH SQUARES
    ============================================= */
@@ -768,58 +822,6 @@ h1, h2, h3 {
   border-radius: 2px;
   flex-shrink: 0;
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5);
-}
-
-/* =============================================
-   BUTTONS
-   ============================================= */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 11px 22px;
-  border-radius: var(--r);
-  font-family: var(--font);
-  font-weight: 600;
-  font-size: 14px;
-  text-decoration: none;
-  transition: all 0.18s;
-  border: 2px solid;
-}
-
-.btn-p {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
-}
-
-.btn-p:hover {
-  background: #1558A0;
-  border-color: #1558A0;
-  color: #fff;
-  text-decoration: none;
-  opacity: 1;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 18px rgba(26, 107, 170, 0.3);
-}
-
-.btn-s {
-  background: transparent;
-  color: var(--accent);
-  border-color: #BBCFE8;
-}
-
-.btn-s:hover {
-  background: #EBF4FB;
-  border-color: var(--accent);
-  text-decoration: none;
-  opacity: 1;
-  transform: translateY(-1px);
-}
-
-.btn:hover, .chip:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* =============================================
@@ -914,141 +916,7 @@ h1, h2, h3 {
 }
 
 /* =============================================
-   HOMEPAGE NAV GRID
-   ============================================= */
-.nav-grid-container {
-  max-width: 100%;
-  margin: 30px auto;
-  padding: 0 15px;
-  font-family: var(--mono);
-  font-size: 12px;
-  overflow: hidden;
-}
-
-.nav-grid-title {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text);
-  padding: 10px 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.nav-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  margin-bottom: 20px;
-  width: 100%;
-}
-
-.nav-grid-case {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 15px;
-  transition: all 0.2s;
-  min-width: 0;
-  box-sizing: border-box;
-}
-
-/* Color accents for visual hierarchy */
-.nav-grid-case:nth-child(1) { border-top: 2px solid #ff6b6b; }
-.nav-grid-case:nth-child(2) { border-top: 2px solid #4ecdc4; }
-.nav-grid-case:nth-child(3) { border-top: 2px solid #45b7d1; }
-.nav-grid-case:nth-child(4) { border-top: 2px solid #f9ca24; }
-.nav-grid-case:nth-child(5) { border-top: 2px solid #a55eea; }
-.nav-grid-case:nth-child(6) { border-top: 2px solid #ff9f43; }
-
-.nav-grid-case:hover {
-  border-color: var(--accent);
-  box-shadow: var(--sh2);
-}
-
-.nav-grid-case-title {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.nav-grid-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.nav-grid-list li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px 0;
-  border-bottom: 1px solid rgba(26, 30, 46, 0.05);
-}
-
-.nav-grid-list li:last-child {
-  border-bottom: none;
-}
-
-.nav-grid-list a:first-child {
-  color: var(--text2);
-  text-decoration: none;
-  transition: color 0.2s;
-  flex-grow: 1;
-  white-space: normal !important;
-  overflow: visible !important;
-  text-overflow: clip !important;
-  word-break: break-word;
-}
-
-.nav-arrow {
-  color: var(--muted);
-  font-size: 12px;
-  text-decoration: none;
-  transition: color 0.2s;
-  margin-left: 10px;
-  flex-shrink: 0;
-}
-
-.nav-grid-list li:hover .nav-arrow {
-  color: var(--accent);
-}
-
-/* Make entire card clickable */
-.nav-grid-case a {
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-decoration: none;
-  color: inherit;
-}
-
-.nav-grid-case-horizontal {
-  grid-column: span 2;
-  text-align: center;
-}
-
-.nav-grid-list-horizontal {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  padding: 0 5px;
-}
-
-.nav-grid-list-horizontal li {
-  border-bottom: none;
-  padding: 0 5px;
-}
-
-/* =============================================
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN - MOBILE-FIRST
    ============================================= */
 
 @media (max-width: 1024px) {
@@ -1061,14 +929,42 @@ h1, h2, h3 {
 }
 
 @media (max-width: 768px) {
+  /* Hero Section */
   .hero {
     padding: 36px 16px 32px;
   }
 
+  .hero-stats {
+    gap: 10px;
+    justify-content: flex-start;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .hero-stats > div {
+    min-width: 60px;
+  }
+
+  .hstat-num {
+    font-size: 18px;
+  }
+
+  .hstat-lbl {
+    font-size: 7px;
+  }
+
+  .stat-circle {
+    width: 10px;
+    height: 10px;
+    margin: 0 auto 4px;
+  }
+
+  /* Sections */
   .section {
     padding: 30px 16px;
   }
 
+  /* Featured Section */
   .featured {
     flex-direction: column;
     padding: 20px;
@@ -1080,24 +976,13 @@ h1, h2, h3 {
     height: 50px;
   }
 
+  /* Layers Grid */
   .layers-grid {
     grid-template-columns: 1fr;
     gap: 12px;
   }
 
-  .hero-stats {
-    gap: 12px;
-  }
-
-  .hstat-num {
-    font-size: 22px;
-  }
-
-  .hstat-lbl {
-    font-size: 8px;
-  }
-
-  /* Nav Grid Mobile Fixes */
+  /* Navigation Grid */
   .nav-grid-container {
     padding: 0 10px;
   }
@@ -1109,6 +994,7 @@ h1, h2, h3 {
 
   .nav-grid-case {
     padding: 12px;
+    min-height: auto;
   }
 
   .nav-grid-case-title {
@@ -1116,10 +1002,15 @@ h1, h2, h3 {
   }
 
   .nav-grid-list a:first-child {
+    font-size: 11px;
     white-space: normal !important;
-    overflow: visible !important;
-    text-overflow: clip !important;
-    word-break: break-word;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .nav-arrow {
+    font-size: 12px;
+    min-width: auto;
   }
 
   .nav-grid-list-horizontal {
@@ -1132,6 +1023,7 @@ h1, h2, h3 {
     margin: 5px 0;
   }
 
+  /* Navigation Links */
   .nav-link {
     padding: 8px 10px;
     font-size: 11px;
@@ -1144,12 +1036,13 @@ h1, h2, h3 {
     transform: translateX(-50%);
   }
 
+  /* Top Navigation */
   .topnav {
     height: 50px;
   }
 }
 
-/* Safari-specific fix for grid overflow */
+/* Safari-specific fixes */
 @supports (-webkit-touch-callout: none) {
   .nav-grid-container {
     width: calc(100% - 20px);
@@ -1160,10 +1053,29 @@ h1, h2, h3 {
   .nav-grid {
     width: 100%;
   }
+
+  .nav-grid-case {
+    min-height: 80px;
+  }
+
+  .nav-grid-list a:first-child {
+    white-space: normal !important;
+    overflow: visible !important;
+    word-break: normal !important;
+  }
+
+  .topnav-inner {
+    flex-wrap: nowrap !important;
+    overflow: hidden;
+  }
+
+  .nav-links {
+    flex-wrap: nowrap !important;
+  }
 }
 
 /* =============================================
-   DARK MODE STYLES (FULLY UPDATED)
+   DARK MODE STYLES (SYSTEM PREFERENCE)
    ============================================= */
 @media (prefers-color-scheme: dark) {
   /* Base Colors */
@@ -1443,67 +1355,14 @@ h1, h2, h3 {
   }
 
   /* Restore colored borders in dark mode */
-  .nav-grid-case:nth-child(1) { border-top: 2px solid #ff6b6b !important; }
-  .nav-grid-case:nth-child(2) { border-top: 2px solid #4ecdc4 !important; }
-  .nav-grid-case:nth-child(3) { border-top: 2px solid #45b7d1 !important; }
-  .nav-grid-case:nth-child(4) { border-top: 2px solid #f9ca24 !important; }
-  .nav-grid-case:nth-child(5) { border-top: 2px solid #a55eea !important; }
-  .nav-grid-case:nth-child(6) { border-top: 2px solid #ff9f43 !important; }
+  .nav-grid-case:nth-child(1) { border-top: 3px solid #ff6b6b !important; }
+  .nav-grid-case:nth-child(2) { border-top: 3px solid #4ecdc4 !important; }
+  .nav-grid-case:nth-child(3) { border-top: 3px solid #45b7d1 !important; }
+  .nav-grid-case:nth-child(4) { border-top: 3px solid #f9ca24 !important; }
+  .nav-grid-case:nth-child(5) { border-top: 3px solid #a55eea !important; }
+  .nav-grid-case:nth-child(6) { border-top: 3px solid #ff9f43 !important; }
 }
 
-/* =============================================
-   Ajustments for MLKN.model - Mathematical Foundations
-   ============================================= */
-.math-container {
-  display: inline-block;
-  white-space: pre-wrap;
-  word-break: break-word;
-  line-height: 1.6;
-  max-width: 100%;
-}
-
-sub, sup {
-  font-size: 0.8em;
-  line-height: 1;
-  vertical-align: baseline;
-}
-
-.layer-card p,
-.layer-card li,
-.essay-box p,
-.essay-box li {
-  word-break: normal;
-  overflow-wrap: break-word;
-}
-
-@media (max-width: 768px) {
-  .math-container {
-    font-size: 0.9em;
-    line-height: 1.5;
-  }
-
-  code {
-    word-break: break-all;
-    white-space: pre-wrap;
-  }
-}
-
-.mobile-alert {
-  background: #FFF8E1;
-  border-left: 4px solid #FFC107;
-  padding: 12px 16px;
-  margin-bottom: 20px;
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--text2);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.mobile-alert i {
-  color: #FFC107;
-}
 
 /* =============================================
    SCIENTIFIC REFERENCES PAGE
@@ -2185,6 +2044,7 @@ sub, sup {
   }
 }
 
+
 /* =============================================
    DISCIPLINARY GRID
    ============================================= */
@@ -2224,5 +2084,129 @@ sub, sup {
 @media (max-width: 768px) {
   .disciplinary-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* =============================================
+   MATHEMATICAL FOUNDATIONS ADJUSTMENTS
+   ============================================= */
+.math-container {
+  display: inline-block;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.6;
+  max-width: 100%;
+}
+
+sub, sup {
+  font-size: 0.8em;
+  line-height: 1;
+  vertical-align: baseline;
+}
+
+.layer-card p,
+.layer-card li,
+.essay-box p,
+.essay-box li {
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+  .math-container {
+    font-size: 0.9em;
+    line-height: 1.5;
+  }
+
+  code {
+    word-break: break-all;
+    white-space: pre-wrap;
+  }
+}
+
+/* =============================================
+   UTILITY CLASSES
+   ============================================= */
+.mobile-alert {
+  background: #FFF8E1;
+  border-left: 4px solid #FFC107;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mobile-alert i {
+  color: #FFC107;
+}
+
+/* =============================================
+   TRUST SIGNALS: OPEN-ACCESS AND PEER-REVIEWED BADGES
+   ============================================= */
+.open-access-badge {
+  font-size: 14px;
+  margin-left: 6px;
+  color: var(--layer3);
+}
+
+.peer-reviewed-badge {
+  background: var(--accent);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-family: var(--mono);
+  margin-left: 8px;
+}
+
+/* =============================================
+   FINAL RESPONSIVE ADJUSTMENTS
+   ============================================= */
+@media (max-width: 768px) {
+  /* Ensure all text remains readable */
+  .nav-grid-list a:first-child {
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  /* Prevent any overflow issues */
+  .nav-grid-case {
+    min-height: 100px;
+  }
+
+  /* Mobile-specific adjustments for disciplinary grid */
+  .disciplinary-card {
+    padding: 12px;
+  }
+
+  .disciplinary-card h4 {
+    font-size: 0.9rem;
+  }
+}
+
+/* =============================================
+   PRINT STYLES
+   ============================================= */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  .topnav, .site-footer {
+    display: none;
+  }
+
+  .nav-grid {
+    grid-template-columns: 1fr;
+  }
+
+  a {
+    color: #000 !important;
+    text-decoration: underline;
   }
 }
