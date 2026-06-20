@@ -509,7 +509,7 @@ h1, h2, h3 {
 }
 
 /* =============================================
-   NAVIGATION GRID - FIXED ALIGNMENT
+   NAVIGATION GRID - PERFECT ALIGNMENT
    ============================================= */
 .nav-grid-container {
   max-width: 100%;
@@ -535,6 +535,7 @@ h1, h2, h3 {
   padding: 15px;
   transition: all 0.2s;
   min-height: 100px;
+  position: relative; /* For absolute positioning of links */
 }
 
 .nav-grid-case:hover {
@@ -542,7 +543,7 @@ h1, h2, h3 {
   box-shadow: var(--sh2);
 }
 
-/* Colored top borders for each grid case */
+/* Colored top borders */
 .nav-grid-case:nth-child(1) { border-top: 3px solid #ff6b6b; }
 .nav-grid-case:nth-child(2) { border-top: 3px solid #4ecdc4; }
 .nav-grid-case:nth-child(3) { border-top: 3px solid #45b7d1; }
@@ -559,7 +560,7 @@ h1, h2, h3 {
   letter-spacing: 0.05em;
 }
 
-/* Grid list layout - FIXED */
+/* Grid list - SEPARATE CONTAINERS FOR TEXT AND ARROW */
 .nav-grid-list {
   list-style: none;
   padding: 0;
@@ -569,8 +570,7 @@ h1, h2, h3 {
 
 .nav-grid-list li {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  position: relative; /* For absolute positioning */
   padding: 5px 0;
   border-bottom: 1px solid rgba(26, 30, 46, 0.05);
   width: 100%;
@@ -580,47 +580,52 @@ h1, h2, h3 {
   border-bottom: none;
 }
 
-/* Webpage names - left-aligned, single line, no cut-off */
+/* TEXT CONTAINER - Left-aligned, full width minus arrow space */
+.nav-grid-list .text-container {
+  flex: 1;
+  overflow: hidden;
+  text-align: left;
+}
+
 .nav-grid-list a:first-child {
   color: var(--text2);
   text-decoration: none;
   transition: color 0.2s;
-  flex-grow: 1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-align: left;
   line-height: 1.4;
   font-size: 12px;
   display: block;
-  max-width: calc(100% - 25px); /* Leave space for arrow */
 }
 
-/* Arrow - right-aligned, properly positioned */
+/* ARROW CONTAINER - Fixed position at right */
+.nav-grid-list .arrow-container {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+}
+
 .nav-arrow {
   color: var(--muted);
   font-size: 16px;
   text-decoration: none;
   transition: color 0.2s;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  margin-left: 8px; /* Consistent spacing */
 }
 
-/* Hover effect for both text and arrow */
+/* Hover effect for both elements */
 .nav-grid-list li:hover .nav-grid-list a:first-child,
 .nav-grid-list li:hover .nav-arrow {
   color: var(--accent) !important;
 }
 
-/* Make entire card clickable while preserving layout */
+/* Make entire card clickable */
 .nav-grid-case a {
-  display: flex;
-  flex-direction: column;
+  display: block;
   width: 100%;
   text-decoration: none;
   color: inherit;
