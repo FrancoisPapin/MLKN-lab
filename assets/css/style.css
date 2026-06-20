@@ -311,9 +311,15 @@ h1, h2, h3 {
 .hero-stats {
   display: flex;
   justify-content: center;
-  gap: 28px;
+  gap: 20px;
   flex-wrap: wrap;
   margin-bottom: 32px;
+}
+
+.hero-stats > div {
+  flex: 1 1 20%;
+  min-width: 100px;
+  text-align: center;
 }
 
 .hstat-num {
@@ -699,16 +705,15 @@ h1, h2, h3 {
 }
 
 /* =============================================
-   HOMEPAGE NAV GRID - UPDATED FOR MOBILE
+   HOMEPAGE NAV GRID - FULLY MOBILE-OPTIMIZED
    ============================================= */
 .nav-grid-container {
   max-width: 100%;
   margin: 30px auto;
-  padding: 0 15px;
+  padding: 0 10px;
   font-family: var(--mono);
   font-size: 12px;
   overflow: hidden;
-  width: auto;
 }
 
 .nav-grid-title {
@@ -724,7 +729,7 @@ h1, h2, h3 {
 .nav-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
+  gap: 12px;
   margin-bottom: 20px;
   width: 100%;
 }
@@ -733,16 +738,10 @@ h1, h2, h3 {
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: var(--r);
-  padding: 15px;
+  padding: 12px;
   transition: all 0.2s;
   min-width: 0;
   box-sizing: border-box;
-  cursor: pointer;
-}
-
-.nav-grid-case:hover {
-  border-color: var(--accent);
-  box-shadow: var(--sh2);
 }
 
 /* Color accents for visual hierarchy */
@@ -753,8 +752,13 @@ h1, h2, h3 {
 .nav-grid-case:nth-child(5) { border-top: 2px solid #a55eea; }
 .nav-grid-case:nth-child(6) { border-top: 2px solid #ff9f43; }
 
+.nav-grid-case:hover {
+  border-color: var(--accent);
+  box-shadow: var(--sh2);
+}
+
 .nav-grid-case-title {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--text);
   margin-bottom: 10px;
@@ -775,7 +779,7 @@ h1, h2, h3 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 0;
+  padding: 6px 0;
   border-bottom: 1px solid rgba(26, 30, 46, 0.05);
 }
 
@@ -792,6 +796,8 @@ h1, h2, h3 {
   overflow: visible !important;
   text-overflow: clip !important;
   word-break: break-word;
+  font-size: 11px;
+  line-height: 1.4;
 }
 
 .nav-arrow {
@@ -799,12 +805,21 @@ h1, h2, h3 {
   font-size: 12px;
   text-decoration: none;
   transition: color 0.2s;
-  margin-left: 10px;
+  margin-left: 8px;
   flex-shrink: 0;
 }
 
 .nav-grid-list li:hover .nav-arrow {
   color: var(--accent);
+}
+
+/* Make entire card clickable */
+.nav-grid-case a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
 }
 
 .nav-grid-case-horizontal {
@@ -825,17 +840,8 @@ h1, h2, h3 {
   padding: 0 5px;
 }
 
-/* Make entire card clickable */
-.nav-grid-case a {
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-decoration: none;
-  color: inherit;
-}
-
 /* =============================================
-   RESPONSIVE DESIGN - UPDATED FOR MOBILE
+   RESPONSIVE DESIGN - MOBILE-FIRST
    ============================================= */
 
 @media (max-width: 1024px) {
@@ -872,9 +878,15 @@ h1, h2, h3 {
     gap: 12px;
   }
 
-  /* Hero Stats - Horizontal Row for Top 3 Metrics */
+  /* Hero Stats - Compact Horizontal Row */
   .hero-stats {
     gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .hero-stats > div {
+    flex: 1 1 22%;
+    min-width: 90px;
   }
 
   .hstat-num {
@@ -885,7 +897,7 @@ h1, h2, h3 {
     font-size: 8px;
   }
 
-  /* Nav Grid Mobile Fixes - Single Column */
+  /* Nav Grid - Single Column on Mobile */
   .nav-grid {
     grid-template-columns: 1fr;
     gap: 10px;
@@ -904,6 +916,8 @@ h1, h2, h3 {
     overflow: visible !important;
     text-overflow: clip !important;
     word-break: break-word;
+    font-size: 11px;
+    line-height: 1.4;
   }
 
   .nav-grid-list-horizontal {
@@ -914,12 +928,6 @@ h1, h2, h3 {
   .nav-grid-list-horizontal li {
     padding: 0;
     margin: 5px 0;
-  }
-
-  .nav-grid-list a:first-child {
-    white-space: normal !important;
-    overflow: visible !important;
-    text-overflow: clip !important;
   }
 
   .nav-link {
@@ -939,29 +947,9 @@ h1, h2, h3 {
   }
 
   /* Stat Counters - Horizontal Row for Top 3 */
-  .hero-stats {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-  }
-
-  .hero-stats > div {
-    flex: 1 1 25%;
-    min-width: 100px;
-    text-align: center;
-  }
-
   .hero-stats > div:last-child {
     flex: 1 1 100%;
     margin-top: 10px;
-  }
-
-  /* Open Access Icon for Truncated Text */
-  .open-access-icon {
-    font-size: 1.1em;
-    vertical-align: middle;
-    margin-left: 5px;
   }
 }
 
@@ -1056,10 +1044,6 @@ h1, h2, h3 {
 
   .hero-subtitle {
     color: var(--text2) !important;
-  }
-
-  .hero-description {
-    color: var(--text) !important;
   }
 
   /* Sections */
