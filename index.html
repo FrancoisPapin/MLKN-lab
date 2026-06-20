@@ -1812,78 +1812,67 @@
     
     <!-- JavaScript for Drop-Down Menu -->
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const dropdowns = document.querySelectorAll('.dropdown');
-      const isMobile = window.innerWidth <= 768;
+document.addEventListener('DOMContentLoaded', function() {
+  const dropdowns = document.querySelectorAll('.dropdown');
+  let activeDropdown = null;
 
-      // Toggle dropdown on click
-      dropdowns.forEach(dropdown => {
-        const link = dropdown.querySelector('.nav-link');
-        if (!link) return;
-
-        link.addEventListener('click', function(e) {
-          // On mobile, prevent default to allow dropdown to open
-          if (isMobile) {
-            e.preventDefault();
-          }
-
-          // Close all other dropdowns
-          dropdowns.forEach(other => {
-            if (other !== dropdown) {
-              other.classList.remove('active');
-            }
-          });
-
-          // Toggle current dropdown
-          dropdown.classList.toggle('active');
-
-          // On mobile, scroll to dropdown if it's at the edge of the screen
-          if (isMobile && dropdown.classList.contains('active')) {
-            const rect = dropdown.getBoundingClientRect();
-            if (rect.right > window.innerWidth) {
-              dropdown.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
-            }
-          }
-        });
-      });
-
-      // Close dropdowns when clicking outside
-      document.addEventListener('click', function(e) {
-        if (!e.target.closest('.dropdown')) {
-          dropdowns.forEach(dropdown => {
-            dropdown.classList.remove('active');
-          });
-        }
-      });
-
-      // Close dropdowns when clicking a link inside (mobile only)
-      document.querySelectorAll('.dropdown-content a').forEach(link => {
-        link.addEventListener('click', function() {
-          if (isMobile) {
-            // Small delay to allow the link to be followed
-            setTimeout(() => {
-              dropdowns.forEach(dropdown => {
-                dropdown.classList.remove('active');
-              });
-            }, 300);
-          }
-        });
-      });
-
-      // Handle window resize
-      window.addEventListener('resize', function() {
-        const wasMobile = isMobile;
-        isMobile = window.innerWidth <= 768;
-
-        // If we switched from mobile to desktop or vice versa, close all dropdowns
-        if (wasMobile !== isMobile) {
-          dropdowns.forEach(dropdown => {
-            dropdown.classList.remove('active');
-          });
-        }
-      });
+  // Close all dropdowns
+  function closeAllDropdowns() {
+    dropdowns.forEach(dropdown => {
+      dropdown.classList.remove('active');
     });
-    </script>
+    activeDropdown = null;
+  }
+
+  // Toggle dropdown on click
+  dropdowns.forEach(dropdown => {
+    const link = dropdown.querySelector('.nav-link');
+    if (!link) return;
+
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      // If this dropdown is already active, close it
+      if (dropdown === activeDropdown) {
+        closeAllDropdowns();
+        return;
+      }
+
+      // Close all other dropdowns
+      closeAllDropdowns();
+
+      // Open this dropdown
+      dropdown.classList.add('active');
+      activeDropdown = dropdown;
+    });
+  });
+
+  // Close dropdowns when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.dropdown')) {
+      closeAllDropdowns();
+    }
+  });
+
+  // Close dropdowns when window is resized
+  window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) {
+      closeAllDropdowns();
+    }
+  });
+
+  // Close dropdowns when clicking a link inside
+  document.querySelectorAll('.dropdown-content a').forEach(link => {
+    link.addEventListener('click', function() {
+      // Small delay to allow the link to be followed
+      setTimeout(() => {
+        closeAllDropdowns();
+      }, 200);
+    });
+  });
+});
+</script>
     
     
 </body>
