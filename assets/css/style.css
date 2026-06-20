@@ -253,11 +253,11 @@ h1, h2, h3 {
 
 /* =============================================
    HERO SECTION
-   ============================================= */
+   ============================================= /
 .hero {
   background: var(--bg);
   border-bottom: 1px solid var(--border);
-  padding: 58px 24px 50px;
+  padding: 64px 24px 60px; / Increased padding for desktop */
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -307,13 +307,13 @@ h1, h2, h3 {
   font-weight: 300;
 }
 
-/* Hero Stats - Single Line on All Devices */
+/* Hero Stats - Single Line on All Devices, Larger on Desktop */
 .hero-stats {
   display: flex;
   justify-content: center;
   gap: 8px;
   flex-wrap: nowrap;
-  margin: 0 auto 24px;
+  margin: 0 auto 32px;
   width: 100%;
   max-width: 600px;
 }
@@ -348,6 +348,39 @@ h1, h2, h3 {
   border-radius: 50%;
   margin: 0 auto 4px;
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.7);
+}
+
+/* Desktop-only hero stats enhancements */
+@media (min-width: 769px) {
+  .hero-stats {
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .hero-stats > div {
+    min-width: 100px;
+  }
+
+  .hstat-num {
+    font-size: 32px !important;
+  }
+
+  .hstat-lbl {
+    font-size: 11px !important;
+    letter-spacing: 0.15em;
+  }
+
+  .stat-circle {
+    width: 16px !important;
+    height: 16px !important;
+    margin: 0 auto 10px !important;
+  }
+
+  /* Highlight 320K+ Connections */
+  .hero-stats > div:last-child .hstat-num {
+    font-size: 36px !important;
+    color: #FFD700 !important;
+  }
 }
 
 /* =============================================
@@ -747,13 +780,13 @@ h1, h2, h3 {
   box-sizing: border-box;
 }
 
-/* Color accents for visual hierarchy */
-.nav-grid-case:nth-child(1) { border-top: 2px solid #ff6b6b; }
-.nav-grid-case:nth-child(2) { border-top: 2px solid #4ecdc4; }
-.nav-grid-case:nth-child(3) { border-top: 2px solid #45b7d1; }
-.nav-grid-case:nth-child(4) { border-top: 2px solid #f9ca24; }
-.nav-grid-case:nth-child(5) { border-top: 2px solid #a55eea; }
-.nav-grid-case:nth-child(6) { border-top: 2px solid #ff9f43; }
+/* More distinct color accents for visual hierarchy /
+.nav-grid-case:nth-child(1) { border-top: 3px solid #ff6b6b; } / Vision (red) /
+.nav-grid-case:nth-child(2) { border-top: 3px solid #4ecdc4; } / Research (teal) /
+.nav-grid-case:nth-child(3) { border-top: 3px solid #45b7d1; } / Knowledge Network (blue) /
+.nav-grid-case:nth-child(4) { border-top: 3px solid #f9ca24; } / Knowledge Library (yellow) /
+.nav-grid-case:nth-child(5) { border-top: 3px solid #a55eea; } / Applications (purple) /
+.nav-grid-case:nth-child(6) { border-top: 3px solid #ff9f43; } / About (orange) */
 
 .nav-grid-case:hover {
   border-color: var(--accent);
@@ -806,7 +839,7 @@ h1, h2, h3 {
 
 .nav-arrow {
   color: var(--muted);
-  font-size: 14px; /* Increased arrow size /
+  font-size: 14px;
   text-decoration: none;
   transition: color 0.2s;
   margin-left: 8px;
@@ -814,7 +847,7 @@ h1, h2, h3 {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  min-width: 16px; / Ensure arrows align in a column */
+  min-width: 16px;
 }
 
 .nav-grid-list li:hover .nav-arrow {
@@ -846,6 +879,26 @@ h1, h2, h3 {
 .nav-grid-list-horizontal li {
   border-bottom: none;
   padding: 0 5px;
+}
+
+/* Desktop-only grid adjustments */
+@media (min-width: 769px) {
+  .nav-grid {
+    gap: 16px;
+  }
+
+  .nav-grid-case {
+    padding: 16px;
+  }
+
+  .nav-grid-list a:first-child {
+    font-size: 13px !important;
+  }
+
+  .nav-arrow {
+    font-size: 16px !important;
+    min-width: 20px !important;
+  }
 }
 
 /* =============================================
@@ -1238,6 +1291,25 @@ h1, h2, h3 {
   .monograph-year {
     color: #b0b0b0 !important;
   }
+}
+
+/* =============================================
+   Trust Signals: Open-Access and Peer-Reviewed Badges
+   ============================================= */
+.open-access-badge {
+  font-size: 14px;
+  margin-left: 6px;
+  color: var(--layer3);
+}
+
+.peer-reviewed-badge {
+  background: var(--accent);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-family: var(--mono);
+  margin-left: 8px;
 }
 
 /* =============================================
