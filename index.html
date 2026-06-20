@@ -1813,35 +1813,47 @@
     <!-- JavaScript for Drop-Down Menu -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const dropdowns = document.querySelectorAll('.dropdown');
+      const dropdowns = document.querySelectorAll('.dropdown');
 
-        // Toggle dropdown on click
-        dropdowns.forEach(dropdown => {
-            const link = dropdown.querySelector('.nav-link');
-            if (!link) return; // Skip if no link found
+      // Toggle dropdown on click
+      dropdowns.forEach(dropdown => {
+        const link = dropdown.querySelector('.nav-link');
+        if (!link) return;
 
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                // Close all other dropdowns
-                dropdowns.forEach(other => {
-                    if (other !== dropdown) {
-                        other.classList.remove('active');
-                    }
-                });
-                // Toggle current dropdown
-                dropdown.classList.toggle('active');
-            });
-        });
-
-        // Close dropdowns when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.dropdown')) {
-                dropdowns.forEach(dropdown => {
-                    dropdown.classList.remove('active');
-                });
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          // Close all other dropdowns
+          dropdowns.forEach(other => {
+            if (other !== dropdown) {
+              other.classList.remove('active');
             }
+          });
+          // Toggle current dropdown
+          dropdown.classList.toggle('active');
         });
       });
+
+      // Close dropdowns when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+          dropdowns.forEach(dropdown => {
+            dropdown.classList.remove('active');
+          });
+        }
+      });
+    
+      // Mobile-specific: Close dropdowns when clicking a link inside
+      document.querySelectorAll('.dropdown-content a').forEach(link => {
+        link.addEventListener('click', function() {
+          // Close all dropdowns when a link is clicked on mobile
+          if (window.innerWidth <= 768) {
+            dropdowns.forEach(dropdown => {
+              dropdown.classList.remove('active');
+            });
+          }
+        });
+      });
+    });
     </script>
     
     
