@@ -252,12 +252,12 @@ h1, h2, h3 {
 }
 
 /* =============================================
-   HERO SECTION
-   ============================================= /
+   HERO SECTION - CENTERED TITLE AND SUBTITLE
+   ============================================= */
 .hero {
   background: var(--bg);
   border-bottom: 1px solid var(--border);
-  padding: 64px 24px 60px; / Increased padding for desktop */
+  padding: 64px 24px 60px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -287,7 +287,8 @@ h1, h2, h3 {
   color: var(--text);
   line-height: 1.05;
   letter-spacing: -0.025em;
-  margin-bottom: 10px;
+  margin: 0 auto 10px;
+  text-align: center;
 }
 
 .hero-title em {
@@ -305,6 +306,7 @@ h1, h2, h3 {
   margin: 0 auto 30px;
   line-height: 1.65;
   font-weight: 300;
+  text-align: center;
 }
 
 /* Hero Stats - Single Line on All Devices, Larger on Desktop */
@@ -741,15 +743,15 @@ h1, h2, h3 {
 }
 
 /* =============================================
-   HOMEPAGE NAV GRID - FIXED TEXT WRAPPING AND ARROWS
-   ============================================= */
+   HOMEPAGE NAV GRID - FIXED TEXT VISIBILITY AND COLORED BORDERS
+   ============================================= /
 .nav-grid-container {
   max-width: 100%;
   margin: 30px auto;
   padding: 0 10px;
   font-family: var(--mono);
   font-size: 12px;
-  overflow: hidden;
+  overflow: visible; / Ensure no clipping */
 }
 
 .nav-grid-title {
@@ -778,15 +780,16 @@ h1, h2, h3 {
   transition: all 0.2s;
   min-width: 0;
   box-sizing: border-box;
+  min-height: 80px; /* Ensure minimum height for text */
 }
 
-/* More distinct color accents for visual hierarchy /
-.nav-grid-case:nth-child(1) { border-top: 3px solid #ff6b6b; } / Vision (red) /
-.nav-grid-case:nth-child(2) { border-top: 3px solid #4ecdc4; } / Research (teal) /
-.nav-grid-case:nth-child(3) { border-top: 3px solid #45b7d1; } / Knowledge Network (blue) /
-.nav-grid-case:nth-child(4) { border-top: 3px solid #f9ca24; } / Knowledge Library (yellow) /
-.nav-grid-case:nth-child(5) { border-top: 3px solid #a55eea; } / Applications (purple) /
-.nav-grid-case:nth-child(6) { border-top: 3px solid #ff9f43; } / About (orange) */
+/* Colored top borders for each grid case - RESTORED /
+.nav-grid-case:nth-child(1) { border-top: 3px solid #ff6b6b !important; } / Vision (red) /
+.nav-grid-case:nth-child(2) { border-top: 3px solid #4ecdc4 !important; } / Research (teal) /
+.nav-grid-case:nth-child(3) { border-top: 3px solid #45b7d1 !important; } / Knowledge Network (blue) /
+.nav-grid-case:nth-child(4) { border-top: 3px solid #f9ca24 !important; } / Knowledge Library (yellow) /
+.nav-grid-case:nth-child(5) { border-top: 3px solid #a55eea !important; } / Applications (purple) /
+.nav-grid-case:nth-child(6) { border-top: 3px solid #ff9f43 !important; } / About (orange) */
 
 .nav-grid-case:hover {
   border-color: var(--accent);
@@ -823,15 +826,15 @@ h1, h2, h3 {
   border-bottom: none;
 }
 
-/* FIX: Single line + aligned arrows */
+/* FIX: Restore text visibility /
 .nav-grid-list a:first-child {
   color: var(--text2);
   text-decoration: none;
   transition: color 0.2s;
   flex-grow: 1;
-  white-space: nowrap !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
+  white-space: normal !important; / Allow text to wrap /
+  word-break: break-word !important; / Break long words if needed /
+  overflow: visible !important; / Ensure text is visible */
   font-size: 12px;
   line-height: 1.4;
   text-align: left;
@@ -967,6 +970,7 @@ h1, h2, h3 {
 
   .nav-grid-case {
     padding: 10px;
+    min-height: auto; /* Reset for mobile */
   }
 
   .nav-grid-case-title {
@@ -975,6 +979,8 @@ h1, h2, h3 {
 
   .nav-grid-list a:first-child {
     font-size: 11px;
+    white-space: normal !important;
+    word-break: break-word !important;
   }
 
   .nav-arrow {
@@ -999,7 +1005,7 @@ h1, h2, h3 {
   }
 }
 
-/* Safari-specific fix for grid overflow */
+/* Safari-specific fixes */
 @supports (-webkit-touch-callout: none) {
   .nav-grid-container {
     width: calc(100% - 20px);
@@ -1009,6 +1015,15 @@ h1, h2, h3 {
 
   .nav-grid {
     width: 100%;
+  }
+
+  .nav-grid-case {
+    min-height: 80px; /* Ensure minimum height for Safari */
+  }
+
+  .nav-grid-list a:first-child {
+    white-space: normal !important;
+    overflow: visible !important;
   }
 }
 
@@ -1291,6 +1306,14 @@ h1, h2, h3 {
   .monograph-year {
     color: #b0b0b0 !important;
   }
+
+  /* Restore colored borders in dark mode */
+  .nav-grid-case:nth-child(1) { border-top: 3px solid #ff6b6b !important; }
+  .nav-grid-case:nth-child(2) { border-top: 3px solid #4ecdc4 !important; }
+  .nav-grid-case:nth-child(3) { border-top: 3px solid #45b7d1 !important; }
+  .nav-grid-case:nth-child(4) { border-top: 3px solid #f9ca24 !important; }
+  .nav-grid-case:nth-child(5) { border-top: 3px solid #a55eea !important; }
+  .nav-grid-case:nth-child(6) { border-top: 3px solid #ff9f43 !important; }
 }
 
 /* =============================================
