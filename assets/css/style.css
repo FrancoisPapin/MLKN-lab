@@ -1,7 +1,6 @@
 /* =============================================
    MLKN.labV2 — MultiLayer Knowledge Network
    Author: François Papin | May 2026 | MIT License
-   Updated: June 2026
    Modern, Minimal, Scientific, and Technological Design
    ============================================= */
 
@@ -99,7 +98,7 @@ h1, h2, h3 {
 }
 
 /* =============================================
-   TOP NAVIGATION BAR + DROP-DOWN MENU + THEME TOGGLE
+   TOP NAVIGATION BAR + DROP-DOWN MENU
    ============================================= */
 .topnav {
   position: sticky;
@@ -160,10 +159,10 @@ h1, h2, h3 {
   display: flex;
   align-items: center;
   gap: 3px;
-  flex-wrap: nowrap; /* Prevent wrapping */
+  flex-wrap: wrap;
 }
 
-/* Nav link base styles /
+/* Nav link base styles */
 .nav-link {
   font-family: var(--mono);
   font-size: 12px;
@@ -179,7 +178,6 @@ h1, h2, h3 {
   gap: 5px;
   height: 100%;
   position: relative;
-  flex-shrink: 0; / Prevent shrinking */
 }
 
 .nav-link:hover {
@@ -190,11 +188,10 @@ h1, h2, h3 {
   opacity: 1;
 }
 
-/* Drop-down menu styles /
+/* Drop-down menu styles */
 .dropdown {
   position: relative;
   display: inline-block;
-  flex-shrink: 0; / Prevent shrinking */
 }
 
 .dropdown-content {
@@ -227,41 +224,6 @@ h1, h2, h3 {
   display: block;
 }
 
-/* Theme Toggle Button /
-.theme-toggle-btn {
-  background: transparent;
-  border: none;
-  color: var(--text2);
-  cursor: pointer;
-  font-size: 14px;
-  padding: 8px 10px;
-  border-radius: var(--r);
-  transition: color 0.2s, background 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 8px;
-  flex-shrink: 0; / Prevent wrapping */
-}
-
-.theme-toggle-btn:hover {
-  color: var(--accent);
-  background: rgba(26, 107, 170, 0.1);
-}
-
-.theme-toggle-btn i {
-  font-size: 14px;
-}
-
-/* Dark mode toggle button icon */
-.dark-mode .theme-toggle-btn i.fa-moon {
-  display: none;
-}
-
-.dark-mode .theme-toggle-btn i.fa-sun {
-  display: inline;
-}
-
 /* =============================================
    TOOLTIPS (Optional)
    ============================================= */
@@ -289,12 +251,12 @@ h1, h2, h3 {
 }
 
 /* =============================================
-   HERO SECTION - CENTERED TITLE AND SUBTITLE
+   HERO SECTION
    ============================================= */
 .hero {
   background: var(--bg);
   border-bottom: 1px solid var(--border);
-  padding: 64px 24px 60px;
+  padding: 58px 24px 50px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -324,8 +286,7 @@ h1, h2, h3 {
   color: var(--text);
   line-height: 1.05;
   letter-spacing: -0.025em;
-  margin: 0 auto 10px;
-  text-align: center;
+  margin-bottom: 10px;
 }
 
 .hero-title em {
@@ -343,30 +304,20 @@ h1, h2, h3 {
   margin: 0 auto 30px;
   line-height: 1.65;
   font-weight: 300;
-  text-align: center;
 }
 
-/* Hero Stats - Single Line on All Devices, Larger on Desktop */
+/* Hero Stats */
 .hero-stats {
   display: flex;
   justify-content: center;
-  gap: 8px;
-  flex-wrap: nowrap;
-  margin: 0 auto 32px;
-  width: 100%;
-  max-width: 600px;
-}
-
-.hero-stats > div {
-  flex: 0 0 auto;
-  min-width: 70px;
-  text-align: center;
-  white-space: nowrap;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
 }
 
 .hstat-num {
   font-family: var(--mono);
-  font-size: 20px;
+  font-size: 26px;
   font-weight: 700;
   color: var(--accent);
   line-height: 1;
@@ -374,52 +325,19 @@ h1, h2, h3 {
 
 .hstat-lbl {
   font-family: var(--mono);
-  font-size: 7px;
+  font-size: 9px;
   color: var(--muted);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-top: 2px;
+  margin-top: 3px;
 }
 
 .stat-circle {
-  width: 10px;
-  height: 10px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  margin: 0 auto 4px;
+  margin: 0 auto 8px;
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.7);
-}
-
-/* Desktop-only hero stats enhancements */
-@media (min-width: 769px) {
-  .hero-stats {
-    gap: 24px;
-    margin-bottom: 40px;
-  }
-
-  .hero-stats > div {
-    min-width: 100px;
-  }
-
-  .hstat-num {
-    font-size: 32px !important;
-  }
-
-  .hstat-lbl {
-    font-size: 11px !important;
-    letter-spacing: 0.15em;
-  }
-
-  .stat-circle {
-    width: 16px !important;
-    height: 16px !important;
-    margin: 0 auto 10px !important;
-  }
-
-  /* Highlight 320K+ Connections */
-  .hero-stats > div:last-child .hstat-num {
-    font-size: 36px !important;
-    color: #FFD700 !important;
-  }
 }
 
 /* =============================================
@@ -780,15 +698,15 @@ h1, h2, h3 {
 }
 
 /* =============================================
-   HOMEPAGE NAV GRID - FIXED TEXT VISIBILITY AND COLORED BORDERS
+   HOMEPAGE NAV GRID
    ============================================= */
 .nav-grid-container {
   max-width: 100%;
   margin: 30px auto;
-  padding: 0 10px;
+  padding: 0 15px;
   font-family: var(--mono);
   font-size: 12px;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .nav-grid-title {
@@ -804,7 +722,7 @@ h1, h2, h3 {
 .nav-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 15px;
   margin-bottom: 20px;
   width: 100%;
 }
@@ -813,20 +731,19 @@ h1, h2, h3 {
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: var(--r);
-  padding: 12px;
+  padding: 15px;
   transition: all 0.2s;
   min-width: 0;
   box-sizing: border-box;
-  min-height: 80px;
 }
 
-/* Colored top borders for each grid case - RESTORED /
-.nav-grid-case:nth-child(1) { border-top: 3px solid #ff6b6b !important; } / Vision (red) /
-.nav-grid-case:nth-child(2) { border-top: 3px solid #4ecdc4 !important; } / Research (teal) /
-.nav-grid-case:nth-child(3) { border-top: 3px solid #45b7d1 !important; } / Knowledge Network (blue) /
-.nav-grid-case:nth-child(4) { border-top: 3px solid #f9ca24 !important; } / Knowledge Library (yellow) /
-.nav-grid-case:nth-child(5) { border-top: 3px solid #a55eea !important; } / Applications (purple) /
-.nav-grid-case:nth-child(6) { border-top: 3px solid #ff9f43 !important; } / About (orange) */
+/* Color accents for visual hierarchy */
+.nav-grid-case:nth-child(1) { border-top: 2px solid #ff6b6b; }
+.nav-grid-case:nth-child(2) { border-top: 2px solid #4ecdc4; }
+.nav-grid-case:nth-child(3) { border-top: 2px solid #45b7d1; }
+.nav-grid-case:nth-child(4) { border-top: 2px solid #f9ca24; }
+.nav-grid-case:nth-child(5) { border-top: 2px solid #a55eea; }
+.nav-grid-case:nth-child(6) { border-top: 2px solid #ff9f43; }
 
 .nav-grid-case:hover {
   border-color: var(--accent);
@@ -834,7 +751,7 @@ h1, h2, h3 {
 }
 
 .nav-grid-case-title {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--text);
   margin-bottom: 10px;
@@ -848,14 +765,14 @@ h1, h2, h3 {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .nav-grid-list li {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 4px 0;
+  padding: 5px 0;
   border-bottom: 1px solid rgba(26, 30, 46, 0.05);
 }
 
@@ -863,31 +780,24 @@ h1, h2, h3 {
   border-bottom: none;
 }
 
-/* FIX: Restore text visibility */
 .nav-grid-list a:first-child {
   color: var(--text2);
   text-decoration: none;
   transition: color 0.2s;
   flex-grow: 1;
   white-space: normal !important;
-  word-break: break-word !important;
   overflow: visible !important;
-  font-size: 12px;
-  line-height: 1.4;
-  text-align: left;
+  text-overflow: clip !important;
+  word-break: break-word;
 }
 
 .nav-arrow {
   color: var(--muted);
-  font-size: 14px;
+  font-size: 12px;
   text-decoration: none;
   transition: color 0.2s;
-  margin-left: 8px;
+  margin-left: 10px;
   flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  min-width: 16px;
 }
 
 .nav-grid-list li:hover .nav-arrow {
@@ -921,28 +831,8 @@ h1, h2, h3 {
   padding: 0 5px;
 }
 
-/* Desktop-only grid adjustments */
-@media (min-width: 769px) {
-  .nav-grid {
-    gap: 16px;
-  }
-
-  .nav-grid-case {
-    padding: 16px;
-  }
-
-  .nav-grid-list a:first-child {
-    font-size: 13px !important;
-  }
-
-  .nav-arrow {
-    font-size: 16px !important;
-    min-width: 20px !important;
-  }
-}
-
 /* =============================================
-   RESPONSIVE DESIGN - MOBILE-FIRST
+   RESPONSIVE DESIGN
    ============================================= */
 
 @media (max-width: 1024px) {
@@ -979,35 +869,30 @@ h1, h2, h3 {
     gap: 12px;
   }
 
-  /* Hero Stats - Single Line on Mobile */
   .hero-stats {
-    gap: 6px;
-    margin-bottom: 20px;
-    max-width: 100%;
-    padding: 0 10px;
-  }
-
-  .hero-stats > div {
-    min-width: 60px;
+    gap: 12px;
   }
 
   .hstat-num {
-    font-size: 18px;
+    font-size: 22px;
   }
 
   .hstat-lbl {
-    font-size: 6px;
+    font-size: 8px;
   }
 
-  /* Nav Grid - Single Column on Mobile */
+  /* Nav Grid Mobile Fixes */
+  .nav-grid-container {
+    padding: 0 10px;
+  }
+
   .nav-grid {
     grid-template-columns: 1fr;
-    gap: 8px;
+    gap: 10px;
   }
 
   .nav-grid-case {
-    padding: 10px;
-    min-height: auto;
+    padding: 12px;
   }
 
   .nav-grid-case-title {
@@ -1015,42 +900,25 @@ h1, h2, h3 {
   }
 
   .nav-grid-list a:first-child {
-    font-size: 11px;
     white-space: normal !important;
-    word-break: break-word !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    word-break: break-word;
   }
 
-  .nav-arrow {
-    font-size: 14px;
-    min-width: 16px;
+  .nav-grid-list-horizontal {
+    gap: 8px;
+    flex-direction: column;
   }
 
-  /* Top Navigation Bar - Mobile Fixes */
-  .topnav {
-    height: 50px;
-  }
-
-  .topnav-inner {
-    gap: 6px;
-    padding: 0 10px;
-  }
-
-  .logo-mark {
-    width: 24px;
-    height: 24px;
-  }
-
-  .logo-text {
-    font-size: 10px;
-  }
-
-  .nav-links {
-    gap: 2px;
+  .nav-grid-list-horizontal li {
+    padding: 0;
+    margin: 5px 0;
   }
 
   .nav-link {
-    padding: 6px 8px;
-    font-size: 10px;
+    padding: 8px 10px;
+    font-size: 11px;
   }
 
   .dropdown-content {
@@ -1060,18 +928,12 @@ h1, h2, h3 {
     transform: translateX(-50%);
   }
 
-  /* Theme Toggle Button - Mobile */
-  .theme-toggle-btn {
-    padding: 6px 8px;
-    margin-left: 4px;
-  }
-
-  .theme-toggle-btn i {
-    font-size: 12px;
+  .topnav {
+    height: 50px;
   }
 }
 
-/* Safari-specific fixes */
+/* Safari-specific fix for grid overflow */
 @supports (-webkit-touch-callout: none) {
   .nav-grid-container {
     width: calc(100% - 20px);
@@ -1082,42 +944,21 @@ h1, h2, h3 {
   .nav-grid {
     width: 100%;
   }
-
-  .nav-grid-case {
-    min-height: 80px;
-  }
-
-  .nav-grid-list a:first-child {
-    white-space: normal !important;
-    overflow: visible !important;
-  }
-
-  /* Top Navigation Bar - Safari Fix */
-  .topnav-inner {
-    flex-wrap: nowrap !important;
-    overflow: hidden;
-  }
-
-  .nav-links {
-    flex-wrap: nowrap !important;
-  }
-
-  .theme-toggle-btn {
-    flex-shrink: 0;
-  }
 }
 
 /* =============================================
-   DARK MODE STYLES - CLASS-BASED (for Toggle)
+   DARK MODE STYLES (FULLY UPDATED)
    ============================================= /
-.dark-mode {
+@media (prefers-color-scheme: dark) {
   / Base Colors */
-  --bg: #121212;
-  --panel: rgba(30, 30, 30, 0.97);
-  --border: #333333;
-  --text: #e0e0e0;
-  --text2: #b0b0b0;
-  --muted: #8a8a8a;
+  :root {
+    --bg: #121212;
+    --panel: rgba(30, 30, 30, 0.97);
+    --border: #333333;
+    --text: #e0e0e0;
+    --text2: #b0b0b0;
+    --muted: #8a8a8a;
+  }
 
   /* Body and Global Text */
   body {
@@ -1183,19 +1024,6 @@ h1, h2, h3 {
 
   .hero-subtitle {
     color: var(--text2) !important;
-  }
-
-  /* Hero Stats Dark Mode */
-  .hstat-num {
-    color: var(--accent) !important;
-  }
-
-  .hstat-lbl {
-    color: var(--muted) !important;
-  }
-
-  .stat-circle {
-    box-shadow: 0 0 0 2px var(--border) !important;
   }
 
   /* Sections */
@@ -1386,45 +1214,16 @@ h1, h2, h3 {
   }
 
   /* Restore colored borders in dark mode */
-  .nav-grid-case:nth-child(1) { border-top: 3px solid #ff6b6b !important; }
-  .nav-grid-case:nth-child(2) { border-top: 3px solid #4ecdc4 !important; }
-  .nav-grid-case:nth-child(3) { border-top: 3px solid #45b7d1 !important; }
-  .nav-grid-case:nth-child(4) { border-top: 3px solid #f9ca24 !important; }
-  .nav-grid-case:nth-child(5) { border-top: 3px solid #a55eea !important; }
-  .nav-grid-case:nth-child(6) { border-top: 3px solid #ff9f43 !important; }
-
-  /* Theme Toggle Button - Dark Mode */
-  .theme-toggle-btn {
-    color: var(--text2) !important;
-  }
-
-  .theme-toggle-btn:hover {
-    background: rgba(255, 255, 255, 0.05) !important;
-    color: var(--accent) !important;
-  }
+  .nav-grid-case:nth-child(1) { border-top: 2px solid #ff6b6b !important; }
+  .nav-grid-case:nth-child(2) { border-top: 2px solid #4ecdc4 !important; }
+  .nav-grid-case:nth-child(3) { border-top: 2px solid #45b7d1 !important; }
+  .nav-grid-case:nth-child(4) { border-top: 2px solid #f9ca24 !important; }
+  .nav-grid-case:nth-child(5) { border-top: 2px solid #a55eea !important; }
+  .nav-grid-case:nth-child(6) { border-top: 2px solid #ff9f43 !important; }
 }
 
 /* =============================================
-   Trust Signals: Open-Access and Peer-Reviewed Badges
-   ============================================= */
-.open-access-badge {
-  font-size: 14px;
-  margin-left: 6px;
-  color: var(--layer3);
-}
-
-.peer-reviewed-badge {
-  background: var(--accent);
-  color: white;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 10px;
-  font-family: var(--mono);
-  margin-left: 8px;
-}
-
-/* =============================================
-   Adjustments for MLKN.model - Mathematical Foundations
+   Ajustments for MLKN.model - Mathematical Foundations
    ============================================= */
 .math-container {
   display: inline-block;
