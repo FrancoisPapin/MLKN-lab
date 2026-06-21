@@ -2135,6 +2135,8 @@ sub, sup {
     box-shadow: var(--sh2);
     padding: 15px;
     z-index: 1000;
+    max-height: 80vh;
+    overflow-y: auto;
   }
 
   /* Mobile menu items */
@@ -2169,7 +2171,7 @@ sub, sup {
     transform: rotate(180deg);
   }
 
-  /* Mobile dropdown menus */
+  /* Mobile dropdown menus - FIXED */
   .topnav.mobile-menu-active .dropdown-menu {
     display: none;
     position: static;
@@ -2181,6 +2183,7 @@ sub, sup {
     margin-left: 15px;
     padding-left: 15px;
     background: transparent;
+    width: auto;
   }
 
   .topnav.mobile-menu-active .has-dropdown.active .dropdown-menu {
@@ -2193,6 +2196,7 @@ sub, sup {
     border-bottom: 1px solid var(--border);
     display: block;
     color: var(--text) !important;
+    white-space: nowrap;
   }
 
   /* Hide logo text on mobile */
@@ -2206,7 +2210,7 @@ sub, sup {
     height: 32px !important;
   }
 
-  /* Horizontal mobile mode - show desktop nav */
+  /* Horizontal mobile mode - show desktop nav with dropdowns */
   @media (max-width: 768px) and (orientation: landscape) {
     .mobile-menu-toggle {
       display: none !important;
@@ -2226,6 +2230,7 @@ sub, sup {
       font-size: 11px;
     }
 
+    /* Fix for horizontal mobile dropdowns */
     .dropdown-menu {
       display: none;
       position: absolute;
@@ -2244,6 +2249,10 @@ sub, sup {
     .has-dropdown:hover .dropdown-menu {
       display: block;
     }
+
+    /* Ensure dropdowns stay within viewport */
+    .dropdown {
+      position: relative;
+    }
   }
 }
-
