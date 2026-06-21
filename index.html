@@ -1769,67 +1769,22 @@
         <p class="sf-legal">© François Papin · May 2026 · MIT License · MLKN.lab</p>
     </footer>
 
-    <!-- JavaScript to highlight active section in nav boxes -->
-    <script>
-        // Highlight the active section in the nav boxes
-        document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('section[id]');
-            const navBoxes = document.querySelectorAll('.nav-box');
-
-            // Function to update active links in all nav boxes
-            function updateActiveLinks() {
-                let currentSection = '';
-
-                // Check which section is in view
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    if (window.scrollY >= (sectionTop - 200)) {
-                        currentSection = section.getAttribute('id');
-                    }
-                });
-
-                // Update active class in all nav boxes
-                navBoxes.forEach(navBox => {
-                    const links = navBox.querySelectorAll('a');
-                    links.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === `#${currentSection}`) {
-                            link.classList.add('active');
-                        }
-                    });
-                });
-            }
-
-            // Update on scroll
-            window.addEventListener('scroll', updateActiveLinks);
-            // Update on load
-            updateActiveLinks();
-        });
-    </script>
-
-    <!-- JavaScript for nav bar -->
     <!-- JavaScript for Navigation and Active Section Highlighting -->
 <script>
-  // Highlight the active section in the nav boxes
   document.addEventListener('DOMContentLoaded', function() {
+    // Highlight the active section in the nav boxes
     const sections = document.querySelectorAll('section[id]');
     const navBoxes = document.querySelectorAll('.nav-box');
 
-    // Function to update active links in all nav boxes
     function updateActiveLinks() {
       let currentSection = '';
-
-      // Check which section is in view
       sections.forEach(section => {
         const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
         if (window.scrollY >= (sectionTop - 200)) {
           currentSection = section.getAttribute('id');
         }
       });
 
-      // Update active class in all nav boxes
       navBoxes.forEach(navBox => {
         const links = navBox.querySelectorAll('a');
         links.forEach(link => {
@@ -1841,9 +1796,7 @@
       });
     }
 
-    // Update on scroll
     window.addEventListener('scroll', updateActiveLinks);
-    // Update on load
     updateActiveLinks();
 
     // Mobile Navigation Functionality
@@ -1856,7 +1809,6 @@
       mobileMenuToggle.addEventListener('click', function(e) {
         e.stopPropagation();
         topnav.classList.toggle('mobile-menu-active');
-        // Close all dropdowns when opening menu
         hasDropdowns.forEach(item => {
           item.classList.remove('active');
         });
@@ -1873,13 +1825,12 @@
       }
     });
 
-    // Toggle dropdowns on mobile
+    // Toggle dropdowns on mobile - FIXED
     hasDropdowns.forEach(item => {
       const link = item.querySelector('> a');
       if (!link) return;
 
       link.addEventListener('click', function(e) {
-        // Only handle clicks on mobile
         if (window.innerWidth <= 768) {
           e.preventDefault();
           e.stopPropagation();
