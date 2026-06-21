@@ -29,7 +29,7 @@
       <ul class="primary-nav">
         <li><a href="index.html">Home</a></li>
         <li class="has-dropdown">
-          <a href="javascript:void(0)">Research</a>
+          <a>Research</a>
           <ul class="dropdown-menu">
             <li><a href="research/research.html">Research Focus</a></li>
             <li><a href="model/model.html">MLKN.model</a></li>
@@ -38,7 +38,7 @@
           </ul>
         </li>
         <li class="has-dropdown">
-          <a href="javascript:void(0)">Knowledge Network</a>
+          <a>Knowledge Network</a>
           <ul class="dropdown-menu">
             <li><a href="polyhierarchy/polyhierarchy.html">Polyhierarchy</a></li>
             <li><a href="knowledge_network/interdisciplinary.html">MLKN.hypergraph</a></li>
@@ -46,7 +46,7 @@
           </ul>
         </li>
         <li class="has-dropdown">
-          <a href="javascript:void(0)">Knowledge Library</a>
+          <a>Knowledge Library</a>
           <ul class="dropdown-menu">
             <li><a href="references/references.html">Scientific References</a></li>
             <li><a href="monographs/monographs.html">Open Access Monographs</a></li>
@@ -54,7 +54,7 @@
           </ul>
         </li>
         <li class="has-dropdown">
-          <a href="javascript:void(0)">Applications</a>
+          <a>Applications</a>
           <ul class="dropdown-menu">
             <li><a href="applications/applications.html">General Applications</a></li>
             <li><a href="essay/essay.html">Essays & Explorations</a></li>
@@ -62,7 +62,7 @@
           </ul>
         </li>
         <li class="has-dropdown">
-          <a href="javascript:void(0)">About</a>
+          <a>About</a>
           <ul class="dropdown-menu">
             <li><a href="about/about.html">About</a></li>
             <li><a href="inspirations/inspirations.html">Inspirations</a></li>
@@ -1777,64 +1777,39 @@
 document.addEventListener('DOMContentLoaded', function() {
   const topnav = document.querySelector('.topnav');
   const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-  const hasDropdowns = document.querySelectorAll('.has-dropdown');
 
-  // Toggle mobile menu
+  // Toggle mobile menu (vertical only)
   mobileMenuToggle.addEventListener('click', function(e) {
     e.stopPropagation();
     topnav.classList.toggle('mobile-menu-active');
-    hasDropdowns.forEach(item => item.classList.remove('active'));
   });
 
   // Close menu when clicking outside
   document.addEventListener('click', function(e) {
     if (!e.target.closest('.topnav')) {
       topnav.classList.remove('mobile-menu-active');
-      hasDropdowns.forEach(item => item.classList.remove('active'));
     }
   });
 
-  // Toggle dropdowns on ALL devices (desktop + mobile)
-  hasDropdowns.forEach(item => {
-    const link = item.querySelector('> a');
-    if (link) {
-      link.addEventListener('click', function(e) {
-        // Always prevent default for parent links
-        e.preventDefault();
-
-        // On mobile: toggle dropdown
-        if (window.innerWidth <= 768) {
-          e.stopPropagation();
-          hasDropdowns.forEach(other => {
-            if (other !== item) other.classList.remove('active');
-          });
-          item.classList.toggle('active');
-        }
-        // On desktop: show dropdown on click (optional)
-        else {
-          hasDropdowns.forEach(other => {
-            if (other !== item) other.classList.remove('active');
-          });
-          item.classList.toggle('active');
-        }
-      });
-    }
-  });
-
-  // Close dropdowns when clicking child links on mobile
-  document.querySelectorAll('.dropdown-menu a').forEach(link => {
-    link.addEventListener('click', function() {
-      if (window.innerWidth <= 768) {
-        setTimeout(() => {
-          topnav.classList.remove('mobile-menu-active');
-          hasDropdowns.forEach(item => item.classList.remove('active'));
-        }, 200);
-      }
-    });
-  });
-
-  // Desktop hover behavior
+  // Desktop: dropdowns on hover
   if (window.innerWidth > 768) {
+    const hasDropdowns = document.querySelectorAll('.has-dropdown');
+    hasDropdowns.forEach(item => {
+      item.addEventListener('mouseenter', function() {
+        hasDropdowns.forEach(other => {
+          if (other !== item) other.classList.remove('active');
+        });
+        item.classList.add('active');
+      });
+      item.addEventListener('mouseleave', function() {
+        item.classList.remove('active');
+      });
+    });
+  }
+
+  // Mobile Horizontal: dropdowns on hover
+  if (window.innerWidth <= 768 && window.matchMedia("(orientation: landscape)").matches) {
+    const hasDropdowns = document.querySelectorAll('.has-dropdown');
     hasDropdowns.forEach(item => {
       item.addEventListener('mouseenter', function() {
         hasDropdowns.forEach(other => {
