@@ -12,72 +12,138 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Top Navigation Bar (for external HTML pages) -->
+    <!-- Top Navigation Bar (a mobile-optimized version) -->
     <header class="topnav" role="banner">
-    <div class="topnav-inner">
-            <a href="index.html" class="topnav-logo">
-                <div class="logo-mark">ML</div>
-                <span class="logo-text">MLKN.lab</span>
-            </a>
-            <div class="nav-links">
+  <div class="topnav-inner">
+    <a href="index.html" class="topnav-logo">
+      <div class="logo-mark">ML</div>
+      <span class="logo-text">MLKN.lab</span>
+    </a>
 
-                <!-- Research Drop-Down -->
-                <div class="dropdown">
-                    <a href="#" class="nav-link"><i class="fas fa-microscope"></i></a>
-                    <div class="dropdown-content">
-                        <a href="research/research.html">Research Focus</a>
-                        <a href="model/model.html">MLKN.model</a>
-                        <a href="model/model-mathematical-foundations.html">MLKN.model Mathematical Foundations</a>
-                        <a href="method/method.html">Method</a>
-                    </div>
-                </div>
+    <!-- Mobile Menu Toggle Button (Hidden on Desktop) -->
+    <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button>
 
-                <!-- Knowledge Networks Drop-Down -->
-                <div class="dropdown">
-                    <a href="#" class="nav-link"><i class="fas fa-sitemap"></i></a>
-                    <div class="dropdown-content">
-                        <a href="polyhierarchy/polyhierarchy.html">Polyhierarchy</a>
-                        <a href="knowledge_network/interdisciplinary.html">MLKN.hypergraph</a>
-                        <a href="data/data.html">Data</a>
-                    </div>
-                </div>
-
-                <!-- Knowledge Library Drop-Down -->
-                <div class="dropdown">
-                    <a href="#" class="nav-link"><i class="fas fa-book"></i></a>
-                    <div class="dropdown-content">
-                        <a href="references/references.html">Scientific References</a>
-                        <a href="monographs/monographs.html">Open Access Monographs</a>
-                        <a href="normative_references/normative-references.html">Normative References</a>
-                    </div>
-                </div>
-                
-                <!-- Applications Drop-Down -->
-                <div class="dropdown">
-                    <a href="#" class="nav-link"><i class="fas fa-lightbulb"></i></a>
-                    <div class="dropdown-content">
-                        <a href="applications/applications.html">General Applications</a>
-                        <a href="essay/essay.html">Essays & Explorations</a>
-                        <a href="normative_applications/normative-applications.html">Normative Applications</a>
-                    </div>
-                </div>
-
-                <!-- About Drop-Down -->
-                <div class="dropdown">
-                    <a href="#" class="nav-link"><i class="fas fa-info-circle"></i></a>
-                    <div class="dropdown-content">
-                        <a href="about/about.html">About</a>
-                        <a href="inspirations/inspirations.html">Inspirations</a>
-                        <a href="normative_foundations/normative-foundations.html">Normative Foundations</a>
-                    </div>
-                </div>
-            </div>
+    <!-- Desktop Navigation (Hidden on Mobile) -->
+    <div class="nav-links desktop-nav">
+      <!-- Research Drop-Down -->
+      <div class="dropdown">
+        <a href="#" class="nav-link"><i class="fas fa-microscope"></i></a>
+        <div class="dropdown-content">
+          <a href="research/research.html">Research Focus</a>
+          <a href="model/model.html">MLKN.model</a>
+          <a href="model/model-mathematical-foundations.html">MLKN.model Mathematical Foundations</a>
+          <a href="method/method.html">Method</a>
         </div>
-        
-        <br>
-        <br>
-        
-   </header>
+      </div>
+
+      <!-- Knowledge Networks Drop-Down -->
+      <div class="dropdown">
+        <a href="#" class="nav-link"><i class="fas fa-sitemap"></i></a>
+        <div class="dropdown-content">
+          <a href="polyhierarchy/polyhierarchy.html">Polyhierarchy</a>
+          <a href="knowledge_network/interdisciplinary.html">MLKN.hypergraph</a>
+          <a href="data/data.html">Data</a>
+        </div>
+      </div>
+
+      <!-- Knowledge Library Drop-Down -->
+      <div class="dropdown">
+        <a href="#" class="nav-link"><i class="fas fa-book"></i></a>
+        <div class="dropdown-content">
+          <a href="references/references.html">Scientific References</a>
+          <a href="monographs/monographs.html">Open Access Monographs</a>
+          <a href="normative_references/normative-references.html">Normative References</a>
+        </div>
+      </div>
+
+      <!-- Applications Drop-Down -->
+      <div class="dropdown">
+        <a href="#" class="nav-link"><i class="fas fa-lightbulb"></i></a>
+        <div class="dropdown-content">
+          <a href="applications/applications.html">General Applications</a>
+          <a href="essay/essay.html">Essays & Explorations</a>
+          <a href="normative_applications/normative-applications.html">Normative Applications</a>
+        </div>
+      </div>
+
+      <!-- About Drop-Down -->
+      <div class="dropdown">
+        <a href="#" class="nav-link"><i class="fas fa-info-circle"></i></a>
+        <div class="dropdown-content">
+          <a href="about/about.html">About</a>
+          <a href="inspirations/inspirations.html">Inspirations</a>
+          <a href="normative_foundations/normative-foundations.html">Normative Foundations</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Menu (Hidden on Desktop) -->
+    <div class="mobile-nav-menu">
+      <div class="mobile-nav-section">
+        <div class="mobile-nav-header">
+          <i class="fas fa-microscope"></i>
+          <span>Research</span>
+        </div>
+        <div class="mobile-nav-links">
+          <a href="research/research.html">Research Focus</a>
+          <a href="model/model.html">MLKN.model</a>
+          <a href="model/model-mathematical-foundations.html">MLKN.model Mathematical Foundations</a>
+          <a href="method/method.html">Method</a>
+        </div>
+      </div>
+
+      <div class="mobile-nav-section">
+        <div class="mobile-nav-header">
+          <i class="fas fa-sitemap"></i>
+          <span>Knowledge Networks</span>
+        </div>
+        <div class="mobile-nav-links">
+          <a href="polyhierarchy/polyhierarchy.html">Polyhierarchy</a>
+          <a href="knowledge_network/interdisciplinary.html">MLKN.hypergraph</a>
+          <a href="data/data.html">Data</a>
+        </div>
+      </div>
+
+      <div class="mobile-nav-section">
+        <div class="mobile-nav-header">
+          <i class="fas fa-book"></i>
+          <span>Knowledge Library</span>
+        </div>
+        <div class="mobile-nav-links">
+          <a href="references/references.html">Scientific References</a>
+          <a href="monographs/monographs.html">Open Access Monographs</a>
+          <a href="normative_references/normative-references.html">Normative References</a>
+        </div>
+      </div>
+
+      <div class="mobile-nav-section">
+        <div class="mobile-nav-header">
+          <i class="fas fa-lightbulb"></i>
+          <span>Applications</span>
+        </div>
+        <div class="mobile-nav-links">
+          <a href="applications/applications.html">General Applications</a>
+          <a href="essay/essay.html">Essays & Explorations</a>
+          <a href="normative_applications/normative-applications.html">Normative Applications</a>
+        </div>
+      </div>
+
+      <div class="mobile-nav-section">
+        <div class="mobile-nav-header">
+          <i class="fas fa-info-circle"></i>
+          <span>About</span>
+        </div>
+        <div class="mobile-nav-links">
+          <a href="about/about.html">About</a>
+          <a href="inspirations/inspirations.html">Inspirations</a>
+          <a href="normative_foundations/normative-foundations.html">Normative Foundations</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
 
     <main>
         <!-- Hero Section Hero -->
@@ -1812,80 +1878,51 @@
     
     <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const dropdowns = document.querySelectorAll('.dropdown');
-  let activeDropdown = null;
-  const isMobile = window.innerWidth <= 768;
+  const topnav = document.querySelector('.topnav');
+  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
 
-  // Close all dropdowns
-  function closeAllDropdowns() {
-    dropdowns.forEach(dropdown => {
-      dropdown.classList.remove('active');
-    });
-    activeDropdown = null;
-  }
-
-  // Toggle dropdown on click
-  dropdowns.forEach(dropdown => {
-    const link = dropdown.querySelector('.nav-link');
-    if (!link) return;
-
-    link.addEventListener('click', function(e) {
-      // On mobile, prevent default to show dropdown
-      if (isMobile) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-
-      // If this dropdown is already active, close it
-      if (dropdown === activeDropdown) {
-        closeAllDropdowns();
-        return;
-      }
-
-      // Close all other dropdowns
-      closeAllDropdowns();
-
-      // Open this dropdown
-      dropdown.classList.add('active');
-      activeDropdown = dropdown;
-
-      // On mobile, scroll to dropdown if it's at the edge
-      if (isMobile) {
-        const rect = dropdown.getBoundingClientRect();
-        if (rect.right > window.innerWidth) {
-          dropdown.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
-        }
-      }
-    });
+  // Toggle mobile menu
+  mobileMenuToggle.addEventListener('click', function() {
+    topnav.classList.toggle('mobile-menu-active');
   });
 
-  // Close dropdowns when clicking outside
+  // Close mobile menu when clicking outside
   document.addEventListener('click', function(e) {
-    if (!e.target.closest('.dropdown')) {
-      closeAllDropdowns();
+    if (!e.target.closest('.topnav')) {
+      topnav.classList.remove('mobile-menu-active');
     }
   });
 
-  // Close dropdowns when clicking a link inside
-  document.querySelectorAll('.dropdown-content a').forEach(link => {
+  // Close mobile menu when clicking a link
+  document.querySelectorAll('.mobile-nav-links a').forEach(link => {
     link.addEventListener('click', function() {
-      // Small delay to allow the link to be followed
-      setTimeout(() => {
-        closeAllDropdowns();
-      }, 200);
+      topnav.classList.remove('mobile-menu-active');
     });
   });
 
-  // Handle window resize
-  window.addEventListener('resize', function() {
-    const wasMobile = isMobile;
-    isMobile = window.innerWidth <= 768;
+  // Desktop dropdown functionality
+  if (window.innerWidth > 768) {
+    const dropdowns = document.querySelectorAll('.dropdown');
 
-    // If we switched from mobile to desktop or vice versa, close all dropdowns
-    if (wasMobile !== isMobile) {
-      closeAllDropdowns();
-    }
-  });
+    dropdowns.forEach(dropdown => {
+      const link = dropdown.querySelector('.nav-link');
+      if (!link) return;
+
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        dropdown.classList.toggle('active');
+      });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.dropdown')) {
+        dropdowns.forEach(dropdown => {
+          dropdown.classList.remove('active');
+        });
+      }
+    });
+  }
 });
 </script>
     
