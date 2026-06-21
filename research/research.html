@@ -749,78 +749,58 @@
         <p class="sf-legal">© François Papin · May 2026 · MIT License · MLKN.lab</p>
     </footer>
 
-    <!-- JavaScript to highlight active section in nav boxes -->
-    <script>
-        // Highlight the active section in the nav boxes
-        document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('section[id]');
-            const navBoxes = document.querySelectorAll('.nav-box');
+     <!-- JavaScript for Navigation and Active Section Highlighting -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const topnav = document.querySelector('.topnav');
+  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
 
-            // Function to update active links in all nav boxes
-            function updateActiveLinks() {
-                let currentSection = '';
+  // Toggle mobile menu (vertical only)
+  mobileMenuToggle.addEventListener('click', function(e) {
+    e.stopPropagation();
+    topnav.classList.toggle('mobile-menu-active');
+  });
 
-                // Check which section is in view
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    if (window.scrollY >= (sectionTop - 200)) {
-                        currentSection = section.getAttribute('id');
-                    }
-                });
+  // Close menu when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.topnav')) {
+      topnav.classList.remove('mobile-menu-active');
+    }
+  });
 
-                // Update active class in all nav boxes
-                navBoxes.forEach(navBox => {
-                    const links = navBox.querySelectorAll('a');
-                    links.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === `#${currentSection}`) {
-                            link.classList.add('active');
-                        }
-                    });
-                });
-            }
-
-            // Update on scroll
-            window.addEventListener('scroll', updateActiveLinks);
-            // Update on load
-            updateActiveLinks();
+  // Desktop: dropdowns on hover
+  if (window.innerWidth > 768) {
+    const hasDropdowns = document.querySelectorAll('.has-dropdown');
+    hasDropdowns.forEach(item => {
+      item.addEventListener('mouseenter', function() {
+        hasDropdowns.forEach(other => {
+          if (other !== item) other.classList.remove('active');
         });
-    </script>
-
-    <!-- JavaScript for Drop-Down Menu -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const dropdowns = document.querySelectorAll('.dropdown');
-
-        // Toggle dropdown on click
-        dropdowns.forEach(dropdown => {
-            const link = dropdown.querySelector('.nav-link');
-            if (!link) return; // Skip if no link found
-
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                // Close all other dropdowns
-                dropdowns.forEach(other => {
-                    if (other !== dropdown) {
-                        other.classList.remove('active');
-                    }
-                });
-                // Toggle current dropdown
-                dropdown.classList.toggle('active');
-            });
-        });
-
-        // Close dropdowns when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.dropdown')) {
-                dropdowns.forEach(dropdown => {
-                    dropdown.classList.remove('active');
-                });
-            }
-        });
+        item.classList.add('active');
       });
-    </script>
+      item.addEventListener('mouseleave', function() {
+        item.classList.remove('active');
+      });
+    });
+  }
+
+  // Mobile Horizontal: dropdowns on hover
+  if (window.innerWidth <= 768 && window.matchMedia("(orientation: landscape)").matches) {
+    const hasDropdowns = document.querySelectorAll('.has-dropdown');
+    hasDropdowns.forEach(item => {
+      item.addEventListener('mouseenter', function() {
+        hasDropdowns.forEach(other => {
+          if (other !== item) other.classList.remove('active');
+        });
+        item.classList.add('active');
+      });
+      item.addEventListener('mouseleave', function() {
+        item.classList.remove('active');
+      });
+    });
+  }
+});
+</script>
     
 </body>
 </html>
