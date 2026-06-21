@@ -29,7 +29,7 @@
       <ul class="primary-nav">
         <li><a href="index.html">Home</a></li>
         <li class="has-dropdown">
-          <a href="#">Research</a>
+          <a href="research/research.html">Research</a>
           <ul class="dropdown-menu">
             <li><a href="research/research.html">Research Focus</a></li>
             <li><a href="model/model.html">MLKN.model</a></li>
@@ -38,7 +38,7 @@
           </ul>
         </li>
         <li class="has-dropdown">
-          <a href="#">Knowledge Network</a>
+          <a href="polyhierarchy/polyhierarchy.html">Knowledge Network</a>
           <ul class="dropdown-menu">
             <li><a href="polyhierarchy/polyhierarchy.html">Polyhierarchy</a></li>
             <li><a href="knowledge_network/interdisciplinary.html">MLKN.hypergraph</a></li>
@@ -46,7 +46,7 @@
           </ul>
         </li>
         <li class="has-dropdown">
-          <a href="#">Knowledge Library</a>
+          <a href="references/references.html">Knowledge Library</a>
           <ul class="dropdown-menu">
             <li><a href="references/references.html">Scientific References</a></li>
             <li><a href="monographs/monographs.html">Open Access Monographs</a></li>
@@ -54,7 +54,7 @@
           </ul>
         </li>
         <li class="has-dropdown">
-          <a href="#">Applications</a>
+          <a href="applications/applications.html">Applications</a>
           <ul class="dropdown-menu">
             <li><a href="applications/applications.html">General Applications</a></li>
             <li><a href="essay/essay.html">Essays & Explorations</a></li>
@@ -62,7 +62,7 @@
           </ul>
         </li>
         <li class="has-dropdown">
-          <a href="#">About</a>
+          <a href="about/about.html">About</a>
           <ul class="dropdown-menu">
             <li><a href="about/about.html">About</a></li>
             <li><a href="inspirations/inspirations.html">Inspirations</a></li>
@@ -1794,24 +1794,28 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Toggle dropdowns
+  // Toggle dropdowns on mobile
   hasDropdowns.forEach(item => {
     const link = item.querySelector('> a');
     if (link) {
       link.addEventListener('click', function(e) {
         if (window.innerWidth <= 768) {
-          e.preventDefault();
+          e.preventDefault();  // ✅ Explicitly prevent default
           e.stopPropagation();
+
+          // Close other dropdowns
           hasDropdowns.forEach(other => {
             if (other !== item) other.classList.remove('active');
           });
+
+          // Toggle current dropdown
           item.classList.toggle('active');
         }
       });
     }
   });
 
-  // Close when clicking links
+  // Close dropdowns when clicking links
   document.querySelectorAll('.dropdown-menu a').forEach(link => {
     link.addEventListener('click', function() {
       if (window.innerWidth <= 768) {
