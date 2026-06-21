@@ -131,6 +131,256 @@
 
         <!-- Mathematical Foundations -->
         <section id="math" class="section" aria-labelledby="math-title">
+          <br>
+          <h2 class="sec-h" id="math-title">Mathematical Foundations</h2>
+          <p class="sec-sub">From Multilayer Networks to Polyhierarchical Hypergraphs</p>
+
+          <div class="nav-box">
+            <a href="#overview">Overview</a>
+            <a href="#math" class="active">Mathematical Foundations</a>
+            <a href="#comparison">Comparison</a>
+          </div>
+          <br>
+
+          <!-- Introduction -->
+          <div class="essay-box">
+            <p>
+              MLKN.model formalizes knowledge as a <strong>polyhierarchical hypergraph</strong> with two complementary representations:
+            </p>
+            <ol class="discipline-list">
+              <li><span class="discipline-square" style="background: #1A6BAA;"></span> A <strong>multilayer network</strong> for hierarchical structure (Layers 1-4)</li>
+              <li><span class="discipline-square" style="background: #2ECC71;"></span> A <strong>hypergraph</strong> for cross-domain connections (Layers 4-5)</li>
+            </ol>
+            <p>
+              This dual approach enables both <strong>top-down disciplinary analysis</strong> and <strong>bottom-up conceptual mapping</strong>.
+            </p>
+          </div>
+
+          <!-- =============================================
+               1. MULTILAYER NETWORK DEFINITION (Layers 1-4)
+               ============================================= -->
+          <div class="layer-card">
+            <div class="licon" style="color: #1A6BAA;">⬢</div>
+            <h3>Multilayer Network Definition (Layers 1-4)</h3>
+            <p>
+              Let <div class="math-container"><strong>G = (V, E, L, W)</strong></div> be a <strong>directed, weighted multilayer network</strong> where:
+            </p>
+            <ul class="discipline-list">
+              <li>
+                <span class="discipline-square" style="background: #1A6BAA;"></span>
+                <strong>V</strong> = <div class="math-container"><em>∪<sub>l=1 to 4</sub> V<sub>l</sub></em></div> is the set of nodes, partitioned into 4 layers:
+                <ul style="margin-top: 5px; padding-left: 20px;">
+                  <li><div class="math-container"><em>V<sub>1</sub></em></div>: Core Domains (e.g., "Formal Sciences")</li>
+                  <li><div class="math-container"><em>V<sub>2</sub></em></div>: Academic Disciplines (e.g., "Computer Science")</li>
+                  <li><div class="math-container"><em>V<sub>3</sub></em></div>: Subdisciplines (e.g., "AI")</li>
+                  <li><div class="math-container"><em>V<sub>4</sub></em></div>: Thematic Domains (e.g., "Machine Learning")</li>
+                </ul>
+              </li>
+              <li>
+                <span class="discipline-square" style="background: #1A6BAA;"></span>
+                <strong>E</strong> = <div class="math-container"><em>∪<sub>l=1 to 3</sub> E<sub>l→l+1</sub></em></div> is the set of <strong>directed edges</strong> between layers:
+                <ul style="margin-top: 5px; padding-left: 20px;">
+                  <li><div class="math-container"><em>E<sub>1→2</sub></em></div>: Core Domains → Disciplines</li>
+                  <li><div class="math-container"><em>E<sub>2→3</sub></em></div>: Disciplines → Subdisciplines</li>
+                  <li><div class="math-container"><em>E<sub>3→4</sub></em></div>: Subdisciplines → Thematic Domains</li>
+                </ul>
+              </li>
+              <li>
+                <span class="discipline-square" style="background: #1A6BAA;"></span>
+                <strong>L</strong>: <div class="math-container"><em>V → {1, 2, 3, 4}</em></div> is the <strong>layer assignment function</strong>
+              </li>
+              <li>
+                <span class="discipline-square" style="background: #1A6BAA;"></span>
+                <strong>W</strong>: <div class="math-container"><em>E → [0, 1]</em></div> is the <strong>weight function</strong> (e.g., based on OpenAlex co-occurrence data)
+              </li>
+   
+            </ul>
+            <p style="margin-top: 15px;">
+              <strong>Key Property:</strong> G is <strong>polyhierarchical</strong> - nodes in Layer l can have <strong>multiple parents</strong> in Layer l-1.
+              <br>Example: "Cognitive Science" (L2) may belong to both "Psychology" and "Computer Science" (L1).
+            </p>
+            <div class="chips" style="margin-top: 15px;">
+              <span class="chip" style="color:#1A6BAA;border-color:#1A6BAA55">Directed</span>
+              <span class="chip" style="color:#1A6BAA;border-color:#1A6BAA55">Weighted</span>
+              <span class="chip" style="color:#1A6BAA;border-color:#1A6BAA55">Polyhierarchical</span>
+            </div>
+          </div>
+
+          <!-- =============================================
+               2. HYPERGRAPH DEFINITION (Layers 4-5)
+               ============================================= -->
+          <div class="layer-card">
+            <div class="licon" style="color: #2ECC71;">⬢</div>
+            <h3>Hypergraph Definition (Layers 4-5)</h3>
+            <p>
+              Let <div class="math-container"><strong>H = (X, E, w)</strong></div> be a <strong>weighted hypergraph</strong> where:
+            </p>
+            <ul class="discipline-list">
+              <li>
+                <span class="discipline-square" style="background: #2ECC71;"></span>
+                <strong>X</strong> = <div class="math-container"><em>V<sub>4</sub> ∪ V<sub>5</sub></em></div> is the set of nodes:
+                <ul style="margin-top: 5px; padding-left: 20px;">
+                  <li><div class="math-container"><em>V<sub>4</sub></em></div>: Thematic Domains (shared with multilayer network)</li>
+                  <li><div class="math-container"><em>V<sub>5</sub></em></div>: Concepts (e.g., "Attention Mechanism")</li>
+                </ul>
+              </li>
+              <li>
+                <span class="discipline-square" style="background: #2ECC71;"></span>
+                <strong>E</strong> ⊆ <div class="math-container"><em>ℙ(X)\{∅}</em></div> is the set of <strong>hyperedges</strong>, where each hyperedge <div class="math-container"><em>e ∈ E</em></div> connects a subset of nodes <div class="math-container"><em>S ⊆ X</em></div> with <div class="math-container"><em>|S| ≥ 2</em></div>
+              </li>
+              <li>
+                <span class="discipline-square" style="background: #2ECC71;"></span>
+                <strong>w</strong>: <div class="math-container"><em>E → [0, 1]</em></div> is the <strong>weight function</strong>
+              </li>
+            </ul>
+            <p style="margin-top: 15px;">
+              <strong>Key Property:</strong> Hyperedges can connect <strong>any number of nodes</strong> across Layers 4-5, enabling representation of:
+              <ul style="margin-top: 5px; padding-left: 20px;">
+                <li>Multi-field concepts (e.g., "Transformers" in CS, Linguistics, and Neuroscience)</li>
+                <li>Non-linear relationships (e.g., "Cognition" spanning Psychology, Philosophy, and AI)</li>
+              </ul>
+            </p>
+            <div class="chips" style="margin-top: 15px;">
+              <span class="chip" style="color:#2ECC71;border-color:#2ECC7155">Undirected</span>
+              <span class="chip" style="color:#2ECC71;border-color:#2ECC7155">Multi-Edge</span>
+              <span class="chip" style="color:#2ECC71;border-color:#2ECC7155">Weighted</span>
+            </div>
+          </div>
+
+          <!-- =============================================
+               3. COMPARISON (Multilayer vs. Hypergraph)
+               ============================================= -->
+          <div class="layer-card">
+            <div class="licon" style="color: #FF6347;">⬢</div>
+            <h3>Comparison: Multilayer Network vs. Hypergraph</h3>
+            <p>
+              The two representations serve <strong>complementary purposes</strong> in MLKN.model:
+            </p>
+
+            <div style="overflow-x: auto; margin-top: 15px;">
+              <table style="width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 0.9em;">
+                <thead>
+                  <tr style="border-bottom: 2px solid var(--border);">
+                    <th style="text-align: left; padding: 10px; background: var(--panel);">Feature</th>
+                    <th style="text-align: left; padding: 10px; background: var(--panel);">Multilayer Network</th>
+                    <th style="text-align: left; padding: 10px; background: var(--panel);">Hypergraph</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom: 1px solid var(--border);">
+                    <td style="padding: 10px;"><strong>Layers</strong></td>
+                    <td style="padding: 10px;">1-4 (Core Domains → Thematic Domains)</td>
+                    <td style="padding: 10px;">4-5 (Thematic Domains → Concepts)</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--border);">
+                    <td style="padding: 10px;"><strong>Edges</strong></td>
+                    <td style="padding: 10px;">Pairs of nodes (v<sub>i</sub>, v<sub>j</sub>)</td>
+                    <td style="padding: 10px;">Subsets of nodes S ⊆ X, |S| ≥ 2</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--border);">
+                    <td style="padding: 10px;"><strong>Hierarchy</strong></td>
+                    <td style="padding: 10px;">Polyhierarchical (multiple parents allowed)</td>
+                    <td style="padding: 10px;">Flat (no inherent hierarchy)</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--border);">
+                    <td style="padding: 10px;"><strong>Purpose</strong></td>
+                    <td style="padding: 10px;">Hierarchical organization</td>
+                    <td style="padding: 10px;">Cross-domain connections</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p style="margin-top: 15px;">
+              <strong>Why Both?</strong> The multilayer network captures the <strong>disciplinary structure</strong> of science,
+              while the hypergraph captures the <strong>interdisciplinary nature</strong> of modern research.
+            </p>
+          </div>
+
+          <!-- =============================================
+               4. UNIFIED FRAMEWORK
+               ============================================= -->
+          <div class="layer-card">
+            <div class="licon" style="color: #9B59B6;">⬢</div>
+            <h3>Unified Polyhierarchical Hypergraph</h3>
+            <p>
+              MLKN.model combines both representations into a <strong>polyhierarchical hypergraph</strong>
+              <div class="math-container"><strong>P = (G, H)</strong></div> where:
+            </p>
+            <ul class="discipline-list">
+              <li>
+                <span class="discipline-square" style="background: #9B59B6;"></span>
+                <strong>G</strong> = (<div class="math-container">V<sub>1-4</sub></div>, <div class="math-container">E<sub>1-3</sub></div>, L, W) is the multilayer network
+              </li>
+              <li>
+                <span class="discipline-square" style="background: #9B59B6;"></span>
+                <strong>H</strong> = (<div class="math-container">X<sub>4-5</sub></div>, <div class="math-container">E<sub>H</sub></div>, w) is the hypergraph
+              </li>
+              <li>
+                <span class="discipline-square" style="background: #9B59B6;"></span>
+                <div class="math-container">V<sub>4</sub> = X<sub>4</sub></div> (Layer 4 is shared between G and H)
+              </li>
+            </ul>
+            <p style="margin-top: 15px;">
+              <strong>Key Innovation:</strong> Layer 4 (Thematic Domains) acts as the <strong>bridge</strong> between:
+              <ul style="margin-top: 5px; padding-left: 20px;">
+                <li>The <strong>hierarchical structure</strong> of Layers 1-3 (multilayer network)</li>
+                <li>The <strong>cross-domain connections</strong> of Layer 5 (hypergraph)</li>
+              </ul>
+            </p>
+            <div style="text-align: center; margin-top: 15px;">
+              <img src="../assets/images/polyhierarchical-hypergraph-diagram.png"
+                   alt="Polyhierarchical Hypergraph Diagram"
+                   style="width: 100%; max-width: 600px; border-radius: var(--r); box-shadow: var(--sh);">
+              <p style="margin-top: 10px; font-size: 0.85em; color: var(--muted);">
+                Visualization: The polyhierarchical hypergraph structure of MLKN.model
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Comparison Section (Optional - if you want to keep it separate) -->
+        <section id="comparison" class="section" aria-labelledby="comparison-title">
+          <br>
+          <h2 class="sec-h" id="comparison-title">Why This Hybrid Approach Matters</h2>
+          <p class="sec-sub">Addressing the Limitations of Traditional Knowledge Representations</p>
+
+          <div class="nav-box">
+            <a href="#overview">Overview</a>
+            <a href="#math">Mathematical Foundations</a>
+            <a href="#comparison" class="active">Comparison</a>
+          </div>
+          <br>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div>
+              <h3 style="color: var(--accent); margin-bottom: 10px;">Traditional Hierarchies</h3>
+              <ul class="discipline-list">
+                <li><span class="discipline-square" style="background: #FF6347;"></span> ✅ Clear parent-child relationships</li>
+                <li><span class="discipline-square" style="background: #FF6347;"></span> ✅ Intuitive for domain experts</li>
+                <li><span class="discipline-square" style="background: #FF6347;"></span> ❌ Cannot model multi-field concepts</li>
+                <li><span class="discipline-square" style="background: #FF6347;"></span> ❌ Rigid structure</li>
+              </ul>
+            </div>
+            <div>
+              <h3 style="color: var(--accent2); margin-bottom: 10px;">Traditional Hypergraphs</h3>
+              <ul class="discipline-list">
+                <li><span class="discipline-square" style="background: #2ECC71;"></span> ✅ Captures complex relationships</li>
+                <li><span class="discipline-square" style="background: #2ECC71;"></span> ✅ Flexible for cross-domain concepts</li>
+                <li><span class="discipline-square" style="background: #2ECC71;"></span> ❌ No inherent hierarchy</li>
+                <li><span class="discipline-square" style="background: #2ECC71;"></span> ❌ Harder to navigate</li>
+              </ul>
+            </div>
+          </div>
+          <p style="margin-top: 15px; text-align: center;">
+            MLKN.model's polyhierarchical hypergraph combines the <strong>strengths of both</strong>:
+            <strong>hierarchical clarity</strong> + <strong>cross-domain flexibility</strong>.
+          </p>
+        </section>
+        
+        
+        <!-- Mathematical Foundations -->
+        <section id="math" class="section" aria-labelledby="math-title">
             <br>
             <h2 class="sec-h" id="math-title">Mathematical Foundations</h2>
             <p class="sec-sub">Formalizing Knowledge as a Dynamic, Multi-Layered Hypergraph</p>
