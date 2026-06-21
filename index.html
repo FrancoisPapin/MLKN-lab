@@ -1772,7 +1772,7 @@
     <!-- JavaScript for Navigation and Active Section Highlighting -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Mobile menu toggle
+  // Mobile navigation elements
   const topnav = document.querySelector('.topnav');
   const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
   const hasDropdowns = document.querySelectorAll('.has-dropdown');
@@ -1782,6 +1782,7 @@ document.addEventListener('DOMContentLoaded', function() {
     mobileMenuToggle.addEventListener('click', function(e) {
       e.stopPropagation();
       topnav.classList.toggle('mobile-menu-active');
+      // Close all dropdowns when opening menu
       hasDropdowns.forEach(item => item.classList.remove('active'));
     });
   }
@@ -1799,6 +1800,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const link = item.querySelector('> a');
     if (link) {
       link.addEventListener('click', function(e) {
+        // ONLY handle clicks on mobile
         if (window.innerWidth <= 768) {
           e.preventDefault();
           e.stopPropagation();
@@ -1815,7 +1817,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Close dropdowns when clicking links
+  // Close dropdowns when clicking links on mobile
   document.querySelectorAll('.dropdown-menu a').forEach(link => {
     link.addEventListener('click', function() {
       if (window.innerWidth <= 768) {
@@ -1827,7 +1829,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Active section highlighting
+  // Active section highlighting (keep your existing code)
   const sections = document.querySelectorAll('section[id]');
   const navBoxes = document.querySelectorAll('.nav-box');
 
