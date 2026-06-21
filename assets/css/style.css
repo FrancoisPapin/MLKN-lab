@@ -2203,9 +2203,14 @@ sub, sup {
 }
 
 /* =============================================
-   MOBILE NAVIGATION - COMPLETE FIX
+   MOBILE NAVIGATION - COMPLETE FIX (COMBINED)
    ============================================= */
 @media (max-width: 768px) {
+  /* Prevent horizontal scrolling issues */
+  html, body {
+    overflow-x: hidden !important;
+  }
+
   /* Top navigation bar */
   .topnav {
     height: 56px !important;
@@ -2217,6 +2222,8 @@ sub, sup {
     overflow-x: auto !important;
     overflow-y: visible !important;
     -webkit-overflow-scrolling: touch !important;
+    min-width: 100% !important;
+    justify-content: flex-start !important;
   }
 
   /* Navigation links container */
@@ -2224,6 +2231,7 @@ sub, sup {
     display: flex !important;
     gap: 2px !important;
     flex-wrap: nowrap !important;
+    margin-left: 5px !important;
   }
 
   /* Individual dropdown containers */
@@ -2239,7 +2247,7 @@ sub, sup {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    min-width: 44px !important; /* Minimum touch target size */
+    min-width: 44px !important;
     height: 44px !important;
   }
 
@@ -2248,7 +2256,7 @@ sub, sup {
     margin: 0 !important;
   }
 
-  /* Dropdown content - now positioned below */
+  /* Dropdown content */
   .dropdown-content {
     position: absolute !important;
     top: 100% !important;
@@ -2260,7 +2268,8 @@ sub, sup {
     box-shadow: var(--sh2) !important;
     z-index: 1001 !important;
     display: none !important;
-    margin-top: 0 !important;
+    max-height: 70vh !important;
+    overflow-y: auto !important;
     padding: 8px 0 !important;
   }
 
@@ -2287,6 +2296,7 @@ sub, sup {
   /* Logo adjustments */
   .topnav-logo {
     margin-right: 8px !important;
+    flex-shrink: 0;
   }
 
   .logo-mark {
@@ -2296,36 +2306,7 @@ sub, sup {
 
   .logo-text {
     font-size: 12px !important;
-    display: none !important; /* Hide text on mobile to save space */
-  }
-}
-
-
-/* =============================================
-   MOBILE-SPECIFIC ENHANCEMENTS
-   ============================================= */
-@media (max-width: 768px) {
-  /* Prevent horizontal scrolling issues */
-  html, body {
-    overflow-x: hidden !important;
-  }
-
-  /* Ensure dropdowns don't get cut off by viewport */
-  .dropdown-content {
-    max-height: 70vh !important;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-  }
-
-  /* Make sure the topnav doesn't collapse */
-  .topnav-inner {
-    min-width: 100% !important;
-    justify-content: flex-start !important;
-  }
-
-  /* Adjust spacing for mobile */
-  .nav-links {
-    margin-left: 5px !important;
+    display: none !important;
   }
 }
 
