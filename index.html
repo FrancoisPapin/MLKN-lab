@@ -1810,11 +1810,11 @@
     </script>
 
     
-    <!-- JavaScript for Drop-Down Menu -->
     <script>
 document.addEventListener('DOMContentLoaded', function() {
   const dropdowns = document.querySelectorAll('.dropdown');
   let activeDropdown = null;
+  const isMobile = window.innerWidth <= 768;
 
   // Close all dropdowns
   function closeAllDropdowns() {
@@ -1830,8 +1830,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!link) return;
 
     link.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
+      // On mobile, prevent default to show dropdown
+      if (isMobile) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
 
       // If this dropdown is already active, close it
       if (dropdown === activeDropdown) {
@@ -1845,19 +1848,20 @@ document.addEventListener('DOMContentLoaded', function() {
       // Open this dropdown
       dropdown.classList.add('active');
       activeDropdown = dropdown;
+
+      // On mobile, scroll to dropdown if it's at the edge
+      if (isMobile) {
+        const rect = dropdown.getBoundingClientRect();
+        if (rect.right > window.innerWidth) {
+          dropdown.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+        }
+      }
     });
   });
 
   // Close dropdowns when clicking outside
   document.addEventListener('click', function(e) {
     if (!e.target.closest('.dropdown')) {
-      closeAllDropdowns();
-    }
-  });
-
-  // Close dropdowns when window is resized
-  window.addEventListener('resize', function() {
-    if (window.innerWidth > 768) {
       closeAllDropdowns();
     }
   });
@@ -1870,6 +1874,17 @@ document.addEventListener('DOMContentLoaded', function() {
         closeAllDropdowns();
       }, 200);
     });
+  });
+
+  // Handle window resize
+  window.addEventListener('resize', function() {
+    const wasMobile = isMobile;
+    isMobile = window.innerWidth <= 768;
+
+    // If we switched from mobile to desktop or vice versa, close all dropdowns
+    if (wasMobile !== isMobile) {
+      closeAllDropdowns();
+    }
   });
 });
 </script>
