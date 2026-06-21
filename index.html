@@ -1843,16 +1843,18 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!link) return;
 
     link.addEventListener('click', function(e) {
-      // Only handle clicks on mobile in portrait mode
-      if (window.innerWidth <= 768 && window.matchMedia("(orientation: portrait)").matches) {
+      // Only handle clicks on mobile
+      if (window.innerWidth <= 768) {
         e.preventDefault();
         e.stopPropagation();
+
         // Close other dropdowns
         hasDropdowns.forEach(other => {
           if (other !== item) {
             other.classList.remove('active');
           }
         });
+
         // Toggle current dropdown
         item.classList.toggle('active');
       }
