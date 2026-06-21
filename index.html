@@ -29,7 +29,7 @@
       <ul class="primary-nav">
         <li><a href="index.html">Home</a></li>
         <li class="has-dropdown">
-          <a href="research/research.html">Research</a>
+          <a href="javascript:void(0)">Research</a>
           <ul class="dropdown-menu">
             <li><a href="research/research.html">Research Focus</a></li>
             <li><a href="model/model.html">MLKN.model</a></li>
@@ -38,7 +38,7 @@
           </ul>
         </li>
         <li class="has-dropdown">
-          <a href="polyhierarchy/polyhierarchy.html">Knowledge Network</a>
+          <a href="javascript:void(0)">Knowledge Network</a>
           <ul class="dropdown-menu">
             <li><a href="polyhierarchy/polyhierarchy.html">Polyhierarchy</a></li>
             <li><a href="knowledge_network/interdisciplinary.html">MLKN.hypergraph</a></li>
@@ -46,7 +46,7 @@
           </ul>
         </li>
         <li class="has-dropdown">
-          <a href="references/references.html">Knowledge Library</a>
+          <a href="javascript:void(0)">Knowledge Library</a>
           <ul class="dropdown-menu">
             <li><a href="references/references.html">Scientific References</a></li>
             <li><a href="monographs/monographs.html">Open Access Monographs</a></li>
@@ -54,7 +54,7 @@
           </ul>
         </li>
         <li class="has-dropdown">
-          <a href="applications/applications.html">Applications</a>
+          <a href="javascript:void(0)">Applications</a>
           <ul class="dropdown-menu">
             <li><a href="applications/applications.html">General Applications</a></li>
             <li><a href="essay/essay.html">Essays & Explorations</a></li>
@@ -62,7 +62,7 @@
           </ul>
         </li>
         <li class="has-dropdown">
-          <a href="about/about.html">About</a>
+          <a href="javascript:void(0)">About</a>
           <ul class="dropdown-menu">
             <li><a href="about/about.html">About</a></li>
             <li><a href="inspirations/inspirations.html">Inspirations</a></li>
@@ -1794,28 +1794,34 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Toggle dropdowns on mobile
+  // Toggle dropdowns on ALL devices (desktop + mobile)
   hasDropdowns.forEach(item => {
     const link = item.querySelector('> a');
     if (link) {
       link.addEventListener('click', function(e) {
-        if (window.innerWidth <= 768) {
-          e.preventDefault();  // ✅ Explicitly prevent default
-          e.stopPropagation();
+        // Always prevent default for parent links
+        e.preventDefault();
 
-          // Close other dropdowns
+        // On mobile: toggle dropdown
+        if (window.innerWidth <= 768) {
+          e.stopPropagation();
           hasDropdowns.forEach(other => {
             if (other !== item) other.classList.remove('active');
           });
-
-          // Toggle current dropdown
+          item.classList.toggle('active');
+        }
+        // On desktop: show dropdown on click (optional)
+        else {
+          hasDropdowns.forEach(other => {
+            if (other !== item) other.classList.remove('active');
+          });
           item.classList.toggle('active');
         }
       });
     }
   });
 
-  // Close dropdowns when clicking links
+  // Close dropdowns when clicking child links on mobile
   document.querySelectorAll('.dropdown-menu a').forEach(link => {
     link.addEventListener('click', function() {
       if (window.innerWidth <= 768) {
@@ -1826,6 +1832,21 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+
+  // Desktop hover behavior
+  if (window.innerWidth > 768) {
+    hasDropdowns.forEach(item => {
+      item.addEventListener('mouseenter', function() {
+        hasDropdowns.forEach(other => {
+          if (other !== item) other.classList.remove('active');
+        });
+        item.classList.add('active');
+      });
+      item.addEventListener('mouseleave', function() {
+        item.classList.remove('active');
+      });
+    });
+  }
 });
 </script>
     
