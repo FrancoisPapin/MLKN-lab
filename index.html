@@ -1808,7 +1808,7 @@
         });
     </script>
 
-    
+    <!-- JavaScript for nav bar -->
     <script>
 document.addEventListener('DOMContentLoaded', function() {
   const topnav = document.querySelector('.topnav');
@@ -1843,7 +1843,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!link) return;
 
     link.addEventListener('click', function(e) {
-      // Only handle clicks on mobile
+      // Only handle clicks on mobile in portrait mode
       if (window.innerWidth <= 768 && window.matchMedia("(orientation: portrait)").matches) {
         e.preventDefault();
         e.stopPropagation();
