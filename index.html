@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>MLKN.lab — Multi-Layered Knowledge Network</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <!-- Add version query to force reload -->
+    <link rel="stylesheet" href="assets/css/style.css?v=20260621">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -1772,20 +1775,16 @@
     <!-- JavaScript for Navigation and Active Section Highlighting -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Mobile navigation elements
   const topnav = document.querySelector('.topnav');
   const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
   const hasDropdowns = document.querySelectorAll('.has-dropdown');
 
   // Toggle mobile menu
-  if (mobileMenuToggle) {
-    mobileMenuToggle.addEventListener('click', function(e) {
-      e.stopPropagation();
-      topnav.classList.toggle('mobile-menu-active');
-      // Close all dropdowns when opening menu
-      hasDropdowns.forEach(item => item.classList.remove('active'));
-    });
-  }
+  mobileMenuToggle.addEventListener('click', function(e) {
+    e.stopPropagation();
+    topnav.classList.toggle('mobile-menu-active');
+    hasDropdowns.forEach(item => item.classList.remove('active'));
+  });
 
   // Close menu when clicking outside
   document.addEventListener('click', function(e) {
@@ -1795,29 +1794,24 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Toggle dropdowns on mobile
+  // Toggle dropdowns
   hasDropdowns.forEach(item => {
     const link = item.querySelector('> a');
     if (link) {
       link.addEventListener('click', function(e) {
-        // ONLY handle clicks on mobile
         if (window.innerWidth <= 768) {
           e.preventDefault();
           e.stopPropagation();
-
-          // Close other dropdowns
           hasDropdowns.forEach(other => {
             if (other !== item) other.classList.remove('active');
           });
-
-          // Toggle current dropdown
           item.classList.toggle('active');
         }
       });
     }
   });
 
-  // Close dropdowns when clicking links on mobile
+  // Close when clicking links
   document.querySelectorAll('.dropdown-menu a').forEach(link => {
     link.addEventListener('click', function() {
       if (window.innerWidth <= 768) {
@@ -1828,31 +1822,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
-
-  // Active section highlighting (keep your existing code)
-  const sections = document.querySelectorAll('section[id]');
-  const navBoxes = document.querySelectorAll('.nav-box');
-
-  function updateActiveLinks() {
-    let currentSection = '';
-    sections.forEach(section => {
-      if (window.scrollY >= (section.offsetTop - 200)) {
-        currentSection = section.getAttribute('id');
-      }
-    });
-
-    navBoxes.forEach(navBox => {
-      navBox.querySelectorAll('a').forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${currentSection}`) {
-          link.classList.add('active');
-        }
-      });
-    });
-  }
-
-  window.addEventListener('scroll', updateActiveLinks);
-  updateActiveLinks();
 });
 </script>
     
