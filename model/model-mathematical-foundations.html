@@ -196,7 +196,7 @@
                     </li>
                 </ul>
             </div>
-
+            
             <!-- Layered Structure -->
             <div class="layer-card">
                 <div class="licon" style="color: #2ECC71;">⬢</div>
@@ -492,6 +492,190 @@
                 </ul>
             </div>
         </section>
+
+        <!-- =============================================
+                 MULTILAYER NETWORKS VS. HYPERGRAPHS: COMPARISON
+                 ============================================= -->
+            <section id="comparison" class="section" aria-labelledby="comparison-title">
+              <br>
+              <h2 class="sec-h" id="comparison-title">Multilayer Networks vs. Hypergraphs</h2>
+              <p class="sec-sub">Complementary Representations in MLKN.model</p>
+
+              <div class="nav-box">
+                <a href="#overview">Overview</a>
+                <a href="#math">Mathematical Foundations</a>
+                <a href="#comparison" class="active">Comparison</a>
+              </div>
+              <br>
+
+              <p>
+                MLKN.model uniquely combines <strong>multilayer networks</strong> (for hierarchical structure)
+                and <strong>hypergraphs</strong> (for cross-domain connections) to create a
+                <strong>polyhierarchical hypergraph framework</strong>. Below is a detailed comparison:
+              </p>
+              <br>
+
+              <!-- Comparison Table -->
+              <div style="overflow-x: auto; margin-top: 20px;">
+                <table style="width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 0.9em;">
+                  <thead>
+                    <tr style="border-bottom: 2px solid var(--border);">
+                      <th style="text-align: left; padding: 10px; background: var(--panel);">Feature</th>
+                      <th style="text-align: left; padding: 10px; background: var(--panel);">Multilayer Network (Layers 1-4)</th>
+                      <th style="text-align: left; padding: 10px; background: var(--panel);">Hypergraph (Layers 4-5)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                      <td style="padding: 10px;"><strong>Purpose</strong></td>
+                      <td style="padding: 10px;">Hierarchical organization (parent-child relationships)</td>
+                      <td style="padding: 10px;">Cross-domain connections (multi-field concepts)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                      <td style="padding: 10px;"><strong>Mathematical Structure</strong></td>
+                      <td style="padding: 10px;">
+                        <div class="math-container">G = (V, E, L)</div>
+                        Directed graph with layer assignments
+                      </td>
+                      <td style="padding: 10px;">
+                        <div class="math-container">H = (X, E, w)</div>
+                        Undirected hypergraph with weights
+                      </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                      <td style="padding: 10px;"><strong>Edges</strong></td>
+                      <td style="padding: 10px;">Pairs of nodes (v<sub>i</sub>, v<sub>j</sub>)</td>
+                      <td style="padding: 10px;">Subsets of nodes S ⊆ X, |S| ≥ 2</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                      <td style="padding: 10px;"><strong>Hierarchy</strong></td>
+                      <td style="padding: 10px;">Strict (tree-like with possible multiple parents)</td>
+                      <td style="padding: 10px;">Flat (no inherent hierarchy)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                      <td style="padding: 10px;"><strong>Example in MLKN.lab</strong></td>
+                      <td style="padding: 10px;">
+                        Computer Science (L2) → AI (L3) → Machine Learning (L4)
+                      </td>
+                      <td style="padding: 10px;">
+                        "Transformers" (L5) connected to {AI, NLP, Neuroscience} (L4)
+                      </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                      <td style="padding: 10px;"><strong>Strengths</strong></td>
+                      <td style="padding: 10px;">
+                        <ul style="margin: 5px 0; padding-left: 15px;">
+                          <li>Clear hierarchical relationships</li>
+                          <li>Efficient for top-down analysis</li>
+                          <li>Natural for domain decomposition</li>
+                        </ul>
+                      </td>
+                      <td style="padding: 10px;">
+                        <ul style="margin: 5px 0; padding-left: 15px;">
+                          <li>Captures multi-field concepts</li>
+                          <li>Models non-linear relationships</li>
+                          <li>Reveals hidden interdisciplinary connections</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                      <td style="padding: 10px;"><strong>Limitations</strong></td>
+                      <td style="padding: 10px;">
+                        <ul style="margin: 5px 0; padding-left: 15px;">
+                          <li>Cannot model multi-parent relationships natively</li>
+                          <li>Struggles with cross-domain concepts</li>
+                        </ul>
+                      </td>
+                      <td style="padding: 10px;">
+                        <ul style="margin: 5px 0; padding-left: 15px;">
+                          <li>No inherent hierarchical structure</li>
+                          <li>Less intuitive for domain decomposition</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                      <td style="padding: 10px;"><strong>MLKN.lab Implementation</strong></td>
+                      <td style="padding: 10px;">
+                        <div class="math-container">
+                          V = ∪<sub>l=1 to 4</sub> V<sub>l</sub><br>
+                          E = ∪<sub>l=1 to 3</sub> E<sub>l→l+1</sub>
+                        </div>
+                      </td>
+                      <td style="padding: 10px;">
+                        <div class="math-container">
+                          X = V<sub>4</sub> ∪ V<sub>5</sub><br>
+                          E = {e | e ⊆ X, |e| ≥ 2}
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Unified Framework -->
+              <div class="layer-card" style="margin-top: 25px;">
+                <div class="licon" style="color: #9B59B6;">⬢</div>
+                <h3>Unified Polyhierarchical Hypergraph</h3>
+                <p>
+                  MLKN.model combines both representations into a <strong>polyhierarchical hypergraph</strong>
+                  <div class="math-container"><strong>P = (G, H)</strong></div> where:
+                </p>
+                <ul class="discipline-list">
+                  <li>
+                    <span class="discipline-square" style="background: #9B59B6;"></span>
+                    <strong>G</strong> = (<div class="math-container">V<sub>1-4</sub></div>, <div class="math-container">E<sub>1-3</sub></div>, L) is the multilayer network for Layers 1-4
+                  </li>
+                  <li>
+                    <span class="discipline-square" style="background: #9B59B6;"></span>
+                    <strong>H</strong> = (<div class="math-container">X<sub>4-5</sub></div>, <div class="math-container">E<sub>H</sub></div>, w) is the hypergraph for Layers 4-5
+                  </li>
+                  <li>
+                    <span class="discipline-square" style="background: #9B59B6;"></span>
+                    <div class="math-container">V<sub>4</sub> = X<sub>4</sub></div> (shared layer between G and H)
+                  </li>
+                </ul>
+                <p style="margin-top: 15px;">
+                  <strong>Key Innovation:</strong> Layer 4 (Thematic Domains) acts as the <strong>bridge</strong> between:
+                  <ul style="margin-top: 5px; padding-left: 20px;">
+                    <li>The <strong>hierarchical structure</strong> of Layers 1-3 (multilayer network)</li>
+                    <li>The <strong>cross-domain connections</strong> of Layer 5 (hypergraph)</li>
+                  </ul>
+                </p>
+              </div>
+
+              <!-- Why This Matters -->
+             <div class="essay-box" style="margin-top: 20px;">
+                <h3>Why This Hybrid Approach Matters</h3>
+                <p>
+                  Traditional knowledge representations suffer from <strong>trade-offs</strong>:
+                </p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                  <div>
+                    <h4 style="color: var(--accent); margin-bottom: 10px;">Hierarchies (e.g., Taxonomies)</h4>
+                    <ul class="discipline-list">
+                      <li><span class="discipline-square" style="background: #FF6347;"></span> ✅ Clear parent-child relationships</li>
+                      <li><span class="discipline-square" style="background: #FF6347;"></span> ✅ Intuitive for domain experts</li>
+                      <li><span class="discipline-square" style="background: #FF6347;"></span> ❌ Cannot model multi-field concepts</li>
+                      <li><span class="discipline-square" style="background: #FF6347;"></span> ❌ Rigid structure</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 style="color: var(--accent2); margin-bottom: 10px;">Hypergraphs (e.g., Knowledge Graphs)</h4>
+                    <ul class="discipline-list">
+                      <li><span class="discipline-square" style="background: #2ECC71;"></span> ✅ Captures complex relationships</li>
+                      <li><span class="discipline-square" style="background: #2ECC71;"></span> ✅ Flexible for cross-domain concepts</li>
+                      <li><span class="discipline-square" style="background: #2ECC71;"></span> ❌ No inherent hierarchy</li>
+                      <li><span class="discipline-square" style="background: #2ECC71;"></span> ❌ Harder to navigate for non-experts</li>
+                    </ul>
+                  </div>
+                </div>
+                <p style="margin-top: 15px;">
+                  MLKN.model's <strong>polyhierarchical hypergraph</strong> combines the strengths of both:
+                  <strong>hierarchical clarity</strong> + <strong>cross-domain flexibility</strong>.
+                </p>
+              </div>
+            </section>
+        
 
         <!-- Call to Action -->
         <section class="section" style="text-align: center;">
