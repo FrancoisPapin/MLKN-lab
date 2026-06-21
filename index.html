@@ -1824,7 +1824,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
   const hasDropdowns = document.querySelectorAll('.has-dropdown');
 
-  // Mobile menu toggle
+  // Toggle mobile menu
   mobileMenuToggle.addEventListener('click', function(e) {
     e.stopPropagation();
     topnav.classList.toggle('mobile-menu-active');
@@ -1844,7 +1844,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Mobile dropdown toggle
+  // Toggle dropdowns on mobile
   hasDropdowns.forEach(item => {
     const link = item.querySelector('> a');
     if (!link) return;
@@ -1853,6 +1853,13 @@ document.addEventListener('DOMContentLoaded', function() {
       if (window.innerWidth <= 768) {
         e.preventDefault();
         e.stopPropagation();
+        // Close other dropdowns
+        hasDropdowns.forEach(other => {
+          if (other !== item) {
+            other.classList.remove('active');
+          }
+        });
+        // Toggle current dropdown
         item.classList.toggle('active');
       }
     });
