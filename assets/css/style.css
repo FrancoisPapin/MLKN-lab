@@ -230,8 +230,21 @@
     width: 100%;
   }
 
+  /* Fix for Home link (first item) - MUST BE BEFORE parent items rule */
+  .topnav.mobile-menu-active .primary-nav > li:first-child > a {
+    padding: 12px 15px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border);
+    display: block;
+    color: var(--text2) !important;
+    font-weight: 600;
+    background: rgba(26, 107, 170, 0.05);
+    cursor: pointer !important;
+    pointer-events: auto !important;
+  }
+
   /* Parent items (section headers - non-clickable) */
-  .topnav.mobile-menu-active .primary-nav > li > a {
+  .topnav.mobile-menu-active .primary-nav > li:not(:first-child) > a {
     padding: 12px 15px;
     font-size: 13px;
     border-bottom: 1px solid var(--border);
@@ -240,7 +253,7 @@
     font-weight: 600;
     background: rgba(26, 107, 170, 0.05);
     cursor: default !important;
-    pointer-events: none !important; /* Prevents clicking */
+    pointer-events: none !important;
   }
 
   /* Child items (indented and clickable) */
@@ -274,6 +287,7 @@
     height: 32px !important;
   }
 }
+
 
 /* =============================================
    MOBILE HORIZONTAL - DESKTOP-LIKE NAVIGATION
