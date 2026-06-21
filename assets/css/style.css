@@ -34,7 +34,7 @@
 }
 
 /* =============================================
-   DESKTOP NAVIGATION (Base Styles)
+   DESKTOP NAVIGATION (Unchanged)
    ============================================= */
 .topnav {
   position: sticky;
@@ -158,7 +158,7 @@
   background: rgba(26, 107, 170, 0.05);
 }
 
-/* Mobile Menu Toggle (Hidden on Desktop) */
+/* Mobile Menu Toggle */
 .mobile-menu-toggle {
   display: none;
   background: none;
@@ -178,6 +178,151 @@
   background: var(--text2);
   margin: 4px 0;
   transition: all 0.2s;
+}
+
+/* =============================================
+   MOBILE NAVIGATION - SCROLLING VERSION (Vertical Only)
+   ============================================= */
+@media only screen and (max-width: 768px) and (orientation: portrait) {
+  /* Hide desktop nav, show hamburger */
+  .desktop-nav {
+    display: none !important;
+  }
+
+  .mobile-menu-toggle {
+    display: block !important;
+  }
+
+  /* Adjust topnav for mobile */
+  .topnav {
+    height: 56px !important;
+  }
+
+  .topnav-inner {
+    padding: 0 10px !important;
+    justify-content: space-between !important;
+  }
+
+  /* Full-screen scrolling menu */
+  .topnav.mobile-menu-active .desktop-nav {
+    display: block !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 0 0 var(--r) var(--r);
+    box-shadow: var(--sh2);
+    padding: 15px;
+    z-index: 1000;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  /* All links in a single column */
+  .topnav.mobile-menu-active .primary-nav {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .topnav.mobile-menu-active .primary-nav > li {
+    width: 100%;
+  }
+
+  /* Parent items (section headers - non-clickable) */
+  .topnav.mobile-menu-active .primary-nav > li > a {
+    padding: 12px 15px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border);
+    display: block;
+    color: var(--text2) !important;
+    font-weight: 600;
+    background: rgba(26, 107, 170, 0.05);
+    cursor: default !important;
+    pointer-events: none !important; /* Prevents clicking */
+  }
+
+  /* Child items (indented and clickable) */
+  .topnav.mobile-menu-active .dropdown-menu {
+    display: block !important;
+    position: static;
+    border: none;
+    border-left: none;
+    margin-left: 0;
+    padding-left: 30px;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .topnav.mobile-menu-active .dropdown-menu a {
+    padding: 8px 15px;
+    font-size: 12px;
+    border-bottom: 1px solid var(--border);
+    display: block;
+    color: var(--text) !important;
+    white-space: nowrap;
+  }
+
+  /* Hide logo text */
+  .topnav.mobile-menu-active .logo-text {
+    display: none !important;
+  }
+
+  .logo-mark {
+    width: 32px !important;
+    height: 32px !important;
+  }
+}
+
+/* =============================================
+   MOBILE HORIZONTAL - DESKTOP-LIKE NAVIGATION
+   ============================================= */
+@media only screen and (max-width: 768px) and (orientation: landscape) {
+  /* Hide hamburger, show desktop nav */
+  .mobile-menu-toggle {
+    display: none !important;
+  }
+
+  .desktop-nav {
+    display: flex !important;
+  }
+
+  /* Adjust for small screen */
+  .topnav {
+    height: 48px !important;
+  }
+
+  .topnav-inner {
+    padding: 0 10px !important;
+  }
+
+  .primary-nav {
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+
+  .primary-nav > li > a {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  /* Dropdowns work on hover */
+  .dropdown-menu {
+    position: absolute !important;
+    top: 100%;
+    left: 0;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    box-shadow: var(--sh2);
+    min-width: 180px;
+    z-index: 1001;
+  }
+
+  .has-dropdown:hover .dropdown-menu {
+    display: block !important;
+  }
 }
 
 /* =============================================
@@ -2186,187 +2331,3 @@ sub, sup {
   }
 }
 
-/* =============================================
-   MOBILE NAVIGATION - FINAL WORKING VERSION
-   ============================================= */
-@media only screen and (max-width: 768px) {
-  /* Hide desktop nav */
-  .desktop-nav {
-    display: none !important;
-  }
-
-  /* Show hamburger */
-  .mobile-menu-toggle {
-    display: block !important;
-    background: none;
-    border: none;
-    width: 30px;
-    height: 30px;
-    padding: 0;
-    cursor: pointer;
-    position: relative;
-    z-index: 1002;
-    margin-left: auto;
-  }
-
-  .hamburger-line {
-    display: block;
-    width: 20px;
-    height: 2px;
-    background: var(--text2);
-    margin: 4px 0;
-    transition: all 0.2s;
-  }
-
-  /* Mobile menu container */
-  .topnav {
-    height: 56px !important;
-  }
-
-  .topnav-inner {
-    padding: 0 10px !important;
-    justify-content: space-between !important;
-  }
-
-  /* Mobile menu when active */
-  .topnav.mobile-menu-active .desktop-nav {
-    display: block !important;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 0 0 var(--r) var(--r);
-    box-shadow: var(--sh2);
-    padding: 15px;
-    z-index: 1000;
-    max-height: 80vh;
-    overflow-y: auto;
-  }
-
-  /* Mobile menu items */
-  .topnav.mobile-menu-active .primary-nav {
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .topnav.mobile-menu-active .primary-nav > li {
-    width: 100%;
-  }
-
-  /* Parent items (e.g., "Research") - Non-navigating */
-  .topnav.mobile-menu-active .primary-nav > li > a {
-    padding: 12px 15px;
-    font-size: 13px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: var(--text2) !important;
-    cursor: pointer;
-    text-decoration: none !important;
-  }
-
-  /* Dropdown indicators */
-  .topnav.mobile-menu-active .has-dropdown > a::after {
-    content: "▼";
-    font-size: 10px;
-    color: var(--muted);
-    margin-left: 5px;
-    transition: transform 0.2s;
-    pointer-events: none;
-  }
-
-  .topnav.mobile-menu-active .has-dropdown.active > a::after {
-    transform: rotate(180deg);
-  }
-
-  /* Mobile dropdowns - Always visible when parent is active */
-  .topnav.mobile-menu-active .dropdown-menu {
-    display: none;
-    position: static;
-    border: none;
-    border-left: 1px solid var(--border);
-    margin-left: 15px;
-    padding-left: 15px;
-    background: transparent;
-    box-shadow: none;
-    width: auto;
-  }
-
-  /* Show dropdown when parent is active */
-  .topnav.mobile-menu-active .has-dropdown.active .dropdown-menu {
-    display: block !important;
-  }
-
-  /* Child items (e.g., "Research Focus") */
-  .topnav.mobile-menu-active .dropdown-menu a {
-    padding: 8px 15px;
-    font-size: 12px;
-    border-bottom: 1px solid var(--border);
-    display: block;
-    color: var(--text) !important;
-    white-space: nowrap;
-    text-decoration: none !important;
-  }
-
-  /* Hide logo text */
-  .topnav.mobile-menu-active .logo-text {
-    display: none !important;
-  }
-
-  /* Adjust logo for mobile */
-  .logo-mark {
-    width: 32px !important;
-    height: 32px !important;
-  }
-
-  /* Horizontal mobile mode - show desktop-like navigation */
-  @media (max-width: 768px) and (orientation: landscape) {
-    .mobile-menu-toggle {
-      display: none !important;
-    }
-
-    .desktop-nav {
-      display: flex !important;
-    }
-
-    .primary-nav {
-      flex-wrap: wrap;
-      gap: 2px;
-    }
-
-    .primary-nav > li > a {
-      padding: 8px 10px;
-      font-size: 11px;
-      text-decoration: none !important;
-    }
-
-    /* Dropdown menus for horizontal mode */
-    .dropdown-menu {
-      display: none;
-      position: absolute !important;
-      top: 100%;
-      left: 0;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      box-shadow: var(--sh2);
-      min-width: 180px;
-      z-index: 1001;
-      opacity: 1;
-      visibility: visible;
-    }
-
-    /* Show dropdown on hover for horizontal mode */
-    .has-dropdown:hover .dropdown-menu {
-      display: block !important;
-    }
-
-    /* Parent items in horizontal mode */
-    .has-dropdown > a {
-      cursor: pointer;
-    }
-  }
-}
