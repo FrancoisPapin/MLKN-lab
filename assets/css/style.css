@@ -2233,24 +2233,50 @@ sub, sup {
 }
 
 /* =============================================
-   MOBILE NAVIGATION - FIXED DROPDOWNS
+   MOBILE NAVIGATION - FINAL WORKING VERSION
    ============================================= */
 @media (max-width: 768px) {
+  /* Hide desktop navigation */
   .primary-nav {
-    display: none;
+    display: none !important;
   }
 
+  /* Show mobile menu toggle */
   .mobile-menu-toggle {
+    display: block !important;
+    background: none;
+    border: none;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+    z-index: 1002;
+    margin-left: auto;
+  }
+
+  .hamburger-line {
     display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--text2);
+    margin: 4px 0;
+    transition: all 0.2s;
   }
 
+  /* Adjust topnav for mobile */
   .topnav {
-    height: 56px;
+    height: 56px !important;
   }
 
-  /* Mobile Menu Overlay */
+  .topnav-inner {
+    padding: 0 10px !important;
+    justify-content: space-between !important;
+  }
+
+  /* Mobile menu overlay */
   .topnav.mobile-menu-active .primary-nav {
-    display: flex;
+    display: block !important;
     position: absolute;
     top: 100%;
     left: 0;
@@ -2265,6 +2291,7 @@ sub, sup {
     gap: 0;
   }
 
+  /* Mobile menu items */
   .topnav.mobile-menu-active .primary-nav > li {
     width: 100%;
   }
@@ -2276,9 +2303,10 @@ sub, sup {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: var(--text2) !important;
   }
 
-  /* Mobile Dropdown Indicator */
+  /* Dropdown indicator for mobile */
   .topnav.mobile-menu-active .has-dropdown > a::after {
     content: "▼";
     font-size: 10px;
@@ -2290,7 +2318,7 @@ sub, sup {
     transform: rotate(180deg);
   }
 
-  /* Mobile Dropdown Menu */
+  /* Mobile dropdown menus */
   .topnav.mobile-menu-active .dropdown-menu {
     position: static;
     opacity: 1;
@@ -2313,9 +2341,17 @@ sub, sup {
     font-size: 12px;
     border-bottom: 1px solid var(--border);
     display: block;
+    color: var(--text) !important;
   }
 
+  /* Hide logo text on mobile */
   .topnav.mobile-menu-active .logo-text {
-    display: none;
+    display: none !important;
+  }
+
+  /* Adjust logo for mobile */
+  .logo-mark {
+    width: 32px !important;
+    height: 32px !important;
   }
 }
