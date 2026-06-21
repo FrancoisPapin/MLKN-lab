@@ -880,7 +880,7 @@ h1, h2, h3 {
 }
 
 /* =============================================
-   UNIFIED NAVIGATION SYSTEM - FINAL VERSION
+   UNIFIED NAVIGATION - FINAL WORKING VERSION
    ============================================= */
 .topnav {
   position: sticky;
@@ -936,6 +936,7 @@ h1, h2, h3 {
   letter-spacing: 0.04em;
 }
 
+/* Desktop Navigation */
 .desktop-nav {
   display: flex;
   align-items: center;
@@ -964,11 +965,7 @@ h1, h2, h3 {
   display: block;
 }
 
-.primary-nav > li > a:hover {
-  color: var(--accent);
-  background: rgba(26, 107, 170, 0.08);
-}
-
+/* Dropdown Menus */
 .dropdown-menu {
   display: none;
   position: absolute;
@@ -979,16 +976,11 @@ h1, h2, h3 {
   border-radius: var(--r);
   box-shadow: var(--sh2);
   min-width: 200px;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.2s;
   z-index: 1001;
 }
 
 .has-dropdown:hover .dropdown-menu {
   display: block;
-  opacity: 1;
-  visibility: visible;
 }
 
 .dropdown-menu li {
@@ -1012,6 +1004,7 @@ h1, h2, h3 {
   background: rgba(26, 107, 170, 0.05);
 }
 
+/* Mobile Menu Toggle */
 .mobile-menu-toggle {
   display: none;
   background: none;
@@ -1033,6 +1026,7 @@ h1, h2, h3 {
   transition: all 0.2s;
 }
 
+/* Mobile Styles */
 @media (max-width: 768px) {
   .mobile-menu-toggle {
     display: block !important;
@@ -1051,6 +1045,7 @@ h1, h2, h3 {
     justify-content: space-between !important;
   }
 
+  /* Mobile menu overlay */
   .topnav.mobile-menu-active .desktop-nav {
     display: block !important;
     position: absolute;
@@ -1067,6 +1062,7 @@ h1, h2, h3 {
     overflow-y: auto;
   }
 
+  /* Mobile menu structure */
   .topnav.mobile-menu-active .primary-nav {
     flex-direction: column;
     gap: 0;
@@ -1087,6 +1083,7 @@ h1, h2, h3 {
     cursor: pointer;
   }
 
+  /* Dropdown indicators */
   .topnav.mobile-menu-active .has-dropdown > a::after {
     content: "▼";
     font-size: 10px;
@@ -1099,18 +1096,16 @@ h1, h2, h3 {
     transform: rotate(180deg);
   }
 
+  /* Mobile dropdowns - CRITICAL FIX */
   .topnav.mobile-menu-active .dropdown-menu {
-    display: none;
     position: static;
-    opacity: 1;
-    visibility: visible;
-    box-shadow: none;
+    display: none;
     border: none;
     border-left: 1px solid var(--border);
     margin-left: 15px;
     padding-left: 15px;
     background: transparent;
-    width: auto;
+    box-shadow: none;
   }
 
   .topnav.mobile-menu-active .has-dropdown.active .dropdown-menu {
@@ -1126,6 +1121,7 @@ h1, h2, h3 {
     white-space: nowrap;
   }
 
+  /* Mobile logo adjustments */
   .topnav.mobile-menu-active .logo-text {
     display: none !important;
   }
@@ -1135,6 +1131,7 @@ h1, h2, h3 {
     height: 32px !important;
   }
 
+  /* Horizontal mobile mode */
   @media (max-width: 768px) and (orientation: landscape) {
     .mobile-menu-toggle {
       display: none !important;
@@ -1155,18 +1152,12 @@ h1, h2, h3 {
     }
 
     .dropdown-menu {
-      display: none;
-      position: absolute;
+      position: absolute !important;
       top: 100%;
       left: 0;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      box-shadow: var(--sh2);
       min-width: 180px;
       opacity: 1;
       visibility: visible;
-      z-index: 1001;
     }
 
     .has-dropdown:hover .dropdown-menu {
