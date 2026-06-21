@@ -2187,7 +2187,7 @@ sub, sup {
 }
 
 /* =============================================
-   MOBILE NAVIGATION - SAFARI-PROOF VERSION
+   MOBILE NAVIGATION - FINAL WORKING VERSION
    ============================================= */
 @media only screen and (max-width: 768px) {
   /* Hide desktop nav */
@@ -2215,6 +2215,7 @@ sub, sup {
     height: 2px;
     background: var(--text2);
     margin: 4px 0;
+    transition: all 0.2s;
   }
 
   /* Mobile menu container */
@@ -2254,6 +2255,7 @@ sub, sup {
     width: 100%;
   }
 
+  /* Parent items (e.g., "Research") - Non-navigating */
   .topnav.mobile-menu-active .primary-nav > li > a {
     padding: 12px 15px;
     font-size: 13px;
@@ -2263,6 +2265,7 @@ sub, sup {
     align-items: center;
     color: var(--text2) !important;
     cursor: pointer;
+    text-decoration: none !important;
   }
 
   /* Dropdown indicators */
@@ -2271,9 +2274,15 @@ sub, sup {
     font-size: 10px;
     color: var(--muted);
     margin-left: 5px;
+    transition: transform 0.2s;
+    pointer-events: none;
   }
 
-  /* Mobile dropdowns */
+  .topnav.mobile-menu-active .has-dropdown.active > a::after {
+    transform: rotate(180deg);
+  }
+
+  /* Mobile dropdowns - Always visible when parent is active */
   .topnav.mobile-menu-active .dropdown-menu {
     display: none;
     position: static;
@@ -2283,12 +2292,15 @@ sub, sup {
     padding-left: 15px;
     background: transparent;
     box-shadow: none;
+    width: auto;
   }
 
+  /* Show dropdown when parent is active */
   .topnav.mobile-menu-active .has-dropdown.active .dropdown-menu {
     display: block !important;
   }
 
+  /* Child items (e.g., "Research Focus") */
   .topnav.mobile-menu-active .dropdown-menu a {
     padding: 8px 15px;
     font-size: 12px;
@@ -2296,6 +2308,7 @@ sub, sup {
     display: block;
     color: var(--text) !important;
     white-space: nowrap;
+    text-decoration: none !important;
   }
 
   /* Hide logo text */
@@ -2303,35 +2316,57 @@ sub, sup {
     display: none !important;
   }
 
+  /* Adjust logo for mobile */
   .logo-mark {
     width: 32px !important;
     height: 32px !important;
   }
 
-  /* Horizontal mode */
+  /* Horizontal mobile mode - show desktop-like navigation */
   @media (max-width: 768px) and (orientation: landscape) {
     .mobile-menu-toggle {
       display: none !important;
     }
+
     .desktop-nav {
       display: flex !important;
     }
+
     .primary-nav {
       flex-wrap: wrap;
       gap: 2px;
     }
+
     .primary-nav > li > a {
       padding: 8px 10px;
       font-size: 11px;
+      text-decoration: none !important;
     }
+
+    /* Dropdown menus for horizontal mode */
     .dropdown-menu {
+      display: none;
       position: absolute !important;
       top: 100%;
       left: 0;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      box-shadow: var(--sh2);
       min-width: 180px;
+      z-index: 1001;
+      opacity: 1;
+      visibility: visible;
     }
+
+    /* Show dropdown on hover for horizontal mode */
     .has-dropdown:hover .dropdown-menu {
       display: block !important;
+    }
+
+    /* Parent items in horizontal mode */
+    .has-dropdown > a {
+      cursor: pointer;
     }
   }
 }
