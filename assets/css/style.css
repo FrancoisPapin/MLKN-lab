@@ -880,7 +880,7 @@ h1, h2, h3 {
 }
 
 /* =============================================
-   UNIFIED NAVIGATION SYSTEM - FINAL WORKING VERSION
+   UNIFIED NAVIGATION SYSTEM - FINAL VERSION
    ============================================= */
 .topnav {
   position: sticky;
@@ -905,7 +905,6 @@ h1, h2, h3 {
   gap: 12px;
 }
 
-/* Logo Styles */
 .topnav-logo {
   display: flex;
   align-items: center;
@@ -937,7 +936,6 @@ h1, h2, h3 {
   letter-spacing: 0.04em;
 }
 
-/* Desktop Navigation */
 .desktop-nav {
   display: flex;
   align-items: center;
@@ -971,7 +969,6 @@ h1, h2, h3 {
   background: rgba(26, 107, 170, 0.08);
 }
 
-/* Dropdown Menus (Desktop) */
 .dropdown-menu {
   display: none;
   position: absolute;
@@ -1015,7 +1012,6 @@ h1, h2, h3 {
   background: rgba(26, 107, 170, 0.05);
 }
 
-/* Mobile Menu Toggle (Hidden on Desktop) */
 .mobile-menu-toggle {
   display: none;
   background: none;
@@ -1037,19 +1033,15 @@ h1, h2, h3 {
   transition: all 0.2s;
 }
 
-/* Mobile Styles */
 @media (max-width: 768px) {
-  /* Show mobile menu toggle */
   .mobile-menu-toggle {
     display: block !important;
   }
 
-  /* Hide desktop navigation by default */
   .desktop-nav {
     display: none;
   }
 
-  /* Adjust topnav for mobile */
   .topnav {
     height: 56px !important;
   }
@@ -1059,7 +1051,6 @@ h1, h2, h3 {
     justify-content: space-between !important;
   }
 
-  /* Mobile menu overlay */
   .topnav.mobile-menu-active .desktop-nav {
     display: block !important;
     position: absolute;
@@ -1076,7 +1067,6 @@ h1, h2, h3 {
     overflow-y: auto;
   }
 
-  /* Mobile menu items */
   .topnav.mobile-menu-active .primary-nav {
     flex-direction: column;
     gap: 0;
@@ -1094,21 +1084,21 @@ h1, h2, h3 {
     justify-content: space-between;
     align-items: center;
     color: var(--text2) !important;
+    cursor: pointer;
   }
 
-  /* Dropdown indicator for mobile */
   .topnav.mobile-menu-active .has-dropdown > a::after {
     content: "▼";
     font-size: 10px;
     color: var(--muted);
     transition: transform 0.2s;
+    pointer-events: none;
   }
 
   .topnav.mobile-menu-active .has-dropdown.active > a::after {
     transform: rotate(180deg);
   }
 
-  /* Mobile dropdown menus */
   .topnav.mobile-menu-active .dropdown-menu {
     display: none;
     position: static;
@@ -1124,7 +1114,7 @@ h1, h2, h3 {
   }
 
   .topnav.mobile-menu-active .has-dropdown.active .dropdown-menu {
-    display: block;
+    display: block !important;
   }
 
   .topnav.mobile-menu-active .dropdown-menu a {
@@ -1136,18 +1126,15 @@ h1, h2, h3 {
     white-space: nowrap;
   }
 
-  /* Hide logo text on mobile */
   .topnav.mobile-menu-active .logo-text {
     display: none !important;
   }
 
-  /* Adjust logo for mobile */
   .logo-mark {
     width: 32px !important;
     height: 32px !important;
   }
 
-  /* Horizontal mobile mode - show desktop nav with dropdowns */
   @media (max-width: 768px) and (orientation: landscape) {
     .mobile-menu-toggle {
       display: none !important;
@@ -1167,7 +1154,6 @@ h1, h2, h3 {
       font-size: 11px;
     }
 
-    /* Fix for horizontal mobile dropdowns */
     .dropdown-menu {
       display: none;
       position: absolute;
