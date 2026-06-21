@@ -140,6 +140,119 @@
                 <span class="chip" style="color:#50C878;border-color:#50C87855">Edges</span>
             </div>
         </section>
+
+        <!-- Conceptual Foundations -->
+        <section id="conceptual-foundations" class="section" aria-labelledby="conceptual-foundations-title">
+          <br>
+          <h2 class="sec-h" id="conceptual-foundations-title">Conceptual Foundations</h2>
+          <p class="sec-sub">Multilayer Networks & Hypergraphs in MLKN.lab</p>
+
+          <!-- Navigation boxes -->
+          <div class="nav-box">
+            <a href="#overview">Overview</a>
+            <a href="#conceptual-foundations" class="active">Conceptual Foundations</a>
+            <a href="#layers">Knowledge Layers</a>
+            <a href="#domains">Core Domains</a>
+            <a href="#disciplines">Academic Disciplines</a>
+            <a href="#visualization">Visualization</a>
+            <a href="#exploration">Exploration</a>
+          </div>
+          <br>
+
+          <p>
+            MLKN.lab's polyhierarchical framework is built on <strong>two complementary mathematical structures</strong>:
+            <strong>multilayer networks</strong> (Layers 1-4) and <strong>hypergraphs</strong> (Layers 4-5).
+            This dual approach allows us to model both <strong>hierarchical relationships</strong> (e.g., disciplines containing subdisciplines)
+            and <strong>complex, non-linear connections</strong> (e.g., concepts spanning multiple fields).
+          </p>
+          <br>
+
+          <!-- Two-Column Layout for Concepts -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+            <!-- Multilayer Network (Layers 1-4) -->
+            <div class="layer-card">
+              <div class="licon" style="color: #1A6BAA;">⬢</div>
+              <h3>Multilayer Network (Layers 1-4)</h3>
+              <p>
+                <strong>Layers 1-4</strong> form a <strong>hierarchical network</strong> where:
+              </p>
+              <ul class="discipline-list" style="margin-top: 10px;">
+                <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Layer 1 (Core Domains)</strong>: 6 broad categories (e.g., Natural Sciences)</li>
+                <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Layer 2 (Disciplines)</strong>: 25 fields (e.g., Physics)</li>
+                <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Layer 3 (Subdisciplines)</strong>: 235 specialized areas (e.g., Quantum Mechanics)</li>
+                <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Layer 4 (Thematic Domains)</strong>: Granular clusters (e.g., Quantum Field Theory)</li>
+              </ul>
+              <p style="margin-top: 15px;">
+                This structure enables <strong>top-down analysis</strong> of knowledge diffusion across traditional academic boundaries.
+              </p>
+              <div class="chips" style="margin-top: 15px;">
+                <span class="chip" style="color:#1A6BAA;border-color:#1A6BAA55">Hierarchical</span>
+                <span class="chip" style="color:#1A6BAA;border-color:#1A6BAA55">Tree-like</span>
+                <span class="chip" style="color:#1A6BAA;border-color:#1A6BAA55">Parent-Child</span>
+              </div>
+            </div>
+
+            <!-- Hypergraph (Layers 4-5) -->
+            <div class="layer-card">
+              <div class="licon" style="color: #2ECC71;">⬢</div>
+              <h3>Hypergraph (Layers 4-5)</h3>
+              <p>
+                <strong>Layers 4-5</strong> form a <strong>hypergraph</strong> where:
+              </p>
+              <ul class="discipline-list" style="margin-top: 10px;">
+                <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Layer 4 (Thematic Domains)</strong>: Connects to multiple disciplines</li>
+                <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Layer 5 (Concepts)</strong>: Links to multiple thematic domains</li>
+              </ul>
+              <p style="margin-top: 15px;">
+                This allows <strong>non-linear mapping</strong> of concepts that span multiple fields (e.g., "Machine Learning" in CS, Math, and Neuroscience).
+              </p>
+              <div class="chips" style="margin-top: 15px;">
+                <span class="chip" style="color:#2ECC71;border-color:#2ECC7155">Non-Linear</span>
+                <span class="chip" style="color:#2ECC71;border-color:#2ECC7155">Multi-Edge</span>
+                <span class="chip" style="color:#2ECC71;border-color:#2ECC7155">Cross-Domain</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Combined Visualization -->
+          <div class="essay-box" style="margin-top: 25px;">
+            <h3>Combined Framework</h3>
+            <p>
+              The <strong>multilayer network</strong> (Layers 1-4) and <strong>hypergraph</strong> (Layers 4-5) work together to:
+            </p>
+            <ul class="discipline-list" style="margin-top: 10px;">
+              <li><span class="discipline-square" style="background: #9B59B6;"></span> Preserve <strong>disciplinary hierarchy</strong> (e.g., Physics → Quantum Mechanics)</li>
+              <li><span class="discipline-square" style="background: #9B59B6;"></span> Enable <strong>cross-disciplinary connections</strong> (e.g., Quantum Mechanics → Chemistry)</li>
+              <li><span class="discipline-square" style="background: #9B59B6;"></span> Support <strong>multi-scale analysis</strong> (from domains to concepts)</li>
+            </ul>
+            <div class="chips" style="margin-top: 15px;">
+              <span class="chip" style="color:#9B59B6;border-color:#9B59B655">Polyhierarchical</span>
+              <span class="chip" style="color:#9B59B6;border-color:#9B59B655">Multi-Scale</span>
+              <span class="chip" style="color:#9B59B6;border-color:#9B59B655">Interdisciplinary</span>
+            </div>
+          </div>
+
+          <!-- OpenAlex Integration -->
+          <div class="essay-box" style="margin-top: 20px;">
+            <h3>OpenAlex Integration</h3>
+            <p>
+              Our implementation uses <strong>OpenAlex</strong> data to:
+            </p>
+            <ul class="discipline-list" style="margin-top: 10px;">
+              <li><span class="discipline-square" style="background: #FFD700;"></span> Map <strong>25 disciplines</strong> to <strong>6 core domains</strong></li>
+              <li><span class="discipline-square" style="background: #FFD700;"></span> Identify <strong>235 subdisciplines</strong> with cross-domain connections</li>
+              <li><span class="discipline-square" style="background: #FFD700;"></span> Track <strong>320K+ connections</strong> between concepts</li>
+            </ul>
+            <p style="margin-top: 15px;">
+              This creates a <strong>data-driven polyhierarchy</strong> that reflects real-world scientific relationships.
+            </p>
+            <div style="text-align: center; margin-top: 15px;">
+              <a href="https://openalex.org/" target="_blank" class="btn btn-p" style="display: inline-flex; align-items: center; gap: 8px;">
+                <i class="fas fa-external-link-alt"></i> Explore OpenAlex
+              </a>
+            </div>
+          </div>
+        </section>
         
         <!-- Knowledge Layers -->
         <section id="layers" class="section" aria-labelledby="layers-title">
