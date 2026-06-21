@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Top Navigation Bar (a mobile-optimized version) -->
+    <!-- Top Navigation Bar (a unified version) -->
     <header class="topnav" role="banner">
   <div class="topnav-inner">
     <!-- Logo with Home Link -->
@@ -21,19 +21,10 @@
       <span class="logo-text">MLKN.lab</span>
     </a>
 
-    <!-- Unified Navigation Menu -->
-    <nav class="unified-nav">
-      <!-- Primary Navigation (Always Visible) -->
+    <!-- Desktop Navigation (Text-Based) -->
+    <nav class="desktop-nav">
       <ul class="primary-nav">
         <li><a href="index.html">Home</a></li>
-        <li class="has-dropdown">
-          <a href="#">Vision</a>
-          <ul class="dropdown-menu">
-            <li><a href="about/about.html">Overview</a></li>
-            <li><a href="about/about.html#impact-title">Scientific Impact</a></li>
-            <li><a href="model/model.html">Featured Insights</a></li>
-          </ul>
-        </li>
         <li class="has-dropdown">
           <a href="#">Research</a>
           <ul class="dropdown-menu">
@@ -76,14 +67,14 @@
           </ul>
         </li>
       </ul>
-
-      <!-- Mobile Menu Toggle (Hidden on Desktop) -->
-      <button class="mobile-menu-toggle" aria-label="Toggle navigation">
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-      </button>
     </nav>
+
+    <!-- Mobile Menu Toggle (Only for Vertical Mode) -->
+    <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
   </div>
 </header>
 
@@ -1824,15 +1815,17 @@ document.addEventListener('DOMContentLoaded', function() {
   const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
   const hasDropdowns = document.querySelectorAll('.has-dropdown');
 
-  // Toggle mobile menu
-  mobileMenuToggle.addEventListener('click', function(e) {
-    e.stopPropagation();
-    topnav.classList.toggle('mobile-menu-active');
-    // Close all dropdowns when opening menu
-    hasDropdowns.forEach(item => {
-      item.classList.remove('active');
+  // Toggle mobile menu (vertical mode only)
+  if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      topnav.classList.toggle('mobile-menu-active');
+      // Close all dropdowns when opening menu
+      hasDropdowns.forEach(item => {
+        item.classList.remove('active');
+      });
     });
-  });
+  }
 
   // Close mobile menu when clicking outside
   document.addEventListener('click', function(e) {
@@ -1850,7 +1843,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!link) return;
 
     link.addEventListener('click', function(e) {
-      if (window.innerWidth <= 768) {
+      // Only handle clicks on mobile
+      if (window.innerWidth <= 768 && window.matchMedia("(orientation: portrait)").matches) {
         e.preventDefault();
         e.stopPropagation();
         // Close other dropdowns
