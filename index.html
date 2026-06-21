@@ -1825,15 +1825,19 @@ document.addEventListener('DOMContentLoaded', function() {
   const hasDropdowns = document.querySelectorAll('.has-dropdown');
 
   // Mobile menu toggle
-  mobileMenuToggle.addEventListener('click', function() {
+  mobileMenuToggle.addEventListener('click', function(e) {
+    e.stopPropagation();
     topnav.classList.toggle('mobile-menu-active');
+    // Close all dropdowns when opening menu
+    hasDropdowns.forEach(item => {
+      item.classList.remove('active');
+    });
   });
 
   // Close mobile menu when clicking outside
   document.addEventListener('click', function(e) {
     if (!e.target.closest('.topnav')) {
       topnav.classList.remove('mobile-menu-active');
-      // Close all dropdowns on mobile
       hasDropdowns.forEach(item => {
         item.classList.remove('active');
       });
@@ -1848,6 +1852,7 @@ document.addEventListener('DOMContentLoaded', function() {
     link.addEventListener('click', function(e) {
       if (window.innerWidth <= 768) {
         e.preventDefault();
+        e.stopPropagation();
         item.classList.toggle('active');
       }
     });
