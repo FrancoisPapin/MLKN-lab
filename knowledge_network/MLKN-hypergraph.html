@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLKN.hypergraph - MLKN.lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="topnav" role="banner">
+  <div class="topnav-inner">
+    <!-- Logo with Home Link -->
+    <a href="../index.html" class="topnav-logo">
+      <div class="logo-mark">ML</div>
+      <span class="logo-text">MLKN.lab</span>
+    </a>
+
+    <!-- Desktop Navigation (Text-Based) -->
+    <nav class="desktop-nav">
+      <ul class="primary-nav">
+        <li><a href="../index.html">Home</a></li>
+        <li class="has-dropdown">
+          <a>Research</a>
+          <ul class="dropdown-menu">
+            <li><a href="../research/research.html">Research Focus</a></li>
+            <li><a href="../model/model.html">MLKN.model</a></li>
+            <li><a href="../model/model-mathematical-foundations.html">Mathematical Foundations</a></li>
+            <li><a href="../method/method.html">Method</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a>Knowledge Network</a>
+          <ul class="dropdown-menu">
+            <li><a href="../polyhierarchy/polyhierarchy.html">Polyhierarchy</a></li>
+            <li><a href="interdisciplinary.html">MLKN.hypergraph</a></li>
+            <li><a href="../data/data.html">Data</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a>Knowledge Library</a>
+          <ul class="dropdown-menu">
+            <li><a href="../references/references.html">Scientific References</a></li>
+            <li><a href="../monographs/monographs.html">Open Access Monographs</a></li>
+            <li><a href="../normative_references/normative-references.html">Normative References</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a>Applications</a>
+          <ul class="dropdown-menu">
+            <li><a href="../applications/applications.html">General Applications</a></li>
+            <li><a href="../essay/essay.html">Essays & Explorations</a></li>
+            <li><a href="../normative_applications/normative-applications.html">Normative Applications</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a>About</a>
+          <ul class="dropdown-menu">
+            <li><a href="../about/about.html">About</a></li>
+            <li><a href="../inspirations/inspirations.html">Inspirations</a></li>
+            <li><a href="../normative_foundations/normative-foundations.html">Normative Foundations</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Mobile Menu Toggle (Only for Vertical Mode) -->
+    <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </div>
+</header>
+
+
+    <main>
+        <!-- ======================
+             PAGE HERO SECTION
+             ====================== -->
+        <section class="hero" aria-labelledby="network-title">
+            <p class="hero-eyebrow">MLKN.lab · MLKN.hypergraph</p>
+            <h1 class="hero-title" id="network-title"><em>MLKN.hypergraph</em></h1>
+            <p class="hero-subtitle">
+                Explore the connections between 25 disciplines, 235 subdisciplines, and 320K+ concepts
+                across 5 ontological layers and 6 core domains.
+            </p>
+            
+        <!-- Navigation boxes for research sections -->
+            <div class="nav-box">
+                <a href="#controls">Network Controls</a>
+                <a href="#visualization">Network Visualization</a>
+            </div>
+            <br>
+            
+        </section>
+
+        <!-- ======================
+             SECOND NAV BAR (Network Controls)
+             ====================== -->
+        <section id="controls" class="section" aria-labelledby="controls-title">
+          <br>
+            <h2 class="sec-h" id="controls-title">Network Controls</h2>
+            <p class="sec-sub">Select your view and layers</p>
+
+            <!-- Toggle: Interdisciplinary vs. Disciplinary -->
+            <div class="essay-box">
+                <h3>Network Type</h3>
+                <div class="chips" style="margin-top: 10px;">
+                    <button class="chip active" id="interdisciplinary-toggle" style="color:#1A6BAA;border-color:#1A6BAA55; cursor: pointer;">
+                        Interdisciplinary Network
+                    </button>
+                    <button class="chip" id="disciplinary-toggle" style="color:#2ECC71;border-color:#2ECC7155; cursor: pointer;">
+                        Disciplinary Networks
+                    </button>
+                </div>
+            </div>
+
+            <!-- Toggle: Ontological Layers -->
+            <div class="essay-box">
+                <h3>Ontological Layers</h3>
+                <div class="chips" style="margin-top: 10px;">
+                    <button class="chip layer-toggle active" data-layer="1" style="color:#FF6347;border-color:#FF634755; cursor: pointer;">
+                        Layer 1: Core Domains
+                    </button>
+                    <button class="chip layer-toggle" data-layer="2" style="color:#2ECC71;border-color:#2ECC7155; cursor: pointer;">
+                        Layer 2: Disciplines
+                    </button>
+                    <button class="chip layer-toggle" data-layer="3" style="color:#50C878;border-color:#50C87855; cursor: pointer;">
+                        Layer 3: Subdisciplines
+                    </button>
+                    <button class="chip layer-toggle" data-layer="4" style="color:#F39C12;border-color:#F39C1255; cursor: pointer;">
+                        Layer 4: Thematic Domains
+                    </button>
+                    <button class="chip layer-toggle" data-layer="5" style="color:#9B59B6;border-color:#9B59B655; cursor: pointer;">
+                        Layer 5: Concepts
+                    </button>
+                    <button class="chip layer-toggle" data-layer="all" style="color:#1ABC9C;border-color:#1ABC9C55; cursor: pointer;">
+                        All Layers
+                    </button>
+                </div>
+            </div>
+
+            <!-- Toggle: Core Domains (for Layer 1) -->
+            <div class="essay-box" id="core-domains-box" style="display: none;">
+                <h3>Core Domains</h3>
+                <div class="chips" style="margin-top: 10px;">
+                    <button class="chip domain-toggle" data-domain="Formal Sciences" style="color:#FF6347;border-color:#FF634755; cursor: pointer;">
+                        Formal Sciences
+                    </button>
+                    <button class="chip domain-toggle" data-domain="Natural Sciences" style="color:#2ECC71;border-color:#2ECC7155; cursor: pointer;">
+                        Natural Sciences
+                    </button>
+                    <button class="chip domain-toggle" data-domain="Life Sciences" style="color:#50C878;border-color:#50C87855; cursor: pointer;">
+                        Life Sciences
+                    </button>
+                    <button class="chip domain-toggle" data-domain="Health Sciences" style="color:#F39C12;border-color:#F39C1255; cursor: pointer;">
+                        Health Sciences
+                    </button>
+                    <button class="chip domain-toggle" data-domain="Social Sciences" style="color:#9B59B6;border-color:#9B59B655; cursor: pointer;">
+                        Social Sciences
+                    </button>
+                    <button class="chip domain-toggle" data-domain="Applied Sciences" style="color:#1ABC9C;border-color:#1ABC9C55; cursor: pointer;">
+                        Applied Sciences
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================
+             NETWORK VISUALIZATION CONTAINER
+             ====================== -->
+        <section id="visualization" class="section" aria-labelledby="visualization-title">
+          <br>
+            <h2 class="sec-h" id="visualization-title">Network Visualization</h2>
+            <p class="sec-sub">
+                Interactive exploration of the knowledge network.
+                <strong>Click on nodes</strong> to see details, <strong>hover</strong> to highlight connections.
+            </p>
+
+            <!-- Container for the network -->
+            <div id="network-container" style="
+                width: 100%;
+                height: 700px;
+                border: 1px solid var(--border);
+                border-radius: var(--r);
+                margin-top: 20px;
+                background: var(--panel);
+                position: relative;
+            ">
+                <!-- Placeholder for the network visualization -->
+                <div id="network-placeholder" style="
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    text-align: center;
+                    color: var(--text2);
+                ">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 24px; margin-bottom: 10px;"></i>
+                    <p>Loading knowledge network...</p>
+                    <p style="font-size: 0.9em; margin-top: 10px;">
+                        Data: <code>knowledge_network/data/full_hierarchy.json</code>
+                    </p>
+                </div>
+                <!-- The actual network will be rendered here by network.js -->
+                <div id="network-canvas"></div>
+            </div>
+
+            <!-- Legend -->
+            <div class="essay-box" style="margin-top: 20px;">
+                <h3>Legend</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <div style="width: 12px; height: 12px; background: #FF6347; border-radius: 50%;"></div>
+                        <span>Core Domains</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <div style="width: 12px; height: 12px; background: #2ECC71; border-radius: 50%;"></div>
+                        <span>Disciplines</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <div style="width: 12px; height: 12px; background: #50C878; border-radius: 50%;"></div>
+                        <span>Subdisciplines</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <div style="width: 12px; height: 12px; background: #F39C12; border-radius: 50%;"></div>
+                        <span>Thematic Domains</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <div style="width: 12px; height: 12px; background: #9B59B6; border-radius: 50%;"></div>
+                        <span>Concepts</span>
+                    </div>
+                </div>
+                <p style="margin-top: 15px; font-size: 0.9em; color: var(--text2);">
+                    <strong>Tip:</strong> Use the controls above to filter the network by type or layer.
+                </p>
+            </div>
+        </section>
+
+        <!-- ======================
+             DISCIPLINARY NETWORKS GRID (Hidden by default)
+             ====================== -->
+        <section id="disciplinary-networks-section" class="section" style="display: none;">
+            <h2 class="sec-h">Disciplinary Knowledge Networks</h2>
+            <p class="sec-sub">Explore individual discipline networks</p>
+            <div class="layers-grid">
+                <!-- Computer Science -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #2ECC71;">⬢</div>
+                    <h3>Computer Science</h3>
+                    <p>AI, algorithms, systems, data science.</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('computer_science')">
+                        <i class="fas fa-project-diagram"></i> View Network
+                    </button>
+                </div>
+                <!-- Neuroscience -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #FF6347;">⬢</div>
+                    <h3>Neuroscience</h3>
+                    <p>Molecular, cognitive, and systems neuroscience.</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('neuroscience')">
+                        <i class="fas fa-project-diagram"></i> View Network
+                    </button>
+                </div>
+                <!-- Psychology -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #9B59B6;">⬢</div>
+                    <h3>Psychology</h3>
+                    <p>Cognitive, social, clinical, and developmental psychology.</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('psychology')">
+                        <i class="fas fa-project-diagram"></i> View Network
+                    </button>
+                </div>
+                <!-- Biology -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #50C878;">⬢</div>
+                    <h3>Biology</h3>
+                    <p>Genetics, ecology, evolution, and cell biology.</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('biology')">
+                        <i class="fas fa-project-diagram"></i> View Network
+                    </button>
+                </div>
+                <!-- Add all 25 disciplines here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- ======================
+         WEBSITE FOOTER
+         ====================== -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="sf-logo">MLKN.lab</div>
+        <p class="sf-tag">Multi-Layered Knowledge Network Ideas Laboratory</p>
+        <div class="sf-links">
+            <a href="https://www.linkedin.com/in/francoispapin/" class="sf-link" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/FrancoisPapin" class="sf-link" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="mailto:your-email@example.com" class="sf-link">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+        <p class="sf-legal">© François Papin · May 2026 · MIT License · MLKN.lab</p>
+    </footer>
+
+    <!-- ======================
+         NETWORK.JS (Empty for now, but linked)
+         ====================== -->
+    <script src="network.js"></script>
+
+    <!-- ======================
+         INLINE SCRIPT FOR TOGGLES
+         ====================== -->
+    <script>
+        // Toggle between interdisciplinary and disciplinary views
+        document.getElementById('interdisciplinary-toggle').addEventListener('click', function() {
+            // Show interdisciplinary network
+            document.getElementById('network-container').style.display = 'block';
+            document.getElementById('disciplinary-networks-section').style.display = 'none';
+
+            // Update active button
+            this.classList.add('active');
+            document.getElementById('disciplinary-toggle').classList.remove('active');
+
+            // Show/hide core domains box (only relevant for interdisciplinary)
+            document.getElementById('core-domains-box').style.display = 'block';
+        });
+
+        document.getElementById('disciplinary-toggle').addEventListener('click', function() {
+            // Show disciplinary networks grid
+            document.getElementById('network-container').style.display = 'none';
+            document.getElementById('disciplinary-networks-section').style.display = 'block';
+
+            // Update active button
+            this.classList.add('active');
+            document.getElementById('interdisciplinary-toggle').classList.remove('active');
+
+            // Hide core domains box (not relevant for disciplinary)
+            document.getElementById('core-domains-box').style.display = 'none';
+        });
+
+        // Toggle between layers
+        document.querySelectorAll('.layer-toggle').forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all layer buttons
+                document.querySelectorAll('.layer-toggle').forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+
+                // Here you would add logic to filter the network by layer
+                const selectedLayer = this.getAttribute('data-layer');
+                console.log(`Filtering network to layer: ${selectedLayer}`);
+                // Example: filterNetworkByLayer(selectedLayer);
+            });
+        });
+
+        // Toggle between core domains (for Layer 1)
+        document.querySelectorAll('.domain-toggle').forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all domain buttons
+                document.querySelectorAll('.domain-toggle').forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+
+                // Here you would add logic to filter the network by domain
+                const selectedDomain = this.getAttribute('data-domain');
+                console.log(`Filtering network to domain: ${selectedDomain}`);
+                // Example: filterNetworkByDomain(selectedDomain);
+            });
+        });
+
+        // Placeholder function for loading disciplinary networks
+        function loadDisciplinaryNetwork(discipline) {
+            console.log(`Loading ${discipline} network...`);
+            // Here you would:
+            // 1. Fetch the disciplinary network data (e.g., from knowledge_network/data/{discipline}.json)
+            // 2. Render it in the #network-container
+            // 3. Update the legend and controls
+            alert(`Loading ${discipline.replace('_', ' ')} network... (Feature coming soon!)`);
+        }
+
+        // Load the full hierarchy data (for future use)
+        fetch('../data/full_hierarchy.json')
+            .then(response => response.json())
+            .then(data => {
+                console.log('Full hierarchy data loaded:', data);
+                // Here you would initialize the network visualization with the data
+                // Example: initializeNetwork(data);
+            })
+            .catch(error => {
+                console.error('Error loading hierarchy data:', error);
+                document.getElementById('network-placeholder').innerHTML = `
+                    <i class="fas fa-exclamation-triangle" style="font-size: 24px; margin-bottom: 10px; color: #FF6347;"></i>
+                    <p>Error loading network data.</p>
+                    <p style="font-size: 0.9em; margin-top: 10px;">Check the console for details.</p>
+                `;
+            });
+    </script>
+
+    <!-- JavaScript for Navigation and Active Section Highlighting -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const topnav = document.querySelector('.topnav');
+  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+
+  // Toggle mobile menu (vertical only)
+  mobileMenuToggle.addEventListener('click', function(e) {
+    e.stopPropagation();
+    topnav.classList.toggle('mobile-menu-active');
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.topnav')) {
+      topnav.classList.remove('mobile-menu-active');
+    }
+  });
+
+  // Desktop: dropdowns on hover
+  if (window.innerWidth > 768) {
+    const hasDropdowns = document.querySelectorAll('.has-dropdown');
+    hasDropdowns.forEach(item => {
+      item.addEventListener('mouseenter', function() {
+        hasDropdowns.forEach(other => {
+          if (other !== item) other.classList.remove('active');
+        });
+        item.classList.add('active');
+      });
+      item.addEventListener('mouseleave', function() {
+        item.classList.remove('active');
+      });
+    });
+  }
+
+  // Mobile Horizontal: dropdowns on hover
+  if (window.innerWidth <= 768 && window.matchMedia("(orientation: landscape)").matches) {
+    const hasDropdowns = document.querySelectorAll('.has-dropdown');
+    hasDropdowns.forEach(item => {
+      item.addEventListener('mouseenter', function() {
+        hasDropdowns.forEach(other => {
+          if (other !== item) other.classList.remove('active');
+        });
+        item.classList.add('active');
+      });
+      item.addEventListener('mouseleave', function() {
+        item.classList.remove('active');
+      });
+    });
+  }
+});
+</script>
+    
+</body>
+</html>
