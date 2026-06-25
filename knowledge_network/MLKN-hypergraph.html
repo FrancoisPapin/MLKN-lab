@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Add D3.js here (NEW) -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
 </head>
 <body>
     <header class="topnav" role="banner">
@@ -183,32 +186,12 @@
             </p>
 
             <!-- Container for the network -->
-            <div id="network-container" style="
-                width: 100%;
-                height: 700px;
-                border: 1px solid var(--border);
-                border-radius: var(--r);
-                margin-top: 20px;
-                background: var(--panel);
-                position: relative;
-            ">
-                <!-- Placeholder for the network visualization -->
-                <div id="network-placeholder" style="
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    text-align: center;
-                    color: var(--text2);
-                ">
-                    <i class="fas fa-spinner fa-spin" style="font-size: 24px; margin-bottom: 10px;"></i>
-                    <p>Loading knowledge network...</p>
-                    <p style="font-size: 0.9em; margin-top: 10px;">
-                        Data: <code>knowledge_network/data/full_hierarchy.json</code>
-                    </p>
-                </div>
-                <!-- The actual network will be rendered here by network.js -->
-                <div id="network-canvas"></div>
+            <div id="network-container" style="width: 100%; height: 700px; border: 1px solid var(--border); border-radius: var(--r); margin-top: 20px; background: var(--panel); position: relative;">
+            <div id="network-placeholder" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: var(--text2);">
+                <i class="fas fa-spinner fa-spin" style="font-size: 24px; margin-bottom: 10px;"></i>
+                <p>Loading knowledge network...</p>
+            </div>
+            <svg id="network-svg" width="100%" height="100%"></svg>
             </div>
 
             <!-- Legend -->
@@ -314,6 +297,36 @@
          NETWORK.JS (Empty for now, but linked)
          ====================== -->
     <script src="network.js"></script>
+    <script>
+        // Link the toggle buttons to network.js functions
+        document.getElementById('interdisciplinary-toggle').addEventListener('click', function() {
+            currentNetworkType = 'interdisciplinary';
+            document.getElementById('network-container').style.display = 'block';
+            document.getElementById('disciplinary-networks-section').style.display = 'none';
+            this.classList.add('active');
+            document.getElementById('disciplinary-toggle').classList.remove('active');
+            document.getElementById('core-domains-box').style.display = 'block';
+            updateNetwork();
+        });
+
+        document.getElementById('disciplinary-toggle').addEventListener('click', function() {
+            currentNetworkType = 'disciplinary';
+            document.getElementById('network-container').style.display = 'none';
+            document.getElementById('disciplinary-networks-section').style.display = 'block';
+            this.classList.add('active');
+            document.getElementById('interdisciplinary-toggle').classList.remove('active');
+            document.getElementById('core-domains-box').style.display = 'none';
+        });
+
+        document.querySelectorAll('.layer-toggle').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.layer-toggle').forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                currentLayer = this.getAttribute('data-layer');
+                updateNetwork();
+            });
+        });
+    </script>
 
     <!-- ======================
          INLINE SCRIPT FOR TOGGLES
