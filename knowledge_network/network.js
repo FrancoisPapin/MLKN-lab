@@ -3,13 +3,14 @@ let svg, simulation, nodes, links, nodeElements, linkElements;
 let currentLayer = 'all';
 let currentNetworkType = 'interdisciplinary';
 
+// Colorblind-friendly palette (ColorBrewer)
 const layerColors = {
-    '1': '#FF6347', // Core Domains
-    '2': '#2ECC71', // Disciplines
-    '3': '#50C878', // Subdisciplines
-    '4': '#F39C12', // Thematic Domains
-    '5': '#9B59B6', // Concepts
-    'all': '#1ABC9C'
+    '1': '#0173B2', // Core Domains (Blue)
+    '2': '#029E73', // Disciplines (Green)
+    '3': '#D55E00', // Subdisciplines (Orange)
+    '4': '#CC78BC', // Thematic Domains (Purple)
+    '5': '#CA9161', // Concepts (Brown)
+    'all': '#949494' // All Layers (Gray)
 };
 
 // Initialize the network
@@ -18,49 +19,63 @@ function initNetwork() {
     svg.selectAll("*").remove();
     const g = svg.append("g");
 
+    // Zoom/pan behavior
     const zoom = d3.zoom()
         .scaleExtent([0.1, 10])
         .on("zoom", (event) => { g.attr("transform", event.transform); });
     svg.call(zoom);
 
+    // Load data
     loadData();
 }
 
-// Load data
+// Load data from JSON
 function loadData() {
     const dataUrl = '../knowledge_network/data/full_hierarchy.json';
     d3.json(dataUrl).then(data => {
-        nodes = data.nodes || [];
-        links = data.links || [];
-
-        if (currentLayer !== 'all') {
-            nodes = nodes.filter(node => node.layer == currentLayer);
-            links = links.filter(link =>
-                nodes.some(node => node.id === link.source) &&
-                nodes.some(node => node.id === link.target)
-            );
+        if (!data || !data.nodes || !data.links) {
+            throw new Error('Invalid data format: expected { nodes, links }');
         }
+        nodes = data.nodes;
+        links = data.links;
+        filterByLayer();
         startSimulation();
     }).catch(error => {
         console.error("Error loading data:", error);
         document.getElementById('network-placeholder').innerHTML = `
-            <i class="fas fa-exclamation-triangle"></i>
+            <i class="fas fa-exclamation-triangle" style="color: #FF6347; font-size: 24px;"></i>
             <p>Error loading network data.</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">${error.message}</p>
         `;
     });
 }
 
-// Start simulation
+// Filter nodes/links by current layer
+function filterByLayer() {
+    if (currentLayer === 'all') return;
+
+    const layerNodes = new Set(nodes.filter(node => node.layer == currentLayer).map(node => node.id));
+    nodes = nodes.filter(node => node.layer == currentLayer);
+    links = links.filter(link => layerNodes.has(link.source) && layerNodes.has(link.target));
+}
+
+// Start the force simulation
 function startSimulation() {
+    // Clear previous elements
     if (nodeElements) nodeElements.remove();
     if (linkElements) linkElements.remove();
 
-    simulation = d3.forceSimulation(nodes)
-        .force("link", d3.forceLink(links).id(d => d.id).distance(50))
-        .force("charge", d3.forceManyBody().strength(-200))
-        .force("center", d3.forceCenter(svg.node().width / 2, svg.node().height / 2))
-        .force("collision", d3.forceCollide().radius(20));
+    // Adjust force parameters for large networks
+    const nodeSize = window.innerWidth < 768 ? 5 : 10;
+    const chargeStrength = window.innerWidth < 768 ? -100 : -200;
 
+    simulation = d3.forceSimulation(nodes)
+        .force("link", d3.forceLink(links).id(d => d.id).distance(30))
+        .force("charge", d3.forceManyBody().strength(chargeStrength))
+        .force("center", d3.forceCenter(svg.node().width / 2, svg.node().height / 2))
+        .force("collision", d3.forceCollide().radius(nodeSize * 2));
+
+    // Draw links
     linkElements = g.selectAll(".link")
         .data(links)
         .enter().append("line")
@@ -69,6 +84,7 @@ function startSimulation() {
         .attr("stroke-opacity", 0.6)
         .attr("stroke-width", 1);
 
+    // Draw nodes
     nodeElements = g.selectAll(".node")
         .data(nodes)
         .enter().append("g")
@@ -78,18 +94,23 @@ function startSimulation() {
             .on("drag", dragged)
             .on("end", dragended));
 
+    // Add circles to nodes
     nodeElements.append("circle")
-        .attr("r", d => Math.max(5, Math.min(20, d.size ? d.size / 100 : 10)))
+        .attr("r", d => Math.max(3, Math.min(15, d.size ? d.size / 100 : nodeSize)))
         .attr("fill", d => layerColors[d.layer] || "#ccc")
         .attr("stroke", "#fff")
         .attr("stroke-width", 1);
 
-    nodeElements.append("text")
-        .text(d => d.name || d.id)
-        .attr("font-size", 10)
-        .attr("text-anchor", "middle")
-        .attr("dy", 30);
+    // Add labels (hidden on mobile for performance)
+    if (window.innerWidth > 768) {
+        nodeElements.append("text")
+            .text(d => d.name || d.id)
+            .attr("font-size", 10)
+            .attr("text-anchor", "middle")
+            .attr("dy", 20);
+    }
 
+    // Tooltips
     nodeElements.on("mouseover", function(event, d) {
         const tooltip = d3.select("#network-container")
             .append("div")
@@ -111,16 +132,19 @@ function startSimulation() {
         d3.select(".tooltip").remove();
     });
 
+    // Update positions on each tick
     simulation.on("tick", () => {
         linkElements
             .attr("x1", d => d.source.x)
             .attr("y1", d => d.source.y)
             .attr("x2", d => d.target.x)
             .attr("y2", d => d.target.y);
+
         nodeElements
             .attr("transform", d => `translate(${d.x},${d.y})`);
     });
 
+    // Hide placeholder
     document.getElementById('network-placeholder').style.display = 'none';
 }
 
@@ -142,11 +166,36 @@ function dragended(event, d) {
     d.fy = null;
 }
 
-// Update network
+// Update network based on current layer
 function updateNetwork() {
-    if (!nodes || !links) return;
+    filterByLayer();
     startSimulation();
 }
 
-// Initialize on DOM load
-document.addEventListener('DOMContentLoaded', initNetwork);
+// Filter by domain (for Layer 1)
+function filterNetworkByDomain(domain) {
+    if (currentLayer !== '1') return; // Only for Layer 1
+    const domainNodes = new Set(nodes.filter(node => node.domain === domain).map(node => node.id));
+    nodeElements.style("opacity", d => domainNodes.has(d.id) ? 1 : 0.2);
+    linkElements.style("opacity", d => domainNodes.has(d.source) && domainNodes.has(d.target) ? 1 : 0.2);
+}
+
+// Load disciplinary network
+function loadDisciplinaryNetworkInJS(discipline) {
+    currentNetworkType = 'disciplinary';
+    const dataUrl = `../knowledge_network/data/${discipline}.json`;
+    d3.json(dataUrl).then(data => {
+        nodes = data.nodes || [];
+        links = data.links || [];
+        startSimulation();
+        // Show the network container
+        document.getElementById('network-container').style.display = 'block';
+        document.getElementById('disciplinary-networks-section').style.display = 'none';
+    }).catch(error => {
+        console.error(`Error loading ${discipline} network:`, error);
+        document.getElementById('network-placeholder').innerHTML = `
+            <i class="fas fa-exclamation-triangle" style="color: #FF6347; font-size: 24px;"></i>
+            <p>Error loading ${discipline} network.</p>
+        `;
+    });
+}
