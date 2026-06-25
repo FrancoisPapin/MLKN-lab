@@ -31,7 +31,7 @@ function initNetwork() {
 
 // Load data from JSON
 function loadData() {
-    const dataUrl = '../knowledge_network/data/full_hierarchy.json';
+    const dataUrl = './data/full_hierarchy.json';
     d3.json(dataUrl).then(data => {
         if (!data || !data.nodes || !data.links) {
             throw new Error('Invalid data format: expected { nodes, links }');
