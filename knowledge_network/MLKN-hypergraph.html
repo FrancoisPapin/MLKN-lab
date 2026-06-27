@@ -298,126 +298,128 @@
         <p class="sf-legal">© François Papin · May 2026 · MIT License · MLKN.lab</p>
     </footer>
 
-    <!-- ======================
+        <!-- ======================
          SCRIPTS
          ====================== -->
-    <!-- Load network.js (D3.js logic) -->
-    <script src="network.js"></script>
+        <!-- Load network.js (D3.js logic) -->
+        <script src="network.js"></script>
 
-    <!-- UI Controls and Initialization -->
-    <script>
-        // Initialize global variables for UI controls
-        let currentNetworkType = 'interdisciplinary';
-        let currentLayer = 'all';
+        <!-- UI Controls and Initialization -->
+        <script>
+            // Initialize global variables for UI controls
+            let currentNetworkType = 'interdisciplinary';
+            let currentLayer = 'all';
+            let svg, simulation, nodes, links, nodeElements, linkElements; // Declare for network.js
 
-        // DOMContentLoaded: Initialize everything
-        document.addEventListener('DOMContentLoaded', function() {
-            // Check if D3.js loaded
-            if (!window.d3) {
-                document.getElementById('network-error').style.display = 'block';
-                document.querySelector('#network-placeholder i').style.display = 'none';
-                return;
-            }
-
-            // Initialize network if function exists (from network.js)
-            if (typeof initNetwork === 'function') {
-                initNetwork();
-            }
-
-            // Mobile menu toggle
-            const topnav = document.querySelector('.topnav');
-            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-            mobileMenuToggle.addEventListener('click', function(e) {
-                e.stopPropagation();
-                topnav.classList.toggle('mobile-menu-active');
-            });
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('.topnav')) {
-                    topnav.classList.remove('mobile-menu-active');
+            // DOMContentLoaded: Initialize everything
+            document.addEventListener('DOMContentLoaded', function() {
+                // Check if D3.js loaded
+                if (!window.d3) {
+                    document.getElementById('network-error').style.display = 'block';
+                    document.querySelector('#network-placeholder i').style.display = 'none';
+                    return;
                 }
-            });
 
-            // Desktop dropdowns
-            if (window.innerWidth > 768) {
-                const hasDropdowns = document.querySelectorAll('.has-dropdown');
-                hasDropdowns.forEach(item => {
-                    item.addEventListener('mouseenter', function() {
-                        hasDropdowns.forEach(other => {
-                            if (other !== item) other.classList.remove('active');
-                        });
-                        item.classList.add('active');
-                    });
-                    item.addEventListener('mouseleave', function() {
-                        item.classList.remove('active');
-                    });
+                // Initialize network if function exists (from network.js)
+                if (typeof initNetwork === 'function') {
+                    initNetwork();
+                }
+
+                // Mobile menu toggle
+                const topnav = document.querySelector('.topnav');
+                const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+                mobileMenuToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    topnav.classList.toggle('mobile-menu-active');
                 });
-            }
-
-            // Mobile horizontal dropdowns
-            if (window.innerWidth <= 768 && window.matchMedia("(orientation: landscape)").matches) {
-                const hasDropdowns = document.querySelectorAll('.has-dropdown');
-                hasDropdowns.forEach(item => {
-                    item.addEventListener('mouseenter', function() {
-                        hasDropdowns.forEach(other => {
-                            if (other !== item) other.classList.remove('active');
-                        });
-                        item.classList.add('active');
-                    });
-                    item.addEventListener('mouseleave', function() {
-                        item.classList.remove('active');
-                    });
+                document.addEventListener('click', function(e) {
+                    if (!e.target.closest('.topnav')) {
+                        topnav.classList.remove('mobile-menu-active');
+                    }
                 });
-            }
 
-            // Network Type Toggle
-            document.getElementById('interdisciplinary-toggle').addEventListener('click', function() {
-                currentNetworkType = 'interdisciplinary';
-                document.getElementById('network-container').style.display = 'block';
-                document.getElementById('disciplinary-networks-section').style.display = 'none';
-                this.classList.add('active');
-                document.getElementById('disciplinary-toggle').classList.remove('active');
-                document.getElementById('core-domains-box').style.display = 'block';
-                if (typeof updateNetwork === 'function') updateNetwork();
-            });
+                // Desktop dropdowns
+                if (window.innerWidth > 768) {
+                    const hasDropdowns = document.querySelectorAll('.has-dropdown');
+                    hasDropdowns.forEach(item => {
+                        item.addEventListener('mouseenter', function() {
+                            hasDropdowns.forEach(other => {
+                                if (other !== item) other.classList.remove('active');
+                            });
+                            item.classList.add('active');
+                        });
+                        item.addEventListener('mouseleave', function() {
+                            item.classList.remove('active');
+                        });
+                    });
+                }
 
-            document.getElementById('disciplinary-toggle').addEventListener('click', function() {
-                currentNetworkType = 'disciplinary';
-                document.getElementById('network-container').style.display = 'none';
-                document.getElementById('disciplinary-networks-section').style.display = 'block';
-                this.classList.add('active');
-                document.getElementById('interdisciplinary-toggle').classList.remove('active');
-                document.getElementById('core-domains-box').style.display = 'none';
-            });
+                // Mobile horizontal dropdowns
+                if (window.innerWidth <= 768 && window.matchMedia("(orientation: landscape)").matches) {
+                    const hasDropdowns = document.querySelectorAll('.has-dropdown');
+                    hasDropdowns.forEach(item => {
+                        item.addEventListener('mouseenter', function() {
+                            hasDropdowns.forEach(other => {
+                                if (other !== item) other.classList.remove('active');
+                            });
+                            item.classList.add('active');
+                        });
+                        item.addEventListener('mouseleave', function() {
+                            item.classList.remove('active');
+                        });
+                    });
+                }
 
-            // Layer Toggle
-            document.querySelectorAll('.layer-toggle').forEach(button => {
-                button.addEventListener('click', function() {
-                    document.querySelectorAll('.layer-toggle').forEach(btn => btn.classList.remove('active'));
+                // Network Type Toggle
+                document.getElementById('interdisciplinary-toggle').addEventListener('click', function() {
+                    currentNetworkType = 'interdisciplinary';
+                    document.getElementById('network-container').style.display = 'block';
+                    document.getElementById('disciplinary-networks-section').style.display = 'none';
                     this.classList.add('active');
-                    currentLayer = this.getAttribute('data-layer');
+                    document.getElementById('disciplinary-toggle').classList.remove('active');
+                    document.getElementById('core-domains-box').style.display = 'block';
                     if (typeof updateNetwork === 'function') updateNetwork();
                 });
-            });
 
-            // Domain Toggle (for Layer 1)
-            document.querySelectorAll('.domain-toggle').forEach(button => {
-                button.addEventListener('click', function() {
-                    document.querySelectorAll('.domain-toggle').forEach(btn => btn.classList.remove('active'));
+                document.getElementById('disciplinary-toggle').addEventListener('click', function() {
+                    currentNetworkType = 'disciplinary';
+                    document.getElementById('network-container').style.display = 'none';
+                    document.getElementById('disciplinary-networks-section').style.display = 'block';
                     this.classList.add('active');
-                    const selectedDomain = this.getAttribute('data-domain');
-                    if (typeof filterNetworkByDomain === 'function') filterNetworkByDomain(selectedDomain);
+                    document.getElementById('interdisciplinary-toggle').classList.remove('active');
+                    document.getElementById('core-domains-box').style.display = 'none';
+                });
+
+                // Layer Toggle
+                document.querySelectorAll('.layer-toggle').forEach(button => {
+                    button.addEventListener('click', function() {
+                        document.querySelectorAll('.layer-toggle').forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+                        currentLayer = this.getAttribute('data-layer');
+                        if (typeof updateNetwork === 'function') updateNetwork();
+                    });
+                });
+
+                // Domain Toggle (for Layer 1)
+                document.querySelectorAll('.domain-toggle').forEach(button => {
+                    button.addEventListener('click', function() {
+                        document.querySelectorAll('.domain-toggle').forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+                        const selectedDomain = this.getAttribute('data-domain');
+                        if (typeof filterNetworkByDomain === 'function') filterNetworkByDomain(selectedDomain);
+                    });
                 });
             });
-        });
 
-        // Placeholder for disciplinary networks (to be implemented in network.js)
-        function loadDisciplinaryNetwork(discipline) {
-            if (typeof loadDisciplinaryNetworkInJS === 'function') {
-                loadDisciplinaryNetworkInJS(discipline);
-            } else {
-                console.warn('loadDisciplinaryNetworkInJS not implemented in network.js');
+            // Placeholder for disciplinary networks (calls network.js)
+            function loadDisciplinaryNetwork(discipline) {
+                if (typeof loadDisciplinaryNetworkInJS === 'function') {
+                    loadDisciplinaryNetworkInJS(discipline);
+                } else {
+                    console.warn('loadDisciplinaryNetworkInJS not implemented in network.js');
+                }
             }
-        }
-    </script>
+        </script>
+    
 </body>
 </html>
