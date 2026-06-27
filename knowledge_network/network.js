@@ -67,30 +67,69 @@ function loadData() {
         .then(data => {
             document.getElementById('progress-bar').style.width = '100%';
 
-            // Handle your JSON structure: { nodes: [...], edges: [...] }
             if (data.nodes && data.edges) {
-                // Assign unique IDs to nodes (fixes "unknown" duplicates)
+                // Step 1: Assign unique IDs to nodes (fixes "unknown" duplicates)
                 nodes = data.nodes.map((node, index) => ({
                     ...node,
                     id: node.id === "unknown" ? `node_${index}` : node.id
                 }));
 
-                // Remap edges to use the new node IDs
-                links = data.edges.map(edge => {
-                    const sourceNode = data.nodes.find(n => n.name === edge.source || n.Node === edge.source);
-                    const targetNode = data.nodes.find(n => n.name === edge.target || n.Node === edge.target);
-                    return {
-                        ...edge,
-                        source: sourceNode ? (sourceNode.id === "unknown" ? `node_${data.nodes.indexOf(sourceNode)}` : sourceNode.id) : edge.source,
-                        target: targetNode ? (targetNode.id === "unknown" ? `node_${data.nodes.indexOf(targetNode)}` : targetNode.id) : edge.target
-                    };
+                // Step 2: Create a map of node names to IDs for edge remapping
+                const nodeNameToId = {};
+                nodes.forEach(node => {
+                    if (node.name) nodeNameToId[node.name] = node.id;
+                    if (node.Node) nodeNameToId[node.Node] = node.id;
                 });
 
-                // Log the first node and edge for debugging
-                console.log("First node (after ID fix):", nodes[0]);
-                console.log("First edge (after ID fix):", links[0]);
+                // Step 3: Remap edges to use valid node IDs
+                links = data.edges.map(edge => {
+                    let sourceId = edge.source;
+                    let targetId = edge.target;
+
+                    // Handle "unknown" source
+                    if (sourceId === "unknown") {
+                        // Try to find a node by name or Node field
+                        const sourceNode = data.nodes.find(n =>
+                            n.name === edge.source || n.Node === edge.source || n.id === edge.source
+                        );
+                        sourceId = sourceNode ?
+                            (sourceNode.id === "unknown" ? `node_${data.nodes.indexOf(sourceNode)}` : sourceNode.id) :
+                            `node_${Math.floor(Math.random() * 1000000)}`; // Fallback: random ID
+                    } else if (nodeNameToId[sourceId]) {
+                        // If sourceId matches a node name, use the node's ID
+                        sourceId = nodeNameToId[sourceId];
+                    }
+
+                    // Handle "unknown" target
+                    if (targetId === "unknown") {
+                        const targetNode = data.nodes.find(n =>
+                            n.name === edge.target || n.Node === edge.target || n.id === edge.target
+                        );
+                        targetId = targetNode ?
+                            (targetNode.id === "unknown" ? `node_${data.nodes.indexOf(targetNode)}` : targetNode.id) :
+                            `node_${Math.floor(Math.random() * 1000000)}`; // Fallback: random ID
+                    } else if (nodeNameToId[targetId]) {
+                        // If targetId matches a node name, use the node's ID
+                        targetId = nodeNameToId[targetId];
+                    }
+
+                    return { ...edge, source: sourceId, target: targetId };
+                });
+
+                // Step 4: Filter out edges with invalid references
+                const validNodeIds = new Set(nodes.map(node => node.id));
+                links = links.filter(link =>
+                    validNodeIds.has(link.source) && validNodeIds.has(link.target)
+                );
+
                 console.log("Total nodes:", nodes.length);
-                console.log("Total edges:", links.length);
+                console.log("Total edges (after filtering):", links.length);
+                console.log("Sample node:", nodes[0]);
+                console.log("Sample edge:", links[0]);
+
+                if (links.length === 0) {
+                    throw new Error('No valid edges after filtering. Check your data for "unknown" references.');
+                }
 
                 filterByLayer();
                 startSimulation();
@@ -108,7 +147,7 @@ function loadData() {
                     ${error.message}
                 </p>
                 <p style="font-size: 0.8em; color: var(--text2); margin-top: 10px;">
-                    <strong>Note:</strong> Your JSON uses "edges" instead of "links".
+                    <strong>Note:</strong> If you see "No valid edges", your data needs cleanup.
                 </p>
             `;
         });
@@ -273,20 +312,51 @@ function loadDisciplinaryNetworkInJS(discipline) {
         })
         .then(data => {
             if (data.nodes && data.edges) {
-                // Apply the same ID fixes for disciplinary networks
+                // Apply the same fixes for disciplinary networks
                 nodes = data.nodes.map((node, index) => ({
                     ...node,
                     id: node.id === "unknown" ? `node_${index}` : node.id
                 }));
-                links = data.edges.map(edge => {
-                    const sourceNode = data.nodes.find(n => n.name === edge.source || n.Node === edge.source);
-                    const targetNode = data.nodes.find(n => n.name === edge.target || n.Node === edge.target);
-                    return {
-                        ...edge,
-                        source: sourceNode ? (sourceNode.id === "unknown" ? `node_${data.nodes.indexOf(sourceNode)}` : sourceNode.id) : edge.source,
-                        target: targetNode ? (targetNode.id === "unknown" ? `node_${data.nodes.indexOf(targetNode)}` : targetNode.id) : edge.target
-                    };
+
+                const nodeNameToId = {};
+                nodes.forEach(node => {
+                    if (node.name) nodeNameToId[node.name] = node.id;
+                    if (node.Node) nodeNameToId[node.Node] = node.id;
                 });
+
+                links = data.edges.map(edge => {
+                    let sourceId = edge.source;
+                    let targetId = edge.target;
+
+                    if (sourceId === "unknown") {
+                        const sourceNode = data.nodes.find(n =>
+                            n.name === edge.source || n.Node === edge.source || n.id === edge.source
+                        );
+                        sourceId = sourceNode ?
+                            (sourceNode.id === "unknown" ? `node_${data.nodes.indexOf(sourceNode)}` : sourceNode.id) :
+                            `node_${Math.floor(Math.random() * 1000000)}`;
+                    } else if (nodeNameToId[sourceId]) {
+                        sourceId = nodeNameToId[sourceId];
+                    }
+
+                    if (targetId === "unknown") {
+                        const targetNode = data.nodes.find(n =>
+                            n.name === edge.target || n.Node === edge.target || n.id === edge.target
+                        );
+                        targetId = targetNode ?
+                            (targetNode.id === "unknown" ? `node_${data.nodes.indexOf(targetNode)}` : targetNode.id) :
+                            `node_${Math.floor(Math.random() * 1000000)}`;
+                    } else if (nodeNameToId[targetId]) {
+                        targetId = nodeNameToId[targetId];
+                    }
+
+                    return { ...edge, source: sourceId, target: targetId };
+                });
+
+                const validNodeIds = new Set(nodes.map(node => node.id));
+                links = links.filter(link =>
+                    validNodeIds.has(link.source) && validNodeIds.has(link.target)
+                );
             } else {
                 throw new Error('Invalid data format: expected { nodes, edges }');
             }
