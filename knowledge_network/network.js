@@ -38,7 +38,7 @@ function initNetwork() {
 // Load data from JSON
 function loadData() {
     // Use the correct path for GitHub Pages
-    const dataUrl = 'knowledge_network/data/full_hierarchy.json';
+    const dataUrl = '/MLKN-lab/knowledge_network/data/full_hierarchy.json';
 
     // Show loading progress
     document.getElementById('network-placeholder').innerHTML = `
