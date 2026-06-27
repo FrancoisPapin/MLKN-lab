@@ -1,5 +1,5 @@
 // network.js
-// Global variables (declared in MLKN-hypergraph.html to avoid duplication)
+// Global variables for D3.js visualization
 let svg, simulation, nodes, links, nodeElements, linkElements;
 
 // Colorblind-friendly palette (ColorBrewer)
@@ -18,13 +18,12 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
     // Local testing
     dataUrl = './data/full_hierarchy.json';
 } else {
-    // GitHub Pages (root of repo)
+    // GitHub Pages
     dataUrl = '/MLKN-lab/knowledge_network/data/full_hierarchy.json';
 }
 
 // Initialize the network
 function initNetwork() {
-    // Check if D3.js is loaded
     if (!window.d3) {
         document.getElementById('network-error').style.display = 'block';
         document.querySelector('#network-placeholder i').style.display = 'none';
@@ -45,11 +44,10 @@ function initNetwork() {
     loadData();
 }
 
-// Load data from JSON
+// Load data from JSON (handles "edges" instead of "links")
 function loadData() {
-    console.log('Fetching data from:', dataUrl);  // Debug: Log the URL
+    console.log('Fetching data from:', dataUrl);
 
-    // Show loading progress
     document.getElementById('network-placeholder').innerHTML = `
         <i class="fas fa-spinner fa-spin" style="font-size: 24px; margin-bottom: 10px;"></i>
         <p>Loading knowledge network...</p>
@@ -69,14 +67,31 @@ function loadData() {
             return response.json();
         })
         .then(data => {
-            // Update progress bar
             document.getElementById('progress-bar').style.width = '100%';
 
-            if (!data || !data.nodes || !data.links) {
-                throw new Error('Invalid data format: expected { nodes, links }');
+            // Handle your JSON structure: { nodes: [...], edges: [...] }
+            if (data.nodes && data.edges) {
+                nodes = data.nodes;
+                links = data.edges; // Map "edges" to "links" for D3.js
+            } else {
+                throw new Error('Invalid data format: expected { nodes, edges }');
             }
-            nodes = data.nodes;
-            links = data.links;
+
+            // Log the first node and edge for debugging
+            console.log("First node:", nodes[0]);
+            console.log("First edge:", links[0]);
+
+            // Fix duplicate "unknown" IDs (if needed)
+            nodes = nodes.map((node, i) => ({
+                ...node,
+                id: node.id === "unknown" ? `unknown_${i}` : node.id
+            }));
+            links = links.map(edge => ({
+                ...edge,
+                source: edge.source === "unknown" ? `unknown_${nodes.findIndex(n => n.name === edge.source)}` : edge.source,
+                target: edge.target === "unknown" ? `unknown_${nodes.findIndex(n => n.name === edge.target)}` : edge.target
+            }));
+
             filterByLayer();
             startSimulation();
         })
@@ -90,7 +105,7 @@ function loadData() {
                     ${error.message}
                 </p>
                 <p style="font-size: 0.8em; color: var(--text2); margin-top: 10px;">
-                    <strong>Note:</strong> Click the URL above to test it directly.
+                    <strong>Note:</strong> Your JSON uses "edges" instead of "links".
                 </p>
             `;
         });
@@ -140,7 +155,7 @@ function startSimulation() {
             .on("drag", dragged)
             .on("end", dragended));
 
-    // Add circles to nodes
+    // Add circles to nodes (use "size" or fallback to default)
     nodeElements.append("circle")
         .attr("r", d => Math.max(3, Math.min(15, d.size ? d.size / 100 : nodeSize)))
         .attr("fill", d => layerColors[d.layer] || "#ccc")
@@ -150,13 +165,13 @@ function startSimulation() {
     // Add labels (hidden on mobile for performance)
     if (window.innerWidth > 768) {
         nodeElements.append("text")
-            .text(d => d.name || d.id)
+            .text(d => d.name || d.Node || d.id)
             .attr("font-size", 10)
             .attr("text-anchor", "middle")
             .attr("dy", 20);
     }
 
-    // Tooltips
+    // Enhanced tooltips with all metadata
     nodeElements.on("mouseover", function(event, d) {
         const tooltip = d3.select("#network-container")
             .append("div")
@@ -170,9 +185,11 @@ function startSimulation() {
             .style("left", (event.pageX + 10) + "px")
             .style("top", (event.pageY + 10) + "px")
             .html(`
-                <strong>${d.name || d.id}</strong><br>
-                Layer: ${d.layer || 'N/A'}<br>
-                Size: ${d.size || 'N/A'}
+                <strong>${d.name || d.Node || d.id}</strong><br>
+                Layer: ${d.layer || d.Layer || 'N/A'}<br>
+                Domain: ${d.domain || d['Core Domain'] || 'N/A'}<br>
+                Size: ${d.size || 'N/A'}<br>
+                Description: ${d.description || 'N/A'}
             `);
     }).on("mouseout", function() {
         d3.select(".tooltip").remove();
@@ -220,8 +237,8 @@ function updateNetwork() {
 
 // Filter by domain (for Layer 1)
 function filterNetworkByDomain(domain) {
-    if (currentLayer !== '1') return; // Only for Layer 1
-    const domainNodes = new Set(nodes.filter(node => node.domain === domain).map(node => node.id));
+    if (currentLayer !== '1') return;
+    const domainNodes = new Set(nodes.filter(node => node.domain === domain || node['Core Domain'] === domain).map(node => node.id));
     nodeElements.style("opacity", d => domainNodes.has(d.id) ? 1 : 0.2);
     linkElements.style("opacity", d => domainNodes.has(d.source) && domainNodes.has(d.target) ? 1 : 0.2);
 }
@@ -229,7 +246,7 @@ function filterNetworkByDomain(domain) {
 // Load disciplinary network
 function loadDisciplinaryNetworkInJS(discipline) {
     currentNetworkType = 'disciplinary';
-    const dataUrl = `/knowledge_network/data/${discipline}.json`;
+    const dataUrl = `/MLKN-lab/knowledge_network/data/${discipline}.json`;
 
     document.getElementById('network-container').style.display = 'block';
     document.getElementById('disciplinary-networks-section').style.display = 'none';
@@ -242,11 +259,12 @@ function loadDisciplinaryNetworkInJS(discipline) {
             return response.json();
         })
         .then(data => {
-            if (!data || !data.nodes || !data.links) {
-                throw new Error('Invalid data format: expected { nodes, links }');
+            if (data.nodes && data.edges) {
+                nodes = data.nodes;
+                links = data.edges;
+            } else {
+                throw new Error('Invalid data format: expected { nodes, edges }');
             }
-            nodes = data.nodes;
-            links = data.links;
             startSimulation();
         })
         .catch(error => {
