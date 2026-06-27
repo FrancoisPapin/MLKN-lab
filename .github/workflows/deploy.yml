@@ -1,25 +1,35 @@
-name: Deploy to GitHub Pages
+name: Deploy Pages with LFS
+
 on:
   push:
-    branches: [ main ]
+    branches: ["main"]
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pages: write
-      id-token: write  # Required for GitHub Pages
     environment:
       name: github-pages
-      url: https://FrancoisPapin.github.io/MLKN-lab/
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
         with:
-          lfs: true  # Fetch LFS pointers
-      - run: git lfs pull  # Pull LFS files
-      - run: ls -lh knowledge_network/data/  # Debug: List files to confirm LFS pull
-      - uses: actions/configure-pages@v4
-      - uses: actions/upload-pages-artifact@v3
+          lfs: true  # 👈 CRITICAL: Pulls actual LFS files
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'  # Deploy the entire repo
-      - uses: actions/deploy-pages@v4
+          path: '.'  # Deploys the entire repo (including LFS files)
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
