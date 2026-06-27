@@ -18,7 +18,7 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
     // Local testing
     dataUrl = './data/full_hierarchy.json';
 } else {
-    // GitHub Pages
+    // GitHub Pages (root of repo)
     dataUrl = '/MLKN-lab/knowledge_network/data/full_hierarchy.json';
 }
 
