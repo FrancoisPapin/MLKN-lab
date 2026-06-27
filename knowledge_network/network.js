@@ -19,7 +19,7 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
     dataUrl = './data/full_hierarchy.json';
 } else {
     // GitHub Pages
-    dataUrl = '/knowledge_network/data/full_hierarchy.json';
+    dataUrl = '/MLKN-lab/knowledge_network/data/full_hierarchy.json';
 }
 
 // Initialize the network
