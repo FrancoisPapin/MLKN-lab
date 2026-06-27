@@ -298,7 +298,7 @@
         <p class="sf-legal">© François Papin · May 2026 · MIT License · MLKN.lab</p>
     </footer>
 
-        <!-- ======================
+            <!-- ======================
          SCRIPTS
          ====================== -->
         <!-- Load network.js (D3.js logic) -->
@@ -309,7 +309,7 @@
             // Initialize global variables for UI controls
             let currentNetworkType = 'interdisciplinary';
             let currentLayer = 'all';
-            let svg, simulation, nodes, links, nodeElements, linkElements; // Declare for network.js
+            // REMOVED: let svg, simulation, nodes, links, nodeElements, linkElements;
 
             // DOMContentLoaded: Initialize everything
             document.addEventListener('DOMContentLoaded', function() {
@@ -420,6 +420,5 @@
                 }
             }
         </script>
-    
 </body>
 </html>
