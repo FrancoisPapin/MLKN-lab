@@ -5,14 +5,21 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write  # Required for GitHub Pages
+    environment:
+      name: github-pages
+      url: https://FrancoisPapin.github.io/MLKN-lab/
     steps:
       - uses: actions/checkout@v4
         with:
           lfs: true  # Fetch LFS pointers
       - run: git lfs pull  # Pull LFS files
       - run: ls -lh knowledge_network/data/  # Debug: List files to confirm LFS pull
-      - uses: actions/configure-pages@v4  # Updated to v4
-      - uses: actions/upload-pages-artifact@v3  # Updated to v3
+      - uses: actions/configure-pages@v4
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: '.'  # Deploy the entire repo
-      - uses: actions/deploy-pages@v4  # Updated to v4
+      - uses: actions/deploy-pages@v4
