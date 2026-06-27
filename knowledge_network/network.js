@@ -1,6 +1,6 @@
 // network.js
-// NOTE: Global variables (currentNetworkType, currentLayer) are declared in MLKN-hypergraph.html
-// to avoid duplication.
+// Global variables (declared in MLKN-hypergraph.html to avoid duplication)
+let svg, simulation, nodes, links, nodeElements, linkElements;
 
 // Colorblind-friendly palette (ColorBrewer)
 const layerColors = {
@@ -11,6 +11,16 @@ const layerColors = {
     '5': '#CA9161', // Concepts (Brown)
     'all': '#949494' // All Layers (Gray)
 };
+
+// Determine the correct data URL based on the environment
+let dataUrl;
+if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    // Local testing
+    dataUrl = './data/full_hierarchy.json';
+} else {
+    // GitHub Pages
+    dataUrl = '/knowledge_network/data/full_hierarchy.json';
+}
 
 // Initialize the network
 function initNetwork() {
@@ -37,23 +47,21 @@ function initNetwork() {
 
 // Load data from JSON
 function loadData() {
-    // Use the correct path for GitHub Pages
-    const dataUrl = '/MLKN-lab/knowledge_network/data/full_hierarchy.json';
+    console.log('Fetching data from:', dataUrl);  // Debug: Log the URL
 
     // Show loading progress
     document.getElementById('network-placeholder').innerHTML = `
         <i class="fas fa-spinner fa-spin" style="font-size: 24px; margin-bottom: 10px;"></i>
         <p>Loading knowledge network...</p>
         <div style="width: 100%; background: #333; border-radius: 4px; margin-top: 10px;">
-            <div id="progress-bar" style="width: 0%; height: 4px; background: #1ABC9C; border-radius: 4px;"></div>
+            <div id="progress-bar" style="width: 20%; height: 4px; background: #1ABC9C; border-radius: 4px;"></div>
         </div>
+        <p style="font-size: 0.9em; color: var(--text2); margin-top: 10px;">
+            Testing URL: <a href="${dataUrl}" target="_blank" style="color: var(--link);">${dataUrl}</a>
+        </p>
     `;
 
-    // Simulate progress (optional)
-    const progressBar = document.getElementById('progress-bar');
-    progressBar.style.width = '20%';
-
-    d3.json(dataUrl)
+    fetch(dataUrl)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -61,7 +69,9 @@ function loadData() {
             return response.json();
         })
         .then(data => {
-            progressBar.style.width = '100%';
+            // Update progress bar
+            document.getElementById('progress-bar').style.width = '100%';
+
             if (!data || !data.nodes || !data.links) {
                 throw new Error('Invalid data format: expected { nodes, links }');
             }
@@ -76,12 +86,11 @@ function loadData() {
                 <i class="fas fa-exclamation-triangle" style="color: #FF6347; font-size: 24px;"></i>
                 <p>Error loading network data.</p>
                 <p style="font-size: 0.9em; margin-top: 10px; color: var(--text2);">
-                    Path: ${dataUrl}<br>
+                    URL: <a href="${dataUrl}" target="_blank" style="color: var(--link);">${dataUrl}</a><br>
                     ${error.message}
                 </p>
                 <p style="font-size: 0.8em; color: var(--text2); margin-top: 10px;">
-                    <strong>Note:</strong> GitHub does not serve LFS files via raw links.
-                    Use GitHub Pages or test locally.
+                    <strong>Note:</strong> Click the URL above to test it directly.
                 </p>
             `;
         });
@@ -220,12 +229,18 @@ function filterNetworkByDomain(domain) {
 // Load disciplinary network
 function loadDisciplinaryNetworkInJS(discipline) {
     currentNetworkType = 'disciplinary';
-    const dataUrl = `knowledge_network/data/${discipline}.json`;
+    const dataUrl = `/knowledge_network/data/${discipline}.json`;
 
     document.getElementById('network-container').style.display = 'block';
     document.getElementById('disciplinary-networks-section').style.display = 'none';
 
-    d3.json(dataUrl)
+    fetch(dataUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
             if (!data || !data.nodes || !data.links) {
                 throw new Error('Invalid data format: expected { nodes, links }');
@@ -239,7 +254,10 @@ function loadDisciplinaryNetworkInJS(discipline) {
             document.getElementById('network-placeholder').innerHTML = `
                 <i class="fas fa-exclamation-triangle" style="color: #FF6347; font-size: 24px;"></i>
                 <p>Error loading ${discipline} network.</p>
-                <p style="font-size: 0.9em; margin-top: 10px; color: var(--text2);">${error.message}</p>
+                <p style="font-size: 0.9em; margin-top: 10px; color: var(--text2);">
+                    URL: <a href="${dataUrl}" target="_blank" style="color: var(--link);">${dataUrl}</a><br>
+                    ${error.message}
+                </p>
             `;
         });
 }
