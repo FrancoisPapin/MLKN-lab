@@ -1,7 +1,6 @@
 // network.js
-let svg, simulation, nodes, links, nodeElements, linkElements;
-let currentLayer = 'all';
-let currentNetworkType = 'interdisciplinary';
+// NOTE: Global variables (currentNetworkType, currentLayer) are declared in MLKN-hypergraph.html
+// to avoid duplication.
 
 // Colorblind-friendly palette (ColorBrewer)
 const layerColors = {
@@ -15,6 +14,13 @@ const layerColors = {
 
 // Initialize the network
 function initNetwork() {
+    // Check if D3.js is loaded
+    if (!window.d3) {
+        document.getElementById('network-error').style.display = 'block';
+        document.querySelector('#network-placeholder i').style.display = 'none';
+        return;
+    }
+
     svg = d3.select("#network-svg");
     svg.selectAll("*").remove();
     const g = svg.append("g");
@@ -31,23 +37,54 @@ function initNetwork() {
 
 // Load data from JSON
 function loadData() {
-    const dataUrl = './data/full_hierarchy.json';
-    d3.json(dataUrl).then(data => {
-        if (!data || !data.nodes || !data.links) {
-            throw new Error('Invalid data format: expected { nodes, links }');
-        }
-        nodes = data.nodes;
-        links = data.links;
-        filterByLayer();
-        startSimulation();
-    }).catch(error => {
-        console.error("Error loading data:", error);
-        document.getElementById('network-placeholder').innerHTML = `
-            <i class="fas fa-exclamation-triangle" style="color: #FF6347; font-size: 24px;"></i>
-            <p>Error loading network data.</p>
-            <p style="font-size: 0.9em; margin-top: 10px;">${error.message}</p>
-        `;
-    });
+    // Use the correct path for GitHub Pages
+    const dataUrl = 'knowledge_network/data/full_hierarchy.json';
+
+    // Show loading progress
+    document.getElementById('network-placeholder').innerHTML = `
+        <i class="fas fa-spinner fa-spin" style="font-size: 24px; margin-bottom: 10px;"></i>
+        <p>Loading knowledge network...</p>
+        <div style="width: 100%; background: #333; border-radius: 4px; margin-top: 10px;">
+            <div id="progress-bar" style="width: 0%; height: 4px; background: #1ABC9C; border-radius: 4px;"></div>
+        </div>
+    `;
+
+    // Simulate progress (optional)
+    const progressBar = document.getElementById('progress-bar');
+    progressBar.style.width = '20%';
+
+    d3.json(dataUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            progressBar.style.width = '100%';
+            if (!data || !data.nodes || !data.links) {
+                throw new Error('Invalid data format: expected { nodes, links }');
+            }
+            nodes = data.nodes;
+            links = data.links;
+            filterByLayer();
+            startSimulation();
+        })
+        .catch(error => {
+            console.error("Error loading data:", error);
+            document.getElementById('network-placeholder').innerHTML = `
+                <i class="fas fa-exclamation-triangle" style="color: #FF6347; font-size: 24px;"></i>
+                <p>Error loading network data.</p>
+                <p style="font-size: 0.9em; margin-top: 10px; color: var(--text2);">
+                    Path: ${dataUrl}<br>
+                    ${error.message}
+                </p>
+                <p style="font-size: 0.8em; color: var(--text2); margin-top: 10px;">
+                    <strong>Note:</strong> GitHub does not serve LFS files via raw links.
+                    Use GitHub Pages or test locally.
+                </p>
+            `;
+        });
 }
 
 // Filter nodes/links by current layer
@@ -183,19 +220,26 @@ function filterNetworkByDomain(domain) {
 // Load disciplinary network
 function loadDisciplinaryNetworkInJS(discipline) {
     currentNetworkType = 'disciplinary';
-    const dataUrl = `../knowledge_network/data/${discipline}.json`;
-    d3.json(dataUrl).then(data => {
-        nodes = data.nodes || [];
-        links = data.links || [];
-        startSimulation();
-        // Show the network container
-        document.getElementById('network-container').style.display = 'block';
-        document.getElementById('disciplinary-networks-section').style.display = 'none';
-    }).catch(error => {
-        console.error(`Error loading ${discipline} network:`, error);
-        document.getElementById('network-placeholder').innerHTML = `
-            <i class="fas fa-exclamation-triangle" style="color: #FF6347; font-size: 24px;"></i>
-            <p>Error loading ${discipline} network.</p>
-        `;
-    });
+    const dataUrl = `knowledge_network/data/${discipline}.json`;
+
+    document.getElementById('network-container').style.display = 'block';
+    document.getElementById('disciplinary-networks-section').style.display = 'none';
+
+    d3.json(dataUrl)
+        .then(data => {
+            if (!data || !data.nodes || !data.links) {
+                throw new Error('Invalid data format: expected { nodes, links }');
+            }
+            nodes = data.nodes;
+            links = data.links;
+            startSimulation();
+        })
+        .catch(error => {
+            console.error(`Error loading ${discipline} network:`, error);
+            document.getElementById('network-placeholder').innerHTML = `
+                <i class="fas fa-exclamation-triangle" style="color: #FF6347; font-size: 24px;"></i>
+                <p>Error loading ${discipline} network.</p>
+                <p style="font-size: 0.9em; margin-top: 10px; color: var(--text2);">${error.message}</p>
+            `;
+        });
 }
