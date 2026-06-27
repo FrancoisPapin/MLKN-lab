@@ -15,10 +15,8 @@ const layerColors = {
 // Determine the correct data URL based on the environment
 let dataUrl;
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-    // Local testing
     dataUrl = './data/full_hierarchy.json';
 } else {
-    // GitHub Pages
     dataUrl = '/MLKN-lab/knowledge_network/data/full_hierarchy.json';
 }
 
@@ -44,7 +42,7 @@ function initNetwork() {
     loadData();
 }
 
-// Load data from JSON (handles "edges" instead of "links")
+// Load data from JSON (handles "edges" instead of "links" and fixes "unknown" IDs)
 function loadData() {
     console.log('Fetching data from:', dataUrl);
 
@@ -71,29 +69,34 @@ function loadData() {
 
             // Handle your JSON structure: { nodes: [...], edges: [...] }
             if (data.nodes && data.edges) {
-                nodes = data.nodes;
-                links = data.edges; // Map "edges" to "links" for D3.js
+                // Assign unique IDs to nodes (fixes "unknown" duplicates)
+                nodes = data.nodes.map((node, index) => ({
+                    ...node,
+                    id: node.id === "unknown" ? `node_${index}` : node.id
+                }));
+
+                // Remap edges to use the new node IDs
+                links = data.edges.map(edge => {
+                    const sourceNode = data.nodes.find(n => n.name === edge.source || n.Node === edge.source);
+                    const targetNode = data.nodes.find(n => n.name === edge.target || n.Node === edge.target);
+                    return {
+                        ...edge,
+                        source: sourceNode ? (sourceNode.id === "unknown" ? `node_${data.nodes.indexOf(sourceNode)}` : sourceNode.id) : edge.source,
+                        target: targetNode ? (targetNode.id === "unknown" ? `node_${data.nodes.indexOf(targetNode)}` : targetNode.id) : edge.target
+                    };
+                });
+
+                // Log the first node and edge for debugging
+                console.log("First node (after ID fix):", nodes[0]);
+                console.log("First edge (after ID fix):", links[0]);
+                console.log("Total nodes:", nodes.length);
+                console.log("Total edges:", links.length);
+
+                filterByLayer();
+                startSimulation();
             } else {
                 throw new Error('Invalid data format: expected { nodes, edges }');
             }
-
-            // Log the first node and edge for debugging
-            console.log("First node:", nodes[0]);
-            console.log("First edge:", links[0]);
-
-            // Fix duplicate "unknown" IDs (if needed)
-            nodes = nodes.map((node, i) => ({
-                ...node,
-                id: node.id === "unknown" ? `unknown_${i}` : node.id
-            }));
-            links = links.map(edge => ({
-                ...edge,
-                source: edge.source === "unknown" ? `unknown_${nodes.findIndex(n => n.name === edge.source)}` : edge.source,
-                target: edge.target === "unknown" ? `unknown_${nodes.findIndex(n => n.name === edge.target)}` : edge.target
-            }));
-
-            filterByLayer();
-            startSimulation();
         })
         .catch(error => {
             console.error("Error loading data:", error);
@@ -111,13 +114,23 @@ function loadData() {
         });
 }
 
-// Filter nodes/links by current layer
+// Filter nodes/links by current layer (handles string/number layer values)
 function filterByLayer() {
-    if (currentLayer === 'all') return;
+    if (currentLayer === 'all') {
+        return;  // Show all nodes/links
+    }
 
-    const layerNodes = new Set(nodes.filter(node => node.layer == currentLayer).map(node => node.id));
-    nodes = nodes.filter(node => node.layer == currentLayer);
+    // Convert currentLayer to string for comparison
+    const layerStr = String(currentLayer);
+
+    // Filter nodes by layer (using string comparison)
+    const layerNodes = new Set(nodes.filter(node => String(node.layer) === layerStr).map(node => node.id));
+    nodes = nodes.filter(node => String(node.layer) === layerStr);
     links = links.filter(link => layerNodes.has(link.source) && layerNodes.has(link.target));
+
+    // Debug: Log filtered data
+    console.log("Filtered nodes (count):", nodes.length);
+    console.log("Filtered links (count):", links.length);
 }
 
 // Start the force simulation
@@ -128,10 +141,10 @@ function startSimulation() {
 
     // Adjust force parameters for large networks
     const nodeSize = window.innerWidth < 768 ? 5 : 10;
-    const chargeStrength = window.innerWidth < 768 ? -100 : -200;
+    const chargeStrength = window.innerWidth < 768 ? -100 : -150;
 
     simulation = d3.forceSimulation(nodes)
-        .force("link", d3.forceLink(links).id(d => d.id).distance(30))
+        .force("link", d3.forceLink(links).id(d => d.id).distance(15))
         .force("charge", d3.forceManyBody().strength(chargeStrength))
         .force("center", d3.forceCenter(svg.node().width / 2, svg.node().height / 2))
         .force("collision", d3.forceCollide().radius(nodeSize * 2));
@@ -260,8 +273,20 @@ function loadDisciplinaryNetworkInJS(discipline) {
         })
         .then(data => {
             if (data.nodes && data.edges) {
-                nodes = data.nodes;
-                links = data.edges;
+                // Apply the same ID fixes for disciplinary networks
+                nodes = data.nodes.map((node, index) => ({
+                    ...node,
+                    id: node.id === "unknown" ? `node_${index}` : node.id
+                }));
+                links = data.edges.map(edge => {
+                    const sourceNode = data.nodes.find(n => n.name === edge.source || n.Node === edge.source);
+                    const targetNode = data.nodes.find(n => n.name === edge.target || n.Node === edge.target);
+                    return {
+                        ...edge,
+                        source: sourceNode ? (sourceNode.id === "unknown" ? `node_${data.nodes.indexOf(sourceNode)}` : sourceNode.id) : edge.source,
+                        target: targetNode ? (targetNode.id === "unknown" ? `node_${data.nodes.indexOf(targetNode)}` : targetNode.id) : edge.target
+                    };
+                });
             } else {
                 throw new Error('Invalid data format: expected { nodes, edges }');
             }
