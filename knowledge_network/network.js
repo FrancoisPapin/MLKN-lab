@@ -1,6 +1,6 @@
 // network.js
 // Global variables for D3.js visualization
-let svg, simulation, nodes, links, nodeElements, linkElements;
+let svg, simulation, nodes, links, nodeElements, linkElements, g;  // <-- Added `g` here
 
 // Colorblind-friendly palette (ColorBrewer)
 const layerColors = {
@@ -30,7 +30,7 @@ function initNetwork() {
 
     svg = d3.select("#network-svg");
     svg.selectAll("*").remove();
-    const g = svg.append("g");
+    g = svg.append("g");  // <-- Removed `const` to make `g` global
 
     // Zoom/pan behavior
     const zoom = d3.zoom()
@@ -68,55 +68,50 @@ function loadData() {
             document.getElementById('progress-bar').style.width = '100%';
 
             if (data.nodes && data.edges) {
-                // Step 1: Assign unique IDs to nodes (fixes "unknown" duplicates)
+                // Assign unique IDs to nodes (fixes "unknown" duplicates)
                 nodes = data.nodes.map((node, index) => ({
                     ...node,
                     id: node.id === "unknown" ? `node_${index}` : node.id
                 }));
 
-                // Step 2: Create a map of node names to IDs for edge remapping
+                // Create a map of node names to IDs for edge remapping
                 const nodeNameToId = {};
                 nodes.forEach(node => {
                     if (node.name) nodeNameToId[node.name] = node.id;
                     if (node.Node) nodeNameToId[node.Node] = node.id;
                 });
 
-                // Step 3: Remap edges to use valid node IDs
+                // Remap edges to use valid node IDs
                 links = data.edges.map(edge => {
                     let sourceId = edge.source;
                     let targetId = edge.target;
 
-                    // Handle "unknown" source
                     if (sourceId === "unknown") {
-                        // Try to find a node by name or Node field
                         const sourceNode = data.nodes.find(n =>
                             n.name === edge.source || n.Node === edge.source || n.id === edge.source
                         );
                         sourceId = sourceNode ?
                             (sourceNode.id === "unknown" ? `node_${data.nodes.indexOf(sourceNode)}` : sourceNode.id) :
-                            `node_${Math.floor(Math.random() * 1000000)}`; // Fallback: random ID
+                            `node_${Math.floor(Math.random() * 1000000)}`;
                     } else if (nodeNameToId[sourceId]) {
-                        // If sourceId matches a node name, use the node's ID
                         sourceId = nodeNameToId[sourceId];
                     }
 
-                    // Handle "unknown" target
                     if (targetId === "unknown") {
                         const targetNode = data.nodes.find(n =>
                             n.name === edge.target || n.Node === edge.target || n.id === edge.target
                         );
                         targetId = targetNode ?
                             (targetNode.id === "unknown" ? `node_${data.nodes.indexOf(targetNode)}` : targetNode.id) :
-                            `node_${Math.floor(Math.random() * 1000000)}`; // Fallback: random ID
+                            `node_${Math.floor(Math.random() * 1000000)}`;
                     } else if (nodeNameToId[targetId]) {
-                        // If targetId matches a node name, use the node's ID
                         targetId = nodeNameToId[targetId];
                     }
 
                     return { ...edge, source: sourceId, target: targetId };
                 });
 
-                // Step 4: Filter out edges with invalid references
+                // Filter out edges with invalid references
                 const validNodeIds = new Set(nodes.map(node => node.id));
                 links = links.filter(link =>
                     validNodeIds.has(link.source) && validNodeIds.has(link.target)
@@ -145,9 +140,6 @@ function loadData() {
                 <p style="font-size: 0.9em; margin-top: 10px; color: var(--text2);">
                     URL: <a href="${dataUrl}" target="_blank" style="color: var(--link);">${dataUrl}</a><br>
                     ${error.message}
-                </p>
-                <p style="font-size: 0.8em; color: var(--text2); margin-top: 10px;">
-                    <strong>Note:</strong> If you see "No valid edges", your data needs cleanup.
                 </p>
             `;
         });
@@ -189,7 +181,7 @@ function startSimulation() {
         .force("collision", d3.forceCollide().radius(nodeSize * 2));
 
     // Draw links
-    linkElements = g.selectAll(".link")
+    linkElements = g.selectAll(".link")  // <-- Now `g` is accessible
         .data(links)
         .enter().append("line")
         .attr("class", "link")
@@ -207,7 +199,7 @@ function startSimulation() {
             .on("drag", dragged)
             .on("end", dragended));
 
-    // Add circles to nodes (use "size" or fallback to default)
+    // Add circles to nodes
     nodeElements.append("circle")
         .attr("r", d => Math.max(3, Math.min(15, d.size ? d.size / 100 : nodeSize)))
         .attr("fill", d => layerColors[d.layer] || "#ccc")
@@ -223,7 +215,7 @@ function startSimulation() {
             .attr("dy", 20);
     }
 
-    // Enhanced tooltips with all metadata
+    // Enhanced tooltips
     nodeElements.on("mouseover", function(event, d) {
         const tooltip = d3.select("#network-container")
             .append("div")
@@ -240,8 +232,7 @@ function startSimulation() {
                 <strong>${d.name || d.Node || d.id}</strong><br>
                 Layer: ${d.layer || d.Layer || 'N/A'}<br>
                 Domain: ${d.domain || d['Core Domain'] || 'N/A'}<br>
-                Size: ${d.size || 'N/A'}<br>
-                Description: ${d.description || 'N/A'}
+                Size: ${d.size || 'N/A'}
             `);
     }).on("mouseout", function() {
         d3.select(".tooltip").remove();
@@ -312,7 +303,6 @@ function loadDisciplinaryNetworkInJS(discipline) {
         })
         .then(data => {
             if (data.nodes && data.edges) {
-                // Apply the same fixes for disciplinary networks
                 nodes = data.nodes.map((node, index) => ({
                     ...node,
                     id: node.id === "unknown" ? `node_${index}` : node.id
