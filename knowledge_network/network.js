@@ -1,8 +1,8 @@
 // network.js
 // Global variables for D3.js visualization
-let svg, simulation, nodes, links, nodeElements, linkElements, g;  // <-- Added `g` here
+let svg, simulation, nodes, links, nodeElements, linkElements, g, currentLayer = 'all';
 
-// Colorblind-friendly palette (ColorBrewer)
+// Colorblind-friendly palettes
 const layerColors = {
     '1': '#0173B2', // Core Domains (Blue)
     '2': '#029E73', // Disciplines (Green)
@@ -12,12 +12,22 @@ const layerColors = {
     'all': '#949494' // All Layers (Gray)
 };
 
+const edgeTypeColors = {
+    'CoreDomain_to_AcademicDiscipline': '#0173B2', // Blue
+    'AcademicDiscipline_to_Subdiscipline': '#029E73', // Green
+    'Subdiscipline_to_Topic': '#D55E00', // Orange
+    'Topic_to_Concept': '#CC78BC', // Purple
+    'connection': '#999999' // Default (Gray)
+};
+
 // Determine the correct data URL based on the environment
-let dataUrl;
+let nodesUrl, edgesUrl;
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-    dataUrl = './data/full_hierarchy.json';
+    nodesUrl = './data/full_hierarchy_nodes.json';
+    edgesUrl = './data/full_hierarchy_edges.json';
 } else {
-    dataUrl = '/MLKN-lab/knowledge_network/data/full_hierarchy.json';
+    nodesUrl = '/MLKN-lab/knowledge_network/data/full_hierarchy_nodes.json';
+    edgesUrl = '/MLKN-lab/knowledge_network/data/full_hierarchy_edges.json';
 }
 
 // Initialize the network
@@ -30,7 +40,7 @@ function initNetwork() {
 
     svg = d3.select("#network-svg");
     svg.selectAll("*").remove();
-    g = svg.append("g");  // <-- Removed `const` to make `g` global
+    g = svg.append("g");
 
     // Zoom/pan behavior
     const zoom = d3.zoom()
@@ -42,126 +52,71 @@ function initNetwork() {
     loadData();
 }
 
-// Load data from JSON (handles "edges" instead of "links" and fixes "unknown" IDs)
+// Load data from split JSON files
 function loadData() {
-    console.log('Fetching data from:', dataUrl);
-
+    console.log('Fetching nodes and edges from split files...');
     document.getElementById('network-placeholder').innerHTML = `
         <i class="fas fa-spinner fa-spin" style="font-size: 24px; margin-bottom: 10px;"></i>
         <p>Loading knowledge network...</p>
         <div style="width: 100%; background: #333; border-radius: 4px; margin-top: 10px;">
             <div id="progress-bar" style="width: 20%; height: 4px; background: #1ABC9C; border-radius: 4px;"></div>
         </div>
-        <p style="font-size: 0.9em; color: var(--text2); margin-top: 10px;">
-            Testing URL: <a href="${dataUrl}" target="_blank" style="color: var(--link);">${dataUrl}</a>
-        </p>
     `;
 
-    fetch(dataUrl)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
+    Promise.all([
+        fetch(nodesUrl).then(res => {
+            if (!res.ok) throw new Error(`Nodes HTTP error! status: ${res.status}`);
+            return res.json();
+        }),
+        fetch(edgesUrl).then(res => {
+            if (!res.ok) throw new Error(`Edges HTTP error! status: ${res.status}`);
+            return res.json();
         })
-        .then(data => {
-            document.getElementById('progress-bar').style.width = '100%';
+    ])
+    .then(([nodesData, edgesData]) => {
+        document.getElementById('progress-bar').style.width = '100%';
+        nodes = nodesData.nodes;
+        links = edgesData.edges;
 
-            if (data.nodes && data.edges) {
-                // Assign unique IDs to nodes (fixes "unknown" duplicates)
-                nodes = data.nodes.map((node, index) => ({
-                    ...node,
-                    id: node.id === "unknown" ? `node_${index}` : node.id
-                }));
+        console.log("Loaded nodes:", nodes.length);
+        console.log("Loaded edges:", links.length);
+        console.log("Sample node:", nodes[0]);
+        console.log("Sample edge:", links[0]);
 
-                // Create a map of node names to IDs for edge remapping
-                const nodeNameToId = {};
-                nodes.forEach(node => {
-                    if (node.name) nodeNameToId[node.name] = node.id;
-                    if (node.Node) nodeNameToId[node.Node] = node.id;
-                });
-
-                // Remap edges to use valid node IDs
-                links = data.edges.map(edge => {
-                    let sourceId = edge.source;
-                    let targetId = edge.target;
-
-                    if (sourceId === "unknown") {
-                        const sourceNode = data.nodes.find(n =>
-                            n.name === edge.source || n.Node === edge.source || n.id === edge.source
-                        );
-                        sourceId = sourceNode ?
-                            (sourceNode.id === "unknown" ? `node_${data.nodes.indexOf(sourceNode)}` : sourceNode.id) :
-                            `node_${Math.floor(Math.random() * 1000000)}`;
-                    } else if (nodeNameToId[sourceId]) {
-                        sourceId = nodeNameToId[sourceId];
-                    }
-
-                    if (targetId === "unknown") {
-                        const targetNode = data.nodes.find(n =>
-                            n.name === edge.target || n.Node === edge.target || n.id === edge.target
-                        );
-                        targetId = targetNode ?
-                            (targetNode.id === "unknown" ? `node_${data.nodes.indexOf(targetNode)}` : targetNode.id) :
-                            `node_${Math.floor(Math.random() * 1000000)}`;
-                    } else if (nodeNameToId[targetId]) {
-                        targetId = nodeNameToId[targetId];
-                    }
-
-                    return { ...edge, source: sourceId, target: targetId };
-                });
-
-                // Filter out edges with invalid references
-                const validNodeIds = new Set(nodes.map(node => node.id));
-                links = links.filter(link =>
-                    validNodeIds.has(link.source) && validNodeIds.has(link.target)
-                );
-
-                console.log("Total nodes:", nodes.length);
-                console.log("Total edges (after filtering):", links.length);
-                console.log("Sample node:", nodes[0]);
-                console.log("Sample edge:", links[0]);
-
-                if (links.length === 0) {
-                    throw new Error('No valid edges after filtering. Check your data for "unknown" references.');
-                }
-
-                filterByLayer();
-                startSimulation();
-            } else {
-                throw new Error('Invalid data format: expected { nodes, edges }');
-            }
-        })
-        .catch(error => {
-            console.error("Error loading data:", error);
-            document.getElementById('network-placeholder').innerHTML = `
-                <i class="fas fa-exclamation-triangle" style="color: #FF6347; font-size: 24px;"></i>
-                <p>Error loading network data.</p>
-                <p style="font-size: 0.9em; margin-top: 10px; color: var(--text2);">
-                    URL: <a href="${dataUrl}" target="_blank" style="color: var(--link);">${dataUrl}</a><br>
-                    ${error.message}
-                </p>
-            `;
-        });
+        // Initialize layer filter
+        currentLayer = 'all';
+        filterByLayer();
+        startSimulation();
+    })
+    .catch(error => {
+        console.error("Error loading data:", error);
+        document.getElementById('network-placeholder').innerHTML = `
+            <i class="fas fa-exclamation-triangle" style="color: #FF6347; font-size: 24px;"></i>
+            <p>Error loading network data.</p>
+            <p style="font-size: 0.9em; margin-top: 10px; color: var(--text2);">
+                ${error.message}
+            </p>
+        `;
+    });
 }
 
-// Filter nodes/links by current layer (handles string/number layer values)
+// Filter nodes/links by current layer
 function filterByLayer() {
     if (currentLayer === 'all') {
-        return;  // Show all nodes/links
+        // Show all nodes/links
+        return;
     }
 
-    // Convert currentLayer to string for comparison
     const layerStr = String(currentLayer);
-
-    // Filter nodes by layer (using string comparison)
     const layerNodes = new Set(nodes.filter(node => String(node.layer) === layerStr).map(node => node.id));
-    nodes = nodes.filter(node => String(node.layer) === layerStr);
-    links = links.filter(link => layerNodes.has(link.source) && layerNodes.has(link.target));
+    const filteredNodes = nodes.filter(node => String(node.layer) === layerStr);
+    const filteredLinks = links.filter(link => layerNodes.has(link.source) && layerNodes.has(link.target));
 
-    // Debug: Log filtered data
-    console.log("Filtered nodes (count):", nodes.length);
-    console.log("Filtered links (count):", links.length);
+    // Update global variables for simulation
+    nodes = filteredNodes;
+    links = filteredLinks;
+
+    console.log(`Filtered to layer ${currentLayer}: ${nodes.length} nodes, ${links.length} edges.`);
 }
 
 // Start the force simulation
@@ -180,14 +135,14 @@ function startSimulation() {
         .force("center", d3.forceCenter(svg.node().width / 2, svg.node().height / 2))
         .force("collision", d3.forceCollide().radius(nodeSize * 2));
 
-    // Draw links
-    linkElements = g.selectAll(".link")  // <-- Now `g` is accessible
+    // Draw links with edge type colors
+    linkElements = g.selectAll(".link")
         .data(links)
         .enter().append("line")
         .attr("class", "link")
-        .attr("stroke", "#999")
+        .attr("stroke", d => edgeTypeColors[d.type] || "#999")
         .attr("stroke-opacity", 0.6)
-        .attr("stroke-width", 1);
+        .attr("stroke-width", d => Math.max(0.5, d.weight / 10));
 
     // Draw nodes
     nodeElements = g.selectAll(".node")
@@ -217,6 +172,19 @@ function startSimulation() {
 
     // Enhanced tooltips
     nodeElements.on("mouseover", function(event, d) {
+        // Highlight connected nodes/edges
+        nodeElements.style("opacity", 0.2);
+        linkElements.style("opacity", 0.2);
+        d3.select(this).style("opacity", 1);
+        linkElements
+            .filter(l => l.source.id === d.id || l.target.id === d.id)
+            .style("opacity", 1);
+        nodeElements
+            .filter(n => n.id === d.id ||
+                        links.some(l => l.source.id === n.id || l.target.id === n.id))
+            .style("opacity", 1);
+
+        // Show tooltip
         const tooltip = d3.select("#network-container")
             .append("div")
             .attr("class", "tooltip")
@@ -232,9 +200,12 @@ function startSimulation() {
                 <strong>${d.name || d.Node || d.id}</strong><br>
                 Layer: ${d.layer || d.Layer || 'N/A'}<br>
                 Domain: ${d.domain || d['Core Domain'] || 'N/A'}<br>
-                Size: ${d.size || 'N/A'}
+                Type: ${d.type || 'N/A'}
             `);
-    }).on("mouseout", function() {
+    })
+    .on("mouseout", function() {
+        nodeElements.style("opacity", 1);
+        linkElements.style("opacity", 1);
         d3.select(".tooltip").remove();
     });
 
@@ -286,81 +257,5 @@ function filterNetworkByDomain(domain) {
     linkElements.style("opacity", d => domainNodes.has(d.source) && domainNodes.has(d.target) ? 1 : 0.2);
 }
 
-// Load disciplinary network
-function loadDisciplinaryNetworkInJS(discipline) {
-    currentNetworkType = 'disciplinary';
-    const dataUrl = `/MLKN-lab/knowledge_network/data/${discipline}.json`;
-
-    document.getElementById('network-container').style.display = 'block';
-    document.getElementById('disciplinary-networks-section').style.display = 'none';
-
-    fetch(dataUrl)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.nodes && data.edges) {
-                nodes = data.nodes.map((node, index) => ({
-                    ...node,
-                    id: node.id === "unknown" ? `node_${index}` : node.id
-                }));
-
-                const nodeNameToId = {};
-                nodes.forEach(node => {
-                    if (node.name) nodeNameToId[node.name] = node.id;
-                    if (node.Node) nodeNameToId[node.Node] = node.id;
-                });
-
-                links = data.edges.map(edge => {
-                    let sourceId = edge.source;
-                    let targetId = edge.target;
-
-                    if (sourceId === "unknown") {
-                        const sourceNode = data.nodes.find(n =>
-                            n.name === edge.source || n.Node === edge.source || n.id === edge.source
-                        );
-                        sourceId = sourceNode ?
-                            (sourceNode.id === "unknown" ? `node_${data.nodes.indexOf(sourceNode)}` : sourceNode.id) :
-                            `node_${Math.floor(Math.random() * 1000000)}`;
-                    } else if (nodeNameToId[sourceId]) {
-                        sourceId = nodeNameToId[sourceId];
-                    }
-
-                    if (targetId === "unknown") {
-                        const targetNode = data.nodes.find(n =>
-                            n.name === edge.target || n.Node === edge.target || n.id === edge.target
-                        );
-                        targetId = targetNode ?
-                            (targetNode.id === "unknown" ? `node_${data.nodes.indexOf(targetNode)}` : targetNode.id) :
-                            `node_${Math.floor(Math.random() * 1000000)}`;
-                    } else if (nodeNameToId[targetId]) {
-                        targetId = nodeNameToId[targetId];
-                    }
-
-                    return { ...edge, source: sourceId, target: targetId };
-                });
-
-                const validNodeIds = new Set(nodes.map(node => node.id));
-                links = links.filter(link =>
-                    validNodeIds.has(link.source) && validNodeIds.has(link.target)
-                );
-            } else {
-                throw new Error('Invalid data format: expected { nodes, edges }');
-            }
-            startSimulation();
-        })
-        .catch(error => {
-            console.error(`Error loading ${discipline} network:`, error);
-            document.getElementById('network-placeholder').innerHTML = `
-                <i class="fas fa-exclamation-triangle" style="color: #FF6347; font-size: 24px;"></i>
-                <p>Error loading ${discipline} network.</p>
-                <p style="font-size: 0.9em; margin-top: 10px; color: var(--text2);">
-                    URL: <a href="${dataUrl}" target="_blank" style="color: var(--link);">${dataUrl}</a><br>
-                    ${error.message}
-                </p>
-            `;
-        });
-}
+// Initialize the network when the page loads
+window.onload = initNetwork;
