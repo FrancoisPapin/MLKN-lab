@@ -39,7 +39,8 @@
 .topnav {
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 100;
+  position: relative;
   background: var(--panel);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -661,6 +662,10 @@ h1, h2, h3 {
   line-height: 1.6;
   max-width: 540px;
 }
+
+/* =============================================
+   NETWORK
+   ============================================= */
 
 /* =============================================
    NAVIGATION GRID - PERFECT ALIGNMENT
