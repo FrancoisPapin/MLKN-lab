@@ -149,7 +149,7 @@ function startSimulation() {
         .enter().append("line")
         .attr("class", "link")
         .attr("stroke", d => edgeTypeColors[d.type] || "#999")
-        .attr("stroke-opacity", 0.6)
+        .attr("stroke-opacity", 0.8)
         .attr("stroke-width", d => Math.max(0.5, d.weight / 10))
         .style("display", "none"); // Initially hide all edges (LoD)
 
@@ -166,8 +166,8 @@ function startSimulation() {
     // Add circles to nodes
     nodeElements.append("circle")
         .attr("r", d => Math.max(3, Math.min(15, d.size ? d.size / 100 : nodeSize)))
-        .attr("fill", d => layerColors[d.layer] || "#ccc")
-        .attr("stroke", "#fff")
+        .attr("fill", d => layerColors[d.layer] || "#FFFFFF")
+        .attr("stroke", "#000000")
         .attr("stroke-width", 1);
 
     // Add labels (hidden on mobile for performance)
