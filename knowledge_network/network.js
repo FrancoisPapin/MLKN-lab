@@ -1,4 +1,3 @@
-// network.js
 // Global variables for D3.js visualization
 let svg, simulation, nodes, links, nodeElements, linkElements, g, currentLayer = 'all';
 
@@ -42,10 +41,15 @@ function initNetwork() {
     svg.selectAll("*").remove();
     g = svg.append("g");
 
-    // Zoom/pan behavior
+    // Zoom/pan behavior with LoD for edges
     const zoom = d3.zoom()
         .scaleExtent([0.1, 10])
-        .on("zoom", (event) => { g.attr("transform", event.transform); });
+        .on("zoom", (event) => {
+            g.attr("transform", event.transform);
+            const k = event.transform.k; // Current zoom scale
+            // Show edges only when zoomed in (k > 0.5)
+            linkElements.style("display", k > 0.5 ? "block" : "none");
+        });
     svg.call(zoom);
 
     // Load data
@@ -102,8 +106,11 @@ function loadData() {
 
 // Filter nodes/links by current layer
 function filterByLayer() {
+    if (simulation) simulation.stop();  // Stop the current simulation
+
     if (currentLayer === 'all') {
         // Show all nodes/links
+        simulation = startSimulation();  // Restart simulation with all data
         return;
     }
 
@@ -112,11 +119,12 @@ function filterByLayer() {
     const filteredNodes = nodes.filter(node => String(node.layer) === layerStr);
     const filteredLinks = links.filter(link => layerNodes.has(link.source) && layerNodes.has(link.target));
 
-    // Update global variables for simulation
+    // Update global variables
     nodes = filteredNodes;
     links = filteredLinks;
 
     console.log(`Filtered to layer ${currentLayer}: ${nodes.length} nodes, ${links.length} edges.`);
+    simulation = startSimulation();  // Restart simulation with filtered data
 }
 
 // Start the force simulation
@@ -142,7 +150,8 @@ function startSimulation() {
         .attr("class", "link")
         .attr("stroke", d => edgeTypeColors[d.type] || "#999")
         .attr("stroke-opacity", 0.6)
-        .attr("stroke-width", d => Math.max(0.5, d.weight / 10));
+        .attr("stroke-width", d => Math.max(0.5, d.weight / 10))
+        .style("display", "none"); // Initially hide all edges (LoD)
 
     // Draw nodes
     nodeElements = g.selectAll(".node")
@@ -178,30 +187,12 @@ function startSimulation() {
         d3.select(this).style("opacity", 1);
         linkElements
             .filter(l => l.source.id === d.id || l.target.id === d.id)
-            .style("opacity", 1);
+            .style("opacity", 1)
+            .style("display", "block"); // Ensure connected edges are visible
         nodeElements
             .filter(n => n.id === d.id ||
                         links.some(l => l.source.id === n.id || l.target.id === n.id))
             .style("opacity", 1);
-
-        // Show tooltip
-        const tooltip = d3.select("#network-container")
-            .append("div")
-            .attr("class", "tooltip")
-            .style("position", "absolute")
-            .style("background", "white")
-            .style("border", "1px solid #ddd")
-            .style("padding", "8px")
-            .style("border-radius", "4px")
-            .style("pointer-events", "none")
-            .style("left", (event.pageX + 10) + "px")
-            .style("top", (event.pageY + 10) + "px")
-            .html(`
-                <strong>${d.name || d.Node || d.id}</strong><br>
-                Layer: ${d.layer || d.Layer || 'N/A'}<br>
-                Domain: ${d.domain || d['Core Domain'] || 'N/A'}<br>
-                Type: ${d.type || 'N/A'}
-            `);
     })
     .on("mouseout", function() {
         nodeElements.style("opacity", 1);
@@ -212,13 +203,13 @@ function startSimulation() {
     // Update positions on each tick
     simulation.on("tick", () => {
         linkElements
-            .attr("x1", d => d.source.x)
-            .attr("y1", d => d.source.y)
-            .attr("x2", d => d.target.x)
-            .attr("y2", d => d.target.y);
+            .attr("x1", d => d.source.x || 0)  // Fallback to 0 if NaN
+            .attr("y1", d => d.source.y || 0)
+            .attr("x2", d => d.target.x || 0)
+            .attr("y2", d => d.target.y || 0);
 
         nodeElements
-            .attr("transform", d => `translate(${d.x},${d.y})`);
+            .attr("transform", d => `translate(${d.x || 0},${d.y || 0})`);
     });
 
     // Hide placeholder
@@ -254,7 +245,8 @@ function filterNetworkByDomain(domain) {
     if (currentLayer !== '1') return;
     const domainNodes = new Set(nodes.filter(node => node.domain === domain || node['Core Domain'] === domain).map(node => node.id));
     nodeElements.style("opacity", d => domainNodes.has(d.id) ? 1 : 0.2);
-    linkElements.style("opacity", d => domainNodes.has(d.source) && domainNodes.has(d.target) ? 1 : 0.2);
+    linkElements.style("opacity", d => domainNodes.has(d.source) && domainNodes.has(d.target) ? 1 : 0.2)
+              .style("display", d => domainNodes.has(d.source) && domainNodes.has(d.target) ? "block" : "none");
 }
 
 // Initialize the network when the page loads
