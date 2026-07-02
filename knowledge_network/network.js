@@ -115,8 +115,8 @@ function filterByLayer() {
     }
 
     const layerStr = String(currentLayer);
-    const layerNodes = new Set(nodes.filter(node => String(node.layer) === layerStr).map(node => node.id));
-    const filteredNodes = nodes.filter(node => String(node.layer) === layerStr);
+    const layerNodes = new Set(nodes.filter(node => String(node.Layer) === layerStr).map(node => node.id));
+    const filteredNodes = nodes.filter(node => String(node.Layer) === layerStr);
     const filteredLinks = links.filter(link => layerNodes.has(link.source) && layerNodes.has(link.target));
 
     // Update global variables
@@ -148,8 +148,8 @@ function startSimulation() {
         .data(links)
         .enter().append("line")
         .attr("class", "link")
-        .attr("stroke", d => edgeTypeColors[d.type] || "#999")
-        .attr("stroke-opacity", 0.8)
+        .attr("stroke", d => edgeTypeColors[d.type] || "#FFFFFF")
+        .attr("stroke-opacity", 0.9)
         .attr("stroke-width", d => Math.max(0.5, d.weight / 10))
         .style("display", "none"); // Initially hide all edges (LoD)
 
@@ -166,9 +166,9 @@ function startSimulation() {
     // Add circles to nodes
     nodeElements.append("circle")
         .attr("r", d => Math.max(3, Math.min(15, d.size ? d.size / 100 : nodeSize)))
-        .attr("fill", d => layerColors[d.layer] || "#FFFFFF")
+        .attr("fill", d => layerColors[d.Layer] || "#FFFFFF")
         .attr("stroke", "#000000")
-        .attr("stroke-width", 1);
+        .attr("stroke-width", 1.5)
 
     // Add labels (hidden on mobile for performance)
     if (window.innerWidth > 768) {
@@ -243,7 +243,7 @@ function updateNetwork() {
 // Filter by domain (for Layer 1)
 function filterNetworkByDomain(domain) {
     if (currentLayer !== '1') return;
-    const domainNodes = new Set(nodes.filter(node => node.domain === domain || node['Core Domain'] === domain).map(node => node.id));
+    const domainNodes = new Set(nodes.filter(node => node.Domain === domain || node['Core Domain'] === domain).map(node => node.id));
     nodeElements.style("opacity", d => domainNodes.has(d.id) ? 1 : 0.2);
     linkElements.style("opacity", d => domainNodes.has(d.source) && domainNodes.has(d.target) ? 1 : 0.2)
               .style("display", d => domainNodes.has(d.source) && domainNodes.has(d.target) ? "block" : "none");
