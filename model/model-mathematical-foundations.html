@@ -9,6 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax for LaTeX rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
     <header class="topnav" role="banner">
@@ -298,6 +301,61 @@
                 </p>
             </div>
 
+            <div class="essay-box" style="margin-top: 20px;">
+             <h3>Visual Representation of the Multilayer Hypergraph</h3>
+             <p>
+                 Below is a schematic of MLKN.model's structure, combining <strong>multilayer networks</strong> (Layers 1-4) and <strong>hypergraphs</strong> (Layers 4-5):
+             </p>
+             <div style="margin-top: 15px; text-align: center;">
+                 <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+                 <script>mermaid.initialize({ startOnLoad: true });</script>
+                 <div class="mermaid">
+                     graph TD
+                         subgraph Layer 1: Core Domains
+                             A1[Natural Sciences]
+                             A2[Social Sciences]
+                         end
+                         subgraph Layer 2: Disciplines
+                             B1[Physics]
+                             B2[Psychology]
+                         end
+                         subgraph Layer 3: Subdisciplines
+                             C1[Quantum Mechanics]
+                             C2[Cognitive Psychology]
+                         end
+                         subgraph Layer 4: Thematic Domains
+                             D1[Quantum Field Theory]
+                             D2[Attention]
+                         end
+                         subgraph Layer 5: Concepts
+                             E1[Neural Networks]
+                             E2[Machine Learning]
+                         end
+                         A1 -->|Hierarchical| B1
+                         B1 -->|Hierarchical| C1
+                         C1 -->|Hierarchical| D1
+                         D1 -->|Hierarchical| E1
+                         E1 -->|Hyperedge| D2
+                         E1 -->|Hyperedge| B2
+                         E2 -->|Hyperedge| D2
+                         E2 -->|Hyperedge| B1
+                         style A1 fill:#1A6BAA,color:white
+                         style A2 fill:#9B59B6,color:white
+                         style B1 fill:#2ECC71,color:white
+                         style B2 fill:#FF6347,color:white
+                         style C1 fill:#FFD700,color:black
+                         style C2 fill:#E74C3C,color:white
+                         style D1 fill:#3498DB,color:white
+                         style D2 fill:#50C878,color:white
+                         style E1 fill:#FF6347,color:white
+                         style E2 fill:#2ECC71,color:white
+                          </div>
+                 </div>
+                 <p style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                     <strong>Key:</strong> Solid arrows = Hierarchical edges (\( \mathcal{T} \)), Dashed arrows = Hyperedges (\( \mathcal{S} \)).
+                 </p>
+            </div>
+            
             <!-- Unified Framework Definition -->
             <div class="essay-box" style="margin-top: 20px;">
                 <h3>Unified Framework: Multilayer Hypergraph</h3>
@@ -306,37 +364,119 @@
                 </p>
                 <ul class="discipline-list">
                     <li><span class="discipline-square" style="background: #9B59B6;"></span> \( V \): Set of <strong>nodes</strong> (Core Domains, Disciplines, Subdisciplines, Thematic Domains, Concepts).</li>
-                    <li><span class="discipline-square" style="background: #9B59B6;"></span> \( \mathcal{S} \): Set of <strong>hyperedges</strong> (connecting any number of nodes across layers).</li>
+                    <li><span class="discipline-square" style="background: #9B59B6;"></span> \( \mathcal{S} \): Set of <strong>hyperedges</strong> (connecting any number of nodes <em>within or across Layers 4-5</em>).</li>
                     <li><span class="discipline-square" style="background: #9B59B6;"></span> \( \mathcal{P} = \{P_1, P_2, P_3, P_4, P_5\} \): <strong>Partition of \( V \)</strong> into 5 ontological layers.</li>
                     <li><span class="discipline-square" style="background: #9B59B6;"></span> \( \mathcal{T} \): Set of <strong>inter-layer edges</strong> (hierarchical relationships, e.g., Discipline → Subdiscipline).</li>
                     <li><span class="discipline-square" style="background: #9B59B6;"></span> \( \omega: \mathcal{S} \cup \mathcal{T} \rightarrow \mathbb{R}^+ \): <strong>Weight function</strong> (e.g., citation counts, semantic similarity).</li>
                     <li><span class="discipline-square" style="background: #9B59B6;"></span> \( \tau: V \rightarrow \mathbb{N} \): <strong>Temporal function</strong> (time of introduction or last update).</li>
                 </ul>
-                <p style="margin-top: 15px;">
-                    <strong>Key Properties:</strong>
-                </p>
-                <ol style="margin-top: 10px; padding-left: 20px;">
-                    <li><strong>Multilayer Structure:</strong> Nodes are partitioned into <strong>5 layers</strong> (\( P_1 \) to \( P_5 \)). <strong>Inter-layer edges</strong> (\( \mathcal{T} \)) connect nodes across adjacent layers (e.g., \( P_2 \rightarrow P_3 \)).</li>
-                    <li><strong>Hypergraph Structure:</strong> <strong>Hyperedges</strong> (\( \mathcal{S} \)) can connect nodes <strong>within or across layers</strong> (e.g., a concept in \( P_5 \) connecting to multiple thematic domains in \( P_4 \)).</li>
-                    <li><strong>Weighted and Directed:</strong> Both \( \mathcal{S} \) and \( \mathcal{T} \) are <strong>weighted</strong> and <strong>directed</strong>.</li>
-                    <li><strong>Temporal Dynamics:</strong> \( \tau \) allows for <strong>time-evolving</strong> knowledge representation.</li>
-                </ol>
-                <p style="margin-top: 15px;">
-                    <strong>Example:</strong> A hyperedge \( e \in \mathcal{S} \) connects:
-                </p>
-                <ul class="discipline-list">
-                    <li><span class="discipline-square" style="background: #9B59B6;"></span> \( v_1 \in P_4 \) (Thematic Domain: <em>\"Artificial Intelligence\"</em>),</li>
-                    <li><span class="discipline-square" style="background: #9B59B6;"></span> \( v_2 \in P_5 \) (Concept: <em>\"Neural Networks\"</em>),</li>
-                    <li><span class="discipline-square" style="background: #9B59B6;"></span> \( v_3 \in P_2 \) (Discipline: <em>\"Computer Science\"</em>),</li>
-                    <li><span class="discipline-square" style="background: #9B59B6;"></span> \( v_4 \in P_2 \) (Discipline: <em>\"Mathematics\"</em>).</li>
-                </ul>
+
+                <!-- Algebraic Operators & Boundary Constraints -->
+                <h4 style="margin-top: 25px; color: var(--accent);">⬢ Algebraic Operators & Boundary Constraints</h4>
                 <p style="margin-top: 10px;">
-                    This represents the <strong>cross-disciplinary nature</strong> of <em>\"Neural Networks.\"</em>
+                    To computationally evaluate the topological dynamics of the multilayer hypergraph \( \mathcal{H} \), we map its structural relationships into a unified tensor and matrix space.
+                </p>
+
+                <p style="margin-top: 15px;">
+                    Let \( \mathbf{H} \in \mathbb{R}^{|V| \times |\mathcal{S}|} \) be the <strong>hypergraph incidence matrix</strong>, where:
+                </p>
+                <p style="font-family: 'Space Mono', monospace; font-size: 1.1em; line-height: 1.6; background: var(--bg-light); padding: 15px; border-radius: var(--r); margin-top: 10px;">
+                    \[
+                    H_{v,e} =
+                    \begin{cases}
+                    1 & \text{if } v \in e, \\
+                    0 & \text{otherwise.}
+                    \end{cases}
+                    \]
+                </p>
+
+                <p style="margin-top: 15px;">
+                    Let \( \mathbf{W} \in \mathbb{R}^{|\mathcal{S}| \times |\mathcal{S}|} \) be a <strong>diagonal matrix</strong> storing the hyperedge weights, where \( \mathbf{W}_{e,e} = \omega(e) \).
+                </p>
+
+                <!-- Ontological Layer-Boundary Constraints -->
+                <h5 style="margin-top: 20px; color: #9B59B6;">1. Ontological Layer-Boundary Constraints</h5>
+                <p style="margin-top: 10px;">
+                    To prevent structural degeneration into an unconstrained hypergraph and preserve taxonomic inheritance, the inter-layer directed edge set \( \mathcal{T} \) is <strong>strictly constrained to adjacent partitions</strong>:
+                </p>
+                <p style="font-family: 'Space Mono', monospace; font-size: 1.1em; line-height: 1.6; background: var(--bg-light); padding: 15px; border-radius: var(--r); margin-top: 10px;">
+                    \[
+                    \mathcal{T} \subseteq \bigcup_{l=1}^{4} \left( P_l \times P_{l+1} \right)
+                    \]
+                </p>
+                <p style="margin-top: 10px;">
+                    This guarantees that hierarchical taxonomy flows <strong>monotonically downward</strong> (\( P_1 \to P_2 \to P_3 \to P_4 \to P_5 \)), while cross-disciplinary hyperedges (\( \mathcal{S} \)) retain the structural freedom to bind multi-node configurations <em>across Layers 4-5</em>.
+                </p>
+                <p style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                    <strong>Note:</strong> \( \mathcal{S} \) is restricted to Layers 4-5 to avoid over-permissiveness while still capturing interdisciplinary connections (e.g., a concept in Layer 5 connecting to multiple thematic domains in Layer 4).
+                </p>
+
+                <!-- Fundamental Degree Matrices -->
+                <h5 style="margin-top: 20px; color: #9B59B6;">2. Fundamental Degree Matrices</h5>
+                <p style="margin-top: 10px;">
+                    The following matrices are <strong>essential for analyzing and simulating</strong> knowledge diffusion in MLKN.model:
+                </p>
+
+                <p style="margin-top: 15px;">
+                    <strong>Weighted Node Hyperdegree Matrix (\( \mathbf{D}_v \)):</strong> A diagonal matrix \( \mathbf{D}_v \in \mathbb{R}^{|V| \times |V|} \) quantifying the total weighted hyperedge footprint of each node \( v \in V \):
+                </p>
+                <p style="font-family: 'Space Mono', monospace; font-size: 1.1em; line-height: 1.6; background: var(--bg-light); padding: 15px; border-radius: var(--r); margin-top: 10px;">
+                    \[
+                    (\mathbf{D}_v)_{vv} = d(v) = \sum_{e \in \mathcal{S}} \omega(e) H_{v,e}
+                    \]
+                </p>
+
+                <p style="margin-top: 15px;">
+                    <strong>Hyperedge Cardinality Matrix (\( \mathbf{D}_e \)):</strong> A diagonal matrix \( \mathbf{D}_e \in \mathbb{R}^{|\mathcal{S}| \times |\mathcal{S}|} \) measuring the exact node cardinality of each hyperedge \( e \in \mathcal{S} \):
+                </p>
+                <p style="font-family: 'Space Mono', monospace; font-size: 1.1em; line-height: 1.6; background: var(--bg-light); padding: 15px; border-radius: var(--r); margin-top: 10px;">
+                    \[
+                    (\mathbf{D}_e)_{ee} = |e| = \sum_{v \in V} H_{v,e}
+                    \]
+                </p>
+                <p style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                    <strong>Intuition:</strong> \( \mathbf{D}_v \) tells us how "influential" a node is (based on its hyperedge connections), while \( \mathbf{D}_e \) tells us how "large" a hyperedge is (number of nodes it connects).
+                </p>
+
+                <!-- Normalized Hypergraph Random Walk -->
+                <h5 style="margin-top: 20px; color: #9B59B6;">3. Normalized Hypergraph Random Walk Transition Matrix</h5>
+                <p style="margin-top: 10px;">
+                    Epistemic diffusion—modeling how <strong>conceptual breakthroughs propagate</strong> across disparate thematic domains—is formalized as a <strong>two-stage stochastic Markov chain</strong> on \( \mathcal{S} \) (Node \( \to \) Hyperedge \( \to \) Node).
+                </p>
+                <p style="margin-top: 10px;">
+                    The probability \( P(v_j \mid v_i) \) of an epistemic random walker transiting from node \( v_i \) to node \( v_j \) via any mutually shared hyperedge \( e \) is:
+                </p>
+                <p style="font-family: 'Space Mono', monospace; font-size: 1.1em; line-height: 1.6; background: var(--bg-light); padding: 15px; border-radius: var(--r); margin-top: 10px;">
+                    \[
+                    P(v_j \mid v_i) = \sum_{e \in \mathcal{S}} \frac{\omega(e)}{d(v_i)} \frac{H_{v_i,e} H_{v_j,e}}{|e|}
+                    \]
+                </p>
+                <p style="margin-top: 15px;">
+                    Expressed globally in matrix form, the <strong>normalized transition probability matrix</strong> \( \mathbf{T}_{\mathcal{H}} \in \mathbb{R}^{|V| \times |V|} \) driving the engine’s predictive learning models is:
+                </p>
+                <p style="font-family: 'Space Mono', monospace; font-size: 1.1em; line-height: 1.6; background: var(--bg-light); padding: 15px; border-radius: var(--r); margin-top: 10px;">
+                    \[
+                    \mathbf{T}_{\mathcal{H}} = \mathbf{D}_v^{-1} \mathbf{H} \mathbf{W} \mathbf{D}_e^{-1} \mathbf{H}^T
+                    \]
+                </p>
+                <p style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                    <strong>Intuition:</strong> This matrix encodes the probability of moving from any node to any other node via shared hyperedges, weighted by their importance (\( \omega \)).
                 </p>
                 <p style="margin-top: 15px; font-size: 0.9em;">
                     <strong>Literature:</strong>
-                    <a href="https://arxiv.org/abs/2006.12613" target="_blank" style="color: var(--accent);">Battiston et al., 2020</a>,
-                    <a href="https://arxiv.org/abs/1402.5519" target="_blank" style="color: var(--accent);">Kivelä et al., 2014</a>.
+                    <a href="https://arxiv.org/abs/2006.12613" target="_blank" style="color: var(--accent);">Battiston et al., 2020</a> (Higher-order networks),
+                    <a href="https://arxiv.org/abs/1002.3690" target="_blank" style="color: var(--accent);">Chung & Graham, 2010</a> (Hypergraph random walks).
+                </p>
+
+                <p style="margin-top: 15px;">
+                    <strong>Example in MLKN.lab:</strong>
+                </p>
+                <ul class="discipline-list">
+                    <li><span class="discipline-square" style="background: #9B59B6;"></span> A random walk starting at <em>\"Neural Networks\"</em> (Layer 5) might transition to <em>\"Machine Learning\"</em> (Layer 5) via a hyperedge connecting both to <em>\"Artificial Intelligence\"</em> (Layer 4).</li>
+                    <li><span class="discipline-square" style="background: #9B59B6;"></span> The probability of this transition depends on the <strong>weight</strong> of the hyperedge and the <strong>hyperdegree</strong> of the nodes.</li>
+                </ul>
+                <p style="margin-top: 20px; font-size: 0.95em; color: #666;">
+                    <strong>Temporal Extension:</strong> The transition matrix \( \mathbf{T}_{\mathcal{H}} \) can be extended to a <strong>time-evolving</strong> matrix \( \mathbf{T}_{\mathcal{H}}(t) \) by incorporating the temporal function \( \tau \). This allows MLKN.model to simulate <strong>dynamic knowledge diffusion</strong> (e.g., the emergence of new disciplines over time).
                 </p>
             </div>
         </section>
@@ -618,19 +758,19 @@
                 
                 <!-- Random Walks & Diffusion -->
                 <div class="layer-card">
-                    <div class="licon" style="color: #2ECC71;">⬢</div>
-                    <h3>Random Walks & Diffusion</h3>
-                    <p>
-                        Models <strong>knowledge exploration paths</strong>:
-                    </p>
-                    <ul class="discipline-list">
-                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Personalized PageRank</strong>: Identify influential nodes (e.g., key disciplines).</li>
-                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Hypergraph Random Walks</strong>: Capture cross-disciplinary paths.</li>
-                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Diffusion Processes</strong>: Model the spread of ideas over time.</li>
-                    </ul>
-                    <p style="margin-top: 15px; font-size: 0.9em;">
-                        <strong>Key Tools:</strong> NetworkX, Graph-tool, custom implementations.
-                    </p>
+                  <div class="licon" style="color: #2ECC71;">⬢</div>
+                  <h3>Random Walks & Diffusion</h3>
+                  <p>
+                      Models <strong>knowledge exploration paths</strong> using the <strong>normalized hypergraph transition matrix \( \mathbf{T}_{\mathcal{H}} \)</strong>:
+                  </p>
+                  <ul class="discipline-list">
+                      <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Personalized PageRank</strong>: Identify influential nodes (e.g., key disciplines) using \( \mathbf{T}_{\mathcal{H}} \).</li>
+                      <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Hypergraph Random Walks</strong>: Capture cross-disciplinary paths via \( P(v_j \mid v_i) \).</li>
+                      <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Diffusion Processes</strong>: Model the spread of ideas over time using \( \mathbf{T}_{\mathcal{H}} \).</li>
+                  </ul>
+                  <p style="margin-top: 15px; font-size: 0.9em;">
+                      <strong>Key Tools:</strong> NetworkX, Graph-tool, custom implementations.
+                  </p>
                 </div>
                 
                 <!-- Temporal Networks -->
