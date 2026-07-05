@@ -612,19 +612,36 @@
             
             <div class="layers-grid">
                 <!-- Graph Theory -->
-                <div class="layer-card">
+                <div class="layer-card" style="min-height: fit-content;">
                     <div class="licon" style="color: #1A6BAA;">⬢</div>
                     <h3>Graph Theory</h3>
                     <p>
-                        Knowledge is modeled as a <strong>directed, weighted, multi-layered graph</strong>:
+                        Knowledge is modeled as a <strong>directed, weighted, multi-layered graph</strong> \( G = (V, E, A) \), where:
                     </p>
                     <ul class="discipline-list">
-                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Nodes (V)</strong>: Represent disciplines, subdisciplines, and concepts.</li>
-                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Edges (E)</strong>: Represent hierarchical, interdisciplinary, and thematic relationships.</li>
-                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Adjacency Matrix (A)</strong>: Captures the structure of connections.</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Nodes (V)</strong>: Represent disciplines, subdisciplines, and concepts (e.g., "Physics," "Quantum Mechanics").</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Edges (E)</strong>: Represent <strong>hierarchical</strong> (e.g., Physics → Quantum Mechanics), <strong>interdisciplinary</strong> (e.g., Quantum Mechanics → Chemistry), and <strong>thematic</strong> (e.g., Machine Learning → Neural Networks) relationships.</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Adjacency Matrix (A)</strong>: A matrix where \( A_{ij} = \omega(e_{ij}) \) if an edge \( e_{ij} \) exists from node \( i \) to \( j \), else \( 0 \).</li>
                     </ul>
-                    <p style="margin-top: 10px; font-style: italic;">
-                        G = (V, E, A)
+                    <p style="margin-top: 15px;">
+                        <strong>Key Matrices for MLKN.model:</strong>
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Intra-Layer Adjacency \( A^{(l)} \)</strong>: Connections <em>within</em> layer \( l \) (e.g., subdisciplines in Physics).</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Inter-Layer Adjacency \( A^{(l, l+1)} \)</strong>: Hierarchical edges <em>between</em> layers \( l \) and \( l+1 \) (e.g., Discipline → Subdiscipline).</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Laplacian Matrix \( L \)</strong>: Defined as \( L = D - A \), where \( D \) is the degree matrix. Used for <strong>spectral clustering</strong> of disciplines.</li>
+                    </ul>
+                    <p style="margin-top: 15px;">
+                        <strong>Example in MLKN.lab:</strong>
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> The <strong>Laplacian</strong> of Layer 2 (Disciplines) can reveal <strong>clusters</strong> (e.g., Natural Sciences vs. Social Sciences).</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> The <strong>eigenvector centrality</strong> of \( A^{(2)} \) identifies <strong>influential disciplines</strong> (e.g., Mathematics).</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 0.9em;">
+                        <strong>Literature:</strong>
+                        <a href="https://www.nature.com/articles/nphys2958" target="_blank" style="color: var(--accent);">Boccaletti et al., 2014</a> (Multilayer Networks),
+                        <a href="https://arxiv.org/abs/0605085" target="_blank" style="color: var(--accent);">Newman, 2006</a> (Modularity and Community Structure).
                     </p>
                     <p style="margin-top: 15px; font-size: 0.9em;">
                         <strong>Key Tools:</strong> NetworkX (Python), Vis.js (JavaScript), D3.js.
@@ -632,7 +649,7 @@
                 </div>
                 
                 <!-- Topological Data Analysis -->
-                <div class="layer-card">
+                <div class="layer-card" style="min-height: fit-content;">
                     <div class="licon" style="color: #2ECC71;">⬢</div>
                     <h3>Topological Data Analysis (TDA)</h3>
                     <p>
@@ -663,24 +680,52 @@
                 </div>
                 
                 <!-- Information Theory -->
-                <div class="layer-card">
+                <div class="layer-card" style="min-height: fit-content;">
                     <div class="licon" style="color: #FF6347;">⬢</div>
                     <h3>Information Theory</h3>
                     <p>
-                        Applies <strong>entropy and complexity metrics</strong> to measure:
+                        Applies <strong>entropy and complexity metrics</strong> to quantify the <strong>organization and efficiency</strong> of knowledge in MLKN.model:
                     </p>
                     <ul class="discipline-list">
-                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Diversity</strong>: Variety of disciplines and connections.</li>
-                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Redundancy</strong>: Overlap between fields.</li>
-                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Efficiency</strong>: How knowledge is organized and accessed.</li>
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Shannon Entropy \( H(X) \)</strong>: Measures the <strong>uncertainty</strong> or <strong>diversity</strong> of a discipline’s subfields:
+                            <p style="font-family: 'Space Mono', monospace; font-size: 0.95em; line-height: 1.6; background: var(--bg-light); padding: 10px; border-radius: var(--r); margin-top: 10px;">
+                                \[
+                                H(X) = -\sum_{x \in X} p(x) \log p(x)
+                                \]
+                            </p>
+                            <p style="font-size: 0.9em; color: #666; margin-top: 5px;">
+                                where \( X \) is a discipline (e.g., Physics) and \( p(x) \) is the probability of subfield \( x \) (e.g., Quantum Mechanics).
+                            </p>
+                        </li>
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Mutual Information \( I(X;Y) \)</strong>: Quantifies the <strong>shared information</strong> between two disciplines \( X \) and \( Y \):
+                            <p style="font-family: 'Space Mono', monospace; font-size: 0.95em; line-height: 1.6; background: var(--bg-light); padding: 10px; border-radius: var(--r); margin-top: 10px;">
+                                \[
+                                I(X;Y) = \sum_{x \in X} \sum_{y \in Y} p(x,y) \log \frac{p(x,y)}{p(x)p(y)}
+                                \]
+                            </p>
+                        </li>
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Redundancy</strong>: Measures <strong>overlap</strong> between fields (e.g., shared concepts between Computer Science and Mathematics).</li>
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Efficiency</strong>: Assesses how <strong>optimally</strong> knowledge is structured (e.g., low entropy = highly organized).</li>
+                    </ul>
+                    <p style="margin-top: 15px;">
+                        <strong>Example in MLKN.lab:</strong>
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> High \( H(X) \) for <em>Interdisciplinary Fields</em> (e.g., Cognitive Science) indicates <strong>diverse subfields</strong>.</li>
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> High \( I(X;Y) \) between <em>Computer Science</em> and <em>Mathematics</em> reflects their <strong>strong interplay</strong>.</li>
                     </ul>
                     <p style="margin-top: 15px; font-size: 0.9em;">
-                        <strong>Key Tools:</strong> Scikit-learn, NumPy.
+                        <strong>Literature:</strong>
+                        <a href="https://www.nature.com/articles/s41562-019-0680-8" target="_blank" style="color: var(--accent);">DeDeo et al., 2019</a> (Information Theory in Science),
+                        <a href="https://arxiv.org/abs/1905.13195" target="_blank" style="color: var(--accent);">Rosvall & Lizana, 2019</a> (Compression and Information in Networks).
+                    </p>
+                    <p style="margin-top: 15px; font-size: 0.9em;">
+                        <strong>Key Tools:</strong> Scikit-learn, NumPy, SciPy.
                     </p>
                 </div>
                 
                 <!-- Dynamical Systems -->
-                <div class="layer-card">
+                <div class="layer-card" style="min-height: fit-content;">
                     <div class="licon" style="color: #9B59B6;">⬢</div>
                     <h3>Dynamical Systems</h3>
                     <p>
@@ -711,7 +756,7 @@
                 </div>
                 
                 <!-- Optimal Transport -->
-                <div class="layer-card">
+                <div class="layer-card" style="min-height: fit-content;">
                     <div class="licon" style="color: #FFD700;">⬢</div>
                     <h3>Optimal Transport Theory</h3>
                     <p>
@@ -772,18 +817,49 @@
                 </div>
                 
                 <!-- Causal Inference -->
-                <div class="layer-card">
+                <div class="layer-card" style="min-height: fit-content;">
                     <div class="licon" style="color: #E74C3C;">⬢</div>
                     <h3>Causal Inference</h3>
                     <p>
-                        Tests <strong>meta-science hypotheses</strong> using causal models:
+                        Tests <strong>meta-science hypotheses</strong> by modeling knowledge as a <strong>causal graph</strong> and using <strong>do-calculus</strong> to infer relationships:
                     </p>
                     <ul class="discipline-list">
-                        <li><span class="discipline-square" style="background: #E74C3C;"></span> <strong>Do-Calculus</strong>: Assess the impact of interdisciplinarity on citation counts.</li>
-                        <li><span class="discipline-square" style="background: #E74C3C;"></span> <strong>Counterfactuals</strong>: "What if Computer Science had not emerged?"</li>
+                        <li><span class="discipline-square" style="background: #E74C3C;"></span> <strong>Causal Graph</strong>: A directed acyclic graph (DAG) where nodes are disciplines/concepts and edges represent <strong>causal influences</strong> (e.g., "Mathematics → Physics → Engineering").</li>
+                        <li><span class="discipline-square" style="background: #E74C3C;"></span> <strong>Do-Calculus</strong>: A framework for identifying causal effects from observational data. For example, to assess:
+                            <p style="font-family: 'Space Mono', monospace; font-size: 0.95em; line-height: 1.6; background: var(--bg-light); padding: 10px; border-radius: var(--r); margin-top: 10px;">
+                                \[
+                                P(Y \mid do(X=x)) \quad \text{(Effect of intervention \( X=x \) on \( Y \))}
+                                \]
+                            </p>
+                            <p style="font-size: 0.9em; color: #666; margin-top: 5px;">
+                                where \( do(X=x) \) represents an intervention (e.g., "What if we increase funding for interdisciplinarity?").
+                            </p>
+                        </li>
+                        <li><span class="discipline-square" style="background: #E74C3C;"></span> <strong>Counterfactuals</strong>: Answer "what-if" questions by simulating <strong>alternative histories</strong> of science:
+                            <p style="font-family: 'Space Mono', monospace; font-size: 0.95em; line-height: 1.6; background: var(--bg-light); padding: 10px; border-radius: var(--r); margin-top: 10px;">
+                                \[
+                                P(Y_{X=x} \mid X=x', Y=y')
+                                \]
+                            </p>
+                            <p style="font-size: 0.9em; color: #666; margin-top: 5px;">
+                                Example: "What would the citation network look like if <em>Computer Science</em> had not emerged?"
+                            </p>
+                        </li>
+                    </ul>
+                    <p style="margin-top: 15px;">
+                        <strong>Example in MLKN.lab:</strong>
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #E74C3C;"></span> Use <strong>do-calculus</strong> to test: <em>"Does interdisciplinarity increase citation impact?"</em></li>
+                        <li><span class="discipline-square" style="background: #E74C3C;"></span> Use <strong>counterfactuals</strong> to explore: <em>"How would Physics have evolved without Quantum Mechanics?"</em></li>
                     </ul>
                     <p style="margin-top: 15px; font-size: 0.9em;">
-                        <strong>Key Tools:</strong> DoWhy, CausalML, PyMC.
+                        <strong>Literature:</strong>
+                        <a href="https://bayes.cs.ucla.edu/BOOK-08/" target="_blank" style="color: var(--accent);">Pearl, 2009</a> (Causality),
+                        <a href="https://arxiv.org/abs/2002.02851" target="_blank" style="color: var(--accent);">Hernán & Robins, 2020</a> (Causal Inference).
+                    </p>
+                    <p style="margin-top: 15px; font-size: 0.9em;">
+                        <strong>Key Tools:</strong> DoWhy, CausalML, PyMC, Dowhy.
                     </p>
                 </div>
             </div>
