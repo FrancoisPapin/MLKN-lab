@@ -164,7 +164,7 @@
             </p>
             <br>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
                 <!-- Multilayer Network -->
                 <div class="layer-card">
                     <div class="licon" style="color: #1A6BAA;">⬢</div>
@@ -636,12 +636,26 @@
                     <div class="licon" style="color: #2ECC71;">⬢</div>
                     <h3>Topological Data Analysis (TDA)</h3>
                     <p>
-                        Uses <strong>persistent homology</strong> to study the <strong>shape of knowledge</strong>:
+                        Uses <strong>persistent homology</strong> to study the <strong>shape of knowledge</strong> by analyzing the <strong>filtration of the hypergraph incidence matrix \( \mathbf{H} \)</strong>:
                     </p>
                     <ul class="discipline-list">
-                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Holes</strong>: Represent gaps or missing connections in knowledge (e.g., under-explored interdisciplinary areas).</li>
-                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Connected Components</strong>: Represent clusters of related disciplines.</li>
-                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Betti Numbers</strong>: Quantify the dimensionality of knowledge structures.</li>
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Filtration of \( \mathbf{H} \)</strong>: Construct a sequence of simplicial complexes from \( \mathbf{H} \) by thresholding hyperedge weights \( \omega(e) \):
+                            <p style="font-family: 'Space Mono', monospace; font-size: 0.95em; line-height: 1.6; background: var(--bg-light); padding: 10px; border-radius: var(--r); margin-top: 10px;">
+                                \[
+                                \mathbf{H}_\theta = \{ H_{v,e} \mid \omega(e) \geq \theta \}, \quad \theta \in [0, 1]
+                                \]
+                            </p>
+                        </li>
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Holes (Betti-1)</strong>: Represent <strong>gaps or missing connections</strong> in knowledge (e.g., under-explored interdisciplinary areas between Physics and Biology).</li>
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Connected Components (Betti-0)</strong>: Represent <strong>clusters of related disciplines</strong> (e.g., all subfields of Computer Science).</li>
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Betti Numbers</strong>: Quantify the <strong>dimensionality of knowledge structures</strong> (e.g., \( \beta_0 \) = number of connected components, \( \beta_1 \) = number of holes).</li>
+                    </ul>
+                    <p style="margin-top: 15px;">
+                        <strong>Example in MLKN.lab:</strong>
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> A <strong>hole</strong> in the filtration at \( \theta = 0.5 \) might reveal a missing connection between <em>Quantum Computing</em> (Layer 3) and <em>Topological Materials</em> (Layer 3).</li>
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> A <strong>persistent connected component</strong> across all \( \theta \) indicates a <strong>stable discipline cluster</strong> (e.g., Mathematics).</li>
                     </ul>
                     <p style="margin-top: 15px; font-size: 0.9em;">
                         <strong>Key Tools:</strong> Gudhi, Ripser, Dionysus.
@@ -670,12 +684,26 @@
                     <div class="licon" style="color: #9B59B6;">⬢</div>
                     <h3>Dynamical Systems</h3>
                     <p>
-                        Models knowledge as a <strong>dynamical system</strong>:
+                        Models knowledge as a <strong>dynamical system</strong> where the state evolves via the <strong>hypergraph transition matrix \( \mathbf{T}_{\mathcal{H}} \)</strong>:
                     </p>
                     <ul class="discipline-list">
-                        <li><span class="discipline-square" style="background: #9B59B6;"></span> <strong>State Space</strong>: All possible configurations of the knowledge network.</li>
-                        <li><span class="discipline-square" style="background: #9B59B6;"></span> <strong>Trajectories</strong>: How knowledge evolves over time (e.g., emergence of new disciplines).</li>
-                        <li><span class="discipline-square" style="background: #9B59B6;"></span> <strong>Attractors</strong>: Stable configurations (e.g., major disciplines like Physics or Mathematics).</li>
+                        <li><span class="discipline-square" style="background: #9B59B6;"></span> <strong>State Space</strong>: All possible configurations of the knowledge network, represented as probability distributions \( \mathbf{P}_t \in \mathbb{R}^{|V|} \).</li>
+                        <li><span class="discipline-square" style="background: #9B59B6;"></span> <strong>Trajectories</strong>: The evolution of \( \mathbf{P}_t \) over time, governed by:
+                            <p style="font-family: 'Space Mono', monospace; font-size: 1em; line-height: 1.6; background: var(--bg-light); padding: 10px; border-radius: var(--r); margin-top: 10px;">
+                                \[
+                                \mathbf{P}_{t+1} = \mathbf{P}_t \mathbf{T}_{\mathcal{H}}
+                                \]
+                            </p>
+                        </li>
+                        <li><span class="discipline-square" style="background: #9B59B6;"></span> <strong>Attractors</strong>: Stable configurations (e.g., major disciplines like Physics or Mathematics) where \( \mathbf{P}_t \) converges to a stationary distribution \( \mathbf{P}_\infty \).</li>
+                        <li><span class="discipline-square" style="background: #9B59B6;"></span> <strong>Wasserstein Stability</strong>: The system is stable if \( W_1(\mathbf{P}_t, \mathbf{P}_{t+1}) \to 0 \) as \( t \to \infty \).</li>
+                    </ul>
+                    <p style="margin-top: 15px;">
+                        <strong>Example in MLKN.lab:</strong>
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #9B59B6;"></span> Simulate the <strong>emergence of Bioinformatics</strong> by tracking \( \mathbf{P}_t \) from 1980 to 2020.</li>
+                        <li><span class="discipline-square" style="background: #9B59B6;"></span> Identify <strong>attractors</strong> (e.g., Mathematics) where \( \mathbf{P}_\infty \) has high probability mass.</li>
                     </ul>
                     <p style="margin-top: 15px; font-size: 0.9em;">
                         <strong>Key Tools:</strong> SciPy, MATLAB, custom ODE solvers.
@@ -687,12 +715,57 @@
                     <div class="licon" style="color: #FFD700;">⬢</div>
                     <h3>Optimal Transport Theory</h3>
                     <p>
-                        Measures the <strong>"distance" between disciplines</strong> by modeling knowledge as a <strong>probability distribution</strong>:
+                        Measures the <strong>"distance" between disciplines</strong> by modeling knowledge as a <strong>probability distribution</strong> and using the <strong>Wasserstein-1 distance</strong> to quantify the <strong>epistemic effort</strong> required to transform one distribution into another.
                     </p>
                     <ul class="discipline-list">
-                        <li><span class="discipline-square" style="background: #FFD700;"></span> <strong>Wasserstein Distance</strong>: Quantifies the effort to transform one discipline into another.</li>
-                        <li><span class="discipline-square" style="background: #FFD700;"></span> <strong>Barycenters</strong>: Identify "central" disciplines (e.g., Mathematics as a hub).</li>
+                        <li><span class="discipline-square" style="background: #FFD700;"></span> <strong>Knowledge State Distributions</strong>: Let \( \mathbf{P}_t \in \mathbb{R}^{|V|} \) be a probability distribution over nodes \( V \) at time \( t \), generated via the hypergraph random walk transition matrix \( \mathbf{T}_{\mathcal{H}} \):
+                            <p style="font-family: 'Space Mono', monospace; font-size: 1em; line-height: 1.6; background: var(--bg-light); padding: 10px; border-radius: var(--r); margin-top: 10px;">
+                                \[
+                                \mathbf{P}_t = \mathbf{P}_0 \mathbf{T}_{\mathcal{H}}^t
+                                \]
+                            </p>
+                        </li>
+                        <li><span class="discipline-square" style="background: #FFD700;"></span> <strong>Ground Metric</strong>: The cost \( c(v_i, v_j) \) of moving knowledge from node \( v_i \) to \( v_j \) is defined as:
+                            <p style="font-family: 'Space Mono', monospace; font-size: 1em; line-height: 1.6; background: var(--bg-light); padding: 10px; border-radius: var(--r); margin-top: 10px;">
+                                \[
+                                c(v_i, v_j) = -\log P(v_j \mid v_i)
+                                \]
+                            </p>
+                            <p style="font-size: 0.9em; color: #666; margin-top: 5px;">
+                                <strong>Intuition:</strong> Nodes with high transition probability are "closer" in epistemic space.
+                            </p>
+                        </li>
+                        <li><span class="discipline-square" style="background: #FFD700;"></span> <strong>Wasserstein-1 Distance</strong>: The optimal transport distance between two knowledge states \( \mathbf{\mu} \) and \( \mathbf{\nu} \) is:
+                            <p style="font-family: 'Space Mono', monospace; font-size: 1em; line-height: 1.6; background: var(--bg-light); padding: 10px; border-radius: var(--r); margin-top: 10px;">
+                                \[
+                                W_1(\mathbf{\mu}, \mathbf{\nu}) = \inf_{\mathbf{\gamma} \in \Pi(\mathbf{\mu}, \mathbf{\nu})} \sum_{i,j} \gamma_{i,j} c(v_i, v_j)
+                                \]
+                            </p>
+                            <p style="font-size: 0.9em; color: #666; margin-top: 5px;">
+                                where \( \Pi(\mathbf{\mu}, \mathbf{\nu}) \) is the set of transport plans \( \mathbf{\gamma} \) such that:
+                            </p>
+                            <p style="font-family: 'Space Mono', monospace; font-size: 0.95em; line-height: 1.6; background: var(--bg-light); padding: 10px; border-radius: var(--r); margin-top: 5px;">
+                                \[
+                                \sum_j \gamma_{i,j} = \mathbf{\mu}_i, \quad \sum_i \gamma_{i,j} = \mathbf{\nu}_j
+                                \]
+                            </p>
+                        </li>
                     </ul>
+                    <p style="margin-top: 15px;">
+                        <strong>Example in MLKN.lab:</strong>
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #FFD700;"></span> Compare the knowledge distributions of <em>Computer Science</em> (\( \mathbf{\mu} \)) and <em>Neuroscience</em> (\( \mathbf{\nu} \)) to measure their <strong>cognitive distance</strong>.</li>
+                        <li><span class="discipline-square" style="background: #FFD700;"></span> Track the evolution of <em>Physics</em> from 1990 (\( \mathbf{\mu} \)) to 2020 (\( \mathbf{\nu} \)) to quantify <strong>disciplinary drift</strong>.</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 0.9em;">
+                        <strong>Computational Note:</strong> For large-scale networks (e.g., OpenAlex), use the <strong>Sinkhorn algorithm</strong> with entropy regularization:
+                    </p>
+                    <p style="font-family: 'Space Mono', monospace; font-size: 0.95em; line-height: 1.6; background: var(--bg-light); padding: 10px; border-radius: var(--r); margin-top: 5px;">
+                        \[
+                        W_1^\epsilon(\mathbf{\mu}, \mathbf{\nu}) = \min_{\mathbf{\gamma}} \sum_{i,j} \gamma_{i,j} c(v_i, v_j) + \epsilon \sum_{i,j} \gamma_{i,j} \log \gamma_{i,j}
+                        \]
+                    </p>
                     <p style="margin-top: 15px; font-size: 0.9em;">
                         <strong>Key Tools:</strong> POT (Python Optimal Transport), Sinkhorn algorithm.
                     </p>
