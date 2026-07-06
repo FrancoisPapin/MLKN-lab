@@ -8,7 +8,12 @@ const layerColors = {
     '3': '#D55E00', // Subdisciplines (Orange)
     '4': '#CC78BC', // Thematic Domains (Purple)
     '5': '#CA9161', // Concepts (Brown)
-    'all': '#949494' // All Layers (Gray)
+    'all': '#949494', // All Layers (Gray)
+    'Core Domain': '#0173B2',
+    'Academic Discipline': '#029E73',
+    'Academic Subdiscipline': '#D55E00',
+    'Core Thematic Domain': '#CC78BC',
+    'Main Concept': '#CA9161'
 };
 
 const edgeTypeColors = {
@@ -16,7 +21,16 @@ const edgeTypeColors = {
     'AcademicDiscipline_to_Subdiscipline': '#029E73', // Green
     'Subdiscipline_to_Topic': '#D55E00', // Orange
     'Topic_to_Concept': '#CC78BC', // Purple
-    'connection': '#999999' // Default (Gray)
+    'connection': '#FFFFFF' // White for dark mode
+};
+
+// Map layer numbers to layer names
+const layerMap = {
+    '1': 'Core Domain',
+    '2': 'Academic Discipline',
+    '3': 'Academic Subdiscipline',
+    '4': 'Core Thematic Domain',
+    '5': 'Main Concept'
 };
 
 // Determine the correct data URL based on the environment
@@ -46,9 +60,10 @@ function initNetwork() {
         .scaleExtent([0.1, 10])
         .on("zoom", (event) => {
             g.attr("transform", event.transform);
-            const k = event.transform.k; // Current zoom scale
-            // Show edges only when zoomed in (k > 0.5)
-            linkElements.style("display", k > 0.5 ? "block" : "none");
+            const k = event.transform.k;
+            if (linkElements) {
+                linkElements.style("display", k > 0.3 ? "block" : "none");
+            }
         });
     svg.call(zoom);
 
@@ -67,6 +82,11 @@ function loadData() {
         </div>
     `;
 
+    // Animate progress bar
+    const progressBar = document.getElementById('progress-bar');
+    progressBar.style.width = '50%';
+    setTimeout(() => { progressBar.style.width = '100%'; }, 500);
+
     Promise.all([
         fetch(nodesUrl).then(res => {
             if (!res.ok) throw new Error(`Nodes HTTP error! status: ${res.status}`);
@@ -78,7 +98,6 @@ function loadData() {
         })
     ])
     .then(([nodesData, edgesData]) => {
-        document.getElementById('progress-bar').style.width = '100%';
         nodes = nodesData.nodes;
         links = edgesData.edges;
 
@@ -106,28 +125,31 @@ function loadData() {
 
 // Filter nodes/links by current layer
 function filterByLayer() {
-    if (simulation) simulation.stop();  // Stop the current simulation
+    if (simulation) simulation.stop();
+
+    const layerName = layerMap[currentLayer] || currentLayer;
+    console.log("DEBUG: Current layer:", currentLayer, "→ Layer name:", layerName);
+    console.log("DEBUG: Sample node Layer:", nodes[0]?.Layer, nodes[0]?.layer);
 
     if (currentLayer === 'all') {
-        // Show all nodes/links
-        simulation = startSimulation();  // Restart simulation with all data
+        simulation = startSimulation();
         return;
     }
 
-    const layerStr = String(currentLayer);
     const layerNodes = new Set(
-        nodes.filter(node => String(node.Layer || node.layer) === layerStr)
-         .map(node => node.id)
+        nodes.filter(node => (node.Layer || node.layer) === layerName)
+             .map(node => node.id)
     );
-    const filteredNodes = nodes.filter(node => String(node.Layer || node.layer) === layerStr);
+    console.log("DEBUG: Nodes in layer", layerName, ":", layerNodes.size);
+
+    const filteredNodes = nodes.filter(node => (node.Layer || node.layer) === layerName);
     const filteredLinks = links.filter(link => layerNodes.has(link.source) && layerNodes.has(link.target));
 
-    // Update global variables
     nodes = filteredNodes;
     links = filteredLinks;
 
-    console.log(`Filtered to layer ${currentLayer}: ${nodes.length} nodes, ${links.length} edges.`);
-    simulation = startSimulation();  // Restart simulation with filtered data
+    console.log(`Filtered to layer ${currentLayer} (${layerName}): ${nodes.length} nodes, ${links.length} edges.`);
+    simulation = startSimulation();
 }
 
 // Start the force simulation
@@ -137,31 +159,27 @@ function startSimulation() {
     if (linkElements) linkElements.remove();
 
     // Adjust force parameters for large networks
-    const nodeSize = window.innerWidth < 768 ? 5 : 10;
-    const chargeStrength = window.innerWidth < 768 ? -300 : -500;  // Stronger repulsion
-    const linkDistance = window.innerWidth < 768 ? 30 : 50;       // Longer links
-    const collisionRadius = nodeSize * 3;                        // Larger collision radius
+    const nodeSize = window.innerWidth < 768 ? 6 : 12;
+    const chargeStrength = window.innerWidth < 768 ? -800 : -1000;
+    const linkDistance = window.innerWidth < 768 ? 50 : 100;
+    const collisionRadius = window.innerWidth < 768 ? 15 : 20;
 
     simulation = d3.forceSimulation(nodes)
         .force("link", d3.forceLink(links).id(d => d.id).distance(linkDistance))
         .force("charge", d3.forceManyBody().strength(chargeStrength))
         .force("center", d3.forceCenter(svg.node().width / 2, svg.node().height / 2))
         .force("collision", d3.forceCollide().radius(collisionRadius))
-        .alphaDecay(0.02)  // Slower cooling for better convergence
-        .velocityDecay(0.6);  // Higher velocity decay for stability
+        .alphaDecay(0.01)  // Very slow cooling for stability
+        .velocityDecay(0.8);  // Higher velocity decay
 
     // Draw links with edge type colors
     linkElements = g.selectAll(".link")
         .data(links)
         .enter().append("line")
         .attr("class", "link")
-        .attr("stroke", d => {
-            // Use bright colors for dark mode
-            const color = edgeTypeColors[d.type] || "#1ABC9C";  // Fallback to teal
-            return color;
-        })
-        .attr("stroke-opacity", 0.9)
-        .attr("stroke-width", d => Math.max(1, d.weight / 5))  // Thicker edges
+        .attr("stroke", d => edgeTypeColors[d.type] || "#FFFFFF")
+        .attr("stroke-opacity", 1.0)
+        .attr("stroke-width", d => Math.max(2, d.weight / 2))
         .style("display", "none");
 
     // Draw nodes
@@ -176,15 +194,13 @@ function startSimulation() {
 
     // Add circles to nodes
     nodeElements.append("circle")
-        .attr("r", d => Math.max(4, Math.min(15, d.size ? d.size / 100 : nodeSize)))  // Larger nodes
+        .attr("r", d => Math.max(6, Math.min(20, d.size ? d.size / 50 : nodeSize)))
         .attr("fill", d => {
-            // Use bright, distinct colors for dark mode
             const layer = d.Layer || d.layer;
-            const color = layerColors[layer] || "#1ABC9C";  // Fallback to teal
-            return color;
+            return layerColors[layer] || "#FFFFFF";
         })
-        .attr("stroke", "#FFFFFF")  // White stroke for contrast on dark backgrounds
-        .attr("stroke-width", 1.5);
+        .attr("stroke", "#000000")
+        .attr("stroke-width", 2);
 
     // Add labels (hidden on mobile for performance)
     if (window.innerWidth > 768) {
@@ -192,19 +208,19 @@ function startSimulation() {
             .text(d => d.name || d.Node || d.id)
             .attr("font-size", 10)
             .attr("text-anchor", "middle")
-            .attr("dy", 20);
+            .attr("dy", 20)
+            .attr("fill", "#FFFFFF");  // White text for dark mode
     }
 
     // Enhanced tooltips
     nodeElements.on("mouseover", function(event, d) {
-        // Highlight connected nodes/edges
         nodeElements.style("opacity", 0.2);
         linkElements.style("opacity", 0.2);
         d3.select(this).style("opacity", 1);
         linkElements
             .filter(l => l.source.id === d.id || l.target.id === d.id)
             .style("opacity", 1)
-            .style("display", "block"); // Ensure connected edges are visible
+            .style("display", "block");
         nodeElements
             .filter(n => n.id === d.id ||
                         links.some(l => l.source.id === n.id || l.target.id === n.id))
@@ -219,7 +235,7 @@ function startSimulation() {
     // Update positions on each tick
     simulation.on("tick", () => {
         linkElements
-            .attr("x1", d => d.source.x || 0)  // Fallback to 0 if NaN
+            .attr("x1", d => d.source.x || 0)
             .attr("y1", d => d.source.y || 0)
             .attr("x2", d => d.target.x || 0)
             .attr("y2", d => d.target.y || 0);
@@ -260,42 +276,12 @@ function updateNetwork() {
 function filterNetworkByDomain(domain) {
     if (currentLayer !== '1') return;
     const domainNodes = new Set(
-    nodes.filter(node => (node.Domain || node.domain) === domain || node['Core Domain'] === domain)
-         .map(node => node.id)
-);
+        nodes.filter(node => (node.Domain || node.domain) === domain || node['Core Domain'] === domain)
+             .map(node => node.id)
+    );
     nodeElements.style("opacity", d => domainNodes.has(d.id) ? 1 : 0.2);
     linkElements.style("opacity", d => domainNodes.has(d.source) && domainNodes.has(d.target) ? 1 : 0.2)
               .style("display", d => domainNodes.has(d.source) && domainNodes.has(d.target) ? "block" : "none");
-}
-
-// Temporary Debug Log for Layer Filtering
-function filterByLayer() {
-    if (simulation) simulation.stop();
-
-    console.log("DEBUG: Current layer:", currentLayer);
-    console.log("DEBUG: Sample node fields:", Object.keys(nodes[0]));
-    console.log("DEBUG: Sample node Layer:", nodes[0]?.Layer, nodes[0]?.layer);
-
-    if (currentLayer === 'all') {
-        simulation = startSimulation();
-        return;
-    }
-
-    const layerStr = String(currentLayer);
-    const layerNodes = new Set(
-        nodes.filter(node => String(node.Layer || node.layer) === layerStr)
-             .map(node => node.id)
-    );
-    console.log("DEBUG: Nodes in layer", layerStr, ":", layerNodes.size);
-
-    const filteredNodes = nodes.filter(node => String(node.Layer || node.layer) === layerStr);
-    const filteredLinks = links.filter(link => layerNodes.has(link.source) && layerNodes.has(link.target));
-
-    nodes = filteredNodes;
-    links = filteredLinks;
-
-    console.log(`Filtered to layer ${currentLayer}: ${nodes.length} nodes, ${links.length} edges.`);
-    simulation = startSimulation();
 }
 
 // Initialize the network when the page loads
