@@ -10,6 +10,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- KaTeX for LaTeX rendering -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 </head>
 <body>
     <!-- Top Navigation Bar (a unified version) -->
@@ -629,116 +633,128 @@
             <h2 class="sec-h" id="model-title">MLKN.model</h2>
             <p class="sec-sub">The Computational Epistemology Engine</p>
 
-              <p>
-                  <strong>MLKN.model</strong> is the <strong>mathematical and computational heart</strong> of MLKN.lab.
-                  It treats scientific knowledge as a <strong>dynamic, multi-layered hypergraph</strong>,
-                  enabling <strong>rigorous analysis, simulation, and prediction</strong> of how disciplines evolve, connect, and diffuse.
-              </p>
+            <p>
+                <strong>MLKN.model</strong> is the <strong>mathematical and computational heart</strong> of MLKN.lab.
+                It treats scientific knowledge as a <strong>dynamic, multi-layered hypergraph</strong> \( \mathcal{H} \),
+                enabling <strong>rigorous analysis, simulation, and prediction</strong> of how disciplines evolve, connect, and diffuse.
+            </p>
+        
+            <p>
+                Just as physics engines simulate the behavior of physical systems,
+                <strong>MLKN.model simulates the behavior of knowledge systems</strong>—
+                revealing hidden patterns, testing hypotheses, and enabling breakthroughs in
+                <strong>meta-science, AI, and interdisciplinary research</strong>.
+            </p>
 
-              <p>
-                  Just as physics engines simulate the behavior of physical systems,
-                  <strong>MLKN.model simulates the behavior of knowledge systems</strong>—revealing hidden patterns,
-                  testing hypotheses, and enabling breakthroughs in <strong>meta-science, AI, and interdisciplinary research</strong>.
-              </p>
+            <div class="layers-grid" style="margin-top: 20px;">
+                <div class="layer-card">
+                    <div class="licon" style="color: #1A6BAA;">⬢</div>
+                    <h3>Theoretical Foundations</h3>
+                    <p>
+                        Built on <strong>unified theories of cognition, network science, systems theory, and computational epistemology</strong>.
+                        Models knowledge as a <strong>computational system</strong> where structure can be analyzed and optimized.
+                    </p>
+                </div>
+                <div class="layer-card">
+                    <div class="licon" style="color: #2ECC71;">⬢</div>
+                    <h3>Mathematical Formalization</h3>
+                    <p>
+                        Formalizes knowledge as a <strong>multilayer hypergraph</strong> \( \mathcal{H} = (V, \mathcal{S}, \mathcal{P}, \mathcal{T}, \omega, \tau) \),
+                        with <strong>5 ontological layers</strong> (Core Domains → Concepts) and <strong>hyperedges</strong> for cross-disciplinary connections.
+                    </p>
+                </div>
+                <div class="layer-card">
+                    <div class="licon" style="color: #FF6347;">⬢</div>
+                    <h3>Architecture</h3>
+                    <p>
+                        Organized into <strong>3 core layers</strong>:
+                        <strong>Knowledge Representation</strong> (polyhierarchy),
+                        <strong>Network Analysis</strong> (graph theory, TDA),
+                        <strong>Dynamic Simulation</strong> (random walks, GNNs).
+                    </p>
+                </div>
+            </div>
 
-              <div class="layers-grid" style="margin-top: 20px;">
-                  <div class="layer-card">
-                      <div class="licon" style="color: #1A6BAA;">⬢</div>
-                      <h3>Theoretical Foundations</h3>
-                      <p>
-                          Built on <strong>unified theories of cognition, network science, systems theory, and computational epistemology</strong>.
-                          Models knowledge as a <strong>computational system</strong> where structure can be analyzed and optimized.
-                      </p>
-                  </div>
-                  <div class="layer-card">
-                      <div class="licon" style="color: #2ECC71;">⬢</div>
-                      <h3>Mathematical Formalization</h3>
-                      <p>
-                          Formalizes knowledge as a <strong>multi-layered hypergraph</strong> with nodes (disciplines, concepts),
-                          hyperedges (relationships), and layers (ontological hierarchy).
-                      </p>
-                  </div>
-                  <div class="layer-card">
-                      <div class="licon" style="color: #FF6347;">⬢</div>
-                      <h3>Applications</h3>
-                      <p>
-                          Enables <strong>meta-science, AI reasoning, education, and policy</strong> through predictive modeling,
-                          knowledge diffusion simulations, and dynamic analysis.
-                      </p>
-                  </div>
-              </div>
-
-              <div style="text-align: center; margin-top: 25px;">
-                  <a href="model/model.html" class="btn btn-p">
-                      <i class="fas fa-cog" style="margin-right: 8px;"></i> Explore MLKN.model
-                  </a>
-              </div>
+            <div style="text-align: center; margin-top: 25px;">
+                <p style="font-size: 0.95em; color: #666; margin-bottom: 15px;">
+                    For the <strong>5-layer polyhierarchy</strong>, see our
+                    <a href="polyhierarchy/polyhierarchy.html" style="color: var(--accent);"><strong>Polyhierarchy page</strong></a>.
+                </p>
+                <a href="model/model.html" class="btn btn-p">
+                    <i class="fas fa-cog" style="margin-right: 8px;"></i> Explore MLKN.model
+                </a>
+            </div>
         </section>
 
         <!-- MLKN.model Mathematical Foundations Section -->
         <section id="mathematical-foundations" class="section" aria-labelledby="math-title">
-          <br>
+            <br>
             <h2 class="sec-h" id="math-title">MLKN.model - Mathematical Foundations</h2>
             <p class="sec-sub">The Rigor Behind MLKN.model</p>
 
-             <p>
-                 The <strong>mathematical backbone</strong> of MLKN.model is built on a <strong>polyhierarchical hypergraph framework</strong>,
-                 where knowledge is formalized as a <strong>dynamic, multi-layered network</strong>.
-                 This enables <strong>rigorous analysis, simulation, and prediction</strong> of scientific structures.
-             </p>
+            <p>
+                The <strong>mathematical backbone</strong> of MLKN.model is a <strong>multilayer hypergraph</strong>
+                \( \mathcal{H} = (V, \mathcal{S}, \mathcal{P}, \mathcal{T}, \omega, \tau) \),
+                where knowledge is formalized as a <strong>dynamic, multi-layered network</strong>.
+                This framework enables <strong>rigorous analysis, simulation, and prediction</strong> of scientific structures.
+            </p>
 
-             <div class="layers-grid" style="margin-top: 20px;">
-                 <div class="layer-card">
-                     <div class="licon" style="color: #1A6BAA;">⬢</div>
-                     <h3>Hypergraph Definition</h3>
-                     <p>
-                         A tuple <strong>H = (V, E, L, W, T)</strong>, where:
-                         <ul class="discipline-list" style="margin-top: 10px;">
-                             <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>V</strong>: Nodes (disciplines, concepts).</li>
-                             <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>E</strong>: Hyperedges (relationships).</li>
-                             <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>L</strong>: Layer assignment function.</li>
-                             <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>W</strong>: Weight function.</li>
-                             <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>T</strong>: Temporal function.</li>
-                         </ul>
-                     </p>
-                 </div>
-                 <div class="layer-card">
-                     <div class="licon" style="color: #2ECC71;">⬢</div>
-                     <h3>Key Properties</h3>
-                     <p>
-                         The hypergraph exhibits:
-                         <ul class="discipline-list" style="margin-top: 10px;">
-                             <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Multi-Layered</strong>: 5 ontological layers.</li>
-                             <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Polyhierarchical</strong>: Nodes can have multiple parents.</li>
-                             <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Dynamic</strong>: Tracks evolution over time.</li>
-                         </ul>
-                     </p>
-                 </div>
-                 <div class="layer-card">
-                     <div class="licon" style="color: #FF6347;">⬢</div>
-                     <h3>Mathematical Operations</h3>
-                     <p>
-                         Supports:
-                         <ul class="discipline-list" style="margin-top: 10px;">
-                             <li><span class="discipline-square" style="background: #FF6347;"></span> Centrality measures (degree, betweenness).</li>
-                             <li><span class="discipline-square" style="background: #FF6347;"></span> Community detection (Louvain, Leiden).</li>
-                             <li><span class="discipline-square" style="background: #FF6347;"></span> Knowledge diffusion simulations.</li>
-                         </ul>
-                     </p>
-                 </div>
-             </div>
+            <div class="layers-grid" style="margin-top: 20px;">
+                <div class="layer-card">
+                    <div class="licon" style="color: #1A6BAA;">⬢</div>
+                    <h3>Formal Definition</h3>
+                    <p>
+                        A <strong>multilayer hypergraph</strong> where:
+                        <ul class="discipline-list" style="margin-top: 10px;">
+                            <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>\( V \)</strong>: Nodes (Core Domains → Concepts).</li>
+                            <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>\( \mathcal{S} \)</strong>: Hyperedges (cross-disciplinary connections).</li>
+                            <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>\( \mathcal{P} \)</strong>: 5 ontological layers.</li>
+                            <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>\( \mathcal{T} \)</strong>: Hierarchical edges (adjacent layers).</li>
+                            <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>\( \omega \)</strong>: Weights (e.g., citations, semantic similarity).</li>
+                            <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>\( \tau \)</strong>: Temporal function (evolution over time).</li>
+                        </ul>
+                    </p>
+                </div>
+                <div class="layer-card">
+                    <div class="licon" style="color: #2ECC71;">⬢</div>
+                    <h3>Key Properties</h3>
+                    <p>
+                        The framework is:
+                        <ul class="discipline-list" style="margin-top: 10px;">
+                            <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Multilayer</strong>: 5 ontological layers (Core Domains → Concepts).</li>
+                            <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Polyhierarchical</strong>: Nodes can have multiple parents.</li>
+                            <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Dynamic</strong>: Tracks evolution via \( \tau \) and \( \mathbf{T}_{\mathcal{H}} \).</li>
+                        </ul>
+                    </p>
+                </div>
+                <div class="layer-card">
+                    <div class="licon" style="color: #FF6347;">⬢</div>
+                    <h3>Mathematical Tools</h3>
+                    <p>
+                        Supports:
+                        <ul class="discipline-list" style="margin-top: 10px;">
+                            <li><span class="discipline-square" style="background: #FF6347;"></span> Graph theory (adjacency, Laplacian matrices).</li>
+                            <li><span class="discipline-square" style="background: #FF6347;"></span> Topological Data Analysis (persistent homology).</li>
+                            <li><span class="discipline-square" style="background: #FF6347;"></span> Optimal Transport (Wasserstein distance).</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
 
-             <div style="text-align: center; margin-top: 25px;">
-                 <a href="model/model-mathematical-foundations.html" class="btn btn-p">
-                     <i class="fas fa-square-root-alt" style="margin-right: 8px;"></i> Explore Mathematical Foundations
-                 </a>
-             </div>
-         </section>
+            <div style="text-align: center; margin-top: 25px;">
+                <p style="font-size: 0.95em; color: #666; margin-bottom: 15px;">
+                    For the <strong>5-layer polyhierarchy</strong>, see our
+                    <a href="polyhierarchy/polyhierarchy.html" style="color: var(--accent);"><strong>Polyhierarchy page</strong></a>.
+                    For a <strong>visual representation</strong>, see our
+                    <a href="knowledge_network/MLKN-hypergraph.html" style="color: var(--accent);"><strong>MLKN.hypergraph page</strong></a>.
+                </p>
+                <a href="model/model-mathematical-foundations.html" class="btn btn-p">
+                    <i class="fas fa-square-root-alt" style="margin-right: 8px;"></i> Explore Mathematical Foundations
+                </a>
+            </div>
+        </section>
 
 
-
-        
-        
          <!-- Method Section -->
          <section id="method" class="section" aria-labelledby="method-title">
           <br>
