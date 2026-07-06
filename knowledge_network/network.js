@@ -130,11 +130,21 @@ function filterByLayer() {
     const layerName = layerMap[currentLayer] || currentLayer;
     console.log("DEBUG: Current layer:", currentLayer, "→ Layer name:", layerName);
 
-    // Debug: Check node_0 and node_1421
+    // Debug node_0 and node_1421
     const node0 = nodes.find(n => n.id === 'node_0');
     const node1421 = nodes.find(n => n.id === 'node_1421');
-    console.log("DEBUG: node_0 Layer:", node0?.Layer || node0?.layer);
-    console.log("DEBUG: node_1421 Layer:", node1421?.Layer || node1421?.layer);
+    console.log("DEBUG: node_0:", {
+      id: node0?.id,
+      name: node0?.name,
+      Layer: node0?.Layer,
+      layer: node0?.layer
+    });
+    console.log("DEBUG: node_1421:", {
+      id: node1421?.id,
+      name: node1421?.name,
+      Layer: node1421?.Layer,
+      layer: node1421?.layer
+    });
 
     if (currentLayer === 'all') {
         simulation = startSimulation();
@@ -182,13 +192,10 @@ function startSimulation() {
         .data(links)
         .enter().append("line")
         .attr("class", "link")
-        .attr("stroke", d => {
-            // Force bright colors for all edges
-            return "#FFFFFF";  // White for dark mode
-        })
+        .attr("stroke", "#FF0000")  // Bright red for debugging
         .attr("stroke-opacity", 1.0)
-        .attr("stroke-width", 2)  // Fixed width for visibility
-        .style("display", "block");  // Show all edges by default (remove LoD for now)
+        .attr("stroke-width", 3)  // Thick edges for visibility
+        .style("display", "block");  // Show all edges
 
     // Draw nodes
     nodeElements = g.selectAll(".node")
@@ -295,7 +302,7 @@ function filterNetworkByDomain(domain) {
 // Initialize the network when the page loads
 window.onload = initNetwork;
 
-// Debug Loaddata
+// Debug check for Loaddata
 .then(([nodesData, edgesData]) => {
     nodes = nodesData.nodes;
     links = edgesData.edges;
@@ -310,5 +317,14 @@ window.onload = initNetwork;
         console.log("Sample invalid edge:", invalidEdges[0]);
     }
 
+    // Debug: Check edges for node_0 and node_1421
+    const edgesNode0 = links.filter(link => link.source === 'node_0' || link.target === 'node_0');
+    const edgesNode1421 = links.filter(link => link.source === 'node_1421' || link.target === 'node_1421');
+    console.log("DEBUG: Edges for node_0:", edgesNode0.length, edgesNode0);
+    console.log("DEBUG: Edges for node_1421:", edgesNode1421.length, edgesNode1421);
+
     // Rest of the code...
-});
+    currentLayer = 'all';
+    filterByLayer();
+    startSimulation();
+})
