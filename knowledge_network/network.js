@@ -115,8 +115,11 @@ function filterByLayer() {
     }
 
     const layerStr = String(currentLayer);
-    const layerNodes = new Set(nodes.filter(node => String(node.Layer) === layerStr).map(node => node.id));
-    const filteredNodes = nodes.filter(node => String(node.Layer) === layerStr);
+    const layerNodes = new Set(
+        nodes.filter(node => String(node.Layer || node.layer) === layerStr)
+         .map(node => node.id)
+    );
+    const filteredNodes = nodes.filter(node => String(node.Layer || node.layer) === layerStr);
     const filteredLinks = links.filter(link => layerNodes.has(link.source) && layerNodes.has(link.target));
 
     // Update global variables
@@ -135,23 +138,31 @@ function startSimulation() {
 
     // Adjust force parameters for large networks
     const nodeSize = window.innerWidth < 768 ? 5 : 10;
-    const chargeStrength = window.innerWidth < 768 ? -100 : -150;
+    const chargeStrength = window.innerWidth < 768 ? -300 : -500;  // Stronger repulsion
+    const linkDistance = window.innerWidth < 768 ? 30 : 50;       // Longer links
+    const collisionRadius = nodeSize * 3;                        // Larger collision radius
 
     simulation = d3.forceSimulation(nodes)
-        .force("link", d3.forceLink(links).id(d => d.id).distance(15))
+        .force("link", d3.forceLink(links).id(d => d.id).distance(linkDistance))
         .force("charge", d3.forceManyBody().strength(chargeStrength))
         .force("center", d3.forceCenter(svg.node().width / 2, svg.node().height / 2))
-        .force("collision", d3.forceCollide().radius(nodeSize * 2));
+        .force("collision", d3.forceCollide().radius(collisionRadius))
+        .alphaDecay(0.02)  // Slower cooling for better convergence
+        .velocityDecay(0.6);  // Higher velocity decay for stability
 
     // Draw links with edge type colors
     linkElements = g.selectAll(".link")
         .data(links)
         .enter().append("line")
         .attr("class", "link")
-        .attr("stroke", d => edgeTypeColors[d.type] || "#FFFFFF")
+        .attr("stroke", d => {
+            // Use bright colors for dark mode
+            const color = edgeTypeColors[d.type] || "#1ABC9C";  // Fallback to teal
+            return color;
+        })
         .attr("stroke-opacity", 0.9)
-        .attr("stroke-width", d => Math.max(0.5, d.weight / 10))
-        .style("display", "none"); // Initially hide all edges (LoD)
+        .attr("stroke-width", d => Math.max(1, d.weight / 5))  // Thicker edges
+        .style("display", "none");
 
     // Draw nodes
     nodeElements = g.selectAll(".node")
@@ -165,10 +176,15 @@ function startSimulation() {
 
     // Add circles to nodes
     nodeElements.append("circle")
-        .attr("r", d => Math.max(3, Math.min(15, d.size ? d.size / 100 : nodeSize)))
-        .attr("fill", d => layerColors[d.Layer] || "#FFFFFF")
-        .attr("stroke", "#000000")
-        .attr("stroke-width", 1.5)
+        .attr("r", d => Math.max(4, Math.min(15, d.size ? d.size / 100 : nodeSize)))  // Larger nodes
+        .attr("fill", d => {
+            // Use bright, distinct colors for dark mode
+            const layer = d.Layer || d.layer;
+            const color = layerColors[layer] || "#1ABC9C";  // Fallback to teal
+            return color;
+        })
+        .attr("stroke", "#FFFFFF")  // White stroke for contrast on dark backgrounds
+        .attr("stroke-width", 1.5);
 
     // Add labels (hidden on mobile for performance)
     if (window.innerWidth > 768) {
@@ -243,10 +259,43 @@ function updateNetwork() {
 // Filter by domain (for Layer 1)
 function filterNetworkByDomain(domain) {
     if (currentLayer !== '1') return;
-    const domainNodes = new Set(nodes.filter(node => node.Domain === domain || node['Core Domain'] === domain).map(node => node.id));
+    const domainNodes = new Set(
+    nodes.filter(node => (node.Domain || node.domain) === domain || node['Core Domain'] === domain)
+         .map(node => node.id)
+);
     nodeElements.style("opacity", d => domainNodes.has(d.id) ? 1 : 0.2);
     linkElements.style("opacity", d => domainNodes.has(d.source) && domainNodes.has(d.target) ? 1 : 0.2)
               .style("display", d => domainNodes.has(d.source) && domainNodes.has(d.target) ? "block" : "none");
+}
+
+// Temporary Debug Log for Layer Filtering
+function filterByLayer() {
+    if (simulation) simulation.stop();
+
+    console.log("DEBUG: Current layer:", currentLayer);
+    console.log("DEBUG: Sample node fields:", Object.keys(nodes[0]));
+    console.log("DEBUG: Sample node Layer:", nodes[0]?.Layer, nodes[0]?.layer);
+
+    if (currentLayer === 'all') {
+        simulation = startSimulation();
+        return;
+    }
+
+    const layerStr = String(currentLayer);
+    const layerNodes = new Set(
+        nodes.filter(node => String(node.Layer || node.layer) === layerStr)
+             .map(node => node.id)
+    );
+    console.log("DEBUG: Nodes in layer", layerStr, ":", layerNodes.size);
+
+    const filteredNodes = nodes.filter(node => String(node.Layer || node.layer) === layerStr);
+    const filteredLinks = links.filter(link => layerNodes.has(link.source) && layerNodes.has(link.target));
+
+    nodes = filteredNodes;
+    links = filteredLinks;
+
+    console.log(`Filtered to layer ${currentLayer}: ${nodes.length} nodes, ${links.length} edges.`);
+    simulation = startSimulation();
 }
 
 // Initialize the network when the page loads
