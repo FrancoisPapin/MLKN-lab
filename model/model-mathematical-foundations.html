@@ -111,7 +111,7 @@
         <section id="overview" class="section" aria-labelledby="overview-title">
             <br>
             <h2 class="sec-h" id="overview-title">Overview</h2>
-            <p class="sec-sub">Why a Multilayer Hypergraph for Computational Epistemology?</p>
+            <p class="sec-sub">A Multilayer Hypergraph for Computational Epistemology</p>
             <div class="nav-box">
                 <a href="#overview" class="active">Overview</a>
                 <a href="#theoretical-definitions">Theoretical Definitions</a>
@@ -125,33 +125,49 @@
             <br>
 
             <p>
-                Traditional models of scientific knowledge—such as <strong>mono-hierarchies</strong> or <strong>flat networks</strong>—fail to capture its <strong>dual nature</strong>:
-                the <strong>hierarchical organization</strong> of disciplines (e.g., Physics → Quantum Mechanics) and the <strong>non-linear, cross-disciplinary connections</strong>
-                of modern research (e.g., Machine Learning spanning Computer Science, Mathematics, and Neuroscience).
+                <strong>MLKN.model</strong> is the <strong>computational epistemology engine</strong> at the heart of MLKN.lab.
+                Just as <strong>physics engines</strong> simulate the behavior of physical systems,
+                <strong>MLKN.model simulates the behavior of knowledge systems</strong>—
+                revealing hidden patterns, testing hypotheses, and enabling breakthroughs in
+                meta-science, AI, and interdisciplinary research.
             </p>
             <br>
             <p>
-                MLKN.model addresses this by combining <strong>multilayer networks</strong> (for hierarchical relationships) and <strong>hypergraphs</strong>
-                (for multi-node connections) into a <strong>unified multilayer hypergraph framework</strong>. This allows us to:
+                To capture the <strong>dual nature of scientific knowledge</strong>—
+                its <strong>hierarchical organization</strong> (e.g., Core Domains → Concepts)
+                and its <strong>non-linear, cross-disciplinary connections</strong> (e.g., Machine Learning spanning Computer Science, Mathematics, and Neuroscience)—
+                MLKN.model formalizes knowledge as a <strong>multilayer hypergraph</strong>.
+                This framework unifies:
             </p>
             <br>
             <div class="layers-grid">
                 <div class="layer-card">
                     <div class="licon" style="color: #1A6BAA;">⬢</div>
-                    <h3>Model Hierarchy</h3>
-                    <p>Capture the <strong>nested structure</strong> of academic disciplines (e.g., Core Domains → Concepts).</p>
+                    <h3>Hierarchical Structure</h3>
+                    <p>Layers 1-4 model <strong>taxonomic relationships</strong> (e.g., Discipline → Subdiscipline) via <strong>inter-layer edges</strong>.</p>
                 </div>
                 <div class="layer-card">
                     <div class="licon" style="color: #2ECC71;">⬢</div>
-                    <h3>Model Cross-Disciplinary Links</h3>
-                    <p>Represent <strong>multi-node connections</strong> (e.g., a concept belonging to multiple disciplines).</p>
+                    <h3>Cross-Disciplinary Links</h3>
+                    <p>Layers 4-5 model <strong>polyadic relationships</strong> (e.g., a concept belonging to multiple disciplines) via <strong>hyperedges</strong>.</p>
                 </div>
                 <div class="layer-card">
                     <div class="licon" style="color: #9B59B6;">⬢</div>
-                    <h3>Unified Framework</h3>
-                    <p>Combine both structures into a <strong>single, coherent model</strong> for computational epistemology.</p>
+                    <h3>Dynamic Evolution</h3>
+                    <p>Temporal functions \( \tau \) and transition matrices \( \mathbf{T}_{\mathcal{H}} \) enable <strong>simulation of knowledge diffusion</strong> over time.</p>
                 </div>
             </div>
+            <div class="chips" style="margin-top: 15px;">
+                <span class="chip" style="color:#1A6BAA;border-color:#1A6BAA55">Dynamic</span>
+                <span class="chip" style="color:#2ECC71;border-color:#2ECC7155">Predictive</span>
+                <span class="chip" style="color:#FF6347;border-color:#FF634755">Mathematical</span>
+                <span class="chip" style="color:#9B59B6;border-color:#9B59B655">Open-Source</span>
+                <span class="chip" style="color:#FFD700;border-color:#FFD70055">Multilayer Hypergraph</span>
+            </div>
+            <p style="margin-top: 15px; text-align: center;">
+                For details on the <strong>5-layer polyhierarchy</strong>, see our <a href="../polyhierarchy/polyhierarchy.html" style="color: var(--accent);"><strong>Polyhierarchy page</strong></a>.<br>
+                For a <strong>visual representation</strong>, see our <a href="../knowledge_network/MLKN-hypergraph.html" style="color: var(--accent);"><strong>MLKN.hypergraph page</strong></a>.
+            </p>
         </section>
 
         <!-- Theoretical Definitions -->
@@ -237,12 +253,114 @@
             </div>
             <br>
 
-            <p>
-                Here, we provide <strong>rigorous mathematical definitions</strong> for the structures underpinning MLKN.model,
-                aligned with the <strong>scientific literature</strong> in network science and computational epistemology.
-            </p>
-            <br>
+            <!-- Introduction to Formalization -->
+            <div class="essay-box">
+                <h3>Introduction to Formalization</h3>
+                <p>
+                    MLKN.model formalizes knowledge as a <strong>dynamic, multi-layered hypergraph</strong> \( \mathcal{H} = (V, \mathcal{S}, \mathcal{P}, \mathcal{T}, \omega, \tau) \), where:
+                </p>
+                <ul class="discipline-list">
+                    <li>
+                        <span class="discipline-square" style="background: #1A6BAA;"></span>
+                        <strong>Nodes (\( V \))</strong>: Represent <em>disciplines, subdisciplines, concepts, or themes</em> across 5 ontological layers.
+                    </li>
+                    <li>
+                        <span class="discipline-square" style="background: #2ECC71;"></span>
+                        <strong>Hyperedges (\( \mathcal{S} \))</strong>: Represent <em>relationships</em> (hierarchical, interdisciplinary, thematic) between <em>any number of nodes</em>, primarily in Layers 4-5.
+                    </li>
+                    <li>
+                        <span class="discipline-square" style="background: #FF6347;"></span>
+                        <strong>Layers (\( \mathcal{P} \))</strong>: Represent <em>levels of abstraction</em>:
+                        <ol style="margin-top: 5px; padding-left: 20px;">
+                            <li><em>Layer 1: Core Domains</em> (e.g., Natural Sciences).</li>
+                            <li><em>Layer 2: Disciplines</em> (e.g., Physics, Psychology).</li>
+                            <li><em>Layer 3: Subdisciplines</em> (e.g., Quantum Mechanics, Cognitive Psychology).</li>
+                            <li><em>Layer 4: Thematic Domains</em> (e.g., Machine Learning, Attention).</li>
+                            <li><em>Layer 5: Concepts</em> (e.g., Neural Networks, Memory).</li>
+                        </ol>
+                    </li>
+                    <li>
+                        <span class="discipline-square" style="background: #9B59B6;"></span>
+                        <strong>Hierarchical Edges (\( \mathcal{T} \))</strong>: Connect nodes <em>between adjacent layers</em> (e.g., Discipline → Subdiscipline).
+                    </li>
+                    <li>
+                        <span class="discipline-square" style="background: #FFD700;"></span>
+                        <strong>Weights (\( \omega \))</strong>: Quantify the <em>strength</em> of relationships (e.g., citation counts, semantic similarity).
+                    </li>
+                    <li>
+                        <span class="discipline-square" style="background: #E74C3C;"></span>
+                        <strong>Temporal Function (\( \tau \))</strong>: Tracks the <em>evolution</em> of nodes over time (e.g., emergence of new disciplines).
+                    </li>
+                </ul>
+                <p style="margin-top: 15px;">
+                    This formalization enables <strong>rigorous analysis, simulation, and prediction</strong> of knowledge systems,
+                    aligning with the <strong>polyhierarchical structure</strong> of MLKN.lab’s <a href="../polyhierarchy/polyhierarchy.html" style="color: var(--accent);"><strong>Knowledge Network</strong></a>.
+                </p>
+                <p style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                    <strong>Key Property:</strong> A node in Layer \( i \) can belong to <strong>multiple parent nodes</strong> in Layer \( i-1 \) (e.g., "AI Ethics" may belong to both "Computer Science" and "Philosophy").
+                </p>
+            </div>
         
+            <!-- Layered Structure -->
+            <div class="layer-card" style="margin-top: 20px; min-height: fit-content;">
+                <div class="licon" style="color: #2ECC71;">⬢</div>
+                <h3>Layered Structure (Ontological Hierarchy)</h3>
+                <p>
+                    The hypergraph \( \mathcal{H} \) is organized into <strong>5 ontological layers</strong>, forming a <strong>polyhierarchy</strong>
+                    where each layer \( P_i \) contains nodes \( V_i \) with increasing granularity:
+                </p>
+                <ol class="discipline-list">
+                    <li>
+                        <span class="discipline-square" style="background: #FF6347;"></span>
+                        <strong>Layer 1: Core Domains</strong> \( V_1 = \{v \mid \mathcal{P}(v) = 1\} \)
+                        <ul style="margin-top: 5px; padding-left: 20px;">
+                            <li>Represents the <strong>highest level of abstraction</strong> (e.g., Natural Sciences, Social Sciences).</li>
+                            <li>Connected to Layer 2 via <strong>hierarchical edges \( \mathcal{T} \)</strong>.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span class="discipline-square" style="background: #2ECC71;"></span>
+                        <strong>Layer 2: Disciplines</strong> \( V_2 = \{v \mid \mathcal{P}(v) = 2\} \)
+                        <ul style="margin-top: 5px; padding-left: 20px;">
+                            <li>Represents <strong>academic fields</strong> (e.g., Physics, Psychology).</li>
+                            <li>Connected to Layers 1 and 3 via \( \mathcal{T} \).</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span class="discipline-square" style="background: #50C878;"></span>
+                        <strong>Layer 3: Subdisciplines</strong> \( V_3 = \{v \mid \mathcal{P}(v) = 3\} \)
+                        <ul style="margin-top: 5px; padding-left: 20px;">
+                            <li>Represents <strong>specialized areas</strong> (e.g., Quantum Mechanics, Cognitive Psychology).</li>
+                            <li>Connected to Layers 2 and 4 via \( \mathcal{T} \).</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span class="discipline-square" style="background: #F39C12;"></span>
+                        <strong>Layer 4: Thematic Domains</strong> \( V_4 = \{v \mid \mathcal{P}(v) = 4\} \)
+                        <ul style="margin-top: 5px; padding-left: 20px;">
+                            <li>Represents <strong>granular clusters</strong> (e.g., Machine Learning, Attention).</li>
+                            <li>Connected to Layers 3 and 5 via \( \mathcal{T} \), and to other nodes via <strong>hyperedges \( \mathcal{S} \)</strong>.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span class="discipline-square" style="background: #9B59B6;"></span>
+                        <strong>Layer 5: Concepts</strong> \( V_5 = \{v \mid \mathcal{P}(v) = 5\} \)
+                        <ul style="margin-top: 5px; padding-left: 20px;">
+                            <li>Represents <strong>specific topics or ideas</strong> (e.g., Neural Networks, Memory).</li>
+                            <li>Connected to Layer 4 via \( \mathcal{T} \), and to multiple disciplines via \( \mathcal{S} \).</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p style="margin-top: 15px;">
+                    <strong>Polyhierarchy Property:</strong> A node in Layer \( i \) can belong to <strong>multiple parent nodes</strong> in Layer \( i-1 \).
+                    For example, <code>"AI Ethics"</code> (Layer 3) may belong to both <code>"Computer Science"</code> and <code>"Philosophy"</code> (Layer 2).
+                </p>
+                <p style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                    <strong>Note:</strong> Layers 1-4 form a <strong>multilayer network</strong> with \( \mathcal{T} \), while Layers 4-5 form a <strong>hypergraph</strong> with \( \mathcal{S} \).
+                    See our <a href="../polyhierarchy/polyhierarchy.html" style="color: var(--accent);"><strong>Polyhierarchy page</strong></a> for details.
+                </p>
+            </div>
+            
             <!-- Multilayer Network Definition -->
             <div class="essay-box">
                 <h3>Multilayer Network</h3>
