@@ -9,9 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- MathJax for LaTeX rendering -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- KaTeX rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 </head>
 <body>
     <header class="topnav" role="banner">
@@ -610,9 +611,9 @@
             </p>
             <br>
             
-            <div class="layers-grid">
+            <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px;">
                 <!-- Graph Theory -->
-                <div class="layer-card" style="min-height: fit-content;">
+                <div class="layer-card" style="min-height: fit-content; overflow: visible !important; margin-bottom: 20px !important;">
                     <div class="licon" style="color: #1A6BAA;">⬢</div>
                     <h3>Graph Theory</h3>
                     <p>
@@ -649,7 +650,7 @@
                 </div>
                 
                 <!-- Topological Data Analysis -->
-                <div class="layer-card" style="min-height: fit-content;">
+                <div class="layer-card" style="min-height: fit-content; overflow: visible !important; margin-bottom: 20px !important;">
                     <div class="licon" style="color: #2ECC71;">⬢</div>
                     <h3>Topological Data Analysis (TDA)</h3>
                     <p>
@@ -675,12 +676,18 @@
                         <li><span class="discipline-square" style="background: #2ECC71;"></span> A <strong>persistent connected component</strong> across all \( \theta \) indicates a <strong>stable discipline cluster</strong> (e.g., Mathematics).</li>
                     </ul>
                     <p style="margin-top: 15px; font-size: 0.9em;">
+                        <strong>Literature:</strong>
+                        <a href="https://doi.org/10.1090/S0273-0979-09-01249-X" target="_blank" style="color: var(--accent);">Carlsson, 2009</a> (Topology and Data),
+                        <a href="https://doi.org/10.2312/PE.PBG.PBG13.091-100" target="_blank" style="color: var(--accent);">Petri et al., 2013</a> (TDA for Networks),
+                        <a href="https://doi.org/10.1038/s41467-018-04002-3" target="_blank" style="color: var(--accent);">Bianconi, 2018</a> (TDA for Science of Science).
+                    </p>
+                    <p style="margin-top: 15px; font-size: 0.9em;">
                         <strong>Key Tools:</strong> Gudhi, Ripser, Dionysus.
                     </p>
                 </div>
                 
                 <!-- Information Theory -->
-                <div class="layer-card" style="min-height: fit-content;">
+                <div class="layer-card" style="min-height: fit-content; overflow: visible !important; margin-bottom: 20px !important;">
                     <div class="licon" style="color: #FF6347;">⬢</div>
                     <h3>Information Theory</h3>
                     <p>
@@ -725,7 +732,7 @@
                 </div>
                 
                 <!-- Dynamical Systems -->
-                <div class="layer-card" style="min-height: fit-content;">
+                <div class="layer-card" style="min-height: fit-content; overflow: visible !important; margin-bottom: 20px !important;">
                     <div class="licon" style="color: #9B59B6;">⬢</div>
                     <h3>Dynamical Systems</h3>
                     <p>
@@ -751,12 +758,18 @@
                         <li><span class="discipline-square" style="background: #9B59B6;"></span> Identify <strong>attractors</strong> (e.g., Mathematics) where \( \mathbf{P}_\infty \) has high probability mass.</li>
                     </ul>
                     <p style="margin-top: 15px; font-size: 0.9em;">
+                        <strong>Literature:</strong>
+                        <a href="https://doi.org/10.1017/CBO9780511754217" target="_blank" style="color: var(--accent);">Barrat et al., 2008</a> (Dynamical Processes on Networks),
+                        <a href="https://doi.org/10.1016/j.joi.2019.100984" target="_blank" style="color: var(--accent);">Shi et al., 2019</a> (Knowledge Evolution),
+                        <a href="https://doi.org/10.1017/CBO9780511815240" target="_blank" style="color: var(--accent);">Norris, 1998</a> (Markov Chains).
+                    </p>
+                    <p style="margin-top: 15px; font-size: 0.9em;">
                         <strong>Key Tools:</strong> SciPy, MATLAB, custom ODE solvers.
                     </p>
                 </div>
                 
                 <!-- Optimal Transport -->
-                <div class="layer-card" style="min-height: fit-content;">
+               <div class="layer-card" style="min-height: fit-content; overflow: visible !important; margin-bottom: 20px !important;">
                     <div class="licon" style="color: #FFD700;">⬢</div>
                     <h3>Optimal Transport Theory</h3>
                     <p>
@@ -812,12 +825,19 @@
                         \]
                     </p>
                     <p style="margin-top: 15px; font-size: 0.9em;">
+                        <strong>Literature:</strong>
+                        <a href="https://doi.org/10.1090/gsm/058" target="_blank" style="color: var(--accent);">Villani, 2003</a> (Optimal Transportation),
+                        <a href="https://arxiv.org/abs/1306.0895" target="_blank" style="color: var(--accent);">Cuturi, 2013</a> (Sinkhorn Distances),
+                        <a href="https://doi.org/10.1561/2200000073" target="_blank" style="color: var(--accent);">Peyré & Cuturi, 2019</a> (Computational OT),
+                        <a href="https://doi.org/10.1007/s41109-020-00300-3" target="_blank" style="color: var(--accent);">Bassetti et al., 2020</a> (OT for Knowledge Graphs).
+                    </p>
+                   <p style="margin-top: 15px; font-size: 0.9em;">
                         <strong>Key Tools:</strong> POT (Python Optimal Transport), Sinkhorn algorithm.
                     </p>
                 </div>
                 
                 <!-- Causal Inference -->
-                <div class="layer-card" style="min-height: fit-content;">
+                <div class="layer-card" style="min-height: fit-content; overflow: visible !important; margin-bottom: 20px !important;">
                     <div class="licon" style="color: #E74C3C;">⬢</div>
                     <h3>Causal Inference</h3>
                     <p>
