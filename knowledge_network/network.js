@@ -129,7 +129,12 @@ function filterByLayer() {
 
     const layerName = layerMap[currentLayer] || currentLayer;
     console.log("DEBUG: Current layer:", currentLayer, "→ Layer name:", layerName);
-    console.log("DEBUG: Sample node Layer:", nodes[0]?.Layer, nodes[0]?.layer);
+
+    // Debug: Check node_0 and node_1421
+    const node0 = nodes.find(n => n.id === 'node_0');
+    const node1421 = nodes.find(n => n.id === 'node_1421');
+    console.log("DEBUG: node_0 Layer:", node0?.Layer || node0?.layer);
+    console.log("DEBUG: node_1421 Layer:", node1421?.Layer || node1421?.layer);
 
     if (currentLayer === 'all') {
         simulation = startSimulation();
@@ -177,10 +182,13 @@ function startSimulation() {
         .data(links)
         .enter().append("line")
         .attr("class", "link")
-        .attr("stroke", d => edgeTypeColors[d.type] || "#FFFFFF")
+        .attr("stroke", d => {
+            // Force bright colors for all edges
+            return "#FFFFFF";  // White for dark mode
+        })
         .attr("stroke-opacity", 1.0)
-        .attr("stroke-width", d => Math.max(2, d.weight / 2))
-        .style("display", "none");
+        .attr("stroke-width", 2)  // Fixed width for visibility
+        .style("display", "block");  // Show all edges by default (remove LoD for now)
 
     // Draw nodes
     nodeElements = g.selectAll(".node")
@@ -286,3 +294,21 @@ function filterNetworkByDomain(domain) {
 
 // Initialize the network when the page loads
 window.onload = initNetwork;
+
+// Debug Loaddata
+.then(([nodesData, edgesData]) => {
+    nodes = nodesData.nodes;
+    links = edgesData.edges;
+
+    // Debug: Check for invalid edges
+    const validNodeIds = new Set(nodes.map(n => n.id));
+    const invalidEdges = links.filter(link =>
+        !validNodeIds.has(link.source) || !validNodeIds.has(link.target)
+    );
+    console.log("DEBUG: Invalid edges:", invalidEdges.length);
+    if (invalidEdges.length > 0) {
+        console.log("Sample invalid edge:", invalidEdges[0]);
+    }
+
+    // Rest of the code...
+});
