@@ -104,10 +104,9 @@
 
         <!-- Overview -->
         <section id="overview" class="section" aria-labelledby="overview-title">
-          <br>
+            <br>
             <h2 class="sec-h" id="overview-title">Overview</h2>
             <p class="sec-sub">A Mathematical Framework for Modeling Knowledge as a Dynamic System</p>
-            <!-- Navigation boxes for research sections -->
             <div class="nav-box">
                 <a href="#overview" class="active">Overview</a>
                 <a href="#foundations">Theoretical Foundations</a>
@@ -118,7 +117,7 @@
                 <a href="#tech">Technical Specifications</a>
             </div>
             <br>
-            
+
             <p>
                 <strong>MLKN.model</strong> is the <strong>computational epistemology engine</strong> at the heart of MLKN.lab.
                 It treats scientific knowledge as a <strong>dynamic, multi-layered network</strong> and provides the
@@ -129,6 +128,11 @@
                 Just as <strong>physics engines</strong> simulate the behavior of physical systems, MLKN.model simulates the
                 <strong>behavior of knowledge systems</strong>—revealing hidden patterns, testing hypotheses, and enabling
                 breakthroughs in meta-science, AI, and interdisciplinary research.
+            </p>
+            <p style="margin-top: 15px;">
+                For a <strong>rigorous mathematical treatment</strong>, see our
+                <a href="model-mathematical-foundations.html" style="color: var(--accent);"><strong>Mathematical Foundations page</strong></a>,
+                where MLKN.model is formalized as a <strong>multilayer hypergraph</strong> \( \mathcal{H} = (V, \mathcal{S}, \mathcal{P}, \mathcal{T}, \omega, \tau) \).
             </p>
             <div class="chips" style="margin-top: 15px;">
                 <span class="chip" style="color:#1A6BAA;border-color:#1A6BAA55">Dynamic</span>
@@ -197,10 +201,9 @@
 
         <!-- Architecture -->
         <section id="architecture" class="section" aria-labelledby="architecture-title">
-          <br>
+            <br>
             <h2 class="sec-h" id="architecture-title">Architecture</h2>
             <p class="sec-sub">A Modular, Multi-Layered Engine</p>
-            <!-- Navigation boxes for research sections -->
             <div class="nav-box">
                 <a href="#overview">Overview</a>
                 <a href="#foundations">Theoretical Foundations</a>
@@ -211,9 +214,11 @@
                 <a href="#tech">Technical Specifications</a>
             </div>
             <br>
-            
+
             <p>
-                MLKN.model is organized into <strong>three core layers</strong>, each responsible for a distinct aspect of knowledge modeling:
+                MLKN.model is organized into <strong>three core layers</strong>, each responsible for a distinct aspect of knowledge modeling.
+                These layers operate on the <strong>5-layer ontological hierarchy</strong> (Core Domains → Concepts) defined in our
+                <a href="model-mathematical-foundations.html" style="color: var(--accent);"><strong>Mathematical Foundations</strong></a>:
             </p>
             <br>
             <div class="layers-grid">
@@ -224,12 +229,16 @@
                         <strong>Polyhierarchical Graph Structure</strong>:
                     </p>
                     <ul class="discipline-list">
-                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Nodes</strong>: Core Domains, Disciplines, Subdisciplines, Thematic Domains, Concepts.</li>
-                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Edges</strong>: Hierarchical, Interdisciplinary, and Thematic connections.</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Nodes</strong>: Core Domains, Disciplines, Subdisciplines, Thematic Domains, Concepts (Layers 1-5).</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Edges</strong>: Hierarchical (\( \mathcal{T} \)), Interdisciplinary, and Thematic connections (\( \mathcal{S} \)).</li>
                         <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Metadata</strong>: Layer, domain, weight, type, and descriptions.</li>
                     </ul>
                     <p style="margin-top: 10px;">
                         <strong>Data Sources</strong>: OpenAlex, Scopus, MeSH, IEEE Thesaurus.
+                    </p>
+                    <p style="margin-top: 10px; font-size: 0.9em;">
+                        <strong>Formal Definition:</strong> See \( \mathcal{H} = (V, \mathcal{S}, \mathcal{P}, \mathcal{T}, \omega, \tau) \) in the
+                        <a href="model-mathematical-foundations.html" style="color: var(--accent);"><strong>Mathematical Foundations</strong></a>.
                     </p>
                 </div>
                 <div class="layer-card">
@@ -242,7 +251,7 @@
                         <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Centrality Metrics</strong>: Degree, betweenness, eigenvector centrality.</li>
                         <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Community Detection</strong>: Modularity, Louvain, Leiden algorithms.</li>
                         <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Path Analysis</strong>: Shortest paths, random walks, diffusion processes.</li>
-                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Topological Analysis</strong>: Persistent homology, non-Euclidean geometry.</li>
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Topological Analysis</strong>: Persistent homology (see <a href="model-mathematical-foundations.html#mathematical-frameworks" style="color: var(--accent);"><strong>TDA</strong></a>).</li>
                     </ul>
                     <p style="margin-top: 10px;">
                         <strong>Tools</strong>: NetworkX (Python), Vis.js (JavaScript), D3.js.
@@ -255,7 +264,7 @@
                         <strong>Predictive and Generative Models</strong>:
                     </p>
                     <ul class="discipline-list">
-                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Knowledge Evolution</strong>: Simulate the emergence of new disciplines.</li>
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Knowledge Evolution</strong>: Simulate the emergence of new disciplines using \( \mathbf{T}_{\mathcal{H}} \).</li>
                         <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Hypothesis Testing</strong>: Test meta-science hypotheses (e.g., "Does interdisciplinarity increase citation impact?").</li>
                         <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>AI Integration</strong>: Use knowledge graphs to enhance AI reasoning (e.g., RAG, semantic search).</li>
                         <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Adaptive Learning</strong>: Personalize knowledge exploration for users.</li>
@@ -263,16 +272,19 @@
                     <p style="margin-top: 10px;">
                         <strong>Tools</strong>: TensorFlow, PyTorch, Scikit-learn.
                     </p>
+                    <p style="margin-top: 10px; font-size: 0.9em;">
+                        <strong>Formal Definition:</strong> See \( \mathbf{T}_{\mathcal{H}} \) in the
+                        <a href="model-mathematical-foundations.html#mathematical-definitions" style="color: var(--accent);"><strong>Mathematical Foundations</strong></a>.
+                    </p>
                 </div>
             </div>
         </section>
 
         <!-- Mathematical Foundations -->
         <section id="math" class="section" aria-labelledby="math-title">
-          <br>
+            <br>
             <h2 class="sec-h" id="math-title">Mathematical Foundations</h2>
             <p class="sec-sub">Formalizing Knowledge as a Computational System</p>
-            <!-- Navigation boxes for research sections -->
             <div class="nav-box">
                 <a href="#overview">Overview</a>
                 <a href="#foundations">Theoretical Foundations</a>
@@ -283,66 +295,46 @@
                 <a href="#tech">Technical Specifications</a>
             </div>
             <br>
-            
+
             <p>
-                MLKN.model is grounded in <strong>mathematical and computational principles</strong>:
+                MLKN.model is grounded in <strong>mathematical and computational principles</strong>, formalized as a
+                <strong>multilayer hypergraph</strong> \( \mathcal{H} = (V, \mathcal{S}, \mathcal{P}, \mathcal{T}, \omega, \tau) \).
+                For a <strong>detailed treatment</strong>, see our
+                <a href="model-mathematical-foundations.html" style="color: var(--accent);"><strong>Mathematical Foundations page</strong></a>.
             </p>
             <br>
+            <p>
+                The <strong>5-layer ontological hierarchy</strong> (Core Domains → Concepts) is defined as:
+            </p>
             <div class="layers-grid">
                 <div class="layer-card">
-                    <div class="licon" style="color: #1A6BAA;">⬢</div>
-                    <h3>Graph Theory</h3>
-                    <p>
-                        Knowledge is modeled as a <strong>directed, weighted, multi-layered graph</strong>:
-                    </p>
-                    <ul class="discipline-list">
-                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Nodes (V)</strong>: Represent disciplines, subdisciplines, and concepts.</li>
-                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Edges (E)</strong>: Represent relationships (hierarchical, interdisciplinary, thematic).</li>
-                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Adjacency Matrix (A)</strong>: Captures the structure of connections.</li>
-                    </ul>
-                    <p style="margin-top: 10px; font-style: italic;">
-                        G = (V, E, A)
-                    </p>
+                    <div class="licon" style="color: #FF6347;">⬢</div>
+                    <h3>Layer 1: Core Domains</h3>
+                    <p>6 broad categories (e.g., Natural Sciences, Social Sciences).</p>
                 </div>
                 <div class="layer-card">
                     <div class="licon" style="color: #2ECC71;">⬢</div>
-                    <h3>Topological Data Analysis</h3>
-                    <p>
-                        Uses <strong>persistent homology</strong> to study the <strong>shape of knowledge</strong>:
-                    </p>
-                    <ul class="discipline-list">
-                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Holes</strong>: Represent gaps or missing connections in knowledge.</li>
-                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Connected Components</strong>: Represent clusters of related disciplines.</li>
-                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Betti Numbers</strong>: Quantify the dimensionality of knowledge structures.</li>
-                    </ul>
+                    <h3>Layer 2: Disciplines</h3>
+                    <p>25 fields (e.g., Physics, Psychology).</p>
                 </div>
                 <div class="layer-card">
-                    <div class="licon" style="color: #FF6347;">⬢</div>
-                    <h3>Information Theory</h3>
-                    <p>
-                        Applies <strong>entropy and complexity metrics</strong> to measure:
-                    </p>
-                    <ul class="discipline-list">
-                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Diversity</strong>: Variety of disciplines and connections.</li>
-                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Redundancy</strong>: Overlap between fields.</li>
-                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Efficiency</strong>: How knowledge is organized and accessed.</li>
-                    </ul>
+                    <div class="licon" style="color: #50C878;">⬢</div>
+                    <h3>Layer 3: Subdisciplines</h3>
+                    <p>235 specialized areas (e.g., Quantum Mechanics, Cognitive Psychology).</p>
+                </div>
+                <div class="layer-card">
+                    <div class="licon" style="color: #F39C12;">⬢</div>
+                    <h3>Layer 4: Thematic Domains</h3>
+                    <p>Granular clusters (e.g., Machine Learning, Attention).</p>
                 </div>
                 <div class="layer-card">
                     <div class="licon" style="color: #9B59B6;">⬢</div>
-                    <h3>Dynamical Systems</h3>
-                    <p>
-                        Models knowledge as a <strong>dynamical system</strong>:
-                    </p>
-                    <ul class="discipline-list">
-                        <li><span class="discipline-square" style="background: #9B59B6;"></span> <strong>State Space</strong>: All possible configurations of the knowledge network.</li>
-                        <li><span class="discipline-square" style="background: #9B59B6;"></span> <strong>Trajectories</strong>: How knowledge evolves over time.</li>
-                        <li><span class="discipline-square" style="background: #9B59B6;"></span> <strong>Attractors</strong>: Stable configurations (e.g., major disciplines).</li>
-                    </ul>
+                    <h3>Layer 5: Concepts</h3>
+                    <p>Specific topics (e.g., Neural Networks, Memory).</p>
                 </div>
             </div>
             <p style="text-align: center; margin-top: 10px;">
-                 Explore more in depth in our <a href="model-mathematical-foundations.html" style="color: var(--accent);"><strong>MLKN.model - Mathematical Foundations page</strong></a>.
+                For more details, see our <a href="../polyhierarchy/polyhierarchy.html" style="color: var(--accent);"><strong>Polyhierarchy page</strong></a>.
             </p>
         </section>
         

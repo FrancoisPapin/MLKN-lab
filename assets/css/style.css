@@ -39,7 +39,8 @@
 .topnav {
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 100;
+  position: relative;
   background: var(--panel);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -662,6 +663,7 @@ h1, h2, h3 {
   max-width: 540px;
 }
 
+
 /* =============================================
    NAVIGATION GRID - PERFECT ALIGNMENT
    ============================================= */
@@ -867,7 +869,12 @@ h1, h2, h3 {
 /* =============================================
    HORIZONTAL BOXES (Essay Box + Featured)
    ============================================= */
-.essay-box,
+.essay-box {
+  background: var(--panel);  /* Use the panel background color */
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
 .featured {
   background: linear-gradient(135deg, #EBF4FB, #F5EEF8);
   border: 2px solid #BBCFE8;
@@ -877,8 +884,14 @@ h1, h2, h3 {
   text-align: center;
 }
 
-.essay-box h3,
-.essay-box p,
+.essay-box h3 {
+  color: var(--text);
+}
+
+.essay-box p {
+  color: var(--text2);  
+}
+
 .featured p,
 .featured .feat-eyebrow,
 .featured .feat-title,
@@ -895,6 +908,22 @@ h1, h2, h3 {
   border: 1.5px solid currentColor;
   padding: 3px 9px;
   border-radius: 20px;
+}
+
+#visualization .essay-box {
+    background: rgba(0, 0, 0, 0.3); 
+    border-radius: var(--r);
+    padding: 15px;
+    margin-top: 20px;
+}
+
+#visualization .essay-box h3 {
+    color: #FFFFFF;
+    margin-bottom: 10px;
+}
+
+#visualization .essay-box div {
+    color: var(--text); 
 }
 
 /* =============================================

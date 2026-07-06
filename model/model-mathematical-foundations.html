@@ -3,92 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research Focus - MLKN.lab</title>
+    <title>MLKN.model - Mathematical Foundations - MLKN.lab</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- KaTeX for LaTeX rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 </head>
 <body>
     <header class="topnav" role="banner">
-  <div class="topnav-inner">
-    <!-- Logo with Home Link -->
-    <a href="../index.html" class="topnav-logo">
-      <div class="logo-mark">ML</div>
-      <span class="logo-text">MLKN.lab</span>
-    </a>
-
-    <!-- Desktop Navigation (Text-Based) -->
-    <nav class="desktop-nav">
-      <ul class="primary-nav">
-        <li><a href="../index.html">Home</a></li>
-        <li class="has-dropdown">
-          <a>Research</a>
-          <ul class="dropdown-menu">
-            <li><a href="../research/research.html">Research Focus</a></li>
-            <li><a href="../model/model.html">MLKN.model</a></li>
-            <li><a href="model-mathematical-foundations.html">Mathematical Foundations</a></li>
-            <li><a href="../method/method.html">Method</a></li>
-          </ul>
-        </li>
-        <li class="has-dropdown">
-          <a>Knowledge Network</a>
-          <ul class="dropdown-menu">
-            <li><a href="../polyhierarchy/polyhierarchy.html">Polyhierarchy</a></li>
-            <li><a href="../knowledge_network/MLKN-hypergraph.html">MLKN.hypergraph</a></li>
-            <li><a href="../data/data.html">Data</a></li>
-          </ul>
-        </li>
-        <li class="has-dropdown">
-          <a>Knowledge Library</a>
-          <ul class="dropdown-menu">
-            <li><a href="../references/references.html">Scientific References</a></li>
-            <li><a href="../monographs/monographs.html">Open Access Monographs</a></li>
-            <li><a href="../normative_references/normative-references.html">Normative References</a></li>
-          </ul>
-        </li>
-        <li class="has-dropdown">
-          <a>Applications</a>
-          <ul class="dropdown-menu">
-            <li><a href="../applications/applications.html">General Applications</a></li>
-            <li><a href="../essay/essay.html">Essays & Explorations</a></li>
-            <li><a href="../normative_applications/normative-applications.html">Normative Applications</a></li>
-          </ul>
-        </li>
-        <li class="has-dropdown">
-          <a>About</a>
-          <ul class="dropdown-menu">
-            <li><a href="../about/about.html">About</a></li>
-            <li><a href="../inspirations/inspirations.html">Inspirations</a></li>
-            <li><a href="../normative_foundations/normative-foundations.html">Normative Foundations</a></li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-
-    <!-- Mobile Menu Toggle (Only for Vertical Mode) -->
-    <button class="mobile-menu-toggle" aria-label="Toggle navigation">
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-    </button>
-  </div>
-</header>
-
+        <div class="topnav-inner">
+            <a href="../index.html" class="topnav-logo">
+                <div class="logo-mark">ML</div>
+                <span class="logo-text">MLKN.lab</span>
+            </a>
+            <nav class="desktop-nav">
+                <ul class="primary-nav">
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <a>Research</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="../research/research.html">Research Focus</a></li>
+                            <li><a href="model.html">MLKN.model</a></li>
+                            <li><a href="model-mathematical-foundations.html">Mathematical Foundations</a></li>
+                            <li><a href="../method/method.html">Method</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <a>Knowledge Network</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="../polyhierarchy/polyhierarchy.html">Polyhierarchy</a></li>
+                            <li><a href="../knowledge_network/MLKN-hypergraph.html">MLKN.hypergraph</a></li>
+                            <li><a href="../data/data.html">Data</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <a>Knowledge Library</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="../references/references.html">Scientific References</a></li>
+                            <li><a href="../monographs/monographs.html">Open Access Monographs</a></li>
+                            <li><a href="../normative_references/normative-references.html">Normative References</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <a>Applications</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="../applications/applications.html">General Applications</a></li>
+                            <li><a href="../essay/essay.html">Essays & Explorations</a></li>
+                            <li><a href="../normative_applications/normative-applications.html">Normative Applications</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <a>About</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="../about/about.html">About</a></li>
+                            <li><a href="../inspirations/inspirations.html">Inspirations</a></li>
+                            <li><a href="../normative_foundations/normative-foundations.html">Normative Foundations</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+    </header>
 
     <main>
         <!-- Hero Section -->
         <section class="hero" aria-labelledby="model-title">
             <p class="hero-eyebrow">MLKN.lab · MLKN.model</p>
-            <h1 class="hero-title" id="model-title"><em>MLKN.model - Mathematical Foundations</em></h1>
+            <h1 class="hero-title" id="model-title"><em>Mathematical Foundations</em></h1>
             <p class="hero-subtitle">
-                The Computational Epistemology Engine powering MLKN.lab’s knowledge networks.
+                Formalizing Knowledge as a Multilayer Hypergraph for Computational Epistemology
             </p>
             <div class="nav-box">
                 <a href="#overview">Overview</a>
-                <a href="#math">Mathematical Foundations</a>
+                <a href="#theoretical-definitions">Theoretical Definitions</a>
+                <a href="#mathematical-definitions">Mathematical Definitions</a>
+                <a href="#comparison">Comparison</a>
+                <a href="#mathematical-frameworks">Mathematical Frameworks</a>
+                <a href="#advanced-tools">Advanced Tools</a>
+                <a href="#validation">Validation & Benchmarking</a>
+                <a href="#future-work">Future Work</a>
             </div>
             <br>
         </section>
@@ -103,829 +106,1222 @@
                  </span>
            </div>
         </section>
-        
+
         <!-- Overview -->
         <section id="overview" class="section" aria-labelledby="overview-title">
             <br>
             <h2 class="sec-h" id="overview-title">Overview</h2>
-            <p class="sec-sub">A Mathematical Framework for Modeling Knowledge as a Dynamic System</p>
+            <p class="sec-sub">A Multilayer Hypergraph for Computational Epistemology</p>
+            <div class="nav-box">
+                <a href="#overview" class="active">Overview</a>
+                <a href="#theoretical-definitions">Theoretical Definitions</a>
+                <a href="#mathematical-definitions">Mathematical Definitions</a>
+                <a href="#comparison">Comparison</a>
+                <a href="#mathematical-frameworks">Mathematical Frameworks</a>
+                <a href="#advanced-tools">Advanced Tools</a>
+                <a href="#validation">Validation & Benchmarking</a>
+                <a href="#future-work">Future Work</a>
+            </div>
+            <br>
+
             <p>
                 <strong>MLKN.model</strong> is the <strong>computational epistemology engine</strong> at the heart of MLKN.lab.
-                It treats scientific knowledge as a <strong>dynamic, multi-layered network</strong> and provides the
-                <strong>mathematical and algorithmic tools</strong> to analyze, simulate, and predict its evolution.
-            </p>
-            <br>
-            <p>
                 Just as <strong>physics engines</strong> simulate the behavior of physical systems,
                 <strong>MLKN.model simulates the behavior of knowledge systems</strong>—
                 revealing hidden patterns, testing hypotheses, and enabling breakthroughs in
                 meta-science, AI, and interdisciplinary research.
             </p>
+            <br>
+            <p>
+                To capture the <strong>dual nature of scientific knowledge</strong>—
+                its <strong>hierarchical organization</strong> (e.g., Core Domains → Concepts)
+                and its <strong>non-linear, cross-disciplinary connections</strong> (e.g., Machine Learning spanning Computer Science, Mathematics, and Neuroscience)—
+                MLKN.model formalizes knowledge as a <strong>multilayer hypergraph</strong>.
+                This framework unifies:
+            </p>
+            <br>
+            <div class="layers-grid">
+                <div class="layer-card">
+                    <div class="licon" style="color: #1A6BAA;">⬢</div>
+                    <h3>Hierarchical Structure</h3>
+                    <p>Layers 1-4 model <strong>taxonomic relationships</strong> (e.g., Discipline → Subdiscipline) via <strong>inter-layer edges</strong>.</p>
+                </div>
+                <div class="layer-card">
+                    <div class="licon" style="color: #2ECC71;">⬢</div>
+                    <h3>Cross-Disciplinary Links</h3>
+                    <p>Layers 4-5 model <strong>polyadic relationships</strong> (e.g., a concept belonging to multiple disciplines) via <strong>hyperedges</strong>.</p>
+                </div>
+                <div class="layer-card">
+                    <div class="licon" style="color: #9B59B6;">⬢</div>
+                    <h3>Dynamic Evolution</h3>
+                    <p>Temporal functions \( \tau \) and transition matrices \( \mathbf{T}_{\mathcal{H}} \) enable <strong>simulation of knowledge diffusion</strong> over time.</p>
+                </div>
+            </div>
             <div class="chips" style="margin-top: 15px;">
                 <span class="chip" style="color:#1A6BAA;border-color:#1A6BAA55">Dynamic</span>
                 <span class="chip" style="color:#2ECC71;border-color:#2ECC7155">Predictive</span>
                 <span class="chip" style="color:#FF6347;border-color:#FF634755">Mathematical</span>
                 <span class="chip" style="color:#9B59B6;border-color:#9B59B655">Open-Source</span>
+                <span class="chip" style="color:#FFD700;border-color:#FFD70055">Multilayer Hypergraph</span>
             </div>
+            <p style="margin-top: 15px; text-align: center;">
+                For details on the <strong>5-layer polyhierarchy</strong>, see our <a href="../polyhierarchy/polyhierarchy.html" style="color: var(--accent);"><strong>Polyhierarchy page</strong></a>.<br>
+                For a <strong>visual representation</strong>, see our <a href="../knowledge_network/MLKN-hypergraph.html" style="color: var(--accent);"><strong>MLKN.hypergraph page</strong></a>.
+            </p>
         </section>
 
-        <!-- Mathematical Foundations -->
-        <section id="math" class="section" aria-labelledby="math-title">
-          <br>
-          <h2 class="sec-h" id="math-title">Mathematical Foundations</h2>
-          <p class="sec-sub">From Multilayer Networks to Polyhierarchical Hypergraphs</p>
-
-          <div class="nav-box">
-            <a href="#overview">Overview</a>
-            <a href="#math" class="active">Mathematical Foundations</a>
-            <a href="#comparison">Comparison</a>
-          </div>
-          <br>
-
-          <!-- Introduction -->
-          <div class="essay-box">
-            <p>
-              MLKN.model formalizes knowledge as a <strong>polyhierarchical hypergraph</strong> with two complementary representations:
-            </p>
-            <ol class="discipline-list">
-              <li><span class="discipline-square" style="background: #1A6BAA;"></span> A <strong>multilayer network</strong> for hierarchical structure (Layers 1-4)</li>
-              <li><span class="discipline-square" style="background: #2ECC71;"></span> A <strong>hypergraph</strong> for cross-domain connections (Layers 4-5)</li>
-            </ol>
-            <p>
-              This dual approach enables both <strong>top-down disciplinary analysis</strong> and <strong>bottom-up conceptual mapping</strong>.
-            </p>
-          </div>
-
-          <!-- =============================================
-               1. MULTILAYER NETWORK DEFINITION (Layers 1-4)
-               ============================================= -->
-          <div class="layer-card">
-            <div class="licon" style="color: #1A6BAA;">⬢</div>
-            <h3>Multilayer Network Definition (Layers 1-4)</h3>
-            <p>
-              Let <div class="math-container"><strong>G = (V, E, L, W)</strong></div> be a <strong>directed, weighted multilayer network</strong> where:
-            </p>
-            <ul class="discipline-list">
-              <li>
-                <span class="discipline-square" style="background: #1A6BAA;"></span>
-                <strong>V</strong> = <div class="math-container"><em>∪<sub>l=1 to 4</sub> V<sub>l</sub></em></div> is the set of nodes, partitioned into 4 layers:
-                <ul style="margin-top: 5px; padding-left: 20px;">
-                  <li><div class="math-container"><em>V<sub>1</sub></em></div>: Core Domains (e.g., "Formal Sciences")</li>
-                  <li><div class="math-container"><em>V<sub>2</sub></em></div>: Academic Disciplines (e.g., "Computer Science")</li>
-                  <li><div class="math-container"><em>V<sub>3</sub></em></div>: Subdisciplines (e.g., "AI")</li>
-                  <li><div class="math-container"><em>V<sub>4</sub></em></div>: Thematic Domains (e.g., "Machine Learning")</li>
-                </ul>
-              </li>
-              <li>
-                <span class="discipline-square" style="background: #1A6BAA;"></span>
-                <strong>E</strong> = <div class="math-container"><em>∪<sub>l=1 to 3</sub> E<sub>l→l+1</sub></em></div> is the set of <strong>directed edges</strong> between layers:
-                <ul style="margin-top: 5px; padding-left: 20px;">
-                  <li><div class="math-container"><em>E<sub>1→2</sub></em></div>: Core Domains → Disciplines</li>
-                  <li><div class="math-container"><em>E<sub>2→3</sub></em></div>: Disciplines → Subdisciplines</li>
-                  <li><div class="math-container"><em>E<sub>3→4</sub></em></div>: Subdisciplines → Thematic Domains</li>
-                </ul>
-              </li>
-              <li>
-                <span class="discipline-square" style="background: #1A6BAA;"></span>
-                <strong>L</strong>: <div class="math-container"><em>V → {1, 2, 3, 4}</em></div> is the <strong>layer assignment function</strong>
-              </li>
-              <li>
-                <span class="discipline-square" style="background: #1A6BAA;"></span>
-                <strong>W</strong>: <div class="math-container"><em>E → [0, 1]</em></div> is the <strong>weight function</strong> (e.g., based on OpenAlex co-occurrence data)
-              </li>
-   
-            </ul>
-            <p style="margin-top: 15px;">
-              <strong>Key Property:</strong> G is <strong>polyhierarchical</strong> - nodes in Layer l can have <strong>multiple parents</strong> in Layer l-1.
-              <br>Example: "Cognitive Science" (L2) may belong to both "Psychology" and "Computer Science" (L1).
-            </p>
-            <div class="chips" style="margin-top: 15px;">
-              <span class="chip" style="color:#1A6BAA;border-color:#1A6BAA55">Directed</span>
-              <span class="chip" style="color:#1A6BAA;border-color:#1A6BAA55">Weighted</span>
-              <span class="chip" style="color:#1A6BAA;border-color:#1A6BAA55">Polyhierarchical</span>
-            </div>
-          </div>
-
-          <!-- =============================================
-               2. HYPERGRAPH DEFINITION (Layers 4-5)
-               ============================================= -->
-          <div class="layer-card">
-            <div class="licon" style="color: #2ECC71;">⬢</div>
-            <h3>Hypergraph Definition (Layers 4-5)</h3>
-            <p>
-              Let <div class="math-container"><strong>H = (X, E, w)</strong></div> be a <strong>weighted hypergraph</strong> where:
-            </p>
-            <ul class="discipline-list">
-              <li>
-                <span class="discipline-square" style="background: #2ECC71;"></span>
-                <strong>X</strong> = <div class="math-container"><em>V<sub>4</sub> ∪ V<sub>5</sub></em></div> is the set of nodes:
-                <ul style="margin-top: 5px; padding-left: 20px;">
-                  <li><div class="math-container"><em>V<sub>4</sub></em></div>: Thematic Domains (shared with multilayer network)</li>
-                  <li><div class="math-container"><em>V<sub>5</sub></em></div>: Concepts (e.g., "Attention Mechanism")</li>
-                </ul>
-              </li>
-              <li>
-                <span class="discipline-square" style="background: #2ECC71;"></span>
-                <strong>E</strong> ⊆ <div class="math-container"><em>ℙ(X)\{∅}</em></div> is the set of <strong>hyperedges</strong>, where each hyperedge <div class="math-container"><em>e ∈ E</em></div> connects a subset of nodes <div class="math-container"><em>S ⊆ X</em></div> with <div class="math-container"><em>|S| ≥ 2</em></div>
-              </li>
-              <li>
-                <span class="discipline-square" style="background: #2ECC71;"></span>
-                <strong>w</strong>: <div class="math-container"><em>E → [0, 1]</em></div> is the <strong>weight function</strong>
-              </li>
-            </ul>
-            <p style="margin-top: 15px;">
-              <strong>Key Property:</strong> Hyperedges can connect <strong>any number of nodes</strong> across Layers 4-5, enabling representation of:
-              <ul style="margin-top: 5px; padding-left: 20px;">
-                <li>Multi-field concepts (e.g., "Transformers" in CS, Linguistics, and Neuroscience)</li>
-                <li>Non-linear relationships (e.g., "Cognition" spanning Psychology, Philosophy, and AI)</li>
-              </ul>
-            </p>
-            <div class="chips" style="margin-top: 15px;">
-              <span class="chip" style="color:#2ECC71;border-color:#2ECC7155">Undirected</span>
-              <span class="chip" style="color:#2ECC71;border-color:#2ECC7155">Multi-Edge</span>
-              <span class="chip" style="color:#2ECC71;border-color:#2ECC7155">Weighted</span>
-            </div>
-          </div>
-
-          <!-- =============================================
-               3. COMPARISON (Multilayer vs. Hypergraph)
-               ============================================= -->
-          <div class="layer-card">
-            <div class="licon" style="color: #FF6347;">⬢</div>
-            <h3>Comparison: Multilayer Network vs. Hypergraph</h3>
-            <p>
-              The two representations serve <strong>complementary purposes</strong> in MLKN.model:
-            </p>
-
-            <div style="overflow-x: auto; margin-top: 15px;">
-              <table style="width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 0.9em;">
-                <thead>
-                  <tr style="border-bottom: 2px solid var(--border);">
-                    <th style="text-align: left; padding: 10px; background: var(--panel);">Feature</th>
-                    <th style="text-align: left; padding: 10px; background: var(--panel);">Multilayer Network</th>
-                    <th style="text-align: left; padding: 10px; background: var(--panel);">Hypergraph</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr style="border-bottom: 1px solid var(--border);">
-                    <td style="padding: 10px;"><strong>Layers</strong></td>
-                    <td style="padding: 10px;">1-4 (Core Domains → Thematic Domains)</td>
-                    <td style="padding: 10px;">4-5 (Thematic Domains → Concepts)</td>
-                  </tr>
-                  <tr style="border-bottom: 1px solid var(--border);">
-                    <td style="padding: 10px;"><strong>Edges</strong></td>
-                    <td style="padding: 10px;">Pairs of nodes (v<sub>i</sub>, v<sub>j</sub>)</td>
-                    <td style="padding: 10px;">Subsets of nodes S ⊆ X, |S| ≥ 2</td>
-                  </tr>
-                  <tr style="border-bottom: 1px solid var(--border);">
-                    <td style="padding: 10px;"><strong>Hierarchy</strong></td>
-                    <td style="padding: 10px;">Polyhierarchical (multiple parents allowed)</td>
-                    <td style="padding: 10px;">Flat (no inherent hierarchy)</td>
-                  </tr>
-                  <tr style="border-bottom: 1px solid var(--border);">
-                    <td style="padding: 10px;"><strong>Purpose</strong></td>
-                    <td style="padding: 10px;">Hierarchical organization</td>
-                    <td style="padding: 10px;">Cross-domain connections</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <p style="margin-top: 15px;">
-              <strong>Why Both?</strong> The multilayer network captures the <strong>disciplinary structure</strong> of science,
-              while the hypergraph captures the <strong>interdisciplinary nature</strong> of modern research.
-            </p>
-          </div>
-
-          <!-- =============================================
-               4. UNIFIED FRAMEWORK
-               ============================================= -->
-          <div class="layer-card">
-            <div class="licon" style="color: #9B59B6;">⬢</div>
-            <h3>Unified Polyhierarchical Hypergraph</h3>
-            <p>
-              MLKN.model combines both representations into a <strong>polyhierarchical hypergraph</strong>
-              <div class="math-container"><strong>P = (G, H)</strong></div> where:
-            </p>
-            <ul class="discipline-list">
-              <li>
-                <span class="discipline-square" style="background: #9B59B6;"></span>
-                <strong>G</strong> = (<div class="math-container">V<sub>1-4</sub></div>, <div class="math-container">E<sub>1-3</sub></div>, L, W) is the multilayer network
-              </li>
-              <li>
-                <span class="discipline-square" style="background: #9B59B6;"></span>
-                <strong>H</strong> = (<div class="math-container">X<sub>4-5</sub></div>, <div class="math-container">E<sub>H</sub></div>, w) is the hypergraph
-              </li>
-              <li>
-                <span class="discipline-square" style="background: #9B59B6;"></span>
-                <div class="math-container">V<sub>4</sub> = X<sub>4</sub></div> (Layer 4 is shared between G and H)
-              </li>
-            </ul>
-            <p style="margin-top: 15px;">
-              <strong>Key Innovation:</strong> Layer 4 (Thematic Domains) acts as the <strong>bridge</strong> between:
-              <ul style="margin-top: 5px; padding-left: 20px;">
-                <li>The <strong>hierarchical structure</strong> of Layers 1-3 (multilayer network)</li>
-                <li>The <strong>cross-domain connections</strong> of Layer 5 (hypergraph)</li>
-              </ul>
-            </p>
-            <div style="text-align: center; margin-top: 15px;">
-              <img src="../assets/images/polyhierarchical-hypergraph-diagram.png"
-                   alt="Polyhierarchical Hypergraph Diagram"
-                   style="width: 100%; max-width: 600px; border-radius: var(--r); box-shadow: var(--sh);">
-              <p style="margin-top: 10px; font-size: 0.85em; color: var(--muted);">
-                Visualization: The polyhierarchical hypergraph structure of MLKN.model
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <!-- Comparison Section (Optional - if you want to keep it separate) -->
-        <section id="comparison" class="section" aria-labelledby="comparison-title">
-          <br>
-          <h2 class="sec-h" id="comparison-title">Why This Hybrid Approach Matters</h2>
-          <p class="sec-sub">Addressing the Limitations of Traditional Knowledge Representations</p>
-
-          <div class="nav-box">
-            <a href="#overview">Overview</a>
-            <a href="#math">Mathematical Foundations</a>
-            <a href="#comparison" class="active">Comparison</a>
-          </div>
-          <br>
-
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div>
-              <h3 style="color: var(--accent); margin-bottom: 10px;">Traditional Hierarchies</h3>
-              <ul class="discipline-list">
-                <li><span class="discipline-square" style="background: #FF6347;"></span> ✅ Clear parent-child relationships</li>
-                <li><span class="discipline-square" style="background: #FF6347;"></span> ✅ Intuitive for domain experts</li>
-                <li><span class="discipline-square" style="background: #FF6347;"></span> ❌ Cannot model multi-field concepts</li>
-                <li><span class="discipline-square" style="background: #FF6347;"></span> ❌ Rigid structure</li>
-              </ul>
-            </div>
-            <div>
-              <h3 style="color: var(--accent2); margin-bottom: 10px;">Traditional Hypergraphs</h3>
-              <ul class="discipline-list">
-                <li><span class="discipline-square" style="background: #2ECC71;"></span> ✅ Captures complex relationships</li>
-                <li><span class="discipline-square" style="background: #2ECC71;"></span> ✅ Flexible for cross-domain concepts</li>
-                <li><span class="discipline-square" style="background: #2ECC71;"></span> ❌ No inherent hierarchy</li>
-                <li><span class="discipline-square" style="background: #2ECC71;"></span> ❌ Harder to navigate</li>
-              </ul>
-            </div>
-          </div>
-          <p style="margin-top: 15px; text-align: center;">
-            MLKN.model's polyhierarchical hypergraph combines the <strong>strengths of both</strong>:
-            <strong>hierarchical clarity</strong> + <strong>cross-domain flexibility</strong>.
-          </p>
-        </section>
-        
-        
-        <!-- Mathematical Foundations -->
-        <section id="math" class="section" aria-labelledby="math-title">
+        <!-- Theoretical Definitions -->
+        <section id="theoretical-definitions" class="section" aria-labelledby="theoretical-definitions-title">
             <br>
-            <h2 class="sec-h" id="math-title">Mathematical Foundations</h2>
-            <p class="sec-sub">Formalizing Knowledge as a Dynamic, Multi-Layered Hypergraph</p>
+            <h2 class="sec-h" id="theoretical-definitions-title">Theoretical Definitions</h2>
+            <p class="sec-sub">Intuitive Introductions to Multilayer Networks and Hypergraphs</p>
+            <div class="nav-box">
+                <a href="#overview">Overview</a>
+                <a href="#theoretical-definitions" class="active">Theoretical Definitions</a>
+                <a href="#mathematical-definitions">Mathematical Definitions</a>
+                <a href="#comparison">Comparison</a>
+                <a href="#mathematical-frameworks">Mathematical Frameworks</a>
+                <a href="#advanced-tools">Advanced Tools</a>
+                <a href="#validation">Validation & Benchmarking</a>
+                <a href="#future-work">Future Work</a>
+            </div>
+            <br>
+
+            <p>
+                Below, we provide <strong>intuitive definitions</strong> of the two core structures underpinning MLKN.model.
+            </p>
+            <br>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
+                <!-- Multilayer Network -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #1A6BAA;">⬢</div>
+                    <h3>Multilayer Network</h3>
+                    <p>
+                        A <strong>multilayer network</strong> is a graph where nodes and edges are partitioned into <strong>layers</strong>,
+                        with <strong>intra-layer</strong> (within a layer) and <strong>inter-layer</strong> (between layers) connections.
+                    </p>
+                    <p style="margin-top: 15px;">
+                        <strong>Example in MLKN.lab:</strong>
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Layers 1-4</strong> of the <a href="../polyhierarchy/polyhierarchy.html" style="color: var(--accent);"><strong>Polyhierarchy</strong></a> (Core Domains → Thematic Domains).</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Intra-layer edges</strong>: Connections between subdisciplines in the same discipline (e.g., Quantum Mechanics → Quantum Field Theory).</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Inter-layer edges</strong>: Hierarchical relationships (e.g., Physics → Quantum Mechanics).</li>
+                    </ul>
+                    <p style="margin-top: 15px;">
+                        <strong>Why it matters:</strong> Captures the <strong>hierarchical structure</strong> of academic knowledge.
+                    </p>
+                </div>
+
+                <!-- Hypergraph -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #2ECC71;">⬢</div>
+                    <h3>Hypergraph</h3>
+                    <p>
+                        A <strong>hypergraph</strong> is a generalization of a graph where an <strong>edge (hyperedge)</strong> can connect
+                        <strong>any number of nodes</strong> (not just pairs).
+                    </p>
+                    <p style="margin-top: 15px;">
+                        <strong>Example in MLKN.lab:</strong>
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Layers 4-5</strong> of the <a href="../polyhierarchy/polyhierarchy.html" style="color: var(--accent);"><strong>Polyhierarchy</strong></a> (Thematic Domains → Concepts).</li>
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Hyperedge</strong>: A concept like <em>\"Machine Learning\"</em> connects Computer Science, Mathematics, and Neuroscience simultaneously.</li>
+                    </ul>
+                    <p style="margin-top: 15px;">
+                        <strong>Why it matters:</strong> Captures <strong>cross-disciplinary relationships</strong> that cannot be represented in traditional graphs.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mathematical Definitions -->
+        <section id="mathematical-definitions" class="section" aria-labelledby="mathematical-definitions-title">
+            <br>
+            <h2 class="sec-h" id="mathematical-definitions-title">Mathematical Definitions</h2>
+            <p class="sec-sub">Formalizing Multilayer Networks, Hypergraphs, and the Unified Framework</p>
+            <div class="nav-box">
+                <a href="#overview">Overview</a>
+                <a href="#theoretical-definitions">Theoretical Definitions</a>
+                <a href="#mathematical-definitions" class="active">Mathematical Definitions</a>
+                <a href="#comparison">Comparison</a>
+                <a href="#mathematical-frameworks">Mathematical Frameworks</a>
+                <a href="#advanced-tools">Advanced Tools</a>
+                <a href="#validation">Validation & Benchmarking</a>
+                <a href="#future-work">Future Work</a>
+            </div>
+            <br>
 
             <!-- Introduction to Formalization -->
             <div class="essay-box">
+                <h3>Introduction to Formalization</h3>
                 <p>
-                    MLKN.model formalizes knowledge as a <strong>dynamic, multi-layered hypergraph</strong> where:
-                </p>
-                <ul class="discipline-list">
-                    <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Nodes</strong> represent <em>disciplines, subdisciplines, concepts, or themes</em>.</li>
-                    <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Hyperedges</strong> represent <em>relationships</em> (hierarchical, interdisciplinary, thematic) between <em>any number of nodes</em>.</li>
-                    <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Layers</strong> represent <em>levels of abstraction</em> (e.g., Core Domains → Concepts).</li>
-                    <li><span class="discipline-square" style="background: #9B59B6;"></span> <strong>Dynamics</strong> represent <em>temporal evolution</em> (e.g., emergence of new disciplines).</li>
-                </ul>
-                <p>
-                    This formalization enables <strong>rigorous analysis, simulation, and prediction</strong> of knowledge systems.
-                </p>
-            </div>
-
-            <!-- Hypergraph Definition -->
-            <div class="layer-card">
-                <div class="licon" style="color: #1A6BAA;">⬢</div>
-                <h3>Hypergraph Definition</h3>
-                <p>
-                    Let <div class="math-container"><strong>H = (V, E, L, W, T)</strong></div> be a <strong>multi-layered hypergraph</strong> where:
+                    MLKN.model formalizes knowledge as a <strong>dynamic, multi-layered hypergraph</strong> \( \mathcal{H} = (V, \mathcal{S}, \mathcal{P}, \mathcal{T}, \omega, \tau) \), where:
                 </p>
                 <ul class="discipline-list">
                     <li>
                         <span class="discipline-square" style="background: #1A6BAA;"></span>
-                        <strong>V</strong> = <div class="math-container"><em>{v<sub>1</sub>, v<sub>2</sub>, ..., v<sub>n</sub>}</em></div> is the set of <strong>nodes</strong>, where each node <div class="math-container"><em>v<sub>i</sub></em></div> represents a
-                        <strong>discipline, subdiscipline, or concept</strong> with attributes:
-                        <ul style="margin-top: 5px; padding-left: 20px;">
-                            <li><div class="math-container"><em>v<sub>i</sub>.id</em></div>: Unique identifier (e.g., <code>"computer_science"</code>).</li>
-                            <li><div class="math-container"><em>v<sub>i</sub>.name</em></div>: Human-readable name (e.g., <code>"Computer Science"</code>).</li>
-                            <li><div class="math-container"><em>v<sub>i</sub>.layer ∈ {1, 2, 3, 4, 5}</em></div>: Ontological layer (1=Core Domains, 5=Concepts).</li>
-                            <li><div class="math-container"><em>v<sub>i</sub>.domain</em></div>: Parent domain (e.g., <code>"Formal Sciences"</code>).</li>
-                            <li><div class="math-container"><em>v<sub>i</sub>.metadata</em></div>: Additional attributes (e.g., description, citations, timestamps).</li>
-                        </ul>
+                        <strong>Nodes (\( V \))</strong>: Represent <em>disciplines, subdisciplines, concepts, or themes</em> across 5 ontological layers.
                     </li>
                     <li>
                         <span class="discipline-square" style="background: #2ECC71;"></span>
-                        <strong>E</strong> = <div class="math-container"><em>{e<sub>1</sub>, e<sub>2</sub>, ..., e<sub>m</sub>}</em></div> is the set of <strong>hyperedges</strong>, where each hyperedge <div class="math-container"><em>e<sub>j</sub></em></div> connects
-                        <strong>any subset of nodes</strong> <div class="math-container"><em>S ⊆ V</em></div> with attributes:
-                        <ul style="margin-top: 5px; padding-left: 20px;">
-                            <li><div class="math-container"><em>e<sub>j</sub>.nodes</em></div>: Set of nodes connected by the hyperedge (e.g., <code>{"computer_science", "ai", "neuroscience"}</code>).</li>
-                            <li><div class="math-container"><em>e<sub>j</sub>.type ∈ {"hierarchical", "interdisciplinary", "thematic"}</em></div>: Type of relationship.</li>
-                            <li><div class="math-container"><em>e<sub>j</sub>.weight ∈ [0, 1]</em></div>: Strength of the connection (e.g., derived from co-citation frequency).</li>
-                            <li><div class="math-container"><em>e<sub>j</sub>.metadata</em></div>: Additional attributes (e.g., timestamp, source).</li>
-                        </ul>
+                        <strong>Hyperedges (\( \mathcal{S} \))</strong>: Represent <em>relationships</em> (hierarchical, interdisciplinary, thematic) between <em>any number of nodes</em>, primarily in Layers 4-5.
                     </li>
                     <li>
                         <span class="discipline-square" style="background: #FF6347;"></span>
-                        <strong>L</strong>: <div class="math-container"><em>V → {1, 2, 3, 4, 5}</em></div> is the <strong>layer assignment function</strong>, mapping each node to its ontological layer.
+                        <strong>Layers (\( \mathcal{P} \))</strong>: Represent <em>levels of abstraction</em>:
+                        <ol style="margin-top: 5px; padding-left: 20px;">
+                            <li><em>Layer 1: Core Domains</em> (e.g., Natural Sciences).</li>
+                            <li><em>Layer 2: Disciplines</em> (e.g., Physics, Psychology).</li>
+                            <li><em>Layer 3: Subdisciplines</em> (e.g., Quantum Mechanics, Cognitive Psychology).</li>
+                            <li><em>Layer 4: Thematic Domains</em> (e.g., Machine Learning, Attention).</li>
+                            <li><em>Layer 5: Concepts</em> (e.g., Neural Networks, Memory).</li>
+                        </ol>
                     </li>
                     <li>
                         <span class="discipline-square" style="background: #9B59B6;"></span>
-                        <strong>W</strong>: <div class="math-container"><em>E → [0, 1]</em></div> is the <strong>weight function</strong>, assigning a strength to each hyperedge.
+                        <strong>Hierarchical Edges (\( \mathcal{T} \))</strong>: Connect nodes <em>between adjacent layers</em> (e.g., Discipline → Subdiscipline).
                     </li>
                     <li>
-                        <span class="discipline-square" style="background: #F39C12;"></span>
-                        <strong>T</strong>: <div class="math-container"><em>V × E → ℝ<sup>+</sup></em></div> is the <strong>temporal function</strong>, assigning timestamps to nodes/edges (for dynamic analysis).
+                        <span class="discipline-square" style="background: #FFD700;"></span>
+                        <strong>Weights (\( \omega \))</strong>: Quantify the <em>strength</em> of relationships (e.g., citation counts, semantic similarity).
+                    </li>
+                    <li>
+                        <span class="discipline-square" style="background: #E74C3C;"></span>
+                        <strong>Temporal Function (\( \tau \))</strong>: Tracks the <em>evolution</em> of nodes over time (e.g., emergence of new disciplines).
                     </li>
                 </ul>
+                <p style="margin-top: 15px;">
+                    This formalization enables <strong>rigorous analysis, simulation, and prediction</strong> of knowledge systems,
+                    aligning with the <strong>polyhierarchical structure</strong> of MLKN.lab’s <a href="../polyhierarchy/polyhierarchy.html" style="color: var(--accent);"><strong>Knowledge Network</strong></a>.
+                </p>
+                <p style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                    <strong>Key Property:</strong> A node in Layer \( i \) can belong to <strong>multiple parent nodes</strong> in Layer \( i-1 \) (e.g., "AI Ethics" may belong to both "Computer Science" and "Philosophy").
+                </p>
             </div>
-            
+        
             <!-- Layered Structure -->
-            <div class="layer-card">
+            <div class="layer-card" style="margin-top: 20px; min-height: fit-content;">
                 <div class="licon" style="color: #2ECC71;">⬢</div>
                 <h3>Layered Structure (Ontological Hierarchy)</h3>
                 <p>
-                    The hypergraph <strong>H</strong> is organized into <strong>5 ontological layers</strong>, forming a <strong>polyhierarchy</strong>:
+                    The hypergraph \( \mathcal{H} \) is organized into <strong>5 ontological layers</strong>, forming a <strong>polyhierarchy</strong>
+                    where each layer \( P_i \) contains nodes \( V_i \) with increasing granularity:
                 </p>
                 <ol class="discipline-list">
                     <li>
                         <span class="discipline-square" style="background: #FF6347;"></span>
-                        <strong>Layer 1: Core Domains</strong> (e.g., Formal Sciences, Natural Sciences).
+                        <strong>Layer 1: Core Domains</strong> \( V_1 = \{v \mid \mathcal{P}(v) = 1\} \)
                         <ul style="margin-top: 5px; padding-left: 20px;">
-                            <li><div class="math-container"><em>V<sub>1</sub> = {v | L(v) = 1}</em></div></li>
-                            <li>Represents the <strong>highest level of abstraction</strong>.</li>
+                            <li>Represents the <strong>highest level of abstraction</strong> (e.g., Natural Sciences, Social Sciences).</li>
+                            <li>Connected to Layer 2 via <strong>hierarchical edges \( \mathcal{T} \)</strong>.</li>
                         </ul>
                     </li>
                     <li>
                         <span class="discipline-square" style="background: #2ECC71;"></span>
-                        <strong>Layer 2: Disciplines</strong> (e.g., Computer Science, Psychology).
+                        <strong>Layer 2: Disciplines</strong> \( V_2 = \{v \mid \mathcal{P}(v) = 2\} \)
                         <ul style="margin-top: 5px; padding-left: 20px;">
-                            <li><div class="math-container"><em>V<sub>2</sub> = {v | L(v) = 2}</em></div></li>
-                            <li>Connected to Layer 1 via <strong>hierarchical hyperedges</strong>.</li>
+                            <li>Represents <strong>academic fields</strong> (e.g., Physics, Psychology).</li>
+                            <li>Connected to Layers 1 and 3 via \( \mathcal{T} \).</li>
                         </ul>
                     </li>
                     <li>
                         <span class="discipline-square" style="background: #50C878;"></span>
-                        <strong>Layer 3: Subdisciplines</strong> (e.g., AI, Cognitive Psychology).
+                        <strong>Layer 3: Subdisciplines</strong> \( V_3 = \{v \mid \mathcal{P}(v) = 3\} \)
                         <ul style="margin-top: 5px; padding-left: 20px;">
-                            <li><div class="math-container"><em>V<sub>3</sub> = {v | L(v) = 3}</em></div></li>
-                            <li>Connected to Layer 2 via <strong>hierarchical hyperedges</strong>.</li>
+                            <li>Represents <strong>specialized areas</strong> (e.g., Quantum Mechanics, Cognitive Psychology).</li>
+                            <li>Connected to Layers 2 and 4 via \( \mathcal{T} \).</li>
                         </ul>
                     </li>
                     <li>
                         <span class="discipline-square" style="background: #F39C12;"></span>
-                        <strong>Layer 4: Thematic Domains</strong> (e.g., Machine Learning, Attention).
+                        <strong>Layer 4: Thematic Domains</strong> \( V_4 = \{v \mid \mathcal{P}(v) = 4\} \)
                         <ul style="margin-top: 5px; padding-left: 20px;">
-                            <li><div class="math-container"><em>V<sub>4</sub> = {v | L(v) = 4}</em></div></li>
-                            <li>Connected to Layer 3 via <strong>hierarchical hyperedges</strong>.</li>
+                            <li>Represents <strong>granular clusters</strong> (e.g., Machine Learning, Attention).</li>
+                            <li>Connected to Layers 3 and 5 via \( \mathcal{T} \), and to other nodes via <strong>hyperedges \( \mathcal{S} \)</strong>.</li>
                         </ul>
                     </li>
                     <li>
                         <span class="discipline-square" style="background: #9B59B6;"></span>
-                        <strong>Layer 5: Concepts</strong> (e.g., Neural Networks, Memory).
+                        <strong>Layer 5: Concepts</strong> \( V_5 = \{v \mid \mathcal{P}(v) = 5\} \)
                         <ul style="margin-top: 5px; padding-left: 20px;">
-                            <li><div class="math-container"><em>V<sub>5</sub> = {v | L(v) = 5}</em></div></li>
-                            <li>Connected to Layer 4 via <strong>hierarchical hyperedges</strong>.</li>
+                            <li>Represents <strong>specific topics or ideas</strong> (e.g., Neural Networks, Memory).</li>
+                            <li>Connected to Layer 4 via \( \mathcal{T} \), and to multiple disciplines via \( \mathcal{S} \).</li>
                         </ul>
                     </li>
                 </ol>
                 <p style="margin-top: 15px;">
-                    <strong>Polyhierarchy Property:</strong> A node in Layer <div class="math-container"><em>i</em></div> can belong to <strong>multiple parent nodes</strong> in Layer <div class="math-container"><em>i-1</em></div>.
+                    <strong>Polyhierarchy Property:</strong> A node in Layer \( i \) can belong to <strong>multiple parent nodes</strong> in Layer \( i-1 \).
                     For example, <code>"AI Ethics"</code> (Layer 3) may belong to both <code>"Computer Science"</code> and <code>"Philosophy"</code> (Layer 2).
                 </p>
+                <p style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                    <strong>Note:</strong> Layers 1-4 form a <strong>multilayer network</strong> with \( \mathcal{T} \), while Layers 4-5 form a <strong>hypergraph</strong> with \( \mathcal{S} \).
+                    See our <a href="../polyhierarchy/polyhierarchy.html" style="color: var(--accent);"><strong>Polyhierarchy page</strong></a> for details.
+                </p>
             </div>
-
-            <!-- Hypergraph Properties -->
-            <div class="layer-card">
-                <div class="licon" style="color: #FF6347;">⬢</div>
-                <h3>Hypergraph Properties</h3>
+            <br>
+            
+            <!-- Multilayer Network Definition -->
+            <div class="essay-box">
+                <h3>Multilayer Network</h3>
                 <p>
-                    The hypergraph <strong>H</strong> exhibits the following properties:
+                    A <strong>multilayer network</strong> is defined as a <strong>4-tuple</strong> \( \mathcal{M} = (V, E, L, \phi) \), where:
                 </p>
                 <ul class="discipline-list">
-                    <li>
-                        <span class="discipline-square" style="background: #FF6347;"></span>
-                        <strong>Multi-Layered:</strong> Nodes are organized into <strong>5 ontological layers</strong> (Core Domains → Concepts).
-                    </li>
-                    <li>
-                        <span class="discipline-square" style="background: #2ECC71;"></span>
-                        <strong>Polyhierarchical:</strong> Nodes can have <strong>multiple parents</strong> (e.g., a subdiscipline can belong to multiple disciplines).
-                    </li>
-                    <li>
-                        <span class="discipline-square" style="background: #50C878;"></span>
-                        <strong>Weighted:</strong> Hyperedges have <strong>weights</strong> representing connection strength (e.g., co-citation frequency).
-                    </li>
-                    <li>
-                        <span class="discipline-square" style="background: #F39C12;"></span>
-                        <strong>Directed:</strong> Hyperedges can be <strong>directed</strong> (e.g., hierarchical relationships) or <strong>undirected</strong> (e.g., thematic connections).
-                    </li>
-                    <li>
-                        <span class="discipline-square" style="background: #9B59B6;"></span>
-                        <strong>Dynamic:</strong> Nodes and hyperedges have <strong>timestamps</strong> to track evolution over time.
-                    </li>
-                    <li>
-                        <span class="discipline-square" style="background: #1ABC9C;"></span>
-                        <strong>Attributed:</strong> Nodes and hyperedges carry <strong>metadata</strong> (e.g., descriptions, citations, domains).
-                    </li>
+                    <li><span class="discipline-square" style="background: #1A6BAA;"></span> \( V \): A set of <strong>nodes</strong> (e.g., disciplines, subdisciplines).</li>
+                    <li><span class="discipline-square" style="background: #1A6BAA;"></span> \( E \): A set of <strong>edges</strong> (intra-layer and inter-layer).</li>
+                    <li><span class="discipline-square" style="background: #1A6BAA;"></span> \( L \): A set of <strong>layers</strong> (e.g., \( L = \{1, 2, 3, 4\} \) for Layers 1-4 in MLKN.lab).</li>
+                    <li><span class="discipline-square" style="background: #1A6BAA;"></span> \( \phi: V \rightarrow L \): A <strong>mapping function</strong> assigning each node to a layer.</li>
                 </ul>
-            </div>
-
-            <!-- Mathematical Operations -->
-            <div class="layer-card">
-                <div class="licon" style="color: #9B59B6;">⬢</div>
-                <h3>Mathematical Operations</h3>
-                <p>
-                    MLKN.model supports the following <strong>mathematical operations</strong> on the hypergraph <strong>H</strong>:
+                <p style="margin-top: 15px;">
+                    <strong>Additional Properties for MLKN.lab:</strong>
                 </p>
                 <ul class="discipline-list">
-                    <li>
-                        <span class="discipline-square" style="background: #9B59B6;"></span>
-                        <strong>Centrality Measures:</strong>
-                        <ul style="margin-top: 5px; padding-left: 20px;">
-                            <li>
-                                <strong>Degree Centrality:</strong>
-                                <div class="math-container"><em>C<sub>D</sub>(v) = |{e ∈ E | v ∈ e.nodes}|</em></div>
-                                (number of hyperedges connected to <em>v</em>).
-                            </li>
-                            <li>
-                                <strong>Betweenness Centrality:</strong>
-                                <div class="math-container">
-                                    <em>C<sub>B</sub>(v) = Σ (σ<sub>st</sub>(v) / σ<sub>st</sub>)</em>,<br>
-                                    where <em>σ<sub>st</sub>(v)</em> is the number of shortest paths<br>
-                                    from <em>s</em> to <em>t</em> passing through <em>v</em>.
-                                </div>
-                            </li>
-                            <li>
-                                <strong>Eigenvector Centrality:</strong>
-                                <div class="math-container">
-                                    <em>C<sub>E</sub>(v) = (1/λ) Σ<sub>u∈N(v)</sub> A<sub>uv</sub> C<sub>E</sub>(u)</em>,<br>
-                                    where <em>A</em> is the adjacency matrix and<br>
-                                    <em>λ</em> is the largest eigenvalue.
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <span class="discipline-square" style="background: #FF6347;"></span>
-                        <strong>Community Detection:</strong>
-                        <ul style="margin-top: 5px; padding-left: 20px;">
-                            <li>
-                                <strong>Modularity:</strong>
-                                <div class="math-container">
-                                    <em>Q = (1/2m) Σ<sub>ij</sub> [A<sub>ij</sub> - (k<sub>i</sub>k<sub>j</sub>/2m)] δ(c<sub>i</sub>, c<sub>j</sub>)</em>
-                                </div>
-                                , where <div class="math-container"><em>m</em></div> is the total weight of hyperedges,
-                                <div class="math-container"><em>k<sub>i</sub></em></div> is the weighted degree of node <div class="math-container"><em>i</em></div>,
-                                and <div class="math-container"><em>c<sub>i</sub></em></div> is the community of node <div class="math-container"><em>i</em></div>.
-                            </li>
-                            <li><strong>Louvain Method:</strong> Optimizes modularity via greedy optimization.</li>
-                            <li><strong>Leiden Algorithm:</strong> Improves Louvain by ensuring communities are well-connected.</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <span class="discipline-square" style="background: #2ECC71;"></span>
-                        <strong>Path Analysis:</strong>
-                        <ul style="margin-top: 5px; padding-left: 20px;">
-                            <li>
-                                <strong>Shortest Path:</strong>
-                                <div class="math-container"><em>d(s, t) = min |P|</em></div>
-                                , where <div class="math-container"><em>P</em></div> is a path from <div class="math-container"><em>s</em></div> to <div class="math-container"><em>t</em></div>.
-                            </li>
-                            <li><strong>Random Walks:</strong> Simulate diffusion processes to model knowledge spread.</li>
-                            <li><strong>Persistent Homology:</strong> Identify topological features (e.g., holes, connected components) in the hypergraph.</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <span class="discipline-square" style="background: #F39C12;"></span>
-                        <strong>Dynamic Analysis:</strong>
-                        <ul style="margin-top: 5px; padding-left: 20px;">
-                            <li>
-                                <strong>Temporal Slices:</strong> Analyze the hypergraph at different time points
-                                <div class="math-container"><em>H<sub>t</sub> = (V<sub>t</sub>, E<sub>t</sub>)</em></div>.
-                            </li>
-                            <li><strong>Evolution Metrics:</strong> Track changes in centrality, modularity, and connectivity over time.</li>
-                            <li><strong>Predictive Modeling:</strong> Use machine learning to forecast the emergence of new nodes/edges.</li>
+                    <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Directed</strong>: Edges have direction (e.g., parent → child in hierarchy).</li>
+                    <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Weighted</strong>: Edges have weights (e.g., citation counts, semantic similarity).</li>
+                    <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Adjacency Matrices</strong>:
+                        <ul style="margin-top: 5px;">
+                            <li>\( A^{(l)} \): Adjacency matrix for <strong>intra-layer</strong> edges in layer \( l \).</li>
+                            <li>\( A^{(l, l')} \): Adjacency matrix for <strong>inter-layer</strong> edges between layers \( l \) and \( l' \).</li>
                         </ul>
                     </li>
                 </ul>
-            </div>
-
-            <!-- Example: Knowledge Diffusion -->
-            <div class="layer-card">
-                <div class="licon" style="color: #1ABC9C;">⬢</div>
-                <h3>Example: Modeling Knowledge Diffusion</h3>
-                <p>
-                    To model how a new concept (e.g., <code>"Transformers"</code>) diffuses across disciplines:
-                </p>
-                <ol class="discipline-list">
-                    <li>
-                        <span class="discipline-square" style="background: #1ABC9C;"></span>
-                        <strong>Step 1: Represent the Concept</strong>
-                        <p style="margin-top: 5px;">
-                            Add a new node <div class="math-container"><em>v<sub>new</sub> = "Transformers"</em></div> to Layer 5 (Concepts) with:
-                            <ul style="margin-top: 5px; padding-left: 20px;">
-                                <li><div class="math-container"><em>v<sub>new</sub>.layer = 5</em></div></li>
-                                <li><div class="math-container"><em>v<sub>new</sub>.domain = "Machine Learning"</em></div></li>
-                                <li><div class="math-container"><em>v<sub>new</sub>.timestamp = 2017</em></div> (year of introduction).</li>
-                            </ul>
-                        </p>
-                    </li>
-                    <li>
-                        <span class="discipline-square" style="background: #1ABC9C;"></span>
-                        <strong>Step 2: Connect to Existing Nodes</strong>
-                        <p style="margin-top: 5px;">
-                            Add hyperedges to connect <div class="math-container"><em>v<sub>new</sub></em></div> to related nodes:
-                            <ul style="margin-top: 5px; padding-left: 20px;">
-                                <li>
-                                    <div class="math-container"><em>e<sub>1</sub>.nodes = {"Transformers", "Neural Networks", "NLP"}</em></div>
-                                    (interdisciplinary connection).
-                                </li>
-                                <li><div class="math-container"><em>e<sub>1</sub>.type = "thematic"</em></div></li>
-                                <li><div class="math-container"><em>e<sub>1</sub>.weight = 0.95</em></div> (strong connection).</li>
-                            </ul>
-                        </p>
-                    </li>
-                    <li>
-                        <span class="discipline-square" style="background: #1ABC9C;"></span>
-                        <strong>Step 3: Simulate Diffusion</strong>
-                        <p style="margin-top: 5px;">
-                            Use a <strong>random walk</strong> to simulate how researchers "discover" <div class="math-container"><em>v<sub>new</sub></em></div>:
-                            <ul style="margin-top: 5px; padding-left: 20px;">
-                                <li>Start at a random node (e.g., <code>"Computer Science"</code>).</li>
-                                <li>Traverse hyperedges with probability proportional to their weights.</li>
-                                <li>Measure the <strong>time to reach</strong> <div class="math-container"><em>v<sub>new</sub></em></div> from other nodes.</li>
-                            </ul>
-                        </p>
-                    </li>
-                    <li>
-                        <span class="discipline-square" style="background: #1ABC9C;"></span>
-                        <strong>Step 4: Predict Adoption</strong>
-                        <p style="margin-top: 5px;">
-                            Use <strong>centrality measures</strong> to predict which disciplines will adopt <div class="math-container"><em>v<sub>new</sub></em></div>:
-                            <ul style="margin-top: 5px; padding-left: 20px;">
-                                <li>Disciplines with high <div class="math-container"><em>C<sub>B</sub>(v)</em></div> (betweenness centrality) are likely to adopt early.</li>
-                                <li>Disciplines in the same <strong>community</strong> as <div class="math-container"><em>v<sub>new</sub></em></div> (via modularity) are likely to adopt first.</li>
-                            </ul>
-                        </p>
-                    </li>
-                </ol>
-            </div>
-
-            <!-- Formal Definitions -->
-            <div class="layer-card">
-                <div class="licon" style="color: #F39C12;">⬢</div>
-                <h3>Formal Definitions</h3>
-                <p>
-                    Below are the <strong>formal definitions</strong> of key concepts in MLKN.model:
+                <p style="margin-top: 15px;">
+                    <strong>Example:</strong> For <strong>Layer 2 (Disciplines)</strong> and <strong>Layer 3 (Subdisciplines)</strong>:
                 </p>
                 <ul class="discipline-list">
-                    <li>
-                        <span class="discipline-square" style="background: #F39C12;"></span>
-                        <strong>Knowledge Hypergraph:</strong>
-                        <p style="margin-top: 5px;">
-                            A tuple <div class="math-container"><strong>H = (V, E, L, W, T)</strong></div> where:
-                            <ul style="margin-top: 5px; padding-left: 20px;">
-                                <li><div class="math-container"><em>V</em></div> is the set of nodes (disciplines, concepts, etc.).</li>
-                                <li><div class="math-container"><em>E</em></div> is the set of hyperedges (relationships).</li>
-                                <li><div class="math-container"><em>L: V → {1, 2, 3, 4, 5}</em></div> is the layer assignment function.</li>
-                                <li><div class="math-container"><em>W: E → [0, 1]</em></div> is the weight function.</li>
-                                <li><div class="math-container"><em>T: V × E → ℝ<sup>+</sup></em></div> is the temporal function.</li>
-                            </ul>
-                        </p>
-                    </li>
-                    <li>
-                        <span class="discipline-square" style="background: #F39C12;"></span>
-                        <strong>Polyhierarchy:</strong>
-                        <p style="margin-top: 5px;">
-                            A hypergraph is <strong>polyhierarchical</strong> if for some <div class="math-container"><em>v ∈ V</em></div>,
-                            there exist <div class="math-container"><em>u, w ∈ V</em></div> such that:
-                            <ul style="margin-top: 5px; padding-left: 20px;">
-                                <li>
-                                    <div class="math-container"><em>L(u) = L(v) - 1</em></div> and
-                                    <div class="math-container"><em>u</em></div> is a parent of
-                                    <div class="math-container"><em>v</em></div>.
-                                </li>
-                                <li>
-                                    <div class="math-container"><em>L(w) = L(v) - 1</em></div> and
-                                    <div class="math-container"><em>w</em></div> is a parent of
-                                    <div class="math-container"><em>v</em></div>.
-                                </li>
-                                <li><div class="math-container"><em>u ≠ w</em></div>.</li>
-                            </ul>
-                            In other words, a node can have <strong>multiple parents</strong> in the layer above it.
-                        </p>
-                    </li>
-                    <li>
-                        <span class="discipline-square" style="background: #F39C12;"></span>
-                        <strong>Knowledge Diffusion:</strong>
-                        <p style="margin-top: 5px;">
-                            A <strong>stochastic process</strong> on <div class="math-container"><strong>H</strong></div>
-                            where a random walker traverses hyperedges with probability:
-                            <ul style="margin-top: 5px; padding-left: 20px;">
-                                <li>
-                                    <div class="math-container">
-                                        <em>P(v → u | e) = W(e) / Σ<sub>e' ∋ v</sub> W(e')</em>
-                                    </div>,
-                                    where <div class="math-container"><em>e</em></div> is a hyperedge containing
-                                    <div class="math-container"><em>v</em></div> and <div class="math-container"><em>u</em></div>.
-                                </li>
-                            </ul>
-                        </p>
-                    </li>
+                    <li><span class="discipline-square" style="background: #1A6BAA;"></span> \( A^{(2)} \): Connections between disciplines (e.g., Physics ↔ Chemistry).</li>
+                    <li><span class="discipline-square" style="background: #1A6BAA;"></span> \( A^{(2, 3)} \): Hierarchical edges from disciplines to subdisciplines (e.g., Physics → Quantum Mechanics).</li>
+                </ul>
+                <p style="margin-top: 15px; font-size: 0.9em;">
+                    <strong>Literature:</strong>
+                    <a href="https://arxiv.org/abs/1402.5519" target="_blank" style="color: var(--accent);">Kivelä et al., 2014</a>,
+                    <a href="https://www.nature.com/articles/nphys2958" target="_blank" style="color: var(--accent);">Boccaletti et al., 2014</a>.
+                </p>
+            </div>
+
+            <!-- Hypergraph Definition -->
+            <div class="essay-box" style="margin-top: 20px;">
+                <h3>Hypergraph</h3>
+                <p>
+                    A <strong>hypergraph</strong> is defined as a <strong>pair</strong> \( \mathcal{H} = (V, E) \), where:
+                </p>
+                <ul class="discipline-list">
+                    <li><span class="discipline-square" style="background: #2ECC71;"></span> \( V \): A set of <strong>nodes</strong> (e.g., Thematic Domains, Concepts).</li>
+                    <li><span class="discipline-square" style="background: #2ECC71;"></span> \( E \): A set of <strong>hyperedges</strong>, where each hyperedge \( e \in E \) is a <strong>subset of \( V \)</strong> (i.e., \( e \subseteq V \)).</li>
+                </ul>
+                <p style="margin-top: 15px;">
+                    <strong>Additional Properties for MLKN.lab:</strong>
+                </p>
+                <ul class="discipline-list">
+                    <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Directed</strong>: Hyperedges can have direction (e.g., a concept <em>influences</em> a thematic domain).</li>
+                    <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Weighted</strong>: Hyperedges have weights (e.g., strength of connection between nodes).</li>
+                    <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Incidence Matrix</strong>: \( H \) is a \( |V| \times |E| \) matrix where \( H(v, e) = 1 \) if node \( v \) is in hyperedge \( e \), else \( 0 \).</li>
+                </ul>
+                <p style="margin-top: 15px;">
+                    <strong>Example:</strong> For <strong>Layer 5 (Concepts)</strong>:
+                </p>
+                <ul class="discipline-list">
+                    <li><span class="discipline-square" style="background: #2ECC71;"></span> A hyperedge \( e = \{\text{Machine Learning}, \text{Computer Science}, \text{Mathematics}, \text{Neuroscience}\} \) represents the cross-disciplinary nature of <em>\"Machine Learning.\"</em></li>
+                </ul>
+                <p style="margin-top: 15px; font-size: 0.9em;">
+                    <strong>Literature:</strong>
+                    <a href="https://arxiv.org/abs/1302.4586" target="_blank" style="color: var(--accent);">Bretto, 2013</a>,
+                    <a href="https://arxiv.org/abs/2006.12613" target="_blank" style="color: var(--accent);">Battiston et al., 2020</a>.
+                </p>
+            </div>
+
+            <div class="essay-box" style="margin-top: 20px;">
+             <h3>Visual Representation of the Multilayer Hypergraph</h3>
+             <p>
+                 Below is a schematic of MLKN.model's structure, combining <strong>multilayer networks</strong> (Layers 1-4) and <strong>hypergraphs</strong> (Layers 4-5):
+             </p>
+             <div style="margin-top: 15px; text-align: center;">
+                 <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+                 <script>mermaid.initialize({ startOnLoad: true });</script>
+                 <div class="mermaid">
+                     graph TD
+                         subgraph Layer 1: Core Domains
+                             A1[Natural Sciences]
+                             A2[Social Sciences]
+                         end
+                         subgraph Layer 2: Disciplines
+                             B1[Physics]
+                             B2[Psychology]
+                         end
+                         subgraph Layer 3: Subdisciplines
+                             C1[Quantum Mechanics]
+                             C2[Cognitive Psychology]
+                         end
+                         subgraph Layer 4: Thematic Domains
+                             D1[Quantum Field Theory]
+                             D2[Attention]
+                         end
+                         subgraph Layer 5: Concepts
+                             E1[Neural Networks]
+                             E2[Machine Learning]
+                         end
+                         A1 -->|Hierarchical| B1
+                         B1 -->|Hierarchical| C1
+                         C1 -->|Hierarchical| D1
+                         D1 -->|Hierarchical| E1
+                         E1 -->|Hyperedge| D2
+                         E1 -->|Hyperedge| B2
+                         E2 -->|Hyperedge| D2
+                         E2 -->|Hyperedge| B1
+                         style A1 fill:#1A6BAA,color:white
+                         style A2 fill:#9B59B6,color:white
+                         style B1 fill:#2ECC71,color:white
+                         style B2 fill:#FF6347,color:white
+                         style C1 fill:#FFD700,color:black
+                         style C2 fill:#E74C3C,color:white
+                         style D1 fill:#3498DB,color:white
+                         style D2 fill:#50C878,color:white
+                         style E1 fill:#FF6347,color:white
+                         style E2 fill:#2ECC71,color:white
+                          </div>
+                 </div>
+                 <p style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                     <strong>Key:</strong> Solid arrows = Hierarchical edges (\( \mathcal{T} \)), Dashed arrows = Hyperedges (\( \mathcal{S} \)).
+                 </p>
+            </div>
+            
+            <!-- Unified Framework Definition -->
+            <div class="essay-box" style="margin-top: 20px;">
+                <h3>Unified Framework: Multilayer Hypergraph</h3>
+                <p>
+                    MLKN.model is a <strong>multilayer hypergraph</strong> \( \mathcal{H} = (V, \mathcal{S}, \mathcal{P}, \mathcal{T}, \omega, \tau) \), where:
+                </p>
+                <ul class="discipline-list">
+                    <li><span class="discipline-square" style="background: #9B59B6;"></span> \( V \): Set of <strong>nodes</strong> (Core Domains, Disciplines, Subdisciplines, Thematic Domains, Concepts).</li>
+                    <li><span class="discipline-square" style="background: #9B59B6;"></span> \( \mathcal{S} \): Set of <strong>hyperedges</strong> (connecting any number of nodes <em>within or across Layers 4-5</em>).</li>
+                    <li><span class="discipline-square" style="background: #9B59B6;"></span> \( \mathcal{P} = \{P_1, P_2, P_3, P_4, P_5\} \): <strong>Partition of \( V \)</strong> into 5 ontological layers.</li>
+                    <li><span class="discipline-square" style="background: #9B59B6;"></span> \( \mathcal{T} \): Set of <strong>inter-layer edges</strong> (hierarchical relationships, e.g., Discipline → Subdiscipline).</li>
+                    <li><span class="discipline-square" style="background: #9B59B6;"></span> \( \omega: \mathcal{S} \cup \mathcal{T} \rightarrow \mathbb{R}^+ \): <strong>Weight function</strong> (e.g., citation counts, semantic similarity).</li>
+                    <li><span class="discipline-square" style="background: #9B59B6;"></span> \( \tau: V \rightarrow \mathbb{N} \): <strong>Temporal function</strong> (time of introduction or last update).</li>
+                </ul>
+
+                <!-- Algebraic Operators & Boundary Constraints -->
+                <h4 style="margin-top: 25px; color: var(--accent);">⬢ Algebraic Operators & Boundary Constraints</h4>
+                <p style="margin-top: 10px;">
+                    To computationally evaluate the topological dynamics of the multilayer hypergraph \( \mathcal{H} \), we map its structural relationships into a unified tensor and matrix space.
+                </p>
+
+                <p style="margin-top: 15px;">
+                    Let \( \mathbf{H} \in \mathbb{R}^{|V| \times |\mathcal{S}|} \) be the <strong>hypergraph incidence matrix</strong>, where:
+                </p>
+                <p style="font-family: 'Space Mono', monospace; font-size: 1.1em; line-height: 1.6; background: var(--bg-light); padding: 15px; border-radius: var(--r); margin-top: 10px;">
+                    \[
+                    H_{v,e} =
+                    \begin{cases}
+                    1 & \text{if } v \in e, \\
+                    0 & \text{otherwise.}
+                    \end{cases}
+                    \]
+                </p>
+
+                <p style="margin-top: 15px;">
+                    Let \( \mathbf{W} \in \mathbb{R}^{|\mathcal{S}| \times |\mathcal{S}|} \) be a <strong>diagonal matrix</strong> storing the hyperedge weights, where \( \mathbf{W}_{e,e} = \omega(e) \).
+                </p>
+
+                <!-- Ontological Layer-Boundary Constraints -->
+                <h5 style="margin-top: 20px; color: #9B59B6;">1. Ontological Layer-Boundary Constraints</h5>
+                <p style="margin-top: 10px;">
+                    To prevent structural degeneration into an unconstrained hypergraph and preserve taxonomic inheritance, the inter-layer directed edge set \( \mathcal{T} \) is <strong>strictly constrained to adjacent partitions</strong>:
+                </p>
+                <p style="font-family: 'Space Mono', monospace; font-size: 1.1em; line-height: 1.6; background: var(--bg-light); padding: 15px; border-radius: var(--r); margin-top: 10px;">
+                    \[
+                    \mathcal{T} \subseteq \bigcup_{l=1}^{4} \left( P_l \times P_{l+1} \right)
+                    \]
+                </p>
+                <p style="margin-top: 10px;">
+                    This guarantees that hierarchical taxonomy flows <strong>monotonically downward</strong> (\( P_1 \to P_2 \to P_3 \to P_4 \to P_5 \)), while cross-disciplinary hyperedges (\( \mathcal{S} \)) retain the structural freedom to bind multi-node configurations <em>across Layers 4-5</em>.
+                </p>
+                <p style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                    <strong>Note:</strong> \( \mathcal{S} \) is restricted to Layers 4-5 to avoid over-permissiveness while still capturing interdisciplinary connections (e.g., a concept in Layer 5 connecting to multiple thematic domains in Layer 4).
+                </p>
+
+                <!-- Fundamental Degree Matrices -->
+                <h5 style="margin-top: 20px; color: #9B59B6;">2. Fundamental Degree Matrices</h5>
+                <p style="margin-top: 10px;">
+                    The following matrices are <strong>essential for analyzing and simulating</strong> knowledge diffusion in MLKN.model:
+                </p>
+
+                <p style="margin-top: 15px;">
+                    <strong>Weighted Node Hyperdegree Matrix (\( \mathbf{D}_v \)):</strong> A diagonal matrix \( \mathbf{D}_v \in \mathbb{R}^{|V| \times |V|} \) quantifying the total weighted hyperedge footprint of each node \( v \in V \):
+                </p>
+                <p style="font-family: 'Space Mono', monospace; font-size: 1.1em; line-height: 1.6; background: var(--bg-light); padding: 15px; border-radius: var(--r); margin-top: 10px;">
+                    \[
+                    (\mathbf{D}_v)_{vv} = d(v) = \sum_{e \in \mathcal{S}} \omega(e) H_{v,e}
+                    \]
+                </p>
+
+                <p style="margin-top: 15px;">
+                    <strong>Hyperedge Cardinality Matrix (\( \mathbf{D}_e \)):</strong> A diagonal matrix \( \mathbf{D}_e \in \mathbb{R}^{|\mathcal{S}| \times |\mathcal{S}|} \) measuring the exact node cardinality of each hyperedge \( e \in \mathcal{S} \):
+                </p>
+                <p style="font-family: 'Space Mono', monospace; font-size: 1.1em; line-height: 1.6; background: var(--bg-light); padding: 15px; border-radius: var(--r); margin-top: 10px;">
+                    \[
+                    (\mathbf{D}_e)_{ee} = |e| = \sum_{v \in V} H_{v,e}
+                    \]
+                </p>
+                <p style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                    <strong>Intuition:</strong> \( \mathbf{D}_v \) tells us how "influential" a node is (based on its hyperedge connections), while \( \mathbf{D}_e \) tells us how "large" a hyperedge is (number of nodes it connects).
+                </p>
+
+                <!-- Normalized Hypergraph Random Walk -->
+                <h5 style="margin-top: 20px; color: #9B59B6;">3. Normalized Hypergraph Random Walk Transition Matrix</h5>
+                <p style="margin-top: 10px;">
+                    Epistemic diffusion—modeling how <strong>conceptual breakthroughs propagate</strong> across disparate thematic domains—is formalized as a <strong>two-stage stochastic Markov chain</strong> on \( \mathcal{S} \) (Node \( \to \) Hyperedge \( \to \) Node).
+                </p>
+                <p style="margin-top: 10px;">
+                    The probability \( P(v_j \mid v_i) \) of an epistemic random walker transiting from node \( v_i \) to node \( v_j \) via any mutually shared hyperedge \( e \) is:
+                </p>
+                <p style="font-family: 'Space Mono', monospace; font-size: 1.1em; line-height: 1.6; background: var(--bg-light); padding: 15px; border-radius: var(--r); margin-top: 10px;">
+                    \[
+                    P(v_j \mid v_i) = \sum_{e \in \mathcal{S}} \frac{\omega(e)}{d(v_i)} \frac{H_{v_i,e} H_{v_j,e}}{|e|}
+                    \]
+                </p>
+                <p style="margin-top: 15px;">
+                    Expressed globally in matrix form, the <strong>normalized transition probability matrix</strong> \( \mathbf{T}_{\mathcal{H}} \in \mathbb{R}^{|V| \times |V|} \) driving the engine’s predictive learning models is:
+                </p>
+                <p style="font-family: 'Space Mono', monospace; font-size: 1.1em; line-height: 1.6; background: var(--bg-light); padding: 15px; border-radius: var(--r); margin-top: 10px;">
+                    \[
+                    \mathbf{T}_{\mathcal{H}} = \mathbf{D}_v^{-1} \mathbf{H} \mathbf{W} \mathbf{D}_e^{-1} \mathbf{H}^T
+                    \]
+                </p>
+                <p style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                    <strong>Intuition:</strong> This matrix encodes the probability of moving from any node to any other node via shared hyperedges, weighted by their importance (\( \omega \)).
+                </p>
+                <p style="margin-top: 15px; font-size: 0.9em;">
+                    <strong>Literature:</strong>
+                    <a href="https://arxiv.org/abs/2006.12613" target="_blank" style="color: var(--accent);">Battiston et al., 2020</a> (Higher-order networks),
+                    <a href="https://arxiv.org/abs/1002.3690" target="_blank" style="color: var(--accent);">Chung & Graham, 2010</a> (Hypergraph random walks).
+                </p>
+
+                <p style="margin-top: 15px;">
+                    <strong>Example in MLKN.lab:</strong>
+                </p>
+                <ul class="discipline-list">
+                    <li><span class="discipline-square" style="background: #9B59B6;"></span> A random walk starting at <em>\"Neural Networks\"</em> (Layer 5) might transition to <em>\"Machine Learning\"</em> (Layer 5) via a hyperedge connecting both to <em>\"Artificial Intelligence\"</em> (Layer 4).</li>
+                    <li><span class="discipline-square" style="background: #9B59B6;"></span> The probability of this transition depends on the <strong>weight</strong> of the hyperedge and the <strong>hyperdegree</strong> of the nodes.</li>
+                </ul>
+                <p style="margin-top: 20px; font-size: 0.95em; color: #666;">
+                    <strong>Temporal Extension:</strong> The transition matrix \( \mathbf{T}_{\mathcal{H}} \) can be extended to a <strong>time-evolving</strong> matrix \( \mathbf{T}_{\mathcal{H}}(t) \) by incorporating the temporal function \( \tau \). This allows MLKN.model to simulate <strong>dynamic knowledge diffusion</strong> (e.g., the emergence of new disciplines over time).
+                </p>
+            </div>
+        </section>
+
+        <!-- Comparison -->
+        <section id="comparison" class="section" aria-labelledby="comparison-title">
+            <br>
+            <h2 class="sec-h" id="comparison-title">Comparison: Multilayer Networks vs. Hypergraphs</h2>
+            <p class="sec-sub">When to Use Each Structure and How They Complement Each Other</p>
+            <div class="nav-box">
+                <a href="#overview">Overview</a>
+                <a href="#theoretical-definitions">Theoretical Definitions</a>
+                <a href="#mathematical-definitions">Mathematical Definitions</a>
+                <a href="#comparison" class="active">Comparison</a>
+                <a href="#mathematical-frameworks">Mathematical Frameworks</a>
+                <a href="#advanced-tools">Advanced Tools</a>
+                <a href="#validation">Validation & Benchmarking</a>
+                <a href="#future-work">Future Work</a>
+            </div>
+            <br>
+
+            <p>
+                Below, we compare <strong>multilayer networks</strong> and <strong>hypergraphs</strong>, highlighting their strengths, limitations,
+                and how they are <strong>unified in MLKN.model</strong>.
+            </p>
+            <br>
+        
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                    <thead>
+                        <tr style="background: var(--bg-light);">
+                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--border);">Feature</th>
+                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--border);">Multilayer Network</th>
+                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--border);">Hypergraph</th>
+                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--border);">MLKN.model (Unified Framework)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);"><strong>Structure</strong></td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">Nodes and edges partitioned into layers.</td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">Edges can connect any number of nodes.</td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">Combines both: layers + hyperedges.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);"><strong>Hierarchy</strong></td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">✅ Explicit (inter-layer edges).</td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">❌ No inherent hierarchy.</td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">✅ Explicit (via layers).</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);"><strong>Cross-Disciplinary</strong></td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">❌ Limited (only inter-layer edges).</td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">✅ Yes (hyperedges span multiple nodes).</td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">✅ Yes (via hyperedges).</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);"><strong>Representation</strong></td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">Tree-like or lattice-like.</td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">Non-linear, multi-node connections.</td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">Both hierarchical and non-linear.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);"><strong>Use Case in MLKN.lab</strong></td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">Layers 1-4 (Core Domains → Thematic Domains).</td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">Layers 4-5 (Thematic Domains → Concepts).</td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">All 5 layers.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);"><strong>Mathematical Tools</strong></td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">Adjacency matrices, Laplacians.</td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">Incidence matrices, clique expansions.</td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">Both + unified algebra.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);"><strong>Limitations</strong></td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">Cannot model multi-node connections.</td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">Cannot model hierarchy.</td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">None (combines strengths of both).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="essay-box" style="margin-top: 25px;">
+                <h3>Key Insights</h3>
+                <p>
+                    <strong>Multilayer networks</strong> are ideal for:
+                </p>
+                <ul class="discipline-list">
+                    <li><span class="discipline-square" style="background: #1A6BAA;"></span> Modeling <strong>hierarchical, structured knowledge</strong> (e.g., disciplines → subdisciplines).</li>
+                    <li><span class="discipline-square" style="background: #1A6BAA;"></span> Analyzing <strong>top-down knowledge diffusion</strong> (e.g., how ideas propagate from Core Domains to Concepts).</li>
+                </ul>
+                <p style="margin-top: 15px;">
+                    <strong>Hypergraphs</strong> are ideal for:
+                </p>
+                <ul class="discipline-list">
+                    <li><span class="discipline-square" style="background: #2ECC71;"></span> Representing <strong>cross-disciplinary, non-linear connections</strong> (e.g., concepts spanning multiple fields).</li>
+                    <li><span class="discipline-square" style="background: #2ECC71;"></span> Capturing <strong>higher-order interactions</strong> (e.g., collaborations between multiple disciplines).</li>
+                </ul>
+                <p style="margin-top: 15px;">
+                    <strong>MLKN.model</strong> unifies both to:
+                </p>
+                <ul class="discipline-list">
+                    <li><span class="discipline-square" style="background: #9B59B6;"></span> Preserve the <strong>hierarchical structure</strong> of academic knowledge.</li>
+                    <li><span class="discipline-square" style="background: #9B59B6;"></span> Enable <strong>cross-disciplinary analysis</strong> without losing granularity.</li>
+                    <li><span class="discipline-square" style="background: #9B59B6;"></span> Support <strong>multi-scale modeling</strong> (from Core Domains to Concepts).</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Mathematical Frameworks -->
+        <section id="mathematical-frameworks" class="section" aria-labelledby="mathematical-frameworks-title">
+            <br>
+            <h2 class="sec-h" id="mathematical-frameworks-title">Core Mathematical Frameworks</h2>
+            <p class="sec-sub">The Pillars of Computational Epistemology in MLKN.model</p>
+            <div class="nav-box">
+                <a href="#overview">Overview</a>
+                <a href="#theoretical-definitions">Theoretical Definitions</a>
+                <a href="#mathematical-definitions">Mathematical Definitions</a>
+                <a href="#comparison">Comparison</a>
+                <a href="#mathematical-frameworks" class="active">Mathematical Frameworks</a>
+                <a href="#advanced-tools">Advanced Tools</a>
+                <a href="#validation">Validation & Benchmarking</a>
+                <a href="#future-work">Future Work</a>
+            </div>
+            <br>
+            
+            <p>
+                MLKN.model is grounded in <strong>six core mathematical frameworks</strong>, each addressing a distinct aspect of knowledge representation and analysis:
+            </p>
+            <br>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px;">
+                <!-- Graph Theory -->
+                <div class="layer-card" style="min-height: fit-content; overflow: visible !important; margin-bottom: 20px !important;">
+                    <div class="licon" style="color: #1A6BAA;">⬢</div>
+                    <h3>Graph Theory</h3>
+                    <p>
+                        Knowledge is modeled as a <strong>directed, weighted, multi-layered graph</strong> \( G = (V, E, A) \), where:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Nodes (V)</strong>: Represent disciplines, subdisciplines, and concepts (e.g., "Physics," "Quantum Mechanics").</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Edges (E)</strong>: Represent <strong>hierarchical</strong> (e.g., Physics → Quantum Mechanics), <strong>interdisciplinary</strong> (e.g., Quantum Mechanics → Chemistry), and <strong>thematic</strong> (e.g., Machine Learning → Neural Networks) relationships.</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Adjacency Matrix (A)</strong>: A matrix where \( A_{ij} = \omega(e_{ij}) \) if an edge \( e_{ij} \) exists from node \( i \) to \( j \), else \( 0 \).</li>
+                    </ul>
+                    <p style="margin-top: 15px;">
+                        <strong>Key Matrices for MLKN.model:</strong>
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Intra-Layer Adjacency \( A^{(l)} \)</strong>: Connections <em>within</em> layer \( l \) (e.g., subdisciplines in Physics).</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Inter-Layer Adjacency \( A^{(l, l+1)} \)</strong>: Hierarchical edges <em>between</em> layers \( l \) and \( l+1 \) (e.g., Discipline → Subdiscipline).</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Laplacian Matrix \( L \)</strong>: Defined as \( L = D - A \), where \( D \) is the degree matrix. Used for <strong>spectral clustering</strong> of disciplines.</li>
+                    </ul>
+                    <p style="margin-top: 15px;">
+                        <strong>Example in MLKN.lab:</strong>
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> The <strong>Laplacian</strong> of Layer 2 (Disciplines) can reveal <strong>clusters</strong> (e.g., Natural Sciences vs. Social Sciences).</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> The <strong>eigenvector centrality</strong> of \( A^{(2)} \) identifies <strong>influential disciplines</strong> (e.g., Mathematics).</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 0.9em;">
+                        <strong>Literature:</strong>
+                        <a href="https://www.nature.com/articles/nphys2958" target="_blank" style="color: var(--accent);">Boccaletti et al., 2014</a> (Multilayer Networks),
+                        <a href="https://arxiv.org/abs/0605085" target="_blank" style="color: var(--accent);">Newman, 2006</a> (Modularity and Community Structure).
+                    </p>
+                    <p style="margin-top: 15px; font-size: 0.9em;">
+                        <strong>Key Tools:</strong> NetworkX (Python), Vis.js (JavaScript), D3.js.
+                    </p>
+                </div>
+                
+                <!-- Topological Data Analysis -->
+                <div class="layer-card" style="min-height: fit-content; overflow: visible !important; margin-bottom: 20px !important;">
+                    <div class="licon" style="color: #2ECC71;">⬢</div>
+                    <h3>Topological Data Analysis (TDA)</h3>
+                    <p>
+                        Uses <strong>persistent homology</strong> to study the <strong>shape of knowledge</strong> by analyzing the <strong>filtration of the hypergraph incidence matrix \( \mathbf{H} \)</strong>:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Filtration of \( \mathbf{H} \)</strong>: Construct a sequence of simplicial complexes from \( \mathbf{H} \) by thresholding hyperedge weights \( \omega(e) \):
+                            <p style="font-family: 'Space Mono', monospace; font-size: 0.95em; line-height: 1.6; background: var(--bg-light); padding: 10px; border-radius: var(--r); margin-top: 10px;">
+                                \[
+                                \mathbf{H}_\theta = \{ H_{v,e} \mid \omega(e) \geq \theta \}, \quad \theta \in [0, 1]
+                                \]
+                            </p>
+                        </li>
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Holes (Betti-1)</strong>: Represent <strong>gaps or missing connections</strong> in knowledge (e.g., under-explored interdisciplinary areas between Physics and Biology).</li>
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Connected Components (Betti-0)</strong>: Represent <strong>clusters of related disciplines</strong> (e.g., all subfields of Computer Science).</li>
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Betti Numbers</strong>: Quantify the <strong>dimensionality of knowledge structures</strong> (e.g., \( \beta_0 \) = number of connected components, \( \beta_1 \) = number of holes).</li>
+                    </ul>
+                    <p style="margin-top: 15px;">
+                        <strong>Example in MLKN.lab:</strong>
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> A <strong>hole</strong> in the filtration at \( \theta = 0.5 \) might reveal a missing connection between <em>Quantum Computing</em> (Layer 3) and <em>Topological Materials</em> (Layer 3).</li>
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> A <strong>persistent connected component</strong> across all \( \theta \) indicates a <strong>stable discipline cluster</strong> (e.g., Mathematics).</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 0.9em;">
+                        <strong>Literature:</strong>
+                        <a href="https://doi.org/10.1090/S0273-0979-09-01249-X" target="_blank" style="color: var(--accent);">Carlsson, 2009</a> (Topology and Data),
+                        <a href="https://doi.org/10.2312/PE.PBG.PBG13.091-100" target="_blank" style="color: var(--accent);">Petri et al., 2013</a> (TDA for Networks),
+                        <a href="https://doi.org/10.1038/s41467-018-04002-3" target="_blank" style="color: var(--accent);">Bianconi, 2018</a> (TDA for Science of Science).
+                    </p>
+                    <p style="margin-top: 15px; font-size: 0.9em;">
+                        <strong>Key Tools:</strong> Gudhi, Ripser, Dionysus.
+                    </p>
+                </div>
+                
+                <!-- Information Theory -->
+                <div class="layer-card" style="min-height: fit-content; overflow: visible !important; margin-bottom: 20px !important;">
+                    <div class="licon" style="color: #FF6347;">⬢</div>
+                    <h3>Information Theory</h3>
+                    <p>
+                        Applies <strong>entropy and complexity metrics</strong> to quantify the <strong>organization and efficiency</strong> of knowledge in MLKN.model:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Shannon Entropy \( H(X) \)</strong>: Measures the <strong>uncertainty</strong> or <strong>diversity</strong> of a discipline’s subfields:
+                            <p style="font-family: 'Space Mono', monospace; font-size: 0.95em; line-height: 1.6; background: var(--bg-light); padding: 10px; border-radius: var(--r); margin-top: 10px;">
+                                \[
+                                H(X) = -\sum_{x \in X} p(x) \log p(x)
+                                \]
+                            </p>
+                            <p style="font-size: 0.9em; color: #666; margin-top: 5px;">
+                                where \( X \) is a discipline (e.g., Physics) and \( p(x) \) is the probability of subfield \( x \) (e.g., Quantum Mechanics).
+                            </p>
+                        </li>
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Mutual Information \( I(X;Y) \)</strong>: Quantifies the <strong>shared information</strong> between two disciplines \( X \) and \( Y \):
+                            <p style="font-family: 'Space Mono', monospace; font-size: 0.95em; line-height: 1.6; background: var(--bg-light); padding: 10px; border-radius: var(--r); margin-top: 10px;">
+                                \[
+                                I(X;Y) = \sum_{x \in X} \sum_{y \in Y} p(x,y) \log \frac{p(x,y)}{p(x)p(y)}
+                                \]
+                            </p>
+                        </li>
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Redundancy</strong>: Measures <strong>overlap</strong> between fields (e.g., shared concepts between Computer Science and Mathematics).</li>
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Efficiency</strong>: Assesses how <strong>optimally</strong> knowledge is structured (e.g., low entropy = highly organized).</li>
+                    </ul>
+                    <p style="margin-top: 15px;">
+                        <strong>Example in MLKN.lab:</strong>
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> High \( H(X) \) for <em>Interdisciplinary Fields</em> (e.g., Cognitive Science) indicates <strong>diverse subfields</strong>.</li>
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> High \( I(X;Y) \) between <em>Computer Science</em> and <em>Mathematics</em> reflects their <strong>strong interplay</strong>.</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 0.9em;">
+                        <strong>Literature:</strong>
+                        <a href="https://www.nature.com/articles/s41562-019-0680-8" target="_blank" style="color: var(--accent);">DeDeo et al., 2019</a> (Information Theory in Science),
+                        <a href="https://arxiv.org/abs/1905.13195" target="_blank" style="color: var(--accent);">Rosvall & Lizana, 2019</a> (Compression and Information in Networks).
+                    </p>
+                    <p style="margin-top: 15px; font-size: 0.9em;">
+                        <strong>Key Tools:</strong> Scikit-learn, NumPy, SciPy.
+                    </p>
+                </div>
+                
+                <!-- Dynamical Systems -->
+                <div class="layer-card" style="min-height: fit-content; overflow: visible !important; margin-bottom: 20px !important;">
+                    <div class="licon" style="color: #9B59B6;">⬢</div>
+                    <h3>Dynamical Systems</h3>
+                    <p>
+                        Models knowledge as a <strong>dynamical system</strong> where the state evolves via the <strong>hypergraph transition matrix \( \mathbf{T}_{\mathcal{H}} \)</strong>:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #9B59B6;"></span> <strong>State Space</strong>: All possible configurations of the knowledge network, represented as probability distributions \( \mathbf{P}_t \in \mathbb{R}^{|V|} \).</li>
+                        <li><span class="discipline-square" style="background: #9B59B6;"></span> <strong>Trajectories</strong>: The evolution of \( \mathbf{P}_t \) over time, governed by:
+                            <p style="font-family: 'Space Mono', monospace; font-size: 1em; line-height: 1.6; background: var(--bg-light); padding: 10px; border-radius: var(--r); margin-top: 10px;">
+                                \[
+                                \mathbf{P}_{t+1} = \mathbf{P}_t \mathbf{T}_{\mathcal{H}}
+                                \]
+                            </p>
+                        </li>
+                        <li><span class="discipline-square" style="background: #9B59B6;"></span> <strong>Attractors</strong>: Stable configurations (e.g., major disciplines like Physics or Mathematics) where \( \mathbf{P}_t \) converges to a stationary distribution \( \mathbf{P}_\infty \).</li>
+                        <li><span class="discipline-square" style="background: #9B59B6;"></span> <strong>Wasserstein Stability</strong>: The system is stable if \( W_1(\mathbf{P}_t, \mathbf{P}_{t+1}) \to 0 \) as \( t \to \infty \).</li>
+                    </ul>
+                    <p style="margin-top: 15px;">
+                        <strong>Example in MLKN.lab:</strong>
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #9B59B6;"></span> Simulate the <strong>emergence of Bioinformatics</strong> by tracking \( \mathbf{P}_t \) from 1980 to 2020.</li>
+                        <li><span class="discipline-square" style="background: #9B59B6;"></span> Identify <strong>attractors</strong> (e.g., Mathematics) where \( \mathbf{P}_\infty \) has high probability mass.</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 0.9em;">
+                        <strong>Literature:</strong>
+                        <a href="https://doi.org/10.1017/CBO9780511754217" target="_blank" style="color: var(--accent);">Barrat et al., 2008</a> (Dynamical Processes on Networks),
+                        <a href="https://doi.org/10.1016/j.joi.2019.100984" target="_blank" style="color: var(--accent);">Shi et al., 2019</a> (Knowledge Evolution),
+                        <a href="https://doi.org/10.1017/CBO9780511815240" target="_blank" style="color: var(--accent);">Norris, 1998</a> (Markov Chains).
+                    </p>
+                    <p style="margin-top: 15px; font-size: 0.9em;">
+                        <strong>Key Tools:</strong> SciPy, MATLAB, custom ODE solvers.
+                    </p>
+                </div>
+                
+                <!-- Optimal Transport -->
+               <div class="layer-card" style="min-height: fit-content; overflow: visible !important; margin-bottom: 20px !important;">
+                    <div class="licon" style="color: #FFD700;">⬢</div>
+                    <h3>Optimal Transport Theory</h3>
+                    <p>
+                        Measures the <strong>"distance" between disciplines</strong> by modeling knowledge as a <strong>probability distribution</strong> and using the <strong>Wasserstein-1 distance</strong> to quantify the <strong>epistemic effort</strong> required to transform one distribution into another.
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #FFD700;"></span> <strong>Knowledge State Distributions</strong>: Let \( \mathbf{P}_t \in \mathbb{R}^{|V|} \) be a probability distribution over nodes \( V \) at time \( t \), generated via the hypergraph random walk transition matrix \( \mathbf{T}_{\mathcal{H}} \):
+                            <p style="font-family: 'Space Mono', monospace; font-size: 1em; line-height: 1.6; background: var(--bg-light); padding: 10px; border-radius: var(--r); margin-top: 10px;">
+                                \[
+                                \mathbf{P}_t = \mathbf{P}_0 \mathbf{T}_{\mathcal{H}}^t
+                                \]
+                            </p>
+                        </li>
+                        <li><span class="discipline-square" style="background: #FFD700;"></span> <strong>Ground Metric</strong>: The cost \( c(v_i, v_j) \) of moving knowledge from node \( v_i \) to \( v_j \) is defined as:
+                            <p style="font-family: 'Space Mono', monospace; font-size: 1em; line-height: 1.6; background: var(--bg-light); padding: 10px; border-radius: var(--r); margin-top: 10px;">
+                                \[
+                                c(v_i, v_j) = -\log P(v_j \mid v_i)
+                                \]
+                            </p>
+                            <p style="font-size: 0.9em; color: #666; margin-top: 5px;">
+                                <strong>Intuition:</strong> Nodes with high transition probability are "closer" in epistemic space.
+                            </p>
+                        </li>
+                        <li><span class="discipline-square" style="background: #FFD700;"></span> <strong>Wasserstein-1 Distance</strong>: The optimal transport distance between two knowledge states \( \mathbf{\mu} \) and \( \mathbf{\nu} \) is:
+                            <p style="font-family: 'Space Mono', monospace; font-size: 1em; line-height: 1.6; background: var(--bg-light); padding: 10px; border-radius: var(--r); margin-top: 10px;">
+                                \[
+                                W_1(\mathbf{\mu}, \mathbf{\nu}) = \inf_{\mathbf{\gamma} \in \Pi(\mathbf{\mu}, \mathbf{\nu})} \sum_{i,j} \gamma_{i,j} c(v_i, v_j)
+                                \]
+                            </p>
+                            <p style="font-size: 0.9em; color: #666; margin-top: 5px;">
+                                where \( \Pi(\mathbf{\mu}, \mathbf{\nu}) \) is the set of transport plans \( \mathbf{\gamma} \) such that:
+                            </p>
+                            <p style="font-family: 'Space Mono', monospace; font-size: 0.95em; line-height: 1.6; background: var(--bg-light); padding: 10px; border-radius: var(--r); margin-top: 5px;">
+                                \[
+                                \sum_j \gamma_{i,j} = \mathbf{\mu}_i, \quad \sum_i \gamma_{i,j} = \mathbf{\nu}_j
+                                \]
+                            </p>
+                        </li>
+                    </ul>
+                    <p style="margin-top: 15px;">
+                        <strong>Example in MLKN.lab:</strong>
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #FFD700;"></span> Compare the knowledge distributions of <em>Computer Science</em> (\( \mathbf{\mu} \)) and <em>Neuroscience</em> (\( \mathbf{\nu} \)) to measure their <strong>cognitive distance</strong>.</li>
+                        <li><span class="discipline-square" style="background: #FFD700;"></span> Track the evolution of <em>Physics</em> from 1990 (\( \mathbf{\mu} \)) to 2020 (\( \mathbf{\nu} \)) to quantify <strong>disciplinary drift</strong>.</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 0.9em;">
+                        <strong>Computational Note:</strong> For large-scale networks (e.g., OpenAlex), use the <strong>Sinkhorn algorithm</strong> with entropy regularization:
+                    </p>
+                    <p style="font-family: 'Space Mono', monospace; font-size: 0.95em; line-height: 1.6; background: var(--bg-light); padding: 10px; border-radius: var(--r); margin-top: 5px;">
+                        \[
+                        W_1^\epsilon(\mathbf{\mu}, \mathbf{\nu}) = \min_{\mathbf{\gamma}} \sum_{i,j} \gamma_{i,j} c(v_i, v_j) + \epsilon \sum_{i,j} \gamma_{i,j} \log \gamma_{i,j}
+                        \]
+                    </p>
+                    <p style="margin-top: 15px; font-size: 0.9em;">
+                        <strong>Literature:</strong>
+                        <a href="https://doi.org/10.1090/gsm/058" target="_blank" style="color: var(--accent);">Villani, 2003</a> (Optimal Transportation),
+                        <a href="https://arxiv.org/abs/1306.0895" target="_blank" style="color: var(--accent);">Cuturi, 2013</a> (Sinkhorn Distances),
+                        <a href="https://doi.org/10.1561/2200000073" target="_blank" style="color: var(--accent);">Peyré & Cuturi, 2019</a> (Computational OT),
+                        <a href="https://doi.org/10.1007/s41109-020-00300-3" target="_blank" style="color: var(--accent);">Bassetti et al., 2020</a> (OT for Knowledge Graphs).
+                    </p>
+                   <p style="margin-top: 15px; font-size: 0.9em;">
+                        <strong>Key Tools:</strong> POT (Python Optimal Transport), Sinkhorn algorithm.
+                    </p>
+                </div>
+                
+                <!-- Causal Inference -->
+                <div class="layer-card" style="min-height: fit-content; overflow: visible !important; margin-bottom: 20px !important;">
+                    <div class="licon" style="color: #E74C3C;">⬢</div>
+                    <h3>Causal Inference</h3>
+                    <p>
+                        Tests <strong>meta-science hypotheses</strong> by modeling knowledge as a <strong>causal graph</strong> and using <strong>do-calculus</strong> to infer relationships:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #E74C3C;"></span> <strong>Causal Graph</strong>: A directed acyclic graph (DAG) where nodes are disciplines/concepts and edges represent <strong>causal influences</strong> (e.g., "Mathematics → Physics → Engineering").</li>
+                        <li><span class="discipline-square" style="background: #E74C3C;"></span> <strong>Do-Calculus</strong>: A framework for identifying causal effects from observational data. For example, to assess:
+                            <p style="font-family: 'Space Mono', monospace; font-size: 0.95em; line-height: 1.6; background: var(--bg-light); padding: 10px; border-radius: var(--r); margin-top: 10px;">
+                                \[
+                                P(Y \mid do(X=x)) \quad \text{(Effect of intervention \( X=x \) on \( Y \))}
+                                \]
+                            </p>
+                            <p style="font-size: 0.9em; color: #666; margin-top: 5px;">
+                                where \( do(X=x) \) represents an intervention (e.g., "What if we increase funding for interdisciplinarity?").
+                            </p>
+                        </li>
+                        <li><span class="discipline-square" style="background: #E74C3C;"></span> <strong>Counterfactuals</strong>: Answer "what-if" questions by simulating <strong>alternative histories</strong> of science:
+                            <p style="font-family: 'Space Mono', monospace; font-size: 0.95em; line-height: 1.6; background: var(--bg-light); padding: 10px; border-radius: var(--r); margin-top: 10px;">
+                                \[
+                                P(Y_{X=x} \mid X=x', Y=y')
+                                \]
+                            </p>
+                            <p style="font-size: 0.9em; color: #666; margin-top: 5px;">
+                                Example: "What would the citation network look like if <em>Computer Science</em> had not emerged?"
+                            </p>
+                        </li>
+                    </ul>
+                    <p style="margin-top: 15px;">
+                        <strong>Example in MLKN.lab:</strong>
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #E74C3C;"></span> Use <strong>do-calculus</strong> to test: <em>"Does interdisciplinarity increase citation impact?"</em></li>
+                        <li><span class="discipline-square" style="background: #E74C3C;"></span> Use <strong>counterfactuals</strong> to explore: <em>"How would Physics have evolved without Quantum Mechanics?"</em></li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 0.9em;">
+                        <strong>Literature:</strong>
+                        <a href="https://bayes.cs.ucla.edu/BOOK-08/" target="_blank" style="color: var(--accent);">Pearl, 2009</a> (Causality),
+                        <a href="https://arxiv.org/abs/2002.02851" target="_blank" style="color: var(--accent);">Hernán & Robins, 2020</a> (Causal Inference).
+                    </p>
+                    <p style="margin-top: 15px; font-size: 0.9em;">
+                        <strong>Key Tools:</strong> DoWhy, CausalML, PyMC, Dowhy.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advanced Tools -->
+        <section id="advanced-tools" class="section" aria-labelledby="advanced-tools-title">
+            <br>
+            <h2 class="sec-h" id="advanced-tools-title">Advanced Computational Tools</h2>
+            <p class="sec-sub">Enhancing MLKN.model with Machine Learning and AI</p>
+            <div class="nav-box">
+                <a href="#overview">Overview</a>
+                <a href="#theoretical-definitions">Theoretical Definitions</a>
+                <a href="#mathematical-definitions">Mathematical Definitions</a>
+                <a href="#comparison">Comparison</a>
+                <a href="#mathematical-frameworks">Mathematical Frameworks</a>
+                <a href="#advanced-tools" class="active">Advanced Tools</a>
+                <a href="#validation">Validation & Benchmarking</a>
+                <a href="#future-work">Future Work</a>
+            </div>
+            <br>
+            
+            <p>
+                To analyze and simulate the knowledge network, MLKN.model integrates <strong>cutting-edge computational tools</strong>:
+            </p>
+            <br>
+            
+            <div class="layers-grid">
+                <!-- Graph Neural Networks -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #1A6BAA;">⬢</div>
+                    <h3>Graph Neural Networks (GNNs)</h3>
+                    <p>
+                        <strong>Message Passing Neural Networks (MPNNs)</strong> and <strong>Hypergraph Neural Networks (HGNNs)</strong> for:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Node Embeddings</strong>: Represent disciplines/concepts in a low-dimensional space.</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Link Prediction</strong>: Predict new interdisciplinary connections.</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Knowledge Diffusion</strong>: Simulate how ideas spread across fields.</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 0.9em;">
+                        <strong>Key Tools:</strong> PyTorch Geometric, DGL, Spektral.
+                    </p>
+                </div>
+                
+                <!-- Random Walks & Diffusion -->
+                <div class="layer-card">
+                  <div class="licon" style="color: #2ECC71;">⬢</div>
+                  <h3>Random Walks & Diffusion</h3>
+                  <p>
+                      Models <strong>knowledge exploration paths</strong> using the <strong>normalized hypergraph transition matrix \( \mathbf{T}_{\mathcal{H}} \)</strong>:
+                  </p>
+                  <ul class="discipline-list">
+                      <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Personalized PageRank</strong>: Identify influential nodes (e.g., key disciplines) using \( \mathbf{T}_{\mathcal{H}} \).</li>
+                      <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Hypergraph Random Walks</strong>: Capture cross-disciplinary paths via \( P(v_j \mid v_i) \).</li>
+                      <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Diffusion Processes</strong>: Model the spread of ideas over time using \( \mathbf{T}_{\mathcal{H}} \).</li>
+                  </ul>
+                  <p style="margin-top: 15px; font-size: 0.9em;">
+                      <strong>Key Tools:</strong> NetworkX, Graph-tool, custom implementations.
+                  </p>
+                </div>
+                
+                <!-- Temporal Networks -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #FF6347;">⬢</div>
+                    <h3>Temporal Networks</h3>
+                    <p>
+                        Captures the <strong>evolution of knowledge</strong> over time:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Time-Evolving Graphs</strong>: Track changes in the network structure.</li>
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Temporal GNNs</strong>: Predict future states of the knowledge network.</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 0.9em;">
+                        <strong>Key Tools:</strong> TGAT, DySAT, custom RNN-based models.
+                    </p>
+                </div>
+                
+                <!-- Semantic Analysis -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #9B59B6;">⬢</div>
+                    <h3>Semantic Analysis</h3>
+                    <p>
+                        Uses <strong>NLP and word embeddings</strong> to quantify semantic relationships:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #9B59B6;"></span> <strong>SciBERT</strong>: Domain-specific embeddings for scientific text.</li>
+                        <li><span class="discipline-square" style="background: #9B59B6;"></span> <strong>Semantic Similarity</strong>: Measure proximity between concepts.</li>
+                        <li><span class="discipline-square" style="background: #9B59B6;"></span> <strong>Hybrid Metrics</strong>: Combine graph distance and semantic similarity.</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 0.9em;">
+                        <strong>Key Tools:</strong> HuggingFace Transformers, Gensim, spaCy.
+                    </p>
+                </div>
+                
+                <!-- Category Theory -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #FFD700;">⬢</div>
+                    <h3>Category Theory</h3>
+                    <p>
+                        Provides a <strong>high-level abstraction</strong> for knowledge structures:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #FFD700;"></span> <strong>Functors</strong>: Map between categories (e.g., disciplines as categories).</li>
+                        <li><span class="discipline-square" style="background: #FFD700;"></span> <strong>Natural Transformations</strong>: Represent relationships between functors.</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 0.9em;">
+                        <strong>Key Tools:</strong> Catlab, custom implementations.
+                    </p>
+                </div>
+                
+                <!-- Fuzzy Logic -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #E74C3C;">⬢</div>
+                    <h3>Fuzzy Logic</h3>
+                    <p>
+                        Models <strong>graded membership</strong> in disciplines:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #E74C3C;"></span> <strong>Fuzzy Sets</strong>: Represent partial belonging (e.g., "Is Cognitive Science part of Psychology or Neuroscience?").</li>
+                        <li><span class="discipline-square" style="background: #E74C3C;"></span> <strong>Fuzzy Rules</strong>: Define relationships between fuzzy sets.</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 0.9em;">
+                        <strong>Key Tools:</strong> Scikit-fuzzy, PyFuzzy.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Validation & Benchmarking -->
+        <section id="validation" class="section" aria-labelledby="validation-title">
+            <br>
+            <h2 class="sec-h" id="validation-title">Validation & Benchmarking</h2>
+            <p class="sec-sub">Testing MLKN.model Against Real-World Data</p>
+            <div class="nav-box">
+                <a href="#overview">Overview</a>
+                <a href="#theoretical-definitions">Theoretical Definitions</a>
+                <a href="#mathematical-definitions">Mathematical Definitions</a>
+                <a href="#comparison">Comparison</a>
+                <a href="#mathematical-frameworks">Mathematical Frameworks</a>
+                <a href="#advanced-tools">Advanced Tools</a>
+                <a href="#validation" class="active">Validation & Benchmarking</a>
+                <a href="#future-work">Future Work</a>
+            </div>
+            <br>
+            
+            <p>
+                To ensure <strong>scientific rigor</strong> and <strong>practical utility</strong>, MLKN.model is validated against <strong>real-world data</strong> and benchmarked against existing models.
+            </p>
+            <br>
+            
+            <div class="layers-grid">
+                <!-- Predictive Tasks -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #1A6BAA;">⬢</div>
+                    <h3>Predictive Tasks</h3>
+                    <p>
+                        <strong>Forecast the evolution of science</strong>:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Emergence of New Fields</strong>: Predict the rise of disciplines like "Quantum Machine Learning" or "Bioinformatics."</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Citation Impact</strong>: Assess whether interdisciplinarity increases research influence.</li>
+                        <li><span class="discipline-square" style="background: #1A6BAA;"></span> <strong>Collaboration Networks</strong>: Identify optimal team compositions for interdisciplinary projects.</li>
+                    </ul>
+                </div>
+                
+                <!-- Explanatory Tasks -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #2ECC71;">⬢</div>
+                    <h3>Explanatory Tasks</h3>
+                    <p>
+                        <strong>Explain known phenomena</strong> in the structure of science:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Centrality of Mathematics</strong>: Why is Mathematics a hub for so many disciplines?</li>
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Knowledge Gaps</strong>: Identify under-explored areas (e.g., missing links between Biology and Computer Science).</li>
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> <strong>Disciplinary Boundaries</strong>: Explain why some fields are more siloed than others.</li>
+                    </ul>
+                </div>
+                
+                <!-- Benchmarking -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #FF6347;">⬢</div>
+                    <h3>Benchmarking</h3>
+                    <p>
+                        <strong>Compare MLKN.model to existing frameworks</strong>:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>UCSD Map of Science</strong>: A global map of scientific disciplines ([Börner et al., 2012](https://scimaps.org/)).</li>
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>OpenAlex Hierarchy</strong>: The native classification system of OpenAlex.</li>
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Scopus Subject Areas</strong>: A commercial alternative for discipline classification.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="essay-box" style="margin-top: 25px;">
+                <h3>Validation Metrics</h3>
+                <p>
+                    We evaluate MLKN.model using the following <strong>quantitative metrics</strong>:
+                </p>
+                <ul class="discipline-list" style="margin-top: 10px;">
+                    <li><span class="discipline-square" style="background: #9B59B6;"></span> <strong>Modularity</strong>: Measures the strength of disciplinary divisions.</li>
+                    <li><span class="discipline-square" style="background: #9B59B6;"></span> <strong>Predictive Accuracy</strong>: Performance on forecasting tasks (e.g., new field emergence).</li>
+                    <li><span class="discipline-square" style="background: #9B59B6;"></span> <strong>Interdisciplinarity Score</strong>: Quantifies the degree of cross-disciplinary connections.</li>
+                    <li><span class="discipline-square" style="background: #9B59B6;"></span> <strong>Scalability</strong>: Ability to handle large-scale datasets (e.g., all OpenAlex concepts).</li>
                 </ul>
             </div>
         </section>
 
-        <!-- =============================================
-                 MULTILAYER NETWORKS VS. HYPERGRAPHS: COMPARISON
-                 ============================================= -->
-            <section id="comparison" class="section" aria-labelledby="comparison-title">
-              <br>
-              <h2 class="sec-h" id="comparison-title">Multilayer Networks vs. Hypergraphs</h2>
-              <p class="sec-sub">Complementary Representations in MLKN.model</p>
-
-              <div class="nav-box">
+        <!-- Future Work -->
+        <section id="future-work" class="section" aria-labelledby="future-work-title">
+            <br>
+            <h2 class="sec-h" id="future-work-title">Future Work</h2>
+            <p class="sec-sub">Toward a Unified Theory of Knowledge</p>
+            <div class="nav-box">
                 <a href="#overview">Overview</a>
-                <a href="#math">Mathematical Foundations</a>
-                <a href="#comparison" class="active">Comparison</a>
-              </div>
-              <br>
-
-              <p>
-                MLKN.model uniquely combines <strong>multilayer networks</strong> (for hierarchical structure)
-                and <strong>hypergraphs</strong> (for cross-domain connections) to create a
-                <strong>polyhierarchical hypergraph framework</strong>. Below is a detailed comparison:
-              </p>
-              <br>
-
-              <!-- Comparison Table -->
-              <div style="overflow-x: auto; margin-top: 20px;">
-                <table style="width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 0.9em;">
-                  <thead>
-                    <tr style="border-bottom: 2px solid var(--border);">
-                      <th style="text-align: left; padding: 10px; background: var(--panel);">Feature</th>
-                      <th style="text-align: left; padding: 10px; background: var(--panel);">Multilayer Network (Layers 1-4)</th>
-                      <th style="text-align: left; padding: 10px; background: var(--panel);">Hypergraph (Layers 4-5)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr style="border-bottom: 1px solid var(--border);">
-                      <td style="padding: 10px;"><strong>Purpose</strong></td>
-                      <td style="padding: 10px;">Hierarchical organization (parent-child relationships)</td>
-                      <td style="padding: 10px;">Cross-domain connections (multi-field concepts)</td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid var(--border);">
-                      <td style="padding: 10px;"><strong>Mathematical Structure</strong></td>
-                      <td style="padding: 10px;">
-                        <div class="math-container">G = (V, E, L)</div>
-                        Directed graph with layer assignments
-                      </td>
-                      <td style="padding: 10px;">
-                        <div class="math-container">H = (X, E, w)</div>
-                        Undirected hypergraph with weights
-                      </td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid var(--border);">
-                      <td style="padding: 10px;"><strong>Edges</strong></td>
-                      <td style="padding: 10px;">Pairs of nodes (v<sub>i</sub>, v<sub>j</sub>)</td>
-                      <td style="padding: 10px;">Subsets of nodes S ⊆ X, |S| ≥ 2</td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid var(--border);">
-                      <td style="padding: 10px;"><strong>Hierarchy</strong></td>
-                      <td style="padding: 10px;">Strict (tree-like with possible multiple parents)</td>
-                      <td style="padding: 10px;">Flat (no inherent hierarchy)</td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid var(--border);">
-                      <td style="padding: 10px;"><strong>Example in MLKN.lab</strong></td>
-                      <td style="padding: 10px;">
-                        Computer Science (L2) → AI (L3) → Machine Learning (L4)
-                      </td>
-                      <td style="padding: 10px;">
-                        "Transformers" (L5) connected to {AI, NLP, Neuroscience} (L4)
-                      </td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid var(--border);">
-                      <td style="padding: 10px;"><strong>Strengths</strong></td>
-                      <td style="padding: 10px;">
-                        <ul style="margin: 5px 0; padding-left: 15px;">
-                          <li>Clear hierarchical relationships</li>
-                          <li>Efficient for top-down analysis</li>
-                          <li>Natural for domain decomposition</li>
-                        </ul>
-                      </td>
-                      <td style="padding: 10px;">
-                        <ul style="margin: 5px 0; padding-left: 15px;">
-                          <li>Captures multi-field concepts</li>
-                          <li>Models non-linear relationships</li>
-                          <li>Reveals hidden interdisciplinary connections</li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid var(--border);">
-                      <td style="padding: 10px;"><strong>Limitations</strong></td>
-                      <td style="padding: 10px;">
-                        <ul style="margin: 5px 0; padding-left: 15px;">
-                          <li>Cannot model multi-parent relationships natively</li>
-                          <li>Struggles with cross-domain concepts</li>
-                        </ul>
-                      </td>
-                      <td style="padding: 10px;">
-                        <ul style="margin: 5px 0; padding-left: 15px;">
-                          <li>No inherent hierarchical structure</li>
-                          <li>Less intuitive for domain decomposition</li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid var(--border);">
-                      <td style="padding: 10px;"><strong>MLKN.lab Implementation</strong></td>
-                      <td style="padding: 10px;">
-                        <div class="math-container">
-                          V = ∪<sub>l=1 to 4</sub> V<sub>l</sub><br>
-                          E = ∪<sub>l=1 to 3</sub> E<sub>l→l+1</sub>
-                        </div>
-                      </td>
-                      <td style="padding: 10px;">
-                        <div class="math-container">
-                          X = V<sub>4</sub> ∪ V<sub>5</sub><br>
-                          E = {e | e ⊆ X, |e| ≥ 2}
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <!-- Unified Framework -->
-              <div class="layer-card" style="margin-top: 25px;">
-                <div class="licon" style="color: #9B59B6;">⬢</div>
-                <h3>Unified Polyhierarchical Hypergraph</h3>
-                <p>
-                  MLKN.model combines both representations into a <strong>polyhierarchical hypergraph</strong>
-                  <div class="math-container"><strong>P = (G, H)</strong></div> where:
-                </p>
-                <ul class="discipline-list">
-                  <li>
-                    <span class="discipline-square" style="background: #9B59B6;"></span>
-                    <strong>G</strong> = (<div class="math-container">V<sub>1-4</sub></div>, <div class="math-container">E<sub>1-3</sub></div>, L) is the multilayer network for Layers 1-4
-                  </li>
-                  <li>
-                    <span class="discipline-square" style="background: #9B59B6;"></span>
-                    <strong>H</strong> = (<div class="math-container">X<sub>4-5</sub></div>, <div class="math-container">E<sub>H</sub></div>, w) is the hypergraph for Layers 4-5
-                  </li>
-                  <li>
-                    <span class="discipline-square" style="background: #9B59B6;"></span>
-                    <div class="math-container">V<sub>4</sub> = X<sub>4</sub></div> (shared layer between G and H)
-                  </li>
-                </ul>
-                <p style="margin-top: 15px;">
-                  <strong>Key Innovation:</strong> Layer 4 (Thematic Domains) acts as the <strong>bridge</strong> between:
-                  <ul style="margin-top: 5px; padding-left: 20px;">
-                    <li>The <strong>hierarchical structure</strong> of Layers 1-3 (multilayer network)</li>
-                    <li>The <strong>cross-domain connections</strong> of Layer 5 (hypergraph)</li>
-                  </ul>
-                </p>
-              </div>
-
-              <!-- Why This Matters -->
-             <div class="essay-box" style="margin-top: 20px;">
-                <h3>Why This Hybrid Approach Matters</h3>
-                <p>
-                  Traditional knowledge representations suffer from <strong>trade-offs</strong>:
-                </p>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
-                  <div>
-                    <h4 style="color: var(--accent); margin-bottom: 10px;">Hierarchies (e.g., Taxonomies)</h4>
-                    <ul class="discipline-list">
-                      <li><span class="discipline-square" style="background: #FF6347;"></span> ✅ Clear parent-child relationships</li>
-                      <li><span class="discipline-square" style="background: #FF6347;"></span> ✅ Intuitive for domain experts</li>
-                      <li><span class="discipline-square" style="background: #FF6347;"></span> ❌ Cannot model multi-field concepts</li>
-                      <li><span class="discipline-square" style="background: #FF6347;"></span> ❌ Rigid structure</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 style="color: var(--accent2); margin-bottom: 10px;">Hypergraphs (e.g., Knowledge Graphs)</h4>
-                    <ul class="discipline-list">
-                      <li><span class="discipline-square" style="background: #2ECC71;"></span> ✅ Captures complex relationships</li>
-                      <li><span class="discipline-square" style="background: #2ECC71;"></span> ✅ Flexible for cross-domain concepts</li>
-                      <li><span class="discipline-square" style="background: #2ECC71;"></span> ❌ No inherent hierarchy</li>
-                      <li><span class="discipline-square" style="background: #2ECC71;"></span> ❌ Harder to navigate for non-experts</li>
-                    </ul>
-                  </div>
+                <a href="#theoretical-definitions">Theoretical Definitions</a>
+                <a href="#mathematical-definitions">Mathematical Definitions</a>
+                <a href="#comparison">Comparison</a>
+                <a href="#mathematical-frameworks">Mathematical Frameworks</a>
+                <a href="#advanced-tools">Advanced Tools</a>
+                <a href="#validation">Validation & Benchmarking</a>
+                <a href="#future-work" class="active">Future Work</a>
+            </div>
+            <br>
+            
+            <p>
+                Our roadmap for MLKN.model includes <strong>theoretical, computational, and practical advancements</strong>:
+            </p>
+            <br>
+            
+            <div class="layers-grid">
+                <!-- Real-Time Knowledge Mapping -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #1A6BAA;">⬢</div>
+                    <h3>Real-Time Knowledge Mapping</h3>
+                    <p>
+                        Continuously update the knowledge network with <strong>new publications and data</strong> from OpenAlex, arXiv, and other sources.
+                    </p>
                 </div>
-                <p style="margin-top: 15px;">
-                  MLKN.model's <strong>polyhierarchical hypergraph</strong> combines the strengths of both:
-                  <strong>hierarchical clarity</strong> + <strong>cross-domain flexibility</strong>.
-                </p>
-              </div>
-            </section>
-        
+                
+                <!-- Predictive Modeling -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #2ECC71;">⬢</div>
+                    <h3>Predictive Modeling</h3>
+                    <p>
+                        Develop <strong>machine learning models</strong> to predict the evolution of disciplines, including:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> Emergence of new subdisciplines.</li>
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> Decline of outdated fields.</li>
+                        <li><span class="discipline-square" style="background: #2ECC71;"></span> Shifts in interdisciplinary collaboration.</li>
+                    </ul>
+                </div>
+                
+                <!-- AI Integration -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #FF6347;">⬢</div>
+                    <h3>AI Integration</h3>
+                    <p>
+                        Integrate with <strong>large language models (LLMs)</strong> for:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Retrieval-Augmented Generation (RAG)</strong>: Ground LLMs in structured knowledge.</li>
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Semantic Search</strong>: Improve search with knowledge graphs.</li>
+                        <li><span class="discipline-square" style="background: #FF6347;"></span> <strong>Explainable AI</strong>: Use knowledge networks to interpret AI decisions.</li>
+                    </ul>
+                </div>
+                
+                <!-- Collaborative Platform -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #9B59B6;">⬢</div>
+                    <h3>Collaborative Platform</h3>
+                    <p>
+                        Build a <strong>global community</strong> for knowledge mapping and meta-science, enabling:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #9B59B6;"></span> Crowdsourced updates to the knowledge network.</li>
+                        <li><span class="discipline-square" style="background: #9B59B6;"></span> Collaborative hypothesis testing.</li>
+                        <li><span class="discipline-square" style="background: #9B59B6;"></span> Open-access tools for researchers.</li>
+                    </ul>
+                </div>
+                
+                <!-- Open Challenges -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #FFD700;">⬢</div>
+                    <h3>Open Challenges</h3>
+                    <p>
+                        Address key limitations in computational epistemology:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #FFD700;"></span> <strong>Scalability</strong>: Handle millions of nodes and edges efficiently.</li>
+                        <li><span class="discipline-square" style="background: #FFD700;"></span> <strong>Interpretability</strong>: Explain model predictions to domain experts.</li>
+                        <li><span class="discipline-square" style="background: #FFD700;"></span> <strong>Real-Time Updates</strong>: Continuously integrate new data without retraining.</li>
+                    </ul>
+                </div>
+                
+                <!-- Theoretical Advancements -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #E74C3C;">⬢</div>
+                    <h3>Theoretical Advancements</h3>
+                    <p>
+                        Extend the mathematical foundations to include:
+                    </p>
+                    <ul class="discipline-list">
+                        <li><span class="discipline-square" style="background: #E74C3C;"></span> <strong>Higher-Order Interactions</strong>: Model relationships between groups of disciplines.</li>
+                        <li><span class="discipline-square" style="background: #E74C3C;"></span> <strong>Causal Discovery</strong>: Infer causal relationships in knowledge evolution.</li>
+                        <li><span class="discipline-square" style="background: #E74C3C;"></span> <strong>Non-Euclidean Geometry</strong>: Represent knowledge in hyperbolic or spherical spaces.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
         <!-- Call to Action -->
         <section class="section" style="text-align: center;">
@@ -949,7 +1345,7 @@
         <div class="sf-logo">MLKN.lab</div>
         <p class="sf-tag">Multi-Layered Knowledge Network Ideas Laboratory</p>
         <div class="sf-links">
-            <a href="https://www.linkedin.com/in/francoispapin" class="sf-link" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.linkedin.com/in/francoispapin/" class="sf-link" target="_blank" rel="noopener noreferrer">
                 <i class="fab fa-linkedin"></i>
             </a>
             <a href="https://github.com/FrancoisPapin" class="sf-link" target="_blank" rel="noopener noreferrer">
@@ -962,59 +1358,57 @@
         <p class="sf-legal">© François Papin · May 2026 · MIT License · MLKN.lab</p>
     </footer>
 
-    <!-- JavaScript for Navigation and Active Section Highlighting -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const topnav = document.querySelector('.topnav');
-  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    <!-- JavaScript for Navigation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const topnav = document.querySelector('.topnav');
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
 
-  // Toggle mobile menu (vertical only)
-  mobileMenuToggle.addEventListener('click', function(e) {
-    e.stopPropagation();
-    topnav.classList.toggle('mobile-menu-active');
-  });
+            // Toggle mobile menu
+            mobileMenuToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                topnav.classList.toggle('mobile-menu-active');
+            });
 
-  // Close menu when clicking outside
-  document.addEventListener('click', function(e) {
-    if (!e.target.closest('.topnav')) {
-      topnav.classList.remove('mobile-menu-active');
-    }
-  });
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.topnav')) {
+                    topnav.classList.remove('mobile-menu-active');
+                }
+            });
 
-  // Desktop: dropdowns on hover
-  if (window.innerWidth > 768) {
-    const hasDropdowns = document.querySelectorAll('.has-dropdown');
-    hasDropdowns.forEach(item => {
-      item.addEventListener('mouseenter', function() {
-        hasDropdowns.forEach(other => {
-          if (other !== item) other.classList.remove('active');
+            // Desktop: dropdowns on hover
+            if (window.innerWidth > 768) {
+                const hasDropdowns = document.querySelectorAll('.has-dropdown');
+                hasDropdowns.forEach(item => {
+                    item.addEventListener('mouseenter', function() {
+                        hasDropdowns.forEach(other => {
+                            if (other !== item) other.classList.remove('active');
+                        });
+                        item.classList.add('active');
+                    });
+                    item.addEventListener('mouseleave', function() {
+                        item.classList.remove('active');
+                    });
+                });
+            }
+
+            // Mobile Horizontal: dropdowns on hover
+            if (window.innerWidth <= 768 && window.matchMedia("(orientation: landscape)").matches) {
+                const hasDropdowns = document.querySelectorAll('.has-dropdown');
+                hasDropdowns.forEach(item => {
+                    item.addEventListener('mouseenter', function() {
+                        hasDropdowns.forEach(other => {
+                            if (other !== item) other.classList.remove('active');
+                        });
+                        item.classList.add('active');
+                    });
+                    item.addEventListener('mouseleave', function() {
+                        item.classList.remove('active');
+                    });
+                });
+            }
         });
-        item.classList.add('active');
-      });
-      item.addEventListener('mouseleave', function() {
-        item.classList.remove('active');
-      });
-    });
-  }
-
-  // Mobile Horizontal: dropdowns on hover
-  if (window.innerWidth <= 768 && window.matchMedia("(orientation: landscape)").matches) {
-    const hasDropdowns = document.querySelectorAll('.has-dropdown');
-    hasDropdowns.forEach(item => {
-      item.addEventListener('mouseenter', function() {
-        hasDropdowns.forEach(other => {
-          if (other !== item) other.classList.remove('active');
-        });
-        item.classList.add('active');
-      });
-      item.addEventListener('mouseleave', function() {
-        item.classList.remove('active');
-      });
-    });
-  }
-});
-</script>
-
-    
+    </script>
 </body>
 </html>
