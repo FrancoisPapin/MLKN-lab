@@ -45,30 +45,41 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
 
 // Initialize the network
 function initNetwork() {
-    if (!window.d3) {
-        document.getElementById('network-error').style.display = 'block';
-        document.querySelector('#network-placeholder i').style.display = 'none';
-        return;
+    try {
+        if (!window.d3) {
+            document.getElementById('network-error').style.display = 'block';
+            document.querySelector('#network-placeholder i').style.display = 'none';
+            return;
+        }
+
+        svg = d3.select("#network-svg");
+        svg.selectAll("*").remove();
+        g = svg.append("g");
+
+        // Zoom/pan behavior with LoD for edges
+        const zoom = d3.zoom()
+            .scaleExtent([0.1, 10])
+            .on("zoom", (event) => {
+                g.attr("transform", event.transform);
+                const k = event.transform.k;
+                if (linkElements) {
+                    linkElements.style("display", k > 0.3 ? "block" : "none");
+                }
+            });
+        svg.call(zoom);
+
+        // Load data
+        loadData();
+    } catch (error) {
+        console.error("Error in initNetwork:", error);
+        document.getElementById('network-placeholder').innerHTML = `
+            <i class="fas fa-exclamation-triangle" style="color: #FF6347; font-size: 24px;"></i>
+            <p>Error initializing network.</p>
+            <p style="font-size: 0.9em; margin-top: 10px; color: var(--text2);">
+                ${error.message}
+            </p>
+        `;
     }
-
-    svg = d3.select("#network-svg");
-    svg.selectAll("*").remove();
-    g = svg.append("g");
-
-    // Zoom/pan behavior with LoD for edges
-    const zoom = d3.zoom()
-        .scaleExtent([0.1, 10])
-        .on("zoom", (event) => {
-            g.attr("transform", event.transform);
-            const k = event.transform.k;
-            if (linkElements) {
-                linkElements.style("display", k > 0.3 ? "block" : "none");
-            }
-        });
-    svg.call(zoom);
-
-    // Load data
-    loadData();
 }
 
 // Load data from split JSON files
@@ -105,6 +116,22 @@ function loadData() {
         console.log("Loaded edges:", links.length);
         console.log("Sample node:", nodes[0]);
         console.log("Sample edge:", links[0]);
+
+        // Debug: Check for invalid edges
+        const validNodeIds = new Set(nodes.map(n => n.id));
+        const invalidEdges = links.filter(link =>
+            !validNodeIds.has(link.source) || !validNodeIds.has(link.target)
+        );
+        console.log("DEBUG: Invalid edges:", invalidEdges.length);
+        if (invalidEdges.length > 0) {
+            console.log("Sample invalid edge:", invalidEdges[0]);
+        }
+
+        // Debug: Check edges for node_0 and node_1421
+        const edgesNode0 = links.filter(link => link.source === 'node_0' || link.target === 'node_0');
+        const edgesNode1421 = links.filter(link => link.source === 'node_1421' || link.target === 'node_1421');
+        console.log("DEBUG: Edges for node_0:", edgesNode0.length, edgesNode0);
+        console.log("DEBUG: Edges for node_1421:", edgesNode1421.length, edgesNode1421);
 
         // Initialize layer filter
         currentLayer = 'all';
@@ -184,8 +211,8 @@ function startSimulation() {
         .force("charge", d3.forceManyBody().strength(chargeStrength))
         .force("center", d3.forceCenter(svg.node().width / 2, svg.node().height / 2))
         .force("collision", d3.forceCollide().radius(collisionRadius))
-        .alphaDecay(0.01)  // Very slow cooling for stability
-        .velocityDecay(0.8);  // Higher velocity decay
+        .alphaDecay(0.01)
+        .velocityDecay(0.8);
 
     // Draw links with edge type colors
     linkElements = g.selectAll(".link")
@@ -194,8 +221,8 @@ function startSimulation() {
         .attr("class", "link")
         .attr("stroke", "#FF0000")  // Bright red for debugging
         .attr("stroke-opacity", 1.0)
-        .attr("stroke-width", 3)  // Thick edges for visibility
-        .style("display", "block");  // Show all edges
+        .attr("stroke-width", 3)
+        .style("display", "block");
 
     // Draw nodes
     nodeElements = g.selectAll(".node")
@@ -209,11 +236,8 @@ function startSimulation() {
 
     // Add circles to nodes
     nodeElements.append("circle")
-        .attr("r", d => Math.max(6, Math.min(20, d.size ? d.size / 50 : nodeSize)))
-        .attr("fill", d => {
-            const layer = d.Layer || d.layer;
-            return layerColors[layer] || "#FFFFFF";
-        })
+        .attr("r", 10)  // Fixed size for debugging
+        .attr("fill", "#FF0000")  // Bright red for visibility
         .attr("stroke", "#000000")
         .attr("stroke-width", 2);
 
@@ -224,7 +248,7 @@ function startSimulation() {
             .attr("font-size", 10)
             .attr("text-anchor", "middle")
             .attr("dy", 20)
-            .attr("fill", "#FFFFFF");  // White text for dark mode
+            .attr("fill", "#FFFFFF");
     }
 
     // Enhanced tooltips
@@ -301,30 +325,3 @@ function filterNetworkByDomain(domain) {
 
 // Initialize the network when the page loads
 window.onload = initNetwork;
-
-// Debug check for Loaddata
-.then(([nodesData, edgesData]) => {
-    nodes = nodesData.nodes;
-    links = edgesData.edges;
-
-    // Debug: Check for invalid edges
-    const validNodeIds = new Set(nodes.map(n => n.id));
-    const invalidEdges = links.filter(link =>
-        !validNodeIds.has(link.source) || !validNodeIds.has(link.target)
-    );
-    console.log("DEBUG: Invalid edges:", invalidEdges.length);
-    if (invalidEdges.length > 0) {
-        console.log("Sample invalid edge:", invalidEdges[0]);
-    }
-
-    // Debug: Check edges for node_0 and node_1421
-    const edgesNode0 = links.filter(link => link.source === 'node_0' || link.target === 'node_0');
-    const edgesNode1421 = links.filter(link => link.source === 'node_1421' || link.target === 'node_1421');
-    console.log("DEBUG: Edges for node_0:", edgesNode0.length, edgesNode0);
-    console.log("DEBUG: Edges for node_1421:", edgesNode1421.length, edgesNode1421);
-
-    // Rest of the code...
-    currentLayer = 'all';
-    filterByLayer();
-    startSimulation();
-})
