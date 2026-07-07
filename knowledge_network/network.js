@@ -1,30 +1,30 @@
 // Global variables for D3.js visualization
 let svg, simulation, nodes, links, nodeElements, linkElements, g, currentLayer = 'all';
 
-// Colorblind-friendly palettes
+// Colorblind-friendly palettes (aligned with your cleaned data)
 const layerColors = {
     '1': '#0173B2', // Core Domains (Blue)
-    '2': '#029E73', // Disciplines (Green)
-    '3': '#D55E00', // Subdisciplines (Orange)
-    '4': '#CC78BC', // Thematic Domains (Purple)
-    '5': '#CA9161', // Concepts (Brown)
+    '2': '#029E73', // Academic Disciplines (Green)
+    '3': '#D55E00', // Academic Subdisciplines (Orange)
+    '4': '#CC78BC', // Core Thematic Domains (Purple)
+    '5': '#CA9161', // Main Concepts (Brown)
     'all': '#949494', // All Layers (Gray)
-    'Core Domain': '#0173B2',
-    'Academic Discipline': '#029E73',
+    'Core Domain': '#0173B2',      // Matches your JSON's Layer field
+    'Academic Discipline': '#029E73', // Matches your JSON's Layer field
     'Academic Subdiscipline': '#D55E00',
     'Core Thematic Domain': '#CC78BC',
     'Main Concept': '#CA9161'
 };
 
 const edgeTypeColors = {
-    'CoreDomain_to_AcademicDiscipline': '#0173B2', // Blue
-    'AcademicDiscipline_to_Subdiscipline': '#029E73', // Green
-    'Subdiscipline_to_Topic': '#D55E00', // Orange
-    'Topic_to_Concept': '#CC78BC', // Purple
+    'CoreDomain_to_AcademicDiscipline': '#0173B2',
+    'AcademicDiscipline_to_Subdiscipline': '#029E73',
+    'Subdiscipline_to_Topic': '#D55E00',
+    'Topic_to_Concept': '#CC78BC',
     'connection': '#FFFFFF' // White for dark mode
 };
 
-// Map layer numbers to layer names
+// Map layer numbers to EXACT layer names in your JSON
 const layerMap = {
     '1': 'Core Domain',
     '2': 'Academic Discipline',
@@ -63,7 +63,7 @@ function initNetwork() {
                 g.attr("transform", event.transform);
                 const k = event.transform.k;
                 if (linkElements) {
-                    linkElements.style("display", k > 0.3 ? "block" : "none");
+                    linkElements.style("display", k > 0.5 ? "block" : "none"); // Show edges when zoomed in
                 }
             });
         svg.call(zoom);
@@ -127,12 +127,6 @@ function loadData() {
             console.log("Sample invalid edge:", invalidEdges[0]);
         }
 
-        // Debug: Check edges for node_0 and node_1421
-        const edgesNode0 = links.filter(link => link.source === 'node_0' || link.target === 'node_0');
-        const edgesNode1421 = links.filter(link => link.source === 'node_1421' || link.target === 'node_1421');
-        console.log("DEBUG: Edges for node_0:", edgesNode0.length, edgesNode0);
-        console.log("DEBUG: Edges for node_1421:", edgesNode1421.length, edgesNode1421);
-
         // Initialize layer filter
         currentLayer = 'all';
         filterByLayer();
@@ -157,34 +151,22 @@ function filterByLayer() {
     const layerName = layerMap[currentLayer] || currentLayer;
     console.log("DEBUG: Current layer:", currentLayer, "→ Layer name:", layerName);
 
-    // Debug node_0 and node_1421
-    const node0 = nodes.find(n => n.id === 'node_0');
-    const node1421 = nodes.find(n => n.id === 'node_1421');
-    console.log("DEBUG: node_0:", {
-      id: node0?.id,
-      name: node0?.name,
-      Layer: node0?.Layer,
-      layer: node0?.layer
-    });
-    console.log("DEBUG: node_1421:", {
-      id: node1421?.id,
-      name: node1421?.name,
-      Layer: node1421?.Layer,
-      layer: node1421?.layer
-    });
+    // Debug: Log all unique layer names in the data
+    console.log("DEBUG: All unique layer names in nodes:", [...new Set(nodes.map(n => n.Layer))]);
 
     if (currentLayer === 'all') {
         simulation = startSimulation();
         return;
     }
 
+    // Use ONLY the Layer field (now consistent across all nodes)
     const layerNodes = new Set(
-        nodes.filter(node => (node.Layer || node.layer) === layerName)
+        nodes.filter(node => node.Layer === layerName)
              .map(node => node.id)
     );
     console.log("DEBUG: Nodes in layer", layerName, ":", layerNodes.size);
 
-    const filteredNodes = nodes.filter(node => (node.Layer || node.layer) === layerName);
+    const filteredNodes = nodes.filter(node => node.Layer === layerName);
     const filteredLinks = links.filter(link => layerNodes.has(link.source) && layerNodes.has(link.target));
 
     nodes = filteredNodes;
@@ -202,27 +184,27 @@ function startSimulation() {
 
     // Adjust force parameters for large networks
     const nodeSize = window.innerWidth < 768 ? 6 : 12;
-    const chargeStrength = window.innerWidth < 768 ? -800 : -1000;
-    const linkDistance = window.innerWidth < 768 ? 50 : 100;
-    const collisionRadius = window.innerWidth < 768 ? 15 : 20;
+    const chargeStrength = window.innerWidth < 768 ? -800 : -1000;  // Stronger repulsion
+    const linkDistance = window.innerWidth < 768 ? 50 : 100;       // Longer links
+    const collisionRadius = window.innerWidth < 768 ? 15 : 20;   // Larger collision radius
 
     simulation = d3.forceSimulation(nodes)
         .force("link", d3.forceLink(links).id(d => d.id).distance(linkDistance))
         .force("charge", d3.forceManyBody().strength(chargeStrength))
         .force("center", d3.forceCenter(svg.node().width / 2, svg.node().height / 2))
         .force("collision", d3.forceCollide().radius(collisionRadius))
-        .alphaDecay(0.01)
-        .velocityDecay(0.8);
+        .alphaDecay(0.01)  // Slower cooling for stability
+        .velocityDecay(0.8);  // Higher velocity decay
 
     // Draw links with edge type colors
     linkElements = g.selectAll(".link")
         .data(links)
         .enter().append("line")
         .attr("class", "link")
-        .attr("stroke", "#FF0000")  // Bright red for debugging
-        .attr("stroke-opacity", 1.0)
-        .attr("stroke-width", 3)
-        .style("display", "block");
+        .attr("stroke", d => edgeTypeColors[d.type] || "#FFFFFF")  // Fallback to white for dark mode
+        .attr("stroke-opacity", 0.8)
+        .attr("stroke-width", d => Math.max(1, d.weight / 5))
+        .style("display", "none");  // Initially hide edges (LoD)
 
     // Draw nodes
     nodeElements = g.selectAll(".node")
@@ -236,34 +218,55 @@ function startSimulation() {
 
     // Add circles to nodes
     nodeElements.append("circle")
-        .attr("r", 10)  // Fixed size for debugging
-        .attr("fill", "#FF0000")  // Bright red for visibility
-        .attr("stroke", "#000000")
-        .attr("stroke-width", 2);
+        .attr("r", d => Math.max(4, Math.min(15, d.size ? d.size / 100 : nodeSize)))
+        .attr("fill", d => layerColors[d.Layer] || "#FFFFFF")  // Use Layer field
+        .attr("stroke", "#000000")  // Black stroke for contrast
+        .attr("stroke-width", 1.5);
 
     // Add labels (hidden on mobile for performance)
     if (window.innerWidth > 768) {
         nodeElements.append("text")
-            .text(d => d.name || d.Node || d.id)
+            .text(d => d.Node || d.id)  // Use "Node" field (no duplicate "name")
             .attr("font-size", 10)
             .attr("text-anchor", "middle")
             .attr("dy", 20)
-            .attr("fill", "#FFFFFF");
+            .attr("fill", "#FFFFFF");  // White text for dark mode
     }
 
     // Enhanced tooltips
     nodeElements.on("mouseover", function(event, d) {
+        // Highlight connected nodes/edges
         nodeElements.style("opacity", 0.2);
         linkElements.style("opacity", 0.2);
         d3.select(this).style("opacity", 1);
         linkElements
             .filter(l => l.source.id === d.id || l.target.id === d.id)
             .style("opacity", 1)
-            .style("display", "block");
+            .style("display", "block"); // Ensure connected edges are visible
         nodeElements
             .filter(n => n.id === d.id ||
                         links.some(l => l.source.id === n.id || l.target.id === n.id))
             .style("opacity", 1);
+
+        // Show tooltip
+        const tooltip = d3.select("#network-container")
+            .append("div")
+            .attr("class", "tooltip")
+            .style("position", "absolute")
+            .style("background", "rgba(0, 0, 0, 0.8)")
+            .style("color", "#FFFFFF")
+            .style("border", "1px solid #555")
+            .style("padding", "8px")
+            .style("border-radius", "4px")
+            .style("pointer-events", "none")
+            .style("left", (event.pageX + 10) + "px")
+            .style("top", (event.pageY + 10) + "px")
+            .html(`
+                <strong>${d.Node || d.id}</strong><br>
+                Layer: ${d.Layer || 'N/A'}<br>
+                Domain: ${d['Core Domain'] || 'N/A'}<br>
+                Type: ${d.type || 'N/A'}
+            `);
     })
     .on("mouseout", function() {
         nodeElements.style("opacity", 1);
@@ -274,7 +277,7 @@ function startSimulation() {
     // Update positions on each tick
     simulation.on("tick", () => {
         linkElements
-            .attr("x1", d => d.source.x || 0)
+            .attr("x1", d => d.source.x || 0)  // Fallback to 0 if NaN
             .attr("y1", d => d.source.y || 0)
             .attr("x2", d => d.target.x || 0)
             .attr("y2", d => d.target.y || 0);
@@ -315,7 +318,7 @@ function updateNetwork() {
 function filterNetworkByDomain(domain) {
     if (currentLayer !== '1') return;
     const domainNodes = new Set(
-        nodes.filter(node => (node.Domain || node.domain) === domain || node['Core Domain'] === domain)
+        nodes.filter(node => node['Core Domain'] === domain)  // Use "Core Domain" field
              .map(node => node.id)
     );
     nodeElements.style("opacity", d => domainNodes.has(d.id) ? 1 : 0.2);
