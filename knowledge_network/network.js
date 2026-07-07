@@ -1,5 +1,6 @@
 // Global variables for D3.js visualization
 let simulation, nodes, links, canvas, ctx, currentLayer = 'all';
+let tickCount = 0; // Added for throttling
 
 // Colorblind-friendly palettes (aligned with your cleaned data)
 const layerColors = {
@@ -206,8 +207,8 @@ function filterByLayer() {
     const layerName = layerMap[currentLayer] || currentLayer;
     console.log("DEBUG: Current layer:", currentLayer, "→ Layer name:", layerName);
 
-    // Debug: Log all unique layer names in the data
-    console.log("DEBUG: All unique layer names in nodes:", [...new Set(nodes.map(n => n.Layer))]);
+    // Debug: Log the first 5 Layer values in nodes
+    console.log("DEBUG: Sample Layer values:", nodes.slice(0, 5).map(n => n.Layer));
 
     if (currentLayer === 'all') {
         simulation = startSimulation();
@@ -243,10 +244,10 @@ function startSimulation() {
     const width = networkContainer.node().offsetWidth;
     const height = networkContainer.node().offsetHeight;
 
-    // Strong parameters for 31,590 nodes
-    const chargeStrength = -3000;  // Stronger repulsion
-    const linkDistance = 300;       // Longer links
-    const collisionRadius = 50;    // Larger collision radius
+    // Balanced parameters for 31,590 nodes
+    const chargeStrength = -1000;  // Weaker repulsion
+    const linkDistance = 100;       // Shorter links
+    const collisionRadius = 20;    // Smaller collision radius
 
     simulation = d3.forceSimulation(nodes)
         .force("link", d3.forceLink(links).id(d => d.id).distance(linkDistance))
@@ -257,13 +258,18 @@ function startSimulation() {
         .velocityDecay(0.7);  // Higher velocity decay
 
     // Restart simulation with initial positions
+    tickCount = 0; // Reset tick count
     simulation.nodes(nodes).on("tick", () => {
-        // Stop simulation when stabilized
-        if (simulation.alpha() < 0.01) {
+        tickCount++;
+        // Redraw every 3 ticks (throttle for performance)
+        if (tickCount % 3 === 0) {
+            drawCanvas();
+        }
+        // Stop simulation when stabilized (lower alpha threshold)
+        if (simulation.alpha() < 0.001) {
             simulation.stop();
             console.log("Simulation stabilized. Alpha:", simulation.alpha());
         }
-        drawCanvas();
     });
     simulation.force("link").links(links);
     simulation.alpha(1).restart(); // Restart with alpha=1
@@ -301,7 +307,6 @@ function filterNetworkByDomain(domain) {
              .map(node => node.id)
     );
     console.log(`Filtered by domain: ${domain}, nodes: ${domainNodes.size}`);
-    // For Canvas, we don't update opacity here since we redraw everything
 }
 
 // Initialize the network when the page loads
