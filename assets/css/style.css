@@ -877,16 +877,17 @@ h1, h2, h3 {
     margin-top: 20px;
     background: var(--panel);
     position: relative;
-    overflow: hidden;
+    overflow: hidden; /* Prevent scrollbars */
 }
 
 #network-container canvas {
     position: absolute;
     top: 0;
     left: 0;
-    pointer-events: auto;
+    pointer-events: auto; /* Allow zoom/pan on Canvas */
 }
 
+/* Dark mode adjustments for network container */
 @media (prefers-color-scheme: dark) {
     #network-container {
         background: var(--panel);
