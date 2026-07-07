@@ -107,12 +107,18 @@ function drawCanvas() {
     ctx.globalCompositeOperation = 'destination-over';
     links.forEach(d => {
         if (d.source?.x && d.source?.y && d.target?.x && d.target?.y) {
-            ctx.beginPath();
-            ctx.moveTo(d.source.x, d.source.y);
-            ctx.lineTo(d.target.x, d.target.y);
-            ctx.strokeStyle = edgeTypeColors[d.type] || "#FFFFFF";
-            ctx.lineWidth = Math.max(0.5, d.weight / 10) * transform.k;
-            ctx.stroke();
+            // Only draw if edges are within viewport bounds
+            if (
+                isInViewport(d.source.x, d.source.y, canvas.node().width, canvas.node().height, transform) &&
+                isInViewport(d.target.x, d.target.y, canvas.node().width, canvas.node().height, transform)
+            ) {
+                ctx.beginPath();
+                ctx.moveTo(d.source.x, d.source.y);
+                ctx.lineTo(d.target.x, d.target.y);
+                ctx.strokeStyle = edgeTypeColors[d.type] || "#FFFFFF";
+                ctx.lineWidth = Math.max(0.5, d.weight / 10) * transform.k;
+                ctx.stroke();
+            }
         }
     });
 
@@ -120,19 +126,32 @@ function drawCanvas() {
     ctx.globalCompositeOperation = 'source-over';
     nodes.forEach(d => {
         if (d.x && d.y) {
-            const radius = Math.max(4, Math.min(15, d.size ? d.size / 100 : 12)) * transform.k;
-            ctx.beginPath();
-            ctx.arc(d.x, d.y, radius, 0, 2 * Math.PI);
-            ctx.fillStyle = layerColors[d.Layer] || "#FFFFFF";
-            ctx.fill();
-            ctx.strokeStyle = "#000000";
-            ctx.lineWidth = 1.5 * transform.k;
-            ctx.stroke();
+            // Only draw if node is within viewport bounds
+            if (isInViewport(d.x, d.y, canvas.node().width, canvas.node().height, transform)) {
+                const radius = Math.max(4, Math.min(15, d.size ? d.size / 100 : 12)) * transform.k;
+                ctx.beginPath();
+                ctx.arc(d.x, d.y, radius, 0, 2 * Math.PI);
+                ctx.fillStyle = layerColors[d.Layer] || "#FFFFFF";
+                ctx.fill();
+                ctx.strokeStyle = "#000000";
+                ctx.lineWidth = 1.5 * transform.k;
+                ctx.stroke();
+            }
         }
     });
 
     // Restore context
     ctx.restore();
+}
+
+// Helper function to check if a point is within the viewport
+function isInViewport(x, y, width, height, transform) {
+    const scaledX = x * transform.k + transform.x;
+    const scaledY = y * transform.k + transform.y;
+    return (
+        scaledX >= 0 && scaledX <= width &&
+        scaledY >= 0 && scaledY <= height
+    );
 }
 
 // Load data from split JSON files
@@ -245,17 +264,17 @@ function startSimulation() {
     const height = networkContainer.node().offsetHeight;
 
     // Balanced parameters for 31,590 nodes
-    const chargeStrength = -1000;  // Weaker repulsion
-    const linkDistance = 100;       // Shorter links
-    const collisionRadius = 20;    // Smaller collision radius
+    const chargeStrength = -2000;  // Stronger repulsion
+    const linkDistance = 150;      // Longer links
+    const collisionRadius = 30;   // Larger collision radius
 
     simulation = d3.forceSimulation(nodes)
-        .force("link", d3.forceLink(links).id(d => d.id).distance(linkDistance))
-        .force("charge", d3.forceManyBody().strength(chargeStrength))
-        .force("center", d3.forceCenter(width / 2, height / 2))
-        .force("collision", d3.forceCollide().radius(collisionRadius))
-        .alphaDecay(0.02)  // Slower cooling for stability
-        .velocityDecay(0.7);  // Higher velocity decay
+    .force("link", d3.forceLink(links).id(d => d.id).distance(linkDistance))
+    .force("charge", d3.forceManyBody().strength(chargeStrength))
+    .force("center", d3.forceCenter(width / 2, height / 2).strength(0.1))  // Stronger center force
+    .force("collision", d3.forceCollide().radius(collisionRadius))
+    .alphaDecay(0.1)  // Faster cooling
+    .velocityDecay(0.8);
 
     // Restart simulation with initial positions
     tickCount = 0; // Reset tick count
