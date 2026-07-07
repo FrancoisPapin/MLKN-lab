@@ -89,7 +89,7 @@ function initNetwork() {
 
 // Function to draw nodes and edges on Canvas
 function drawCanvas() {
-    if (!ctx || !nodes) return;
+    if (!ctx || !nodes || nodes.length === 0) return;
 
     // Clear canvas
     ctx.clearRect(0, 0, canvas.node().width, canvas.node().height);
@@ -97,24 +97,26 @@ function drawCanvas() {
     // Save context state
     ctx.save();
 
-    // Apply zoom transform to Canvas
+    // Apply zoom transform
     const transform = d3.zoomTransform(canvas.node());
     ctx.translate(transform.x, transform.y);
     ctx.scale(transform.k, transform.k);
 
-    // Draw edges
+    // Draw edges first (behind nodes)
+    ctx.globalCompositeOperation = 'destination-over';
     links.forEach(d => {
-        if (d.source && d.target && d.source.x && d.source.y && d.target.x && d.target.y) {
+        if (d.source?.x && d.source?.y && d.target?.x && d.target?.y) {
             ctx.beginPath();
             ctx.moveTo(d.source.x, d.source.y);
             ctx.lineTo(d.target.x, d.target.y);
             ctx.strokeStyle = edgeTypeColors[d.type] || "#FFFFFF";
-            ctx.lineWidth = Math.max(1, d.weight / 5) * transform.k; // Scale line width with zoom
+            ctx.lineWidth = Math.max(0.5, d.weight / 10) * transform.k;
             ctx.stroke();
         }
     });
 
-    // Draw nodes
+    // Draw nodes on top
+    ctx.globalCompositeOperation = 'source-over';
     nodes.forEach(d => {
         if (d.x && d.y) {
             const radius = Math.max(4, Math.min(15, d.size ? d.size / 100 : 12)) * transform.k;
@@ -128,7 +130,7 @@ function drawCanvas() {
         }
     });
 
-    // Restore context state
+    // Restore context
     ctx.restore();
 }
 
@@ -178,7 +180,7 @@ function loadData() {
         }
 
         // Debug: Log all Layer values in nodes
-        console.log("DEBUG: All Layer values in nodes:", nodes.map(n => n.Layer).slice(0, 10));
+        console.log("DEBUG: All Layer values in nodes:", [...new Set(nodes.map(n => n.Layer))]);
 
         // Initialize layer filter
         currentLayer = 'all';
@@ -216,7 +218,7 @@ function filterByLayer() {
     const filteredNodes = nodes.filter(node => node.Layer === layerName);
     const layerNodes = new Set(filteredNodes.map(node => node.id));
 
-    // Filter links where both source and target are in the filtered nodes
+    // Filter links where BOTH source and target are in the filtered nodes
     const filteredLinks = links.filter(link =>
         layerNodes.has(link.source) && layerNodes.has(link.target)
     );
@@ -233,7 +235,7 @@ function filterByLayer() {
 
 // Start the force simulation
 function startSimulation() {
-    // Clear previous elements
+    // Clear previous simulation
     if (simulation) simulation.stop();
 
     // Get container dimensions
@@ -241,11 +243,10 @@ function startSimulation() {
     const width = networkContainer.node().offsetWidth;
     const height = networkContainer.node().offsetHeight;
 
-    // Adjust force parameters based on node count
-    const nodeCount = nodes.length;
-    const chargeStrength = nodeCount > 10000 ? -2000 : (nodeCount > 1000 ? -1500 : -1000);
-    const linkDistance = nodeCount > 10000 ? 200 : (nodeCount > 1000 ? 150 : 100);
-    const collisionRadius = nodeCount > 10000 ? 40 : (nodeCount > 1000 ? 30 : 20);
+    // Strong parameters for 31,590 nodes
+    const chargeStrength = -3000;  // Stronger repulsion
+    const linkDistance = 300;       // Longer links
+    const collisionRadius = 50;    // Larger collision radius
 
     simulation = d3.forceSimulation(nodes)
         .force("link", d3.forceLink(links).id(d => d.id).distance(linkDistance))
@@ -257,10 +258,15 @@ function startSimulation() {
 
     // Restart simulation with initial positions
     simulation.nodes(nodes).on("tick", () => {
-        drawCanvas(); // Redraw canvas on each tick
+        // Stop simulation when stabilized
+        if (simulation.alpha() < 0.01) {
+            simulation.stop();
+            console.log("Simulation stabilized. Alpha:", simulation.alpha());
+        }
+        drawCanvas();
     });
     simulation.force("link").links(links);
-    simulation.alpha(1).restart(); // Restart simulation with alpha=1
+    simulation.alpha(1).restart(); // Restart with alpha=1
 }
 
 // Drag functions
@@ -295,6 +301,7 @@ function filterNetworkByDomain(domain) {
              .map(node => node.id)
     );
     console.log(`Filtered by domain: ${domain}, nodes: ${domainNodes.size}`);
+    // For Canvas, we don't update opacity here since we redraw everything
 }
 
 // Initialize the network when the page loads
