@@ -1,5 +1,6 @@
 // Global variables for D3.js visualization
 let svg, simulation, nodes, links, nodeElements, linkElements, g, currentLayer = 'all';
+let canvas, ctx; // For Canvas rendering
 
 // Colorblind-friendly palettes (aligned with your cleaned data)
 const layerColors = {
@@ -9,8 +10,8 @@ const layerColors = {
     '4': '#CC78BC', // Core Thematic Domains (Purple)
     '5': '#CA9161', // Main Concepts (Brown)
     'all': '#949494', // All Layers (Gray)
-    'Core Domain': '#0173B2',      // Matches your JSON's Layer field
-    'Academic Discipline': '#029E73', // Matches your JSON's Layer field
+    'Core Domain': '#0173B2',
+    'Academic Discipline': '#029E73',
     'Academic Subdiscipline': '#D55E00',
     'Core Thematic Domain': '#CC78BC',
     'Main Concept': '#CA9161'
@@ -56,15 +57,23 @@ function initNetwork() {
         svg.selectAll("*").remove();
         g = svg.append("g");
 
-        // Zoom/pan behavior with LoD for edges
+        // Create Canvas for rendering (better performance for large networks)
+        const networkContainer = d3.select("#network-container");
+        canvas = networkContainer.append("canvas")
+            .attr("width", svg.node().width)
+            .attr("height", svg.node().height)
+            .style("position", "absolute")
+            .style("top", 0)
+            .style("left", 0);
+        ctx = canvas.node().getContext("2d");
+
+        // Zoom/pan behavior
         const zoom = d3.zoom()
             .scaleExtent([0.1, 10])
             .on("zoom", (event) => {
                 g.attr("transform", event.transform);
-                const k = event.transform.k;
-                if (linkElements) {
-                    linkElements.style("display", k > 0.5 ? "block" : "none"); // Show edges when zoomed in
-                }
+                // Redraw canvas on zoom
+                if (nodes) drawCanvas();
             });
         svg.call(zoom);
 
@@ -80,6 +89,39 @@ function initNetwork() {
             </p>
         `;
     }
+}
+
+// Function to draw nodes and edges on Canvas
+function drawCanvas() {
+    if (!ctx || !nodes) return;
+
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.node().width, canvas.node().height);
+
+    // Draw edges
+    links.forEach(d => {
+        if (d.source && d.target) {
+            ctx.beginPath();
+            ctx.moveTo(d.source.x, d.source.y);
+            ctx.lineTo(d.target.x, d.target.y);
+            ctx.strokeStyle = edgeTypeColors[d.type] || "#FFFFFF";
+            ctx.lineWidth = Math.max(1, d.weight / 5);
+            ctx.stroke();
+        }
+    });
+
+    // Draw nodes
+    nodes.forEach(d => {
+        if (d.x && d.y) {
+            ctx.beginPath();
+            ctx.arc(d.x, d.y, Math.max(4, Math.min(15, d.size ? d.size / 100 : 12)), 0, 2 * Math.PI);
+            ctx.fillStyle = layerColors[d.Layer] || "#FFFFFF";
+            ctx.fill();
+            ctx.strokeStyle = "#000000";
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+        }
+    });
 }
 
 // Load data from split JSON files
@@ -184,9 +226,9 @@ function startSimulation() {
 
     // Adjust force parameters for large networks
     const nodeSize = window.innerWidth < 768 ? 6 : 12;
-    const chargeStrength = window.innerWidth < 768 ? -800 : -1000;  // Stronger repulsion
-    const linkDistance = window.innerWidth < 768 ? 50 : 100;       // Longer links
-    const collisionRadius = window.innerWidth < 768 ? 15 : 20;   // Larger collision radius
+    const chargeStrength = window.innerWidth < 768 ? -1200 : -1500;  // Stronger repulsion
+    const linkDistance = window.innerWidth < 768 ? 80 : 150;       // Longer links
+    const collisionRadius = window.innerWidth < 768 ? 25 : 30;   // Larger collision radius
 
     simulation = d3.forceSimulation(nodes)
         .force("link", d3.forceLink(links).id(d => d.id).distance(linkDistance))
@@ -196,94 +238,9 @@ function startSimulation() {
         .alphaDecay(0.01)  // Slower cooling for stability
         .velocityDecay(0.8);  // Higher velocity decay
 
-    // Draw links with edge type colors
-    linkElements = g.selectAll(".link")
-        .data(links)
-        .enter().append("line")
-        .attr("class", "link")
-        .attr("stroke", d => edgeTypeColors[d.type] || "#FFFFFF")  // Fallback to white for dark mode
-        .attr("stroke-opacity", 0.8)
-        .attr("stroke-width", d => Math.max(1, d.weight / 5))
-        .style("display", "none");  // Initially hide edges (LoD)
-
-    // Draw nodes
-    nodeElements = g.selectAll(".node")
-        .data(nodes)
-        .enter().append("g")
-        .attr("class", "node")
-        .call(d3.drag()
-            .on("start", dragstarted)
-            .on("drag", dragged)
-            .on("end", dragended));
-
-    // Add circles to nodes
-    nodeElements.append("circle")
-        .attr("r", d => Math.max(4, Math.min(15, d.size ? d.size / 100 : nodeSize)))
-        .attr("fill", d => layerColors[d.Layer] || "#FFFFFF")  // Use Layer field
-        .attr("stroke", "#000000")  // Black stroke for contrast
-        .attr("stroke-width", 1.5);
-
-    // Add labels (hidden on mobile for performance)
-    if (window.innerWidth > 768) {
-        nodeElements.append("text")
-            .text(d => d.Node || d.id)  // Use "Node" field (no duplicate "name")
-            .attr("font-size", 10)
-            .attr("text-anchor", "middle")
-            .attr("dy", 20)
-            .attr("fill", "#FFFFFF");  // White text for dark mode
-    }
-
-    // Enhanced tooltips
-    nodeElements.on("mouseover", function(event, d) {
-        // Highlight connected nodes/edges
-        nodeElements.style("opacity", 0.2);
-        linkElements.style("opacity", 0.2);
-        d3.select(this).style("opacity", 1);
-        linkElements
-            .filter(l => l.source.id === d.id || l.target.id === d.id)
-            .style("opacity", 1)
-            .style("display", "block"); // Ensure connected edges are visible
-        nodeElements
-            .filter(n => n.id === d.id ||
-                        links.some(l => l.source.id === n.id || l.target.id === n.id))
-            .style("opacity", 1);
-
-        // Show tooltip
-        const tooltip = d3.select("#network-container")
-            .append("div")
-            .attr("class", "tooltip")
-            .style("position", "absolute")
-            .style("background", "rgba(0, 0, 0, 0.8)")
-            .style("color", "#FFFFFF")
-            .style("border", "1px solid #555")
-            .style("padding", "8px")
-            .style("border-radius", "4px")
-            .style("pointer-events", "none")
-            .style("left", (event.pageX + 10) + "px")
-            .style("top", (event.pageY + 10) + "px")
-            .html(`
-                <strong>${d.Node || d.id}</strong><br>
-                Layer: ${d.Layer || 'N/A'}<br>
-                Domain: ${d['Core Domain'] || 'N/A'}<br>
-                Type: ${d.type || 'N/A'}
-            `);
-    })
-    .on("mouseout", function() {
-        nodeElements.style("opacity", 1);
-        linkElements.style("opacity", 1);
-        d3.select(".tooltip").remove();
-    });
-
-    // Update positions on each tick
+    // Update the simulation on each tick
     simulation.on("tick", () => {
-        linkElements
-            .attr("x1", d => d.source.x || 0)  // Fallback to 0 if NaN
-            .attr("y1", d => d.source.y || 0)
-            .attr("x2", d => d.target.x || 0)
-            .attr("y2", d => d.target.y || 0);
-
-        nodeElements
-            .attr("transform", d => `translate(${d.x || 0},${d.y || 0})`);
+        drawCanvas(); // Redraw canvas on each tick
     });
 
     // Hide placeholder
@@ -321,9 +278,9 @@ function filterNetworkByDomain(domain) {
         nodes.filter(node => node['Core Domain'] === domain)  // Use "Core Domain" field
              .map(node => node.id)
     );
-    nodeElements.style("opacity", d => domainNodes.has(d.id) ? 1 : 0.2);
-    linkElements.style("opacity", d => domainNodes.has(d.source) && domainNodes.has(d.target) ? 1 : 0.2)
-              .style("display", d => domainNodes.has(d.source) && domainNodes.has(d.target) ? "block" : "none");
+    // For Canvas, we don't need to update opacity here since we redraw everything in drawCanvas()
+    // But we can still log for debugging
+    console.log(`Filtered by domain: ${domain}, nodes: ${domainNodes.size}`);
 }
 
 // Initialize the network when the page loads
