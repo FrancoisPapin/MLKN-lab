@@ -107,15 +107,12 @@ function drawCanvas() {
     ctx.globalCompositeOperation = 'destination-over';
     links.forEach(d => {
         if (d.source?.x && d.source?.y && d.target?.x && d.target?.y) {
-            // Only draw if edges are within viewport bounds
-            if (
-                isInViewport(d.source.x, d.source.y, canvas.node().width, canvas.node().height, transform) &&
-                isInViewport(d.target.x, d.target.y, canvas.node().width, canvas.node().height, transform)
-            ) {
+            // Draw all edges (remove clipping for now)
+            if (d.source?.x && d.source?.y && d.target?.x && d.target?.y) {
                 ctx.beginPath();
                 ctx.moveTo(d.source.x, d.source.y);
                 ctx.lineTo(d.target.x, d.target.y);
-                ctx.strokeStyle = edgeTypeColors[d.type] || "#FFFFFF";
+                ctx.strokeStyle = edgeTypeColors[d.type] || "#FF00FF";  // Magenta edges (visible in dark mode)
                 ctx.lineWidth = Math.max(0.5, d.weight / 10) * transform.k;
                 ctx.stroke();
             }
@@ -131,9 +128,9 @@ function drawCanvas() {
                 const radius = Math.max(4, Math.min(15, d.size ? d.size / 100 : 12)) * transform.k;
                 ctx.beginPath();
                 ctx.arc(d.x, d.y, radius, 0, 2 * Math.PI);
-                ctx.fillStyle = layerColors[d.Layer] || "#FFFFFF";
+                ctx.fillStyle = layerColors[d.Layer] || "#FFFFFF";        // White nodes
                 ctx.fill();
-                ctx.strokeStyle = "#000000";
+                ctx.strokeStyle = "#FFFFFF";                           // White node strokes (visible in dark mode)
                 ctx.lineWidth = 1.5 * transform.k;
                 ctx.stroke();
             }
@@ -235,7 +232,10 @@ function filterByLayer() {
     }
 
     // Filter nodes by Layer
-    const filteredNodes = nodes.filter(node => node.Layer === layerName);
+    // Trim whitespace and normalize case
+    const filteredNodes = nodes.filter(node =>
+        node.Layer?.trim().toLowerCase() === layerName.trim().toLowerCase()
+    );
     const layerNodes = new Set(filteredNodes.map(node => node.id));
 
     // Filter links where BOTH source and target are in the filtered nodes
