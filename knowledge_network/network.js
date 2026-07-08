@@ -66,11 +66,12 @@ function initNetwork() {
         const networkContainer = d3.select("#network-container");
         networkContainer.select("svg").remove(); // Remove SVG to avoid conflicts
 
-        // Maintain a 1:1 aspect ratio for the Canvas (spherical network)
+        // Set Canvas dimensions (square for spherical network)
         const containerWidth = networkContainer.node().offsetWidth;
-        const containerHeight = isMobile ? window.innerHeight * 0.8 : 700;
+        const containerHeight = networkContainer.node().offsetHeight;
         const canvasSize = Math.min(containerWidth, containerHeight) * 0.9; // 90% of the smaller dimension
 
+        // Create Canvas
         canvas = networkContainer.append("canvas")
             .attr("width", canvasSize)
             .attr("height", canvasSize)
@@ -86,20 +87,16 @@ function initNetwork() {
         zoom = d3.zoom()
             .scaleExtent([0.1, 4])  // Limit zoom to 0.1x–4x
             .on("zoom", () => {
-                const transform = d3.event.transform;
-                // Constrain zoom to keep the network visible
-                if (transform.k < 0.1) transform.k = 0.1;
-                if (transform.k > 4) transform.k = 4;
                 drawCanvas();
             });
         networkContainer.call(zoom);
         networkContainer.call(zoom.transform, d3.zoomIdentity); // Reset zoom to 1x
 
-        // Handle window resize (for mobile orientation changes)
+        // Handle window resize
         window.addEventListener('resize', () => {
             detectMobile();
             const newContainerWidth = networkContainer.node().offsetWidth;
-            const newContainerHeight = isMobile ? window.innerHeight * 0.8 : 700;
+            const newContainerHeight = networkContainer.node().offsetHeight;
             const newCanvasSize = Math.min(newContainerWidth, newContainerHeight) * 0.9;
             canvas
                 .attr("width", newCanvasSize)
@@ -110,6 +107,9 @@ function initNetwork() {
                 .style("left", `calc(50% - ${newCanvasSize / 2}px)`);
             if (simulation) drawCanvas();
         });
+
+        // Initialize click event AFTER canvas is created
+        canvas.on("click", handleNodeClick);
 
         loadData();
     } catch (error) {
@@ -124,9 +124,27 @@ function initNetwork() {
     }
 }
 
+// Handle node clicks (defined after canvas is created)
+function handleNodeClick(event) {
+    const transform = d3.zoomTransform(canvas.node());
+    const [x, y] = d3.pointer(event);
+
+    const clickedNode = nodes.find(node => {
+        const nodeX = node.x * transform.k + transform.x;
+        const nodeY = node.y * transform.k + transform.y;
+        const radius = Math.max(4, Math.min(15, node.size ? node.size / 100 : 12)) * transform.k;
+        const distance = Math.sqrt((x - nodeX) ** 2 + (y - nodeY) ** 2);
+        return distance <= radius;
+    });
+
+    if (clickedNode) {
+        alert(`Node: ${clickedNode.Node || clickedNode.id}\nLayer: ${clickedNode.Layer}\nDomain: ${clickedNode['Core Domain'] || 'N/A'}`);
+    }
+}
+
 // Fit the network to the viewport
 function fitToViewport() {
-    if (!nodes || nodes.length === 0) return;
+    if (!nodes || nodes.length === 0 || !canvas) return;
 
     const bounds = {
         x1: Infinity, y1: Infinity,
@@ -162,7 +180,7 @@ function fitToViewport() {
 
 // Function to draw nodes and edges on Canvas
 function drawCanvas() {
-    if (!ctx || !nodes || nodes.length === 0) return;
+    if (!ctx || !nodes || nodes.length === 0 || !canvas) return;
 
     // Clear canvas
     ctx.clearRect(0, 0, canvas.node().width, canvas.node().height);
@@ -202,7 +220,7 @@ function drawCanvas() {
             // Only show labels on desktop and when zoomed in (>0.5x)
             if (transform.k > 0.5 && !isMobile) {
                 ctx.fillStyle = "#FFFFFF";
-                ctx.font = `${Math.max(12, 14 * transform.k)}px Arial`; // Larger base size
+                ctx.font = `${Math.max(12, 14 * transform.k)}px Arial`;
                 ctx.textAlign = "center";
                 ctx.textBaseline = "middle";
                 // Add text shadow for readability
@@ -276,7 +294,8 @@ function loadData() {
 
 // Filter nodes/links by current layer
 function filterByLayer() {
-    if (simulation) simulation.stop();
+    if (!simulation) return; // Guard clause
+    simulation.stop();
 
     const layerName = layerMap[currentLayer] || currentLayer;
 
@@ -301,6 +320,7 @@ function filterByLayer() {
 
 // Start the force simulation
 function startSimulation() {
+    if (!canvas) return; // Guard clause
     // Clear previous simulation
     if (simulation) simulation.stop();
 
@@ -374,24 +394,5 @@ function filterNetworkByDomain(domain) {
     console.log(`Filtered by domain: ${domain}, nodes: ${domainNodes.size}`);
 }
 
-// Initialize the network when the page loads
-window.onload = initNetwork;
-
-// Add click event to Canvas for node details
-canvas.on("click", (event) => {
-    const transform = d3.zoomTransform(canvas.node());
-    const [x, y] = d3.pointer(event);
-
-    // Find the clicked node
-    const clickedNode = nodes.find(node => {
-        const nodeX = node.x * transform.k + transform.x;
-        const nodeY = node.y * transform.k + transform.y;
-        const radius = Math.max(4, Math.min(15, node.size ? node.size / 100 : 12)) * transform.k;
-        const distance = Math.sqrt((x - nodeX) ** 2 + (y - nodeY) ** 2);
-        return distance <= radius;
-    });
-
-    if (clickedNode) {
-        alert(`Node: ${clickedNode.Node || clickedNode.id}\nLayer: ${clickedNode.Layer}\nDomain: ${clickedNode['Core Domain'] || 'N/A'}`);
-    }
-});
+// Initialize the network when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', initNetwork);
