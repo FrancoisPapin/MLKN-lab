@@ -66,14 +66,14 @@ function initNetwork() {
         const networkContainer = d3.select("#network-container");
         networkContainer.select("svg").remove(); // Remove SVG to avoid conflicts
 
-        // Adaptive Canvas size (smaller for mobile)
+        // Adaptive Canvas size (100% height for mobile, fixed for desktop)
         const canvasWidth = window.innerWidth * 0.9;
-        const canvasHeight = isMobile ? 500 : 700;
+        const canvasHeight = isMobile ? '100%' : 700;
         canvas = networkContainer.append("canvas")
             .attr("width", canvasWidth)
             .attr("height", canvasHeight)
             .style("width", `${canvasWidth}px`)
-            .style("height", `${canvasHeight}px`)
+            .style("height", canvasHeight)
             .style("position", "absolute")
             .style("top", 0)
             .style("left", 0);
@@ -89,6 +89,19 @@ function initNetwork() {
             });
         networkContainer.call(zoom);
         networkContainer.call(zoom.transform, d3.zoomIdentity); // Reset zoom to 1x
+
+        // Handle window resize (for mobile orientation changes)
+        window.addEventListener('resize', () => {
+            detectMobile();
+            const newWidth = window.innerWidth * 0.9;
+            const newHeight = isMobile ? '100%' : 700;
+            canvas
+                .attr("width", newWidth)
+                .attr("height", newHeight)
+                .style("width", `${newWidth}px`)
+                .style("height", newHeight);
+            if (simulation) drawCanvas();
+        });
 
         loadData();
     } catch (error) {
@@ -123,7 +136,7 @@ function fitToViewport() {
     const scale = Math.min(
         canvas.node().width / (dx + 200),  // Add padding
         canvas.node().height / (dy + 200)
-    ) * 0.9;  // Zoom out 10% more
+    ) * 0.85;  // Zoom out 15% more
 
     const transform = d3.zoomIdentity
         .translate(canvas.node().width / 2, canvas.node().height / 2)
@@ -175,10 +188,20 @@ function drawCanvas() {
             // Only show labels on desktop and when zoomed in (>0.5x)
             if (transform.k > 0.5 && !isMobile) {
                 ctx.fillStyle = "#FFFFFF";
-                ctx.font = `${Math.max(8, 10 * transform.k)}px Arial`;
+                ctx.font = `${Math.max(12, 14 * transform.k)}px Arial`; // Larger base size
                 ctx.textAlign = "center";
                 ctx.textBaseline = "middle";
+                // Add text shadow for readability
+                ctx.shadowColor = '#000000';
+                ctx.shadowBlur = 3;
+                ctx.shadowOffsetX = 1;
+                ctx.shadowOffsetY = 1;
                 ctx.fillText(d.Node || d.id, d.x, d.y);
+                // Reset shadow
+                ctx.shadowColor = 'transparent';
+                ctx.shadowBlur = 0;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 0;
             }
         }
     });
@@ -247,27 +270,18 @@ function filterByLayer() {
         // Reset to full dataset
         nodes = originalNodes;
         links = originalLinks;
-        simulation = startSimulation();
-        setTimeout(fitToViewport, 100); // Fit to viewport after filtering
-        return;
+    } else {
+        // Filter from ORIGINAL data (not global nodes/links)
+        const filteredNodes = originalNodes.filter(node => node.Layer === layerName);
+        const layerNodes = new Set(filteredNodes.map(node => node.id));
+        nodes = filteredNodes;
+        links = originalLinks.filter(link =>
+            layerNodes.has(link.source) && layerNodes.has(link.target)
+        );
     }
-
-    // Filter nodes by exact Layer match
-    const filteredNodes = nodes.filter(node => node.Layer === layerName);
-    const layerNodes = new Set(filteredNodes.map(node => node.id));
-
-    // Filter links where both source and target are in the filtered nodes
-    const filteredLinks = links.filter(link =>
-        layerNodes.has(link.source) && layerNodes.has(link.target)
-    );
-
-    // Update global arrays
-    nodes = filteredNodes;
-    links = filteredLinks;
-
     console.log(`Filtered to layer ${currentLayer} (${layerName}): ${nodes.length} nodes, ${links.length} edges.`);
     simulation = startSimulation();
-    setTimeout(fitToViewport, 100); // Fit to viewport after filtering
+    setTimeout(fitToViewport, 100); // Fit after simulation starts
 }
 
 // Start the force simulation
@@ -303,7 +317,8 @@ function startSimulation() {
         // Stop simulation when stabilized
         if (simulation.alpha() < 0.001) {
             simulation.stop();
-            console.log("Simulation stabilized.");
+            fitToViewport(); // Fit AFTER stabilization
+            console.log("Simulation stabilized and fitted to viewport.");
         }
     });
     simulation.force("link").links(links);
@@ -342,7 +357,6 @@ function filterNetworkByDomain(domain) {
              .map(node => node.id)
     );
     console.log(`Filtered by domain: ${domain}, nodes: ${domainNodes.size}`);
-    // For Canvas, we don't update opacity here since we redraw everything
 }
 
 // Initialize the network when the page loads
