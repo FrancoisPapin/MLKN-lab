@@ -66,26 +66,31 @@ function initNetwork() {
         const networkContainer = d3.select("#network-container");
         networkContainer.select("svg").remove(); // Remove SVG to avoid conflicts
 
-        // Adaptive Canvas size (100% height for mobile, fixed for desktop)
-        const canvasWidth = window.innerWidth * 0.9;
-        const canvasHeight = isMobile ? '100%' : 700;
+        // Maintain a 1:1 aspect ratio for the Canvas (spherical network)
+        const containerWidth = networkContainer.node().offsetWidth;
+        const containerHeight = isMobile ? window.innerHeight * 0.8 : 700;
+        const canvasSize = Math.min(containerWidth, containerHeight) * 0.9; // 90% of the smaller dimension
+
         canvas = networkContainer.append("canvas")
-            .attr("width", canvasWidth)
-            .attr("height", canvasHeight)
-            .style("width", `${canvasWidth}px`)
-            .style("height", canvasHeight)
+            .attr("width", canvasSize)
+            .attr("height", canvasSize)
+            .style("width", `${canvasSize}px`)
+            .style("height", `${canvasSize}px`)
             .style("position", "absolute")
-            .style("top", 0)
-            .style("left", 0);
+            .style("top", `calc(50% - ${canvasSize / 2}px)`)
+            .style("left", `calc(50% - ${canvasSize / 2}px)`);
+
         ctx = canvas.node().getContext("2d");
 
-        // Initialize zoom with debounce
-        let zoomTimeout;
+        // Initialize zoom with constrained range
         zoom = d3.zoom()
-            .scaleExtent([0.01, 10])  // Allow 100x zoom-out
+            .scaleExtent([0.1, 4])  // Limit zoom to 0.1x–4x
             .on("zoom", () => {
-                clearTimeout(zoomTimeout);
-                zoomTimeout = setTimeout(drawCanvas, 50);  // Debounce zoom
+                const transform = d3.event.transform;
+                // Constrain zoom to keep the network visible
+                if (transform.k < 0.1) transform.k = 0.1;
+                if (transform.k > 4) transform.k = 4;
+                drawCanvas();
             });
         networkContainer.call(zoom);
         networkContainer.call(zoom.transform, d3.zoomIdentity); // Reset zoom to 1x
@@ -93,13 +98,16 @@ function initNetwork() {
         // Handle window resize (for mobile orientation changes)
         window.addEventListener('resize', () => {
             detectMobile();
-            const newWidth = window.innerWidth * 0.9;
-            const newHeight = isMobile ? '100%' : 700;
+            const newContainerWidth = networkContainer.node().offsetWidth;
+            const newContainerHeight = isMobile ? window.innerHeight * 0.8 : 700;
+            const newCanvasSize = Math.min(newContainerWidth, newContainerHeight) * 0.9;
             canvas
-                .attr("width", newWidth)
-                .attr("height", newHeight)
-                .style("width", `${newWidth}px`)
-                .style("height", newHeight);
+                .attr("width", newCanvasSize)
+                .attr("height", newCanvasSize)
+                .style("width", `${newCanvasSize}px`)
+                .style("height", `${newCanvasSize}px`)
+                .style("top", `calc(50% - ${newCanvasSize / 2}px)`)
+                .style("left", `calc(50% - ${newCanvasSize / 2}px)`);
             if (simulation) drawCanvas();
         });
 
@@ -133,15 +141,21 @@ function fitToViewport() {
 
     const dx = bounds.x2 - bounds.x1;
     const dy = bounds.y2 - bounds.y1;
-    const scale = Math.min(
-        canvas.node().width / (dx + 200),  // Add padding
-        canvas.node().height / (dy + 200)
-    ) * 0.85;  // Zoom out 15% more
+    const centerX = (bounds.x1 + bounds.x2) / 2;
+    const centerY = (bounds.y1 + bounds.y2) / 2;
 
+    // Calculate scale to fit the network with padding
+    const padding = Math.max(dx, dy) * 0.2; // 20% padding
+    const scale = Math.min(
+        canvas.node().width / (dx + padding),
+        canvas.node().height / (dy + padding)
+    );
+
+    // Center the network in the Canvas
     const transform = d3.zoomIdentity
         .translate(canvas.node().width / 2, canvas.node().height / 2)
-        .scale(Math.max(scale, 0.01))  // Ensure minimum scale
-        .translate(-(bounds.x1 + bounds.x2) / 2, -(bounds.y1 + bounds.y2) / 2);
+        .scale(Math.max(scale, 0.1))  // Ensure minimum scale
+        .translate(-centerX, -centerY);
 
     d3.select("#network-container").call(zoom.transform, transform);
 }
@@ -279,7 +293,8 @@ function filterByLayer() {
             layerNodes.has(link.source) && layerNodes.has(link.target)
         );
     }
-    console.log(`Filtered to layer ${currentLayer} (${layerName}): ${nodes.length} nodes, ${links.length} edges.`);
+
+    console.log(`Filtered to layer ${currentLayer}: ${nodes.length} nodes, ${links.length} edges.`);
     simulation = startSimulation();
     setTimeout(fitToViewport, 100); // Fit after simulation starts
 }
