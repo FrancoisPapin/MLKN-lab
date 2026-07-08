@@ -1,15 +1,11 @@
 // Global variables for D3.js visualization
-let simulation, nodes, links, canvas, ctx, currentLayer = 'all';
-let tickCount = 0; // Added for throttling
+let simulation, nodes, links, canvas, ctx, currentLayer = 'all', zoom;
+let tickCount = 0; // For throttling
 
-// Colorblind-friendly palettes (aligned with your cleaned data)
+// Colorblind-friendly palettes
 const layerColors = {
-    '1': '#0173B2', // Core Domains (Blue)
-    '2': '#029E73', // Academic Disciplines (Green)
-    '3': '#D55E00', // Academic Subdisciplines (Orange)
-    '4': '#CC78BC', // Core Thematic Domains (Purple)
-    '5': '#CA9161', // Main Concepts (Brown)
-    'all': '#949494', // All Layers (Gray)
+    '1': '#0173B2', '2': '#029E73', '3': '#D55E00', '4': '#CC78BC', '5': '#CA9161',
+    'all': '#949494',
     'Core Domain': '#0173B2',
     'Academic Discipline': '#029E73',
     'Academic Subdiscipline': '#D55E00',
@@ -22,10 +18,9 @@ const edgeTypeColors = {
     'AcademicDiscipline_to_Subdiscipline': '#029E73',
     'Subdiscipline_to_Topic': '#D55E00',
     'Topic_to_Concept': '#CC78BC',
-    'connection': '#FFFFFF' // White for dark mode
+    'connection': '#FF00FF' // Magenta for dark mode
 };
 
-// Map layer numbers to EXACT layer names in your JSON
 const layerMap = {
     '1': 'Core Domain',
     '2': 'Academic Discipline',
@@ -34,7 +29,7 @@ const layerMap = {
     '5': 'Main Concept'
 };
 
-// Determine the correct data URL based on the environment
+// Determine data URLs
 let nodesUrl, edgesUrl;
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
     nodesUrl = './data/full_hierarchy_nodes.json';
@@ -53,107 +48,123 @@ function initNetwork() {
             return;
         }
 
-        // Remove SVG and use only Canvas
         const networkContainer = d3.select("#network-container");
-        networkContainer.select("svg").remove(); // Remove SVG to avoid conflicts
+        networkContainer.select("svg").remove();
 
-        // Create Canvas for rendering
+        // Set fixed Canvas size
+        const canvasWidth = window.innerWidth * 0.9;
+        const canvasHeight = 700;
         canvas = networkContainer.append("canvas")
-            .attr("width", networkContainer.node().offsetWidth)
-            .attr("height", networkContainer.node().offsetHeight)
+            .attr("width", canvasWidth)
+            .attr("height", canvasHeight)
+            .style("width", `${canvasWidth}px`)
+            .style("height", `${canvasHeight}px`)
             .style("position", "absolute")
             .style("top", 0)
             .style("left", 0);
         ctx = canvas.node().getContext("2d");
 
-        // Zoom/pan behavior
-        const zoom = d3.zoom()
+        // Initialize zoom
+        zoom = d3.zoom()
             .scaleExtent([0.1, 10])
             .on("zoom", (event) => {
-                drawCanvas(); // Redraw Canvas on zoom/pan
+                drawCanvas();
             });
-        networkContainer.call(zoom); // Apply zoom to the container
+        networkContainer.call(zoom);
+        networkContainer.call(zoom.transform, d3.zoomIdentity); // Reset zoom to 1x
 
-        // Load data
         loadData();
     } catch (error) {
         console.error("Error in initNetwork:", error);
         document.getElementById('network-placeholder').innerHTML = `
             <i class="fas fa-exclamation-triangle" style="color: #FF6347; font-size: 24px;"></i>
             <p>Error initializing network.</p>
-            <p style="font-size: 0.9em; margin-top: 10px; color: var(--text2);">
-                ${error.message}
-            </p>
+            <p style="font-size: 0.9em; margin-top: 10px; color: var(--text2);">${error.message}</p>
         `;
     }
 }
 
-// Function to draw nodes and edges on Canvas
+// Fit the network to the viewport
+function fitToViewport() {
+    const bounds = {
+        x1: Infinity, y1: Infinity,
+        x2: -Infinity, y2: -Infinity
+    };
+    nodes.forEach(d => {
+        bounds.x1 = Math.min(bounds.x1, d.x);
+        bounds.y1 = Math.min(bounds.y1, d.y);
+        bounds.x2 = Math.max(bounds.x2, d.x);
+        bounds.y2 = Math.max(bounds.y2, d.y);
+    });
+    const dx = bounds.x2 - bounds.x1;
+    const dy = bounds.y2 - bounds.y1;
+    const x = (bounds.x1 + bounds.x2) / 2;
+    const y = (bounds.y1 + bounds.y2) / 2;
+    const scale = Math.min(
+        canvas.node().width / (dx + 100),
+        canvas.node().height / (dy + 100)
+    );
+    const transform = d3.zoomIdentity
+        .translate(canvas.node().width / 2, canvas.node().height / 2)
+        .scale(Math.min(scale, 1))
+        .translate(-x, -y);
+    d3.select("#network-container").call(zoom.transform, transform);
+}
+
+// Draw nodes and edges on Canvas
 function drawCanvas() {
     if (!ctx || !nodes || nodes.length === 0) return;
 
-    // Clear canvas
     ctx.clearRect(0, 0, canvas.node().width, canvas.node().height);
-
-    // Save context state
     ctx.save();
 
-    // Apply zoom transform
     const transform = d3.zoomTransform(canvas.node());
     ctx.translate(transform.x, transform.y);
     ctx.scale(transform.k, transform.k);
 
-    // Draw edges first (behind nodes)
+    // Draw edges
     ctx.globalCompositeOperation = 'destination-over';
     links.forEach(d => {
         if (d.source?.x && d.source?.y && d.target?.x && d.target?.y) {
-            // Draw all edges (remove clipping for now)
-            if (d.source?.x && d.source?.y && d.target?.x && d.target?.y) {
-                ctx.beginPath();
-                ctx.moveTo(d.source.x, d.source.y);
-                ctx.lineTo(d.target.x, d.target.y);
-                ctx.strokeStyle = edgeTypeColors[d.type] || "#FF00FF";  // Magenta edges (visible in dark mode)
-                ctx.lineWidth = Math.max(0.5, d.weight / 10) * transform.k;
-                ctx.stroke();
-            }
+            ctx.beginPath();
+            ctx.moveTo(d.source.x, d.source.y);
+            ctx.lineTo(d.target.x, d.target.y);
+            ctx.strokeStyle = edgeTypeColors[d.type] || "#FF00FF";
+            ctx.lineWidth = Math.max(0.5, d.weight / 10) * transform.k;
+            ctx.stroke();
         }
     });
 
-    // Draw nodes on top
+    // Draw nodes
     ctx.globalCompositeOperation = 'source-over';
     nodes.forEach(d => {
         if (d.x && d.y) {
-            // Only draw if node is within viewport bounds
-            if (isInViewport(d.x, d.y, canvas.node().width, canvas.node().height, transform)) {
-                const radius = Math.max(4, Math.min(15, d.size ? d.size / 100 : 12)) * transform.k;
-                ctx.beginPath();
-                ctx.arc(d.x, d.y, radius, 0, 2 * Math.PI);
-                ctx.fillStyle = layerColors[d.Layer] || "#FFFFFF";        // White nodes
-                ctx.fill();
-                ctx.strokeStyle = "#FFFFFF";                           // White node strokes (visible in dark mode)
-                ctx.lineWidth = 1.5 * transform.k;
-                ctx.stroke();
+            const radius = Math.max(4, Math.min(15, d.size ? d.size / 100 : 12)) * transform.k;
+            ctx.beginPath();
+            ctx.arc(d.x, d.y, radius, 0, 2 * Math.PI);
+            ctx.fillStyle = layerColors[d.Layer] || "#FFFFFF";
+            ctx.fill();
+            ctx.strokeStyle = "#FFFFFF";
+            ctx.lineWidth = 1.5 * transform.k;
+            ctx.stroke();
+
+            // Add node label (for zoom > 0.5x)
+            if (transform.k > 0.5) {
+                ctx.fillStyle = "#FFFFFF";
+                ctx.font = `${10 * transform.k}px Arial`;
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillText(d.Node || d.id, d.x, d.y);
             }
         }
     });
 
-    // Restore context
     ctx.restore();
 }
 
-// Helper function to check if a point is within the viewport
-function isInViewport(x, y, width, height, transform) {
-    const scaledX = x * transform.k + transform.x;
-    const scaledY = y * transform.k + transform.y;
-    return (
-        scaledX >= 0 && scaledX <= width &&
-        scaledY >= 0 && scaledY <= height
-    );
-}
-
-// Load data from split JSON files
+// Load data
 function loadData() {
-    console.log('Fetching nodes and edges from split files...');
+    console.log('Fetching nodes and edges...');
     document.getElementById('network-placeholder').innerHTML = `
         <i class="fas fa-spinner fa-spin" style="font-size: 24px; margin-bottom: 10px;"></i>
         <p>Loading knowledge network...</p>
@@ -162,7 +173,6 @@ function loadData() {
         </div>
     `;
 
-    // Animate progress bar
     const progressBar = document.getElementById('progress-bar');
     progressBar.style.width = '50%';
     setTimeout(() => { progressBar.style.width = '100%'; }, 500);
@@ -196,10 +206,9 @@ function loadData() {
             console.log("Sample invalid edge:", invalidEdges[0]);
         }
 
-        // Debug: Log all Layer values in nodes
+        // Debug: Log all Layer values
         console.log("DEBUG: All Layer values in nodes:", [...new Set(nodes.map(n => n.Layer))]);
 
-        // Initialize layer filter
         currentLayer = 'all';
         filterByLayer();
         startSimulation();
@@ -209,36 +218,41 @@ function loadData() {
         document.getElementById('network-placeholder').innerHTML = `
             <i class="fas fa-exclamation-triangle" style="color: #FF6347; font-size: 24px;"></i>
             <p>Error loading network data.</p>
-            <p style="font-size: 0.9em; margin-top: 10px; color: var(--text2);">
-                ${error.message}
-            </p>
+            <p style="font-size: 0.9em; margin-top: 10px; color: var(--text2);">${error.message}</p>
         `;
     });
 }
 
-// Filter nodes/links by current layer
+// Filter by layer
 function filterByLayer() {
     if (simulation) simulation.stop();
+
+    // Reset zoom to 1x when switching layers
+    d3.select("#network-container").transition()
+        .duration(500)
+        .call(zoom.transform, d3.zoomIdentity);
 
     const layerName = layerMap[currentLayer] || currentLayer;
     console.log("DEBUG: Current layer:", currentLayer, "→ Layer name:", layerName);
 
-    // Debug: Log the first 5 Layer values in nodes
-    console.log("DEBUG: Sample Layer values:", nodes.slice(0, 5).map(n => n.Layer));
+    // Debug: Log all Layer values in nodes
+    console.log("DEBUG: All Layer values in nodes:", [...new Set(nodes.map(n => n.Layer))]);
 
     if (currentLayer === 'all') {
         simulation = startSimulation();
         return;
     }
 
-    // Filter nodes by Layer
-    // Trim whitespace and normalize case
-    const filteredNodes = nodes.filter(node =>
-        node.Layer?.trim().toLowerCase() === layerName.trim().toLowerCase()
-    );
-    const layerNodes = new Set(filteredNodes.map(node => node.id));
+    // Filter nodes by Layer (trim + lowercase)
+    const normalizedLayerName = layerName.trim().toLowerCase();
+    const filteredNodes = nodes.filter(node => {
+        const nodeLayer = node.Layer?.trim().toLowerCase();
+        const match = nodeLayer === normalizedLayerName;
+        if (!match) console.log(`DEBUG: Mismatch - Expected: "${normalizedLayerName}", Got: "${nodeLayer}"`);
+        return match;
+    });
 
-    // Filter links where BOTH source and target are in the filtered nodes
+    const layerNodes = new Set(filteredNodes.map(node => node.id));
     const filteredLinks = links.filter(link =>
         layerNodes.has(link.source) && layerNodes.has(link.target)
     );
@@ -253,45 +267,38 @@ function filterByLayer() {
     simulation = startSimulation();
 }
 
-// Start the force simulation
+// Start simulation
 function startSimulation() {
-    // Clear previous simulation
     if (simulation) simulation.stop();
 
-    // Get container dimensions
-    const networkContainer = d3.select("#network-container");
-    const width = networkContainer.node().offsetWidth;
-    const height = networkContainer.node().offsetHeight;
+    const width = canvas.node().width;
+    const height = canvas.node().height;
 
-    // Balanced parameters for 31,590 nodes
-    const chargeStrength = -2000;  // Stronger repulsion
-    const linkDistance = 150;      // Longer links
-    const collisionRadius = 30;   // Larger collision radius
+    // Stronger forces for faster stabilization
+    const chargeStrength = -2000;
+    const linkDistance = 150;
+    const collisionRadius = 30;
 
     simulation = d3.forceSimulation(nodes)
-    .force("link", d3.forceLink(links).id(d => d.id).distance(linkDistance))
-    .force("charge", d3.forceManyBody().strength(chargeStrength))
-    .force("center", d3.forceCenter(width / 2, height / 2).strength(0.1))  // Stronger center force
-    .force("collision", d3.forceCollide().radius(collisionRadius))
-    .alphaDecay(0.1)  // Faster cooling
-    .velocityDecay(0.8);
+        .force("link", d3.forceLink(links).id(d => d.id).distance(linkDistance))
+        .force("charge", d3.forceManyBody().strength(chargeStrength))
+        .force("center", d3.forceCenter(width / 2, height / 2).strength(1.0))
+        .force("collision", d3.forceCollide().radius(collisionRadius))
+        .alphaDecay(0.1)
+        .velocityDecay(0.8);
 
-    // Restart simulation with initial positions
-    tickCount = 0; // Reset tick count
+    tickCount = 0;
     simulation.nodes(nodes).on("tick", () => {
         tickCount++;
-        // Redraw every 3 ticks (throttle for performance)
-        if (tickCount % 3 === 0) {
-            drawCanvas();
-        }
-        // Stop simulation when stabilized (lower alpha threshold)
+        if (tickCount % 3 === 0) drawCanvas();
         if (simulation.alpha() < 0.001) {
             simulation.stop();
+            fitToViewport(); // Fit to viewport after stabilization
             console.log("Simulation stabilized. Alpha:", simulation.alpha());
         }
     });
     simulation.force("link").links(links);
-    simulation.alpha(1).restart(); // Restart with alpha=1
+    simulation.alpha(1).restart();
 }
 
 // Drag functions
@@ -312,13 +319,13 @@ function dragended(event, d) {
     d.fy = null;
 }
 
-// Update network based on current layer
+// Update network
 function updateNetwork() {
     filterByLayer();
     startSimulation();
 }
 
-// Filter by domain (for Layer 1)
+// Filter by domain
 function filterNetworkByDomain(domain) {
     if (currentLayer !== '1') return;
     const domainNodes = new Set(
@@ -328,5 +335,24 @@ function filterNetworkByDomain(domain) {
     console.log(`Filtered by domain: ${domain}, nodes: ${domainNodes.size}`);
 }
 
-// Initialize the network when the page loads
+// Initialize
 window.onload = initNetwork;
+
+// Click event for node details
+canvas.on("click", (event) => {
+    const transform = d3.zoomTransform(canvas.node());
+    const [x, y] = d3.pointer(event);
+
+    const clickedNode = nodes.find(node => {
+        const nodeX = node.x * transform.k + transform.x;
+        const nodeY = node.y * transform.k + transform.y;
+        const radius = Math.max(4, Math.min(15, node.size ? node.size / 100 : 12)) * transform.k;
+        const distance = Math.sqrt((x - nodeX) ** 2 + (y - nodeY) ** 2);
+        return distance <= radius;
+    });
+
+    if (clickedNode) {
+        console.log("Clicked node:", clickedNode);
+        alert(`Node: ${clickedNode.Node || clickedNode.id}\nLayer: ${clickedNode.Layer}\nDomain: ${clickedNode['Core Domain'] || 'N/A'}`);
+    }
+});
