@@ -879,20 +879,20 @@ h1, h2, h3 {
     background: var(--panel);
     position: relative;
     overflow: hidden;
-    display: flex; /* Center the Canvas */
+    display: flex;
     justify-content: center;
     align-items: center;
 }
 
 #network-container canvas {
     position: absolute;
-    pointer-events: auto; /* Allow zoom/pan on Canvas */
+    pointer-events: auto;
 }
 
 /* Mobile-specific adjustments */
 @media (max-width: 768px) {
     #network-container {
-        height: 80vh; /* Full viewport height on mobile */
+        height: 80vh;
         min-height: auto;
     }
 }
