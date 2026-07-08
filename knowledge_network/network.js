@@ -66,26 +66,23 @@ function initNetwork() {
         const networkContainer = d3.select("#network-container");
         networkContainer.select("svg").remove(); // Remove SVG to avoid conflicts
 
-        // Set Canvas dimensions (square for spherical network)
+        // Set Canvas dimensions (fill container)
         const containerWidth = networkContainer.node().offsetWidth;
         const containerHeight = networkContainer.node().offsetHeight;
-        const canvasSize = Math.min(containerWidth, containerHeight) * 0.9; // 90% of the smaller dimension
-
-        // Create Canvas
         canvas = networkContainer.append("canvas")
-            .attr("width", canvasSize)
-            .attr("height", canvasSize)
-            .style("width", `${canvasSize}px`)
-            .style("height", `${canvasSize}px`)
+            .attr("width", containerWidth)
+            .attr("height", containerHeight)
+            .style("width", `${containerWidth}px`)
+            .style("height", `${containerHeight}px`)
             .style("position", "absolute")
-            .style("top", `calc(50% - ${canvasSize / 2}px)`)
-            .style("left", `calc(50% - ${canvasSize / 2}px)`);
+            .style("top", 0)
+            .style("left", 0);
 
         ctx = canvas.node().getContext("2d");
 
-        // Initialize zoom with constrained range
+        // Initialize zoom with broader range
         zoom = d3.zoom()
-            .scaleExtent([0.1, 4])  // Limit zoom to 0.1x–4x
+            .scaleExtent([0.01, 10])  // Allow 100x zoom-out
             .on("zoom", () => {
                 drawCanvas();
             });
@@ -95,17 +92,17 @@ function initNetwork() {
         // Handle window resize
         window.addEventListener('resize', () => {
             detectMobile();
-            const newContainerWidth = networkContainer.node().offsetWidth;
-            const newContainerHeight = networkContainer.node().offsetHeight;
-            const newCanvasSize = Math.min(newContainerWidth, newContainerHeight) * 0.9;
+            const newWidth = networkContainer.node().offsetWidth;
+            const newHeight = networkContainer.node().offsetHeight;
             canvas
-                .attr("width", newCanvasSize)
-                .attr("height", newCanvasSize)
-                .style("width", `${newCanvasSize}px`)
-                .style("height", `${newCanvasSize}px`)
-                .style("top", `calc(50% - ${newCanvasSize / 2}px)`)
-                .style("left", `calc(50% - ${newCanvasSize / 2}px)`);
-            if (simulation) drawCanvas();
+                .attr("width", newWidth)
+                .attr("height", newHeight)
+                .style("width", `${newWidth}px`)
+                .style("height", `${newHeight}px`);
+            if (simulation) {
+                drawCanvas();
+                fitToViewport(); // Re-fit on resize
+            }
         });
 
         // Initialize click event AFTER canvas is created
@@ -126,10 +123,12 @@ function initNetwork() {
 
 // Handle node clicks (defined after canvas is created)
 function handleNodeClick(event) {
+    if (!nodes || nodes.length === 0) return;
     const transform = d3.zoomTransform(canvas.node());
     const [x, y] = d3.pointer(event);
 
     const clickedNode = nodes.find(node => {
+        if (!node.x || !node.y) return false;
         const nodeX = node.x * transform.k + transform.x;
         const nodeY = node.y * transform.k + transform.y;
         const radius = Math.max(4, Math.min(15, node.size ? node.size / 100 : 12)) * transform.k;
@@ -151,10 +150,12 @@ function fitToViewport() {
         x2: -Infinity, y2: -Infinity
     };
     nodes.forEach(d => {
-        bounds.x1 = Math.min(bounds.x1, d.x);
-        bounds.y1 = Math.min(bounds.y1, d.y);
-        bounds.x2 = Math.max(bounds.x2, d.x);
-        bounds.y2 = Math.max(bounds.y2, d.y);
+        if (d.x && d.y) {
+            bounds.x1 = Math.min(bounds.x1, d.x);
+            bounds.y1 = Math.min(bounds.y1, d.y);
+            bounds.x2 = Math.max(bounds.x2, d.x);
+            bounds.y2 = Math.max(bounds.y2, d.y);
+        }
     });
 
     const dx = bounds.x2 - bounds.x1;
@@ -163,7 +164,7 @@ function fitToViewport() {
     const centerY = (bounds.y1 + bounds.y2) / 2;
 
     // Calculate scale to fit the network with padding
-    const padding = Math.max(dx, dy) * 0.2; // 20% padding
+    const padding = Math.max(dx, dy) * 0.3; // 30% padding
     const scale = Math.min(
         canvas.node().width / (dx + padding),
         canvas.node().height / (dy + padding)
@@ -172,7 +173,7 @@ function fitToViewport() {
     // Center the network in the Canvas
     const transform = d3.zoomIdentity
         .translate(canvas.node().width / 2, canvas.node().height / 2)
-        .scale(Math.max(scale, 0.1))  // Ensure minimum scale
+        .scale(Math.max(scale, 0.01))  // Ensure minimum scale
         .translate(-centerX, -centerY);
 
     d3.select("#network-container").call(zoom.transform, transform);
@@ -294,10 +295,11 @@ function loadData() {
 
 // Filter nodes/links by current layer
 function filterByLayer() {
-    if (!simulation) return; // Guard clause
+    if (!simulation) return;
     simulation.stop();
 
     const layerName = layerMap[currentLayer] || currentLayer;
+    console.log(`Filtering to layer: ${currentLayer} (${layerName})`);
 
     if (currentLayer === 'all') {
         // Reset to full dataset
@@ -311,16 +313,18 @@ function filterByLayer() {
         links = originalLinks.filter(link =>
             layerNodes.has(link.source) && layerNodes.has(link.target)
         );
+        console.log(`Filtered to ${nodes.length} nodes and ${links.length} edges.`);
     }
 
-    console.log(`Filtered to layer ${currentLayer}: ${nodes.length} nodes, ${links.length} edges.`);
+    // Restart simulation with NEW data
+    if (simulation) simulation.stop();
     simulation = startSimulation();
     setTimeout(fitToViewport, 100); // Fit after simulation starts
 }
 
 // Start the force simulation
 function startSimulation() {
-    if (!canvas) return; // Guard clause
+    if (!canvas) return;
     // Clear previous simulation
     if (simulation) simulation.stop();
 
