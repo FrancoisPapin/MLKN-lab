@@ -872,20 +872,18 @@ h1, h2, h3 {
 #network-container {
     width: 100%;
     height: 700px;
-    min-height: 500px;
     border: 1px solid var(--border);
     border-radius: var(--r);
     margin-top: 20px;
     background: var(--panel);
     position: relative;
     overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 #network-container canvas {
     position: absolute;
+    top: 0;
+    left: 0;
     pointer-events: auto;
 }
 
@@ -893,7 +891,6 @@ h1, h2, h3 {
 @media (max-width: 768px) {
     #network-container {
         height: 80vh;
-        min-height: auto;
     }
 }
 
