@@ -901,7 +901,7 @@ h1, h2, h3 {
         border-color: var(--border);
     }
     #network-container canvas {
-        background: linear-gradient(to bottom, #1a1a2e, #16213e);
+        background: var(--panel);
     }
 }
 
@@ -925,7 +925,7 @@ h1, h2, h3 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.9);
     color: #FFFFFF;
     padding: 20px;
     border-radius: 8px;
@@ -975,6 +975,7 @@ h1, h2, h3 {
     background: rgba(0, 0, 0, 0.5);
     z-index: 9999;
 }
+
 /* =============================================
    HORIZONTAL BOXES (Essay Box + Featured)
    ============================================= */
