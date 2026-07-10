@@ -2,7 +2,6 @@
 let simulation, nodes, links, originalNodes, originalLinks, canvas, ctx, currentLayer = 'all', zoom;
 let tickCount = 0;
 let isMobile = false;
-let focusedNode = null; // For focus mode
 
 // Initialize mobile detection
 function detectMobile() {
@@ -96,51 +95,19 @@ function initNetwork() {
             }
         });
 
-        canvas.on("click", handleNodeClick);
-
-        // Add tooltip
-        const tooltip = document.createElement('div');
-        tooltip.id = 'node-tooltip';
-        tooltip.style.position = 'absolute';
-        tooltip.style.display = 'none';
-        tooltip.style.background = 'rgba(0, 0, 0, 0.8)';
-        tooltip.style.color = '#FFFFFF';
-        tooltip.style.padding = '10px';
-        tooltip.style.borderRadius = '6px';
-        tooltip.style.pointerEvents = 'none';
-        tooltip.style.zIndex = '1000';
-        tooltip.style.maxWidth = '300px';
-        tooltip.style.fontFamily = 'var(--mono)';
-        tooltip.style.fontSize = '12px';
-        document.getElementById('network-container').appendChild(tooltip);
-
         loadData();
     } catch (error) {
         console.error("Error in initNetwork:", error);
         document.getElementById('network-placeholder').innerHTML = `
-            <i class="fas fa-exclamation-triangle" style="color: #FF6347; font-size: 24px;"></i>
+            <i class="fas fa-exclamation-triangle" style="color: #FF6347;"></i>
             <p>Error initializing network.</p>
         `;
     }
 }
 
-// Check if node is neighbor of focused node
-function isNeighbor(nodeId, focusedNodeId) {
-    if (!focusedNodeId) return true;
-    return links.some(link => {
-        const source = typeof link.source === 'object' ? link.source.id : link.source;
-        const target = typeof link.target === 'object' ? link.target.id : link.target;
-        return (source === nodeId && target === focusedNodeId) ||
-               (source === focusedNodeId && target === nodeId);
-    });
-}
-
-// Strict hierarchical + degree-based node sizing
+// Strict hierarchical node sizing
 function getNodeRadius(d) {
     const layer = d.Layer;
-    const degree = d.degree || 0;
-
-    // Strict hierarchy: Layer 1 > Layer 2 > ... > Layer 5
     const layerSizes = {
         'Core Domain': 20,
         'Academic Discipline': 15,
@@ -148,11 +115,7 @@ function getNodeRadius(d) {
         'Core Thematic Domain': 10,
         'Main Concept': 8
     };
-    const baseRadius = layerSizes[layer] || 10;
-
-    // Degree scaling (capped to not override hierarchy)
-    const degreeMultiplier = 1 + Math.min(0.5, degree / 100); // Max 1.5x within layer
-    return Math.max(4, baseRadius * degreeMultiplier);
+    return layerSizes[layer] || 10;
 }
 
 // Fit network to viewport
@@ -204,11 +167,6 @@ function drawCanvas() {
     ctx.globalCompositeOperation = 'destination-over';
     links.forEach(d => {
         if (d.source?.x && d.source?.y && d.target?.x && d.target?.y) {
-            if (focusedNode) {
-                const source = typeof d.source === 'object' ? d.source.id : d.source;
-                const target = typeof d.target === 'object' ? d.target.id : d.target;
-                if (source !== focusedNode.id && target !== focusedNode.id) return;
-            }
             ctx.beginPath();
             ctx.moveTo(d.source.x, d.source.y);
             ctx.lineTo(d.target.x, d.target.y);
@@ -222,27 +180,17 @@ function drawCanvas() {
     ctx.globalCompositeOperation = 'source-over';
     nodes.forEach(d => {
         if (d.x && d.y) {
-            if (focusedNode && d.id !== focusedNode.id && !isNeighbor(d.id, focusedNode.id)) return;
-
             const radius = getNodeRadius(d) * transform.k;
             ctx.beginPath();
             ctx.arc(d.x, d.y, radius, 0, 2 * Math.PI);
-
-            if (focusedNode && d.id === focusedNode.id) {
-                ctx.shadowColor = '#FFFFFF';
-                ctx.shadowBlur = 20;
-            }
-
             ctx.fillStyle = layerColors[d.Layer] || "#FFFFFF";
             ctx.fill();
             ctx.strokeStyle = "#FFFFFF";
             ctx.lineWidth = 1.5 * transform.k;
             ctx.stroke();
 
-            ctx.shadowColor = 'transparent';
-            ctx.shadowBlur = 0;
-
-            if (transform.k > 0.5 && (!isMobile || transform.k > 1.0)) {
+            // Draw labels (if zoomed in)
+            if (transform.k > 0.5 && !isMobile) {
                 ctx.fillStyle = "#FFFFFF";
                 ctx.font = `${Math.max(12, 14 * transform.k)}px Arial`;
                 ctx.textAlign = "center";
@@ -270,19 +218,6 @@ function loadData() {
     ]).then(([nodesData, edgesData]) => {
         originalNodes = nodesData.nodes;
         originalLinks = edgesData.edges;
-
-        // Compute degrees
-        const degreeMap = {};
-        edgesData.edges.forEach(link => {
-            const source = typeof link.source === 'object' ? link.source.id : link.source;
-            const target = typeof link.target === 'object' ? link.target.id : link.target;
-            degreeMap[source] = (degreeMap[source] || 0) + 1;
-            degreeMap[target] = (degreeMap[target] || 0) + 1;
-        });
-        originalNodes.forEach(node => {
-            node.degree = degreeMap[node.id] || 0;
-        });
-
         nodes = originalNodes;
         links = originalLinks;
         console.log(`Loaded ${nodes.length} nodes and ${links.length} edges.`);
@@ -322,7 +257,6 @@ function filterByLayer() {
         console.log(`Filtered to ${nodes.length} nodes and ${links.length} edges.`);
     }
 
-    focusedNode = null;
     if (simulation) simulation.stop();
     simulation = startSimulation();
     setTimeout(() => {
@@ -363,44 +297,6 @@ function startSimulation() {
     simulation.alpha(1).restart();
 
     if (nodes.length < 100) setTimeout(drawCanvas, 100);
-}
-
-// Handle node clicks
-function handleNodeClick(event) {
-    if (!nodes || nodes.length === 0) return;
-    const transform = d3.zoomTransform(canvas.node());
-    const [x, y] = d3.pointer(event);
-
-    const clickedNode = nodes.find(node => {
-        if (!node.x || !node.y) return false;
-        const nodeX = node.x * transform.k + transform.x;
-        const nodeY = node.y * transform.k + transform.y;
-        const radius = getNodeRadius(node) * transform.k;
-        const distance = Math.sqrt((x - nodeX) ** 2 + (y - nodeY) ** 2);
-        return distance <= radius;
-    });
-
-    if (clickedNode) {
-        focusedNode = (focusedNode && focusedNode.id === clickedNode.id) ? null : clickedNode;
-
-        const tooltip = document.getElementById('node-tooltip');
-        if (focusedNode) {
-            tooltip.innerHTML = `
-                <h3 style="margin: 0 0 5px; color: ${layerColors[clickedNode.Layer]};">
-                    ${clickedNode.Node || clickedNode.id}
-                </h3>
-                <p><strong>Layer:</strong> ${clickedNode.Layer}</p>
-                <p><strong>Domain:</strong> ${clickedNode['Core Domain'] || 'N/A'}</p>
-                <p><strong>Degree:</strong> ${clickedNode.degree || 0}</p>
-            `;
-            tooltip.style.display = 'block';
-            tooltip.style.left = `${event.clientX + 10}px`;
-            tooltip.style.top = `${event.clientY + 10}px`;
-        } else {
-            tooltip.style.display = 'none';
-        }
-    }
-    drawCanvas();
 }
 
 // Update network
