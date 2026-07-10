@@ -189,14 +189,14 @@ function drawCanvas() {
             ctx.lineWidth = 1.5 * transform.k;
             ctx.stroke();
 
-            // Draw labels (if zoomed in)
-            if (transform.k > 0.5 && !isMobile) {
+            // Draw labels (adaptive threshold for mobile)
+            if ((transform.k > 0.3 && isMobile) || (transform.k > 0.5 && !isMobile)) {
                 ctx.fillStyle = "#FFFFFF";
-                ctx.font = `${Math.max(12, 14 * transform.k)}px Arial`;
+                ctx.font = `${Math.max(10, 12 * transform.k)}px Arial`;
                 ctx.textAlign = "center";
                 ctx.textBaseline = "middle";
                 ctx.shadowColor = '#000000';
-                ctx.shadowBlur = 3;
+                ctx.shadowBlur = 2;
                 ctx.fillText(d.Node || d.id, d.x, d.y);
                 ctx.shadowColor = 'transparent';
             }
@@ -218,6 +218,18 @@ function loadData() {
     ]).then(([nodesData, edgesData]) => {
         originalNodes = nodesData.nodes;
         originalLinks = edgesData.edges;
+
+        // Debug: Check for edges between Core Domains
+        const coreDomainNodes = new Set(originalNodes.filter(n => n.Layer === 'Core Domain').map(n => n.id));
+        const invalidEdges = edgesData.edges.filter(link => {
+            const source = typeof link.source === 'object' ? link.source.id : link.source;
+            const target = typeof link.target === 'object' ? link.target.id : link.target;
+            return coreDomainNodes.has(source) && coreDomainNodes.has(target);
+        });
+        if (invalidEdges.length > 0) {
+            console.warn(`DEBUG: Found ${invalidEdges.length} edges between Core Domains. Sample:`, invalidEdges.slice(0, 3));
+        }
+
         nodes = originalNodes;
         links = originalLinks;
         console.log(`Loaded ${nodes.length} nodes and ${links.length} edges.`);
@@ -272,17 +284,17 @@ function startSimulation() {
 
     const width = canvas.node().width;
     const height = canvas.node().height;
-    const chargeStrength = isMobile ? -500 : -2000;
-    const linkDistance = 150;
-    const collisionRadius = isMobile ? 10 : 30;
+    const chargeStrength = isMobile ? -1000 : -3000;  // Stronger repulsion
+    const linkDistance = 100;                        // Shorter links
+    const collisionRadius = isMobile ? 15 : 25;      // Smaller collision radius
 
     simulation = d3.forceSimulation(nodes)
         .force("link", d3.forceLink(links).id(d => d.id).distance(linkDistance))
         .force("charge", d3.forceManyBody().strength(chargeStrength))
-        .force("center", d3.forceCenter(width / 2, height / 2).strength(1.0))
+        .force("center", d3.forceCenter(width / 2, height / 2).strength(0.5))
         .force("collision", d3.forceCollide().radius(collisionRadius))
-        .alphaDecay(0.1)
-        .velocityDecay(0.8);
+        .alphaDecay(0.2)  // Faster cooling
+        .velocityDecay(0.5);  // Less damping
 
     tickCount = 0;
     simulation.nodes(nodes).on("tick", () => {
