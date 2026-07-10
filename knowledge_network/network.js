@@ -2,6 +2,7 @@
 let simulation, nodes, links, originalNodes, originalLinks, canvas, ctx, currentLayer = 'all', zoom;
 let tickCount = 0;
 let isMobile = false;
+let focusedNode = null; // For focus mode
 
 // Initialize mobile detection
 function detectMobile() {
@@ -108,6 +109,22 @@ function initNetwork() {
         // Initialize click event AFTER canvas is created
         canvas.on("click", handleNodeClick);
 
+        // Add tooltip element
+        const tooltip = document.createElement('div');
+        tooltip.id = 'node-tooltip';
+        tooltip.style.position = 'absolute';
+        tooltip.style.display = 'none';
+        tooltip.style.background = 'rgba(0, 0, 0, 0.8)';
+        tooltip.style.color = '#FFFFFF';
+        tooltip.style.padding = '10px';
+        tooltip.style.borderRadius = '6px';
+        tooltip.style.pointerEvents = 'none';
+        tooltip.style.zIndex = '1000';
+        tooltip.style.maxWidth = '300px';
+        tooltip.style.fontFamily = 'var(--mono)';
+        tooltip.style.fontSize = '12px';
+        document.getElementById('network-container').appendChild(tooltip);
+
         loadData();
     } catch (error) {
         console.error("Error in initNetwork:", error);
@@ -121,24 +138,36 @@ function initNetwork() {
     }
 }
 
-// Handle node clicks (defined after canvas is created)
-function handleNodeClick(event) {
-    if (!nodes || nodes.length === 0) return;
-    const transform = d3.zoomTransform(canvas.node());
-    const [x, y] = d3.pointer(event);
+// Helper function to check if a node is a neighbor of the focused node
+function isNeighbor(nodeId, focusedNodeId) {
+    if (!focusedNodeId) return true; // No focus mode: show all
+    return links.some(link =>
+        (link.source === nodeId && link.target === focusedNodeId) ||
+        (link.source === focusedNodeId && link.target === nodeId)
+    );
+}
 
-    const clickedNode = nodes.find(node => {
-        if (!node.x || !node.y) return false;
-        const nodeX = node.x * transform.k + transform.x;
-        const nodeY = node.y * transform.k + transform.y;
-        const radius = Math.max(4, Math.min(15, node.size ? node.size / 100 : 12)) * transform.k;
-        const distance = Math.sqrt((x - nodeX) ** 2 + (y - nodeY) ** 2);
-        return distance <= radius;
-    });
+// Function to calculate node radius based on layer and degree
+function getNodeRadius(d) {
+    const baseSize = d.size ? d.size / 100 : 12;
+    const layer = d.Layer;
+    const degree = d.degree || 0;
 
-    if (clickedNode) {
-        alert(`Node: ${clickedNode.Node || clickedNode.id}\nLayer: ${clickedNode.Layer}\nDomain: ${clickedNode['Core Domain'] || 'N/A'}`);
-    }
+    // Hierarchical sizing: Layer 1 = largest, Layer 5 = smallest
+    const layerSizeMultiplier = {
+        'Core Domain': 2.0,          // Layer 1: 2x larger
+        'Academic Discipline': 1.5,  // Layer 2: 1.5x larger
+        'Academic Subdiscipline': 1.2, // Layer 3: 1.2x larger
+        'Core Thematic Domain': 1.0, // Layer 4: default
+        'Main Concept': 0.8          // Layer 5: 0.8x smaller
+    };
+    const multiplier = layerSizeMultiplier[layer] || 1.0;
+
+    // Degree-based sizing: nodes with more connections are larger
+    const degreeMultiplier = 1 + (degree / 50); // Scale by degree (adjust divisor as needed)
+    const radius = Math.max(6, Math.min(20, baseSize * multiplier * degreeMultiplier)) * transform.k;
+
+    return radius;
 }
 
 // Fit the network to the viewport
@@ -163,8 +192,11 @@ function fitToViewport() {
     const centerX = (bounds.x1 + bounds.x2) / 2;
     const centerY = (bounds.y1 + bounds.y2) / 2;
 
+    // Adjust padding based on node count (smaller networks need more padding)
+    const nodeCount = nodes.length;
+    const padding = nodeCount < 100 ? Math.max(dx, dy) * 0.5 : Math.max(dx, dy) * 0.3;
+
     // Calculate scale to fit the network with padding
-    const padding = Math.max(dx, dy) * 0.3; // 30% padding
     const scale = Math.min(
         canvas.node().width / (dx + padding),
         canvas.node().height / (dy + padding)
@@ -196,6 +228,10 @@ function drawCanvas() {
     ctx.globalCompositeOperation = 'destination-over';
     links.forEach(d => {
         if (d.source?.x && d.source?.y && d.target?.x && d.target?.y) {
+            // In focus mode, only draw edges connected to the focused node
+            if (focusedNode && d.source !== focusedNode.id && d.target !== focusedNode.id) {
+                return; // Skip this edge
+            }
             ctx.beginPath();
             ctx.moveTo(d.source.x, d.source.y);
             ctx.lineTo(d.target.x, d.target.y);
@@ -209,17 +245,33 @@ function drawCanvas() {
     ctx.globalCompositeOperation = 'source-over';
     nodes.forEach(d => {
         if (d.x && d.y) {
-            const radius = Math.max(4, Math.min(15, d.size ? d.size / 100 : 12)) * transform.k;
+            // In focus mode, only draw the focused node and its neighbors
+            if (focusedNode && d.id !== focusedNode.id && !isNeighbor(d.id, focusedNode.id)) {
+                return; // Skip this node
+            }
+
+            const radius = getNodeRadius(d);
             ctx.beginPath();
             ctx.arc(d.x, d.y, radius, 0, 2 * Math.PI);
+
+            // Highlight focused node
+            if (focusedNode && d.id === focusedNode.id) {
+                ctx.shadowColor = '#FFFFFF';
+                ctx.shadowBlur = 20;
+            }
+
             ctx.fillStyle = layerColors[d.Layer] || "#FFFFFF";
             ctx.fill();
-            ctx.strokeStyle = "#FFFFFF"; // White stroke for dark mode
+            ctx.strokeStyle = "#FFFFFF";
             ctx.lineWidth = 1.5 * transform.k;
             ctx.stroke();
 
-            // Only show labels on desktop and when zoomed in (>0.5x)
-            if (transform.k > 0.5 && !isMobile) {
+            // Reset shadow
+            ctx.shadowColor = 'transparent';
+            ctx.shadowBlur = 0;
+
+            // Draw labels (if zoomed in)
+            if (transform.k > 0.5 && (!isMobile || transform.k > 1.0)) {
                 ctx.fillStyle = "#FFFFFF";
                 ctx.font = `${Math.max(12, 14 * transform.k)}px Arial`;
                 ctx.textAlign = "center";
@@ -272,6 +324,17 @@ function loadData() {
     .then(([nodesData, edgesData]) => {
         originalNodes = nodesData.nodes;  // Store original data
         originalLinks = edgesData.edges;
+
+        // Compute degree for each node
+        const degreeMap = {};
+        edgesData.edges.forEach(link => {
+            degreeMap[link.source] = (degreeMap[link.source] || 0) + 1;
+            degreeMap[link.target] = (degreeMap[link.target] || 0) + 1;
+        });
+        originalNodes.forEach(node => {
+            node.degree = degreeMap[node.id] || 0; // Add degree to node
+        });
+
         nodes = originalNodes;
         links = originalLinks;
         console.log(`Loaded ${nodes.length} nodes and ${links.length} edges.`);
@@ -305,6 +368,7 @@ function filterByLayer() {
         // Reset to full dataset
         nodes = originalNodes;
         links = originalLinks;
+        focusedNode = null; // Exit focus mode
     } else {
         // Filter from ORIGINAL data (not global nodes/links)
         const filteredNodes = originalNodes.filter(node => node.Layer === layerName);
@@ -314,12 +378,17 @@ function filterByLayer() {
             layerNodes.has(link.source) && layerNodes.has(link.target)
         );
         console.log(`Filtered to ${nodes.length} nodes and ${links.length} edges.`);
+        console.log("Sample nodes:", nodes.slice(0, 3).map(n => n.Node || n.id));
+        focusedNode = null; // Exit focus mode on layer change
     }
 
     // Restart simulation with NEW data
     if (simulation) simulation.stop();
     simulation = startSimulation();
-    setTimeout(fitToViewport, 100); // Fit after simulation starts
+    setTimeout(() => {
+        fitToViewport(); // Fit after simulation starts
+        drawCanvas(); // Force a redraw immediately
+    }, 100);
 }
 
 // Start the force simulation
@@ -362,6 +431,56 @@ function startSimulation() {
     });
     simulation.force("link").links(links);
     simulation.alpha(1).restart(); // Restart with alpha=1
+
+    // Force a redraw immediately for small networks
+    if (nodes.length < 100) {
+        setTimeout(drawCanvas, 100);
+    }
+}
+
+// Handle node clicks (defined after canvas is created)
+function handleNodeClick(event) {
+    if (!nodes || nodes.length === 0) return;
+    const transform = d3.zoomTransform(canvas.node());
+    const [x, y] = d3.pointer(event);
+
+    const clickedNode = nodes.find(node => {
+        if (!node.x || !node.y) return false;
+        const nodeX = node.x * transform.k + transform.x;
+        const nodeY = node.y * transform.k + transform.y;
+        const radius = getNodeRadius(node) * transform.k;
+        const distance = Math.sqrt((x - nodeX) ** 2 + (y - nodeY) ** 2);
+        return distance <= radius;
+    });
+
+    if (clickedNode) {
+        // Toggle focus mode
+        if (focusedNode && focusedNode.id === clickedNode.id) {
+            focusedNode = null; // Click again to exit focus mode
+        } else {
+            focusedNode = clickedNode;
+        }
+
+        // Show tooltip
+        const tooltip = document.getElementById('node-tooltip');
+        tooltip.innerHTML = `
+            <h3 style="margin: 0 0 5px; color: ${layerColors[clickedNode.Layer]};">
+                ${clickedNode.Node || clickedNode.id}
+            </h3>
+            <p><strong>Layer:</strong> ${clickedNode.Layer}</p>
+            <p><strong>Domain:</strong> ${clickedNode['Core Domain'] || 'N/A'}</p>
+            <p><strong>Degree:</strong> ${clickedNode.degree || 0}</p>
+        `;
+        tooltip.style.display = 'block';
+        tooltip.style.left = `${event.clientX + 10}px`;
+        tooltip.style.top = `${event.clientY + 10}px`;
+
+        // Hide tooltip on mouseout
+        canvas.on('mousemove', () => {
+            tooltip.style.display = 'none';
+        });
+    }
+    drawCanvas();
 }
 
 // Drag functions
