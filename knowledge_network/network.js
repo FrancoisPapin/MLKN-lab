@@ -2,7 +2,7 @@
 let simulation, nodes, links, originalNodes, originalLinks, canvas, ctx, currentLayer = 'all', zoom;
 let tickCount = 0;
 let isMobile = false;
-let modal, overlay; // For node details modal
+let modal, overlay; // Modal elements
 
 // Initialize mobile detection
 function detectMobile() {
@@ -64,30 +64,6 @@ function initNetwork() {
             return;
         }
 
-        const networkContainer = d3.select("#network-container");
-        networkContainer.select("canvas").remove(); // Remove existing canvas
-
-        // Set Canvas dimensions
-        const containerWidth = networkContainer.node().offsetWidth;
-        const containerHeight = networkContainer.node().offsetHeight;
-        canvas = networkContainer.append("canvas")
-            .attr("width", containerWidth)
-            .attr("height", containerHeight)
-            .style("width", `${containerWidth}px`)
-            .style("height", `${containerHeight}px`)
-            .style("position", "absolute")
-            .style("top", 0)
-            .style("left", 0);
-
-        ctx = canvas.node().getContext("2d");
-
-        // Initialize zoom (no debounce)
-        zoom = d3.zoom()
-            .scaleExtent([0.01, 10])
-            .on("zoom", drawCanvas); // Directly call drawCanvas on zoom
-        networkContainer.call(zoom);
-        networkContainer.call(zoom.transform, d3.zoomIdentity);
-
         // Create modal and overlay for node details
         modal = document.createElement('div');
         modal.id = 'node-modal';
@@ -115,8 +91,33 @@ function initNetwork() {
             overlay.style.display = 'none';
         });
 
-        // Initialize click event for node details
-        canvas.on("click", handleNodeClick);
+        const networkContainer = d3.select("#network-container");
+        networkContainer.select("canvas").remove(); // Remove existing canvas
+
+        // Set Canvas dimensions
+        const containerWidth = networkContainer.node().offsetWidth;
+        const containerHeight = networkContainer.node().offsetHeight;
+        canvas = networkContainer.append("canvas")
+            .attr("width", containerWidth)
+            .attr("height", containerHeight)
+            .style("width", `${containerWidth}px`)
+            .style("height", `${containerHeight}px`)
+            .style("position", "absolute")
+            .style("top", 0)
+            .style("left", 0);
+
+        ctx = canvas.node().getContext("2d");
+
+        // Initialize zoom
+        zoom = d3.zoom()
+            .scaleExtent([0.01, 10])
+            .on("zoom", () => {
+                if (!isMobile) {
+                    drawCanvas(); // Only redraw on zoom for desktop
+                }
+            });
+        networkContainer.call(zoom);
+        networkContainer.call(zoom.transform, d3.zoomIdentity);
 
         // Handle window resize (with debounce)
         let resizeTimeout;
@@ -135,8 +136,11 @@ function initNetwork() {
                     drawCanvas();
                     fitToViewport();
                 }
-            }, 200); // Debounce resize
+            }, 200);
         });
+
+        // Initialize click event for node details
+        canvas.on("click", handleNodeClick);
 
         loadData();
     } catch (error) {
@@ -217,6 +221,9 @@ function fitToViewport() {
 function drawCanvas() {
     if (!ctx || !nodes || nodes.length === 0 || !canvas) return;
 
+    // Throttle drawing on mobile to avoid crashes
+    if (isMobile && tickCount % 10 !== 0) return;
+
     ctx.clearRect(0, 0, canvas.node().width, canvas.node().height);
     ctx.save();
 
@@ -232,7 +239,7 @@ function drawCanvas() {
             ctx.moveTo(d.source.x, d.source.y);
             ctx.lineTo(d.target.x, d.target.y);
             ctx.strokeStyle = edgeTypeColors[d.type] || "#FF00FF";
-            ctx.lineWidth = Math.max(1, d.weight / 10 * transform.k);
+            ctx.lineWidth = Math.max(0.5, d.weight / 10 * transform.k); // Thinner edges on mobile
             ctx.stroke();
         }
     });
@@ -241,20 +248,19 @@ function drawCanvas() {
     ctx.globalCompositeOperation = 'source-over';
     nodes.forEach(d => {
         if (d.x && d.y) {
-            const radius = Math.max(4, Math.min(15, d.size ? d.size / 100 : 12)) * transform.k;
+            const radius = Math.max(2, Math.min(10, d.size ? d.size / 100 : 8)) * transform.k;
             ctx.beginPath();
             ctx.arc(d.x, d.y, radius, 0, 2 * Math.PI);
             ctx.fillStyle = layerColors[d.Layer] || "#FFFFFF";
             ctx.fill();
             ctx.strokeStyle = "#FFFFFF";
-            ctx.lineWidth = 1.5 * transform.k;
+            ctx.lineWidth = 1 * transform.k;
             ctx.stroke();
 
-            // Only show labels when zoomed in (>0.5x) and not on mobile (or >0.7x on mobile)
-            const labelThreshold = isMobile ? 0.7 : 0.5;
-            if (transform.k > labelThreshold) {
+            // Only show labels on desktop when zoomed in (>0.5x)
+            if (!isMobile && transform.k > 0.5) {
                 ctx.fillStyle = "#FFFFFF";
-                ctx.font = `${Math.max(12, 14 * transform.k)}px Arial`;
+                ctx.font = `${Math.max(10, 12 * transform.k)}px Arial`;
                 ctx.textAlign = "center";
                 ctx.textBaseline = "middle";
                 ctx.shadowColor = '#000000';
@@ -333,20 +339,28 @@ function filterByLayer() {
         nodes = originalNodes;
         links = originalLinks;
     } else {
+        // Filter nodes by layer
         const filteredNodes = originalNodes.filter(node => node.Layer === layerName);
-        const layerNodes = new Set(filteredNodes.map(node => node.id));
-        nodes = filteredNodes;
+        const layerNodeIds = new Set(filteredNodes.map(node => node.id));
+
+        // Filter edges where both source and target are in the filtered nodes
         links = originalLinks.filter(link => {
             const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
             const targetId = typeof link.target === 'object' ? link.target.id : link.target;
-            return layerNodes.has(sourceId) && layerNodes.has(targetId);
+            return layerNodeIds.has(sourceId) && layerNodeIds.has(targetId);
         });
+
+        nodes = filteredNodes;
         console.log(`Filtered to ${nodes.length} nodes and ${links.length} edges.`);
     }
 
+    // Restart simulation with filtered data
     if (simulation) simulation.stop();
     simulation = startSimulation();
-    setTimeout(fitToViewport, 100); // Fit after simulation starts
+    setTimeout(() => {
+        fitToViewport();
+        drawCanvas(); // Force a redraw
+    }, 100);
 }
 
 // Start the force simulation
@@ -357,26 +371,28 @@ function startSimulation() {
     const width = canvas.node().width;
     const height = canvas.node().height;
 
-    // Adaptive force parameters
-    const chargeStrength = isMobile ? -500 : -2000;
-    const linkDistance = 150;
-    const collisionRadius = isMobile ? 10 : 30;
+    // Adaptive force parameters for mobile/desktop
+    const chargeStrength = isMobile ? -300 : -1500;
+    const linkDistance = isMobile ? 100 : 150;
+    const collisionRadius = isMobile ? 5 : 20;
 
     simulation = d3.forceSimulation(nodes)
         .force("link", d3.forceLink(links).id(d => d.id).distance(linkDistance))
         .force("charge", d3.forceManyBody().strength(chargeStrength))
-        .force("center", d3.forceCenter(width / 2, height / 2).strength(1.0))
+        .force("center", d3.forceCenter(width / 2, height / 2).strength(0.8))
         .force("collision", d3.forceCollide().radius(collisionRadius))
         .alphaDecay(0.1) // Faster cooling
-        .velocityDecay(0.8);
+        .velocityDecay(0.7);
 
     tickCount = 0;
     simulation.nodes(nodes).on("tick", () => {
         tickCount++;
-        if (tickCount % 5 === 0) drawCanvas(); // Throttle redrawing
+        if (tickCount % 5 === 0) {
+            drawCanvas();
+        }
         if (simulation.alpha() < 0.001) {
             simulation.stop();
-            fitToViewport(); // Fit AFTER stabilization
+            fitToViewport();
             console.log("Simulation stabilized and fitted to viewport.");
         }
     });
