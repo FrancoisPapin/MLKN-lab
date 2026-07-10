@@ -925,15 +925,17 @@ h1, h2, h3 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.95);
     color: #FFFFFF;
     padding: 20px;
     border-radius: 8px;
     z-index: 10000;
-    max-width: 300px;
+    max-width: 90%;
+    width: 300px;
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: 14px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
 }
 
 #node-modal .modal-close {
@@ -943,10 +945,10 @@ h1, h2, h3 {
     background: none;
     border: none;
     color: #FFFFFF;
-    font-size: 20px;
+    font-size: 24px;
     cursor: pointer;
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -957,12 +959,14 @@ h1, h2, h3 {
 }
 
 #node-modal h3 {
-    margin: 0 0 10px;
+    margin: 10px 0;
     color: #1ABC9C;
+    font-size: 16px;
 }
 
 #node-modal p {
-    margin: 5px 0;
+    margin: 8px 0;
+    font-size: 14px;
 }
 
 #modal-overlay {
@@ -972,8 +976,22 @@ h1, h2, h3 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
     z-index: 9999;
+}
+
+/* Mobile modal adjustments */
+@media (max-width: 768px) {
+    #node-modal {
+        max-width: 90%;
+        font-size: 12px;
+    }
+    #node-modal h3 {
+        font-size: 14px;
+    }
+    #node-modal p {
+        font-size: 12px;
+    }
 }
 
 /* =============================================
