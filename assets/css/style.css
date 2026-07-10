@@ -918,6 +918,56 @@ h1, h2, h3 {
     }
 }
 
+/* Lightweight popup for node details */
+#node-popup {
+    position: fixed;
+    z-index: 10000;
+    background: rgba(0, 0, 0, 0.9);
+    color: #FFFFFF;
+    padding: 15px;
+    border-radius: 8px;
+    font-family: var(--mono);
+    font-size: 12px;
+    max-width: 300px;
+    display: none;
+    pointer-events: auto;
+}
+
+#node-popup #popup-close {
+    background: none;
+    border: none;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#node-popup #popup-close:hover {
+    color: #CCCCCC;
+}
+
+#node-popup #popup-title {
+    color: #1ABC9C;
+    margin-bottom: 10px;
+}
+
+#node-popup p {
+    margin: 5px 0;
+}
+
+/* Mobile popup adjustments */
+@media (max-width: 768px) {
+    #node-popup {
+        max-width: 90%;
+        font-size: 11px;
+    }
+    #node-popup #popup-title {
+        font-size: 12px;
+    }
+    #node-popup p {
+        font-size: 11px;
+    }
+}
+
 /* =============================================
    HORIZONTAL BOXES (Essay Box + Featured)
    ============================================= */
