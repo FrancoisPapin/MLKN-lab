@@ -11,10 +11,14 @@ function detectMobile() {
     }
 }
 
-// Colorblind-friendly palettes
+// Colorblind-friendly palettes (aligned with your cleaned data)
 const layerColors = {
-    '1': '#0173B2', '2': '#029E73', '3': '#D55E00', '4': '#CC78BC', '5': '#CA9161',
-    'all': '#949494',
+    '1': '#0173B2', // Core Domains (Blue)
+    '2': '#029E73', // Academic Disciplines (Green)
+    '3': '#D55E00', // Academic Subdisciplines (Orange)
+    '4': '#CC78BC', // Core Thematic Domains (Purple)
+    '5': '#CA9161', // Main Concepts (Brown)
+    'all': '#949494', // All Layers (Gray)
     'Core Domain': '#0173B2',
     'Academic Discipline': '#029E73',
     'Academic Subdiscipline': '#D55E00',
@@ -27,10 +31,10 @@ const edgeTypeColors = {
     'AcademicDiscipline_to_Subdiscipline': '#029E73',
     'Subdiscipline_to_Topic': '#D55E00',
     'Topic_to_Concept': '#CC78BC',
-    'connection': '#FF00FF'
+    'connection': '#FF00FF' // Magenta for dark mode visibility
 };
 
-// Layer mapping
+// Map layer numbers to EXACT layer names in your JSON
 const layerMap = {
     '1': 'Core Domain',
     '2': 'Academic Discipline',
@@ -39,7 +43,7 @@ const layerMap = {
     '5': 'Main Concept'
 };
 
-// Data URLs
+// Determine the correct data URL based on the environment
 let nodesUrl, edgesUrl;
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
     nodesUrl = './data/full_hierarchy_nodes.json';
@@ -49,18 +53,20 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
     edgesUrl = '/MLKN-lab/knowledge_network/data/full_hierarchy_edges.json';
 }
 
-// Initialize network
+// Initialize the network
 function initNetwork() {
     detectMobile();
     try {
         if (!window.d3) {
             document.getElementById('network-error').style.display = 'block';
+            document.querySelector('#network-placeholder i').style.display = 'none';
             return;
         }
 
         const networkContainer = d3.select("#network-container");
-        networkContainer.select("svg").remove();
+        networkContainer.select("svg").remove(); // Remove SVG to avoid conflicts
 
+        // Set Canvas dimensions (fill container)
         const containerWidth = networkContainer.node().offsetWidth;
         const containerHeight = networkContainer.node().offsetHeight;
         canvas = networkContainer.append("canvas")
@@ -74,12 +80,16 @@ function initNetwork() {
 
         ctx = canvas.node().getContext("2d");
 
+        // Initialize zoom with broader range
         zoom = d3.zoom()
-            .scaleExtent([0.01, 10])
-            .on("zoom", () => drawCanvas());
+            .scaleExtent([0.01, 10])  // Allow 100x zoom-out
+            .on("zoom", () => {
+                drawCanvas();
+            });
         networkContainer.call(zoom);
-        networkContainer.call(zoom.transform, d3.zoomIdentity);
+        networkContainer.call(zoom.transform, d3.zoomIdentity); // Reset zoom to 1x
 
+        // Handle window resize
         window.addEventListener('resize', () => {
             detectMobile();
             const newWidth = networkContainer.node().offsetWidth;
@@ -91,38 +101,54 @@ function initNetwork() {
                 .style("height", `${newHeight}px`);
             if (simulation) {
                 drawCanvas();
-                fitToViewport();
+                fitToViewport(); // Re-fit on resize
             }
         });
+
+        // Initialize click event AFTER canvas is created
+        canvas.on("click", handleNodeClick);
 
         loadData();
     } catch (error) {
         console.error("Error in initNetwork:", error);
         document.getElementById('network-placeholder').innerHTML = `
-            <i class="fas fa-exclamation-triangle" style="color: #FF6347;"></i>
+            <i class="fas fa-exclamation-triangle" style="color: #FF6347; font-size: 24px;"></i>
             <p>Error initializing network.</p>
+            <p style="font-size: 0.9em; margin-top: 10px; color: var(--text2);">
+                ${error.message}
+            </p>
         `;
     }
 }
 
-// Strict hierarchical node sizing
-function getNodeRadius(d) {
-    const layer = d.Layer;
-    const layerSizes = {
-        'Core Domain': 20,
-        'Academic Discipline': 15,
-        'Academic Subdiscipline': 12,
-        'Core Thematic Domain': 10,
-        'Main Concept': 8
-    };
-    return layerSizes[layer] || 10;
+// Handle node clicks (defined after canvas is created)
+function handleNodeClick(event) {
+    if (!nodes || nodes.length === 0) return;
+    const transform = d3.zoomTransform(canvas.node());
+    const [x, y] = d3.pointer(event);
+
+    const clickedNode = nodes.find(node => {
+        if (!node.x || !node.y) return false;
+        const nodeX = node.x * transform.k + transform.x;
+        const nodeY = node.y * transform.k + transform.y;
+        const radius = Math.max(4, Math.min(15, node.size ? node.size / 100 : 12)) * transform.k;
+        const distance = Math.sqrt((x - nodeX) ** 2 + (y - nodeY) ** 2);
+        return distance <= radius;
+    });
+
+    if (clickedNode) {
+        alert(`Node: ${clickedNode.Node || clickedNode.id}\nLayer: ${clickedNode.Layer}\nDomain: ${clickedNode['Core Domain'] || 'N/A'}`);
+    }
 }
 
-// Fit network to viewport
+// Fit the network to the viewport
 function fitToViewport() {
     if (!nodes || nodes.length === 0 || !canvas) return;
 
-    const bounds = { x1: Infinity, y1: Infinity, x2: -Infinity, y2: -Infinity };
+    const bounds = {
+        x1: Infinity, y1: Infinity,
+        x2: -Infinity, y2: -Infinity
+    };
     nodes.forEach(d => {
         if (d.x && d.y) {
             bounds.x1 = Math.min(bounds.x1, d.x);
@@ -137,116 +163,137 @@ function fitToViewport() {
     const centerX = (bounds.x1 + bounds.x2) / 2;
     const centerY = (bounds.y1 + bounds.y2) / 2;
 
-    const nodeCount = nodes.length;
-    const padding = nodeCount < 100 ? Math.max(dx, dy) * 0.5 : Math.max(dx, dy) * 0.3;
+    // Calculate scale to fit the network with padding
+    const padding = Math.max(dx, dy) * 0.3; // 30% padding
     const scale = Math.min(
         canvas.node().width / (dx + padding),
         canvas.node().height / (dy + padding)
     );
 
+    // Center the network in the Canvas
     const transform = d3.zoomIdentity
         .translate(canvas.node().width / 2, canvas.node().height / 2)
-        .scale(Math.max(scale, 0.01))
+        .scale(Math.max(scale, 0.01))  // Ensure minimum scale
         .translate(-centerX, -centerY);
 
     d3.select("#network-container").call(zoom.transform, transform);
 }
 
-// Draw canvas
+// Function to draw nodes and edges on Canvas
 function drawCanvas() {
     if (!ctx || !nodes || nodes.length === 0 || !canvas) return;
 
+    // Clear canvas
     ctx.clearRect(0, 0, canvas.node().width, canvas.node().height);
     ctx.save();
 
+    // Apply zoom transform
     const transform = d3.zoomTransform(canvas.node());
     ctx.translate(transform.x, transform.y);
     ctx.scale(transform.k, transform.k);
 
-    // Draw edges
+    // Draw edges first (behind nodes)
     ctx.globalCompositeOperation = 'destination-over';
     links.forEach(d => {
         if (d.source?.x && d.source?.y && d.target?.x && d.target?.y) {
             ctx.beginPath();
             ctx.moveTo(d.source.x, d.source.y);
             ctx.lineTo(d.target.x, d.target.y);
-            ctx.strokeStyle = edgeTypeColors[d.type] || "#FF00FF";
-            ctx.lineWidth = Math.max(1, d.weight / 10 * transform.k);
+            ctx.strokeStyle = edgeTypeColors[d.type] || "#FF00FF"; // Magenta for dark mode
+            ctx.lineWidth = Math.max(1, d.weight / 10 * transform.k); // Minimum 1px width
             ctx.stroke();
         }
     });
 
-    // Draw nodes
+    // Draw nodes on top
     ctx.globalCompositeOperation = 'source-over';
     nodes.forEach(d => {
         if (d.x && d.y) {
-            const radius = getNodeRadius(d) * transform.k;
+            const radius = Math.max(4, Math.min(15, d.size ? d.size / 100 : 12)) * transform.k;
             ctx.beginPath();
             ctx.arc(d.x, d.y, radius, 0, 2 * Math.PI);
             ctx.fillStyle = layerColors[d.Layer] || "#FFFFFF";
             ctx.fill();
-            ctx.strokeStyle = "#FFFFFF";
+            ctx.strokeStyle = "#FFFFFF"; // White stroke for dark mode
             ctx.lineWidth = 1.5 * transform.k;
             ctx.stroke();
 
-            // Draw labels (adaptive threshold for mobile)
-            if ((transform.k > 0.3 && isMobile) || (transform.k > 0.5 && !isMobile)) {
+            // Only show labels on desktop and when zoomed in (>0.5x)
+            if (transform.k > 0.5 && !isMobile) {
                 ctx.fillStyle = "#FFFFFF";
-                ctx.font = `${Math.max(10, 12 * transform.k)}px Arial`;
+                ctx.font = `${Math.max(12, 14 * transform.k)}px Arial`;
                 ctx.textAlign = "center";
                 ctx.textBaseline = "middle";
+                // Add text shadow for readability
                 ctx.shadowColor = '#000000';
-                ctx.shadowBlur = 2;
+                ctx.shadowBlur = 3;
+                ctx.shadowOffsetX = 1;
+                ctx.shadowOffsetY = 1;
                 ctx.fillText(d.Node || d.id, d.x, d.y);
+                // Reset shadow
                 ctx.shadowColor = 'transparent';
+                ctx.shadowBlur = 0;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 0;
             }
         }
     });
+
+    // Restore context
     ctx.restore();
 }
 
-// Load data
+// Load data from split JSON files
 function loadData() {
+    console.log('Fetching nodes and edges from split files...');
     document.getElementById('network-placeholder').innerHTML = `
-        <i class="fas fa-spinner fa-spin" style="font-size: 24px;"></i>
+        <i class="fas fa-spinner fa-spin" style="font-size: 24px; margin-bottom: 10px;"></i>
         <p>Loading knowledge network...</p>
+        <div style="width: 100%; background: #333; border-radius: 4px; margin-top: 10px;">
+            <div id="progress-bar" style="width: 20%; height: 4px; background: #1ABC9C; border-radius: 4px;"></div>
+        </div>
     `;
 
+    // Animate progress bar
+    const progressBar = document.getElementById('progress-bar');
+    progressBar.style.width = '50%';
+    setTimeout(() => { progressBar.style.width = '100%'; }, 500);
+
     Promise.all([
-        fetch(nodesUrl).then(res => res.json()),
-        fetch(edgesUrl).then(res => res.json())
-    ]).then(([nodesData, edgesData]) => {
-        originalNodes = nodesData.nodes;
+        fetch(nodesUrl).then(res => {
+            if (!res.ok) throw new Error(`Nodes HTTP error! status: ${res.status}`);
+            return res.json();
+        }),
+        fetch(edgesUrl).then(res => {
+            if (!res.ok) throw new Error(`Edges HTTP error! status: ${res.status}`);
+            return res.json();
+        })
+    ])
+    .then(([nodesData, edgesData]) => {
+        originalNodes = nodesData.nodes;  // Store original data
         originalLinks = edgesData.edges;
-
-        // Debug: Check for edges between Core Domains
-        const coreDomainNodes = new Set(originalNodes.filter(n => n.Layer === 'Core Domain').map(n => n.id));
-        const invalidEdges = edgesData.edges.filter(link => {
-            const source = typeof link.source === 'object' ? link.source.id : link.source;
-            const target = typeof link.target === 'object' ? link.target.id : link.target;
-            return coreDomainNodes.has(source) && coreDomainNodes.has(target);
-        });
-        if (invalidEdges.length > 0) {
-            console.warn(`DEBUG: Found ${invalidEdges.length} edges between Core Domains. Sample:`, invalidEdges.slice(0, 3));
-        }
-
         nodes = originalNodes;
         links = originalLinks;
         console.log(`Loaded ${nodes.length} nodes and ${links.length} edges.`);
 
+        // Initialize with all layers
         currentLayer = 'all';
         filterByLayer();
         startSimulation();
-    }).catch(error => {
+    })
+    .catch(error => {
         console.error("Error loading data:", error);
         document.getElementById('network-placeholder').innerHTML = `
-            <i class="fas fa-exclamation-triangle" style="color: #FF6347;"></i>
+            <i class="fas fa-exclamation-triangle" style="color: #FF6347; font-size: 24px;"></i>
             <p>Error loading network data.</p>
+            <p style="font-size: 0.9em; margin-top: 10px; color: var(--text2);">
+                ${error.message}
+            </p>
         `;
     });
 }
 
-// Filter by layer
+// Filter nodes/links by current layer
 function filterByLayer() {
     if (!simulation) return;
     simulation.stop();
@@ -255,67 +302,101 @@ function filterByLayer() {
     console.log(`Filtering to layer: ${currentLayer} (${layerName})`);
 
     if (currentLayer === 'all') {
+        // Reset to full dataset
         nodes = originalNodes;
         links = originalLinks;
     } else {
+        // Filter from ORIGINAL data (not global nodes/links)
         const filteredNodes = originalNodes.filter(node => node.Layer === layerName);
         const layerNodes = new Set(filteredNodes.map(node => node.id));
-        links = originalLinks.filter(link => {
-            const source = typeof link.source === 'object' ? link.source.id : link.source;
-            const target = typeof link.target === 'object' ? link.target.id : link.target;
-            return layerNodes.has(source) && layerNodes.has(target);
-        });
         nodes = filteredNodes;
+        links = originalLinks.filter(link =>
+            layerNodes.has(link.source) && layerNodes.has(link.target)
+        );
         console.log(`Filtered to ${nodes.length} nodes and ${links.length} edges.`);
     }
 
+    // Restart simulation with NEW data
     if (simulation) simulation.stop();
     simulation = startSimulation();
-    setTimeout(() => {
-        fitToViewport();
-        drawCanvas();
-    }, 100);
+    setTimeout(fitToViewport, 100); // Fit after simulation starts
 }
 
-// Start simulation
+// Start the force simulation
 function startSimulation() {
     if (!canvas) return;
+    // Clear previous simulation
     if (simulation) simulation.stop();
 
+    // Get container dimensions
     const width = canvas.node().width;
     const height = canvas.node().height;
-    const chargeStrength = isMobile ? -1000 : -3000;  // Stronger repulsion
-    const linkDistance = 100;                        // Shorter links
-    const collisionRadius = isMobile ? 15 : 25;      // Smaller collision radius
+
+    // Adaptive force parameters (weaker for mobile)
+    const chargeStrength = isMobile ? -500 : -2000;
+    const linkDistance = 150;
+    const collisionRadius = isMobile ? 10 : 30;
 
     simulation = d3.forceSimulation(nodes)
         .force("link", d3.forceLink(links).id(d => d.id).distance(linkDistance))
         .force("charge", d3.forceManyBody().strength(chargeStrength))
-        .force("center", d3.forceCenter(width / 2, height / 2).strength(0.5))
+        .force("center", d3.forceCenter(width / 2, height / 2).strength(1.0))
         .force("collision", d3.forceCollide().radius(collisionRadius))
-        .alphaDecay(0.2)  // Faster cooling
-        .velocityDecay(0.5);  // Less damping
+        .alphaDecay(0.1) // Faster cooling
+        .velocityDecay(0.8);
 
+    // Reset tick count and set up tick handler
     tickCount = 0;
     simulation.nodes(nodes).on("tick", () => {
         tickCount++;
-        if (tickCount % 5 === 0) drawCanvas();
+        // Throttle redrawing (every 5 ticks for performance)
+        if (tickCount % 5 === 0) {
+            drawCanvas();
+        }
+        // Stop simulation when stabilized
         if (simulation.alpha() < 0.001) {
             simulation.stop();
-            fitToViewport();
+            fitToViewport(); // Fit AFTER stabilization
+            console.log("Simulation stabilized and fitted to viewport.");
         }
     });
     simulation.force("link").links(links);
-    simulation.alpha(1).restart();
-
-    if (nodes.length < 100) setTimeout(drawCanvas, 100);
+    simulation.alpha(1).restart(); // Restart with alpha=1
 }
 
-// Update network
+// Drag functions
+function dragstarted(event, d) {
+    if (!event.active) simulation.alphaTarget(0.3).restart();
+    d.fx = d.x;
+    d.fy = d.y;
+}
+
+function dragged(event, d) {
+    d.fx = event.x;
+    d.fy = event.y;
+}
+
+function dragended(event, d) {
+    if (!event.active) simulation.alphaTarget(0);
+    d.fx = null;
+    d.fy = null;
+}
+
+// Update network based on current layer
 function updateNetwork() {
     filterByLayer();
     startSimulation();
 }
 
-// Initialize
+// Filter by domain (for Layer 1)
+function filterNetworkByDomain(domain) {
+    if (currentLayer !== '1') return;
+    const domainNodes = new Set(
+        nodes.filter(node => node['Core Domain'] === domain)
+             .map(node => node.id)
+    );
+    console.log(`Filtered by domain: ${domain}, nodes: ${domainNodes.size}`);
+}
+
+// Initialize the network when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', initNetwork);
