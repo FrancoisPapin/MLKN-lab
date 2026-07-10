@@ -2,6 +2,7 @@
 let simulation, nodes, links, originalNodes, originalLinks, canvas, ctx, currentLayer = 'all', zoom;
 let tickCount = 0;
 let isMobile = false;
+let popup; // Lightweight popup for node details
 
 // Initialize mobile detection
 function detectMobile() {
@@ -31,7 +32,7 @@ const edgeTypeColors = {
     'AcademicDiscipline_to_Subdiscipline': '#029E73',
     'Subdiscipline_to_Topic': '#D55E00',
     'Topic_to_Concept': '#CC78BC',
-    'connection': '#FF00FF' // Magenta for dark mode visibility
+    'connection': '#FF00FF' // Magenta for visibility
 };
 
 // Map layer numbers to EXACT layer names in your JSON
@@ -63,6 +64,42 @@ function initNetwork() {
             return;
         }
 
+        // Create lightweight popup (non-modal)
+        popup = document.createElement('div');
+        popup.id = 'node-popup';
+        popup.style.position = 'fixed';
+        popup.style.zIndex = '10000';
+        popup.style.background = 'rgba(0, 0, 0, 0.9)';
+        popup.style.color = '#FFFFFF';
+        popup.style.padding = '15px';
+        popup.style.borderRadius = '8px';
+        popup.style.fontFamily = 'var(--mono)';
+        popup.style.fontSize = '12px';
+        popup.style.maxWidth = '300px';
+        popup.style.display = 'none';
+        popup.style.pointerEvents = 'auto'; // Allow clicks inside popup
+        popup.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <strong id="popup-title" style="color: #1ABC9C;"></strong>
+                <button id="popup-close" style="background: none; border: none; color: #FFFFFF; cursor: pointer; font-size: 16px;">Close</button>
+            </div>
+            <p id="popup-layer" style="margin: 5px 0;"></p>
+            <p id="popup-domain" style="margin: 5px 0;"></p>
+        `;
+        document.body.appendChild(popup);
+
+        // Close popup when clicking the close button
+        document.getElementById('popup-close').addEventListener('click', () => {
+            popup.style.display = 'none';
+        });
+
+        // Close popup when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!popup.contains(e.target) && e.target !== canvas.node()) {
+                popup.style.display = 'none';
+            }
+        });
+
         const networkContainer = d3.select("#network-container");
         networkContainer.select("canvas").remove(); // Remove existing canvas
 
@@ -80,11 +117,11 @@ function initNetwork() {
 
         ctx = canvas.node().getContext("2d");
 
-        // Initialize zoom (no debounce)
+        // Initialize zoom (throttled on mobile)
         zoom = d3.zoom()
             .scaleExtent([0.01, 10])
             .on("zoom", () => {
-                if (isMobile && tickCount % 5 !== 0) return; // Throttle zoom redraws on mobile
+                if (isMobile && tickCount % 5 !== 0) return; // Throttle zoom redraws
                 drawCanvas();
             });
         networkContainer.call(zoom);
@@ -110,7 +147,7 @@ function initNetwork() {
             }, 200);
         });
 
-        // Initialize click event for node details (uses alert)
+        // Initialize click event for node details
         canvas.on("click", handleNodeClick);
 
         loadData();
@@ -126,7 +163,7 @@ function initNetwork() {
     }
 }
 
-// Handle node clicks (uses alert)
+// Handle node clicks (show popup)
 function handleNodeClick(event) {
     if (!nodes || nodes.length === 0) return;
     const transform = d3.zoomTransform(canvas.node());
@@ -142,10 +179,14 @@ function handleNodeClick(event) {
     });
 
     if (clickedNode) {
-        const nodeName = clickedNode.Node || clickedNode.id;
-        const nodeLayer = clickedNode.Layer || 'Unknown';
-        const nodeDomain = clickedNode['Core Domain'] || 'N/A';
-        alert(`Node: ${nodeName}\nLayer: ${nodeLayer}\nDomain: ${nodeDomain}`);
+        document.getElementById('popup-title').textContent = clickedNode.Node || clickedNode.id;
+        document.getElementById('popup-layer').innerHTML = `<strong>Layer:</strong> ${clickedNode.Layer}`;
+        document.getElementById('popup-domain').innerHTML = `<strong>Domain:</strong> ${clickedNode['Core Domain'] || 'N/A'}`;
+
+        // Position popup near the clicked node
+        popup.style.left = `${event.clientX + 10}px`;
+        popup.style.top = `${event.clientY + 10}px`;
+        popup.style.display = 'block';
     }
 }
 
@@ -200,17 +241,19 @@ function drawCanvas() {
     ctx.scale(transform.k, transform.k);
 
     // Draw edges first (behind nodes)
-    ctx.globalCompositeOperation = 'destination-over';
-    links.forEach(d => {
-        if (d.source?.x && d.source?.y && d.target?.x && d.target?.y) {
-            ctx.beginPath();
-            ctx.moveTo(d.source.x, d.source.y);
-            ctx.lineTo(d.target.x, d.target.y);
-            ctx.strokeStyle = edgeTypeColors[d.type] || "#FF00FF";
-            ctx.lineWidth = Math.max(0.5, d.weight / 10 * transform.k); // Thinner edges on mobile
-            ctx.stroke();
-        }
-    });
+    if (!isMobile || links.length <= 500) { // Skip edges on mobile if too many
+        ctx.globalCompositeOperation = 'destination-over';
+        links.forEach(d => {
+            if (d.source?.x && d.source?.y && d.target?.x && d.target?.y) {
+                ctx.beginPath();
+                ctx.moveTo(d.source.x, d.source.y);
+                ctx.lineTo(d.target.x, d.target.y);
+                ctx.strokeStyle = edgeTypeColors[d.type] || "#FF00FF";
+                ctx.lineWidth = Math.max(0.5, d.weight / 10 * transform.k);
+                ctx.stroke();
+            }
+        });
+    }
 
     // Draw nodes on top
     ctx.globalCompositeOperation = 'source-over';
@@ -340,14 +383,14 @@ function startSimulation() {
     const height = canvas.node().height;
 
     // Adaptive force parameters for mobile/desktop
-    const chargeStrength = isMobile ? -300 : -1500;
+    const chargeStrength = isMobile ? -200 : -1000;
     const linkDistance = isMobile ? 100 : 150;
     const collisionRadius = isMobile ? 5 : 20;
 
     simulation = d3.forceSimulation(nodes)
         .force("link", d3.forceLink(links).id(d => d.id).distance(linkDistance))
         .force("charge", d3.forceManyBody().strength(chargeStrength))
-        .force("center", d3.forceCenter(width / 2, height / 2).strength(0.8))
+        .force("center", d3.forceCenter(width / 2, height / 2).strength(1.0)) // Stronger center force
         .force("collision", d3.forceCollide().radius(collisionRadius))
         .alphaDecay(0.1) // Faster cooling
         .velocityDecay(0.7);
