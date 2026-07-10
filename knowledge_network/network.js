@@ -85,7 +85,7 @@ function initNetwork() {
         zoom = d3.zoom()
             .scaleExtent([0.01, 10])  // Allow 100x zoom-out
             .on("zoom", () => {
-                drawCanvas();
+                drawCanvas(); // Redraw with the current transform
             });
         networkContainer.call(zoom);
         networkContainer.call(zoom.transform, d3.zoomIdentity); // Reset zoom to 1x
@@ -109,11 +109,11 @@ function initNetwork() {
         // Initialize click event AFTER canvas is created
         canvas.on("click", handleNodeClick);
 
-        // Add tooltip element
+        // Add tooltip element (hidden by default)
         const tooltip = document.createElement('div');
         tooltip.id = 'node-tooltip';
         tooltip.style.position = 'absolute';
-        tooltip.style.display = 'none';
+        tooltip.style.display = 'none'; // Hide by default
         tooltip.style.background = 'rgba(0, 0, 0, 0.8)';
         tooltip.style.color = '#FFFFFF';
         tooltip.style.padding = '10px';
@@ -165,7 +165,7 @@ function getNodeRadius(d) {
 
     // Degree-based sizing: nodes with more connections are larger
     const degreeMultiplier = 1 + (degree / 50); // Scale by degree (adjust divisor as needed)
-    const radius = Math.max(6, Math.min(20, baseSize * multiplier * degreeMultiplier)) * transform.k;
+    const radius = Math.max(6, Math.min(20, baseSize * multiplier * degreeMultiplier));
 
     return radius;
 }
@@ -219,7 +219,7 @@ function drawCanvas() {
     ctx.clearRect(0, 0, canvas.node().width, canvas.node().height);
     ctx.save();
 
-    // Apply zoom transform
+    // Get the current zoom transform
     const transform = d3.zoomTransform(canvas.node());
     ctx.translate(transform.x, transform.y);
     ctx.scale(transform.k, transform.k);
@@ -250,7 +250,7 @@ function drawCanvas() {
                 return; // Skip this node
             }
 
-            const radius = getNodeRadius(d);
+            const radius = getNodeRadius(d) * transform.k;
             ctx.beginPath();
             ctx.arc(d.x, d.y, radius, 0, 2 * Math.PI);
 
@@ -348,7 +348,7 @@ function loadData() {
         console.error("Error loading data:", error);
         document.getElementById('network-placeholder').innerHTML = `
             <i class="fas fa-exclamation-triangle" style="color: #FF6347; font-size: 24px;"></i>
-            <p>Error loading network data.</p>
+            <p>Error loading network.</p>
             <p style="font-size: 0.9em; margin-top: 10px; color: var(--text2);">
                 ${error.message}
             </p>
