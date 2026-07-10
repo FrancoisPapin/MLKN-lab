@@ -2,7 +2,6 @@
 let simulation, nodes, links, originalNodes, originalLinks, canvas, ctx, currentLayer = 'all', zoom;
 let tickCount = 0;
 let isMobile = false;
-let modal, overlay; // Modal elements
 
 // Initialize mobile detection
 function detectMobile() {
@@ -64,33 +63,6 @@ function initNetwork() {
             return;
         }
 
-        // Create modal and overlay for node details
-        modal = document.createElement('div');
-        modal.id = 'node-modal';
-        modal.innerHTML = `
-            <button class="modal-close">×</button>
-            <h3 id="modal-title"></h3>
-            <p id="modal-layer"></p>
-            <p id="modal-domain"></p>
-        `;
-        modal.style.display = 'none';
-        document.body.appendChild(modal);
-
-        overlay = document.createElement('div');
-        overlay.id = 'modal-overlay';
-        overlay.style.display = 'none';
-        document.body.appendChild(overlay);
-
-        // Close modal on close button or overlay click
-        modal.querySelector('.modal-close').addEventListener('click', () => {
-            modal.style.display = 'none';
-            overlay.style.display = 'none';
-        });
-        overlay.addEventListener('click', () => {
-            modal.style.display = 'none';
-            overlay.style.display = 'none';
-        });
-
         const networkContainer = d3.select("#network-container");
         networkContainer.select("canvas").remove(); // Remove existing canvas
 
@@ -108,13 +80,12 @@ function initNetwork() {
 
         ctx = canvas.node().getContext("2d");
 
-        // Initialize zoom
+        // Initialize zoom (no debounce)
         zoom = d3.zoom()
             .scaleExtent([0.01, 10])
             .on("zoom", () => {
-                if (!isMobile) {
-                    drawCanvas(); // Only redraw on zoom for desktop
-                }
+                if (isMobile && tickCount % 5 !== 0) return; // Throttle zoom redraws on mobile
+                drawCanvas();
             });
         networkContainer.call(zoom);
         networkContainer.call(zoom.transform, d3.zoomIdentity);
@@ -139,7 +110,7 @@ function initNetwork() {
             }, 200);
         });
 
-        // Initialize click event for node details
+        // Initialize click event for node details (uses alert)
         canvas.on("click", handleNodeClick);
 
         loadData();
@@ -155,7 +126,7 @@ function initNetwork() {
     }
 }
 
-// Handle node clicks
+// Handle node clicks (uses alert)
 function handleNodeClick(event) {
     if (!nodes || nodes.length === 0) return;
     const transform = d3.zoomTransform(canvas.node());
@@ -171,13 +142,10 @@ function handleNodeClick(event) {
     });
 
     if (clickedNode) {
-        document.getElementById('modal-title').textContent = clickedNode.Node || clickedNode.id;
-        document.getElementById('modal-title').style.color = layerColors[clickedNode.Layer] || '#FFFFFF';
-        document.getElementById('modal-layer').innerHTML = `<strong>Layer:</strong> ${clickedNode.Layer}`;
-        document.getElementById('modal-domain').innerHTML = `<strong>Domain:</strong> ${clickedNode['Core Domain'] || 'N/A'}`;
-
-        modal.style.display = 'block';
-        overlay.style.display = 'block';
+        const nodeName = clickedNode.Node || clickedNode.id;
+        const nodeLayer = clickedNode.Layer || 'Unknown';
+        const nodeDomain = clickedNode['Core Domain'] || 'N/A';
+        alert(`Node: ${nodeName}\nLayer: ${nodeLayer}\nDomain: ${nodeDomain}`);
     }
 }
 
