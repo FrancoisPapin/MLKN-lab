@@ -383,18 +383,18 @@ function startSimulation() {
     const height = canvas.node().height;
 
     // Adaptive force parameters for mobile/desktop
-    const chargeStrength = isMobile ? -200 : -1000;
-    const linkDistance = isMobile ? 100 : 150;
-    const collisionRadius = isMobile ? 5 : 20;
-
+    const chargeStrength = isMobile ? -100 : -500; // Even weaker repulsion
+    const linkDistance = isMobile ? 80 : 120; // Shorter links
+    const collisionRadius = isMobile ? 10 : 25; // Larger collision radius
+    
     simulation = d3.forceSimulation(nodes)
         .force("link", d3.forceLink(links).id(d => d.id).distance(linkDistance))
         .force("charge", d3.forceManyBody().strength(chargeStrength))
-        .force("center", d3.forceCenter(width / 2, height / 2).strength(1.0)) // Stronger center force
+        .force("center", d3.forceCenter(width / 2, height / 2).strength(1.2)) // Stronger center
         .force("collision", d3.forceCollide().radius(collisionRadius))
-        .alphaDecay(0.1) // Faster cooling
-        .velocityDecay(0.7);
-
+        .alphaDecay(0.05) // Slower cooling (more stable)
+        .velocityDecay(0.9); // More damping
+    
     tickCount = 0;
     simulation.nodes(nodes).on("tick", () => {
         tickCount++;
