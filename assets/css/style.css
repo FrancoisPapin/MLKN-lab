@@ -894,7 +894,7 @@ h1, h2, h3 {
     }
 }
 
-/* Dark mode adjustments for network container */
+/* Dark mode adjustments */
 @media (prefers-color-scheme: dark) {
     #network-container {
         background: var(--panel);
@@ -905,24 +905,11 @@ h1, h2, h3 {
     }
 }
 
-/* Legend dark mode */
-@media (prefers-color-scheme: dark) {
-    #visualization .essay-box {
-        background: rgba(0, 0, 0, 0.7);
-        border-color: var(--border);
-    }
-    #visualization .essay-box h3,
-    #visualization .essay-box p,
-    #visualization .essay-box span {
-        color: #FFFFFF;
-    }
-}
-
 /* Lightweight popup for node details */
 #node-popup {
     position: fixed;
     z-index: 10000;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.95);
     color: #FFFFFF;
     padding: 15px;
     border-radius: 8px;
@@ -954,16 +941,9 @@ h1, h2, h3 {
     margin: 5px 0;
 }
 
-/* Mobile popup adjustments */
 @media (max-width: 768px) {
     #node-popup {
         max-width: 90%;
-        font-size: 11px;
-    }
-    #node-popup #popup-title {
-        font-size: 12px;
-    }
-    #node-popup p {
         font-size: 11px;
     }
 }
