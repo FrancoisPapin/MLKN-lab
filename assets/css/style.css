@@ -894,57 +894,27 @@ h1, h2, h3 {
     }
 }
 
-/* Dark mode adjustments */
+/* Dark mode adjustments for network container */
 @media (prefers-color-scheme: dark) {
     #network-container {
         background: var(--panel);
         border-color: var(--border);
     }
     #network-container canvas {
-        background: var(--panel);
+        background: linear-gradient(to bottom, #1a1a2e, #16213e);
     }
 }
 
-/* Lightweight popup for node details */
-#node-popup {
-    position: fixed;
-    z-index: 10000;
-    background: rgba(0, 0, 0, 0.95);
-    color: #FFFFFF;
-    padding: 15px;
-    border-radius: 8px;
-    font-family: var(--mono);
-    font-size: 12px;
-    max-width: 300px;
-    display: none;
-    pointer-events: auto;
-}
-
-#node-popup #popup-close {
-    background: none;
-    border: none;
-    color: #FFFFFF;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-#node-popup #popup-close:hover {
-    color: #CCCCCC;
-}
-
-#node-popup #popup-title {
-    color: #1ABC9C;
-    margin-bottom: 10px;
-}
-
-#node-popup p {
-    margin: 5px 0;
-}
-
-@media (max-width: 768px) {
-    #node-popup {
-        max-width: 90%;
-        font-size: 11px;
+/* Legend dark mode */
+@media (prefers-color-scheme: dark) {
+    #visualization .essay-box {
+        background: rgba(0, 0, 0, 0.7);
+        border-color: var(--border);
+    }
+    #visualization .essay-box h3,
+    #visualization .essay-box p,
+    #visualization .essay-box span {
+        color: #FFFFFF;
     }
 }
 
