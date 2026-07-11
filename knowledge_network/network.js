@@ -32,7 +32,7 @@ const edgeTypeColors = {
     'AcademicDiscipline_to_Subdiscipline': '#029E73',
     'Subdiscipline_to_Topic': '#D55E00',
     'Topic_to_Concept': '#CC78BC',
-    'connection': '#FF00FF' // Magenta for visibility
+    'connection': '#FF00FF'
 };
 
 // Map layer numbers to EXACT layer names in your JSON
@@ -77,7 +77,7 @@ function initNetwork() {
         `;
         popup.style.position = 'fixed';
         popup.style.zIndex = '10000';
-        popup.style.background = 'rgba(0, 0, 0, 0.9)';
+        popup.style.background = 'rgba(0, 0, 0, 0.95)';
         popup.style.color = '#FFFFFF';
         popup.style.padding = '15px';
         popup.style.borderRadius = '8px';
@@ -101,7 +101,7 @@ function initNetwork() {
         });
 
         const networkContainer = d3.select("#network-container");
-        networkContainer.select("canvas").remove(); // Remove existing canvas
+        networkContainer.select("canvas").remove();
 
         // Set Canvas dimensions
         const containerWidth = networkContainer.node().offsetWidth;
@@ -117,17 +117,18 @@ function initNetwork() {
 
         ctx = canvas.node().getContext("2d");
 
-        // Initialize zoom with narrower range for smoother control
+        // Initialize zoom with narrower range and interpolation
         zoom = d3.zoom()
-            .scaleExtent([0.1, 4]) // Narrower range for more precise zoom
+            .scaleExtent([0.5, 2]) // Narrower range for more precise zoom
+            .interpolate(d3.interpolate) // Smooth zoom transitions
             .on("zoom", () => {
-                if (isMobile && tickCount % 5 !== 0) return; // Throttle on mobile
+                if (isMobile && tickCount % 3 !== 0) return;
                 drawCanvas();
             });
         networkContainer.call(zoom);
         networkContainer.call(zoom.transform, d3.zoomIdentity);
 
-        // Handle window resize (with debounce)
+        // Handle window resize
         let resizeTimeout;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
@@ -156,9 +157,6 @@ function initNetwork() {
         document.getElementById('network-placeholder').innerHTML = `
             <i class="fas fa-exclamation-triangle" style="color: #FF6347; font-size: 24px;"></i>
             <p>Error initializing network.</p>
-            <p style="font-size: 0.9em; margin-top: 10px; color: var(--text2);">
-                ${error.message}
-            </p>
         `;
     }
 }
@@ -183,11 +181,10 @@ function handleNodeClick(event) {
         document.getElementById('popup-layer').innerHTML = `<strong>Layer:</strong> ${clickedNode.Layer}`;
         document.getElementById('popup-domain').innerHTML = `<strong>Domain:</strong> ${clickedNode['Core Domain'] || 'N/A'}`;
 
-        // Position popup near the clicked node
         popup.style.left = `${event.clientX + 10}px`;
         popup.style.top = `${event.clientY + 10}px`;
         popup.style.display = 'block';
-        event.stopPropagation(); // Prevent immediate closure
+        event.stopPropagation();
     }
 }
 
@@ -213,7 +210,7 @@ function fitToViewport() {
     const centerX = (bounds.x1 + bounds.x2) / 2;
     const centerY = (bounds.y1 + bounds.y2) / 2;
 
-    const padding = Math.max(dx, dy) * 0.5; // Increased padding to 50%
+    const padding = Math.max(dx, dy) * (isMobile ? 0.8 : 0.5); // More padding on mobile
     const scale = Math.min(
         canvas.node().width / (dx + padding),
         canvas.node().height / (dy + padding)
@@ -221,7 +218,7 @@ function fitToViewport() {
 
     const transform = d3.zoomIdentity
         .translate(canvas.node().width / 2, canvas.node().height / 2)
-        .scale(Math.max(scale, 0.1)) // Minimum scale of 0.1
+        .scale(Math.max(scale, 0.5)) // Minimum scale of 0.5
         .translate(-centerX, -centerY);
 
     d3.select("#network-container").call(zoom.transform, transform);
@@ -231,8 +228,8 @@ function fitToViewport() {
 function drawCanvas() {
     if (!ctx || !nodes || nodes.length === 0 || !canvas) return;
 
-    // Throttle drawing on mobile to avoid crashes
-    if (isMobile && tickCount % 10 !== 0) return;
+    // Throttle drawing on mobile
+    if (isMobile && tickCount % 5 !== 0) return;
 
     ctx.clearRect(0, 0, canvas.node().width, canvas.node().height);
     ctx.save();
@@ -249,7 +246,7 @@ function drawCanvas() {
             ctx.moveTo(d.source.x, d.source.y);
             ctx.lineTo(d.target.x, d.target.y);
             ctx.strokeStyle = edgeTypeColors[d.type] || "#FF00FF";
-            ctx.lineWidth = Math.max(0.5, d.weight / 10 * transform.k);
+            ctx.lineWidth = Math.max(0.3, d.weight / 20 * transform.k); // Thinner edges
             ctx.stroke();
         }
     });
@@ -258,30 +255,25 @@ function drawCanvas() {
     ctx.globalCompositeOperation = 'source-over';
     nodes.forEach(d => {
         if (d.x && d.y) {
-            const radius = Math.max(2, Math.min(10, d.size ? d.size / 100 : 8)) * transform.k;
+            const radius = Math.max(2, Math.min(8, d.size ? d.size / 150 : 5)) * transform.k;
             ctx.beginPath();
             ctx.arc(d.x, d.y, radius, 0, 2 * Math.PI);
             ctx.fillStyle = layerColors[d.Layer] || "#FFFFFF";
             ctx.fill();
             ctx.strokeStyle = "#FFFFFF";
-            ctx.lineWidth = 1 * transform.k;
+            ctx.lineWidth = 0.5 * transform.k;
             ctx.stroke();
 
-            // Only show labels on desktop when zoomed in (>0.5x)
-            if (!isMobile && transform.k > 0.5) {
+            // Only show labels when zoomed in sufficiently (>1.0x)
+            if (transform.k > 1.0) {
                 ctx.fillStyle = "#FFFFFF";
-                ctx.font = `${Math.max(10, 12 * transform.k)}px Arial`;
+                ctx.font = `${Math.max(8, 10 * transform.k)}px Arial`;
                 ctx.textAlign = "center";
                 ctx.textBaseline = "middle";
                 ctx.shadowColor = '#000000';
-                ctx.shadowBlur = 3;
-                ctx.shadowOffsetX = 1;
-                ctx.shadowOffsetY = 1;
+                ctx.shadowBlur = 2;
                 ctx.fillText(d.Node || d.id, d.x, d.y);
                 ctx.shadowColor = 'transparent';
-                ctx.shadowBlur = 0;
-                ctx.shadowOffsetX = 0;
-                ctx.shadowOffsetY = 0;
             }
         }
     });
@@ -295,14 +287,7 @@ function loadData() {
     document.getElementById('network-placeholder').innerHTML = `
         <i class="fas fa-spinner fa-spin" style="font-size: 24px; margin-bottom: 10px;"></i>
         <p>Loading knowledge network...</p>
-        <div style="width: 100%; background: #333; border-radius: 4px; margin-top: 10px;">
-            <div id="progress-bar" style="width: 20%; height: 4px; background: #1ABC9C; border-radius: 4px;"></div>
-        </div>
     `;
-
-    const progressBar = document.getElementById('progress-bar');
-    progressBar.style.width = '50%';
-    setTimeout(() => { progressBar.style.width = '100%'; }, 500);
 
     Promise.all([
         fetch(nodesUrl).then(res => {
@@ -330,9 +315,6 @@ function loadData() {
         document.getElementById('network-placeholder').innerHTML = `
             <i class="fas fa-exclamation-triangle" style="color: #FF6347; font-size: 24px;"></i>
             <p>Error loading network data.</p>
-            <p style="font-size: 0.9em; margin-top: 10px; color: var(--text2);">
-                ${error.message}
-            </p>
         `;
     });
 }
@@ -349,28 +331,36 @@ function filterByLayer() {
         nodes = originalNodes;
         links = originalLinks;
     } else {
-        // Filter nodes by layer
-        const filteredNodes = originalNodes.filter(node => node.Layer === layerName);
-        const layerNodeIds = new Set(filteredNodes.map(node => node.id));
+        // For individual layers, show nodes from that layer AND all connected nodes
+        const layerNodeIds = new Set(originalNodes.filter(node => node.Layer === layerName).map(node => node.id));
+        const connectedNodeIds = new Set();
 
-        // Filter edges where both source and target are in the filtered nodes
+        // Find all nodes connected to the layer nodes
+        originalLinks.forEach(link => {
+            const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+            const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+            if (layerNodeIds.has(sourceId)) connectedNodeIds.add(targetId);
+            if (layerNodeIds.has(targetId)) connectedNodeIds.add(sourceId);
+        });
+
+        // Combine layer nodes and connected nodes
+        const allRelevantNodeIds = new Set([...layerNodeIds, ...connectedNodeIds]);
+        nodes = originalNodes.filter(node => allRelevantNodeIds.has(node.id));
+
+        // Filter edges where at least one end is in the relevant nodes
         links = originalLinks.filter(link => {
             const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
             const targetId = typeof link.target === 'object' ? link.target.id : link.target;
-            return layerNodeIds.has(sourceId) && layerNodeIds.has(targetId);
+            return allRelevantNodeIds.has(sourceId) || allRelevantNodeIds.has(targetId);
         });
 
-        nodes = filteredNodes;
         console.log(`Filtered to ${nodes.length} nodes and ${links.length} edges.`);
     }
 
     // Restart simulation with filtered data
     if (simulation) simulation.stop();
     simulation = startSimulation();
-    setTimeout(() => {
-        fitToViewport();
-        drawCanvas(); // Force a redraw
-    }, 100);
+    setTimeout(fitToViewport, 100);
 }
 
 // Start the force simulation
@@ -381,26 +371,26 @@ function startSimulation() {
     const width = canvas.node().width;
     const height = canvas.node().height;
 
-    // Adaptive force parameters for mobile/desktop
-    const chargeStrength = isMobile ? -100 : -300; // Weaker repulsion
-    const linkDistance = isMobile ? 80 : 120; // Shorter links
-    const collisionRadius = isMobile ? 15 : 30; // Larger collision radius
+    // Adaptive force parameters
+    const chargeStrength = isMobile ? -50 : -200; // Much weaker repulsion
+    const linkDistance = isMobile ? 50 : 80; // Shorter links
+    const collisionRadius = isMobile ? 10 : 15; // Larger collision radius
 
     simulation = d3.forceSimulation(nodes)
         .force("link", d3.forceLink(links).id(d => d.id).distance(linkDistance))
         .force("charge", d3.forceManyBody().strength(chargeStrength))
-        .force("center", d3.forceCenter(width / 2, height / 2).strength(1.2)) // Stronger center force
+        .force("center", d3.forceCenter(width / 2, height / 2).strength(1.5)) // Stronger center
         .force("collision", d3.forceCollide().radius(collisionRadius))
-        .alphaDecay(0.05) // Slower cooling for stability
+        .alphaDecay(0.1) // Faster cooling
         .velocityDecay(0.9); // More damping
 
     tickCount = 0;
     simulation.nodes(nodes).on("tick", () => {
         tickCount++;
-        if (tickCount % 5 === 0) {
+        if (tickCount % 3 === 0) {
             drawCanvas();
         }
-        if (simulation.alpha() < 0.001) {
+        if (simulation.alpha() < 0.005) { // Higher threshold for faster stabilization
             simulation.stop();
             fitToViewport();
             console.log("Simulation stabilized and fitted to viewport.");
@@ -414,16 +404,6 @@ function startSimulation() {
 function updateNetwork() {
     filterByLayer();
     startSimulation();
-}
-
-// Filter by domain (for Layer 1)
-function filterNetworkByDomain(domain) {
-    if (currentLayer !== '1') return;
-    const domainNodes = new Set(
-        nodes.filter(node => node['Core Domain'] === domain)
-             .map(node => node.id)
-    );
-    console.log(`Filtered by domain: ${domain}, nodes: ${domainNodes.size}`);
 }
 
 // Initialize the network when the DOM is fully loaded
