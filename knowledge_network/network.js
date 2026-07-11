@@ -67,6 +67,14 @@ function initNetwork() {
         // Create lightweight popup (non-modal)
         popup = document.createElement('div');
         popup.id = 'node-popup';
+        popup.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <strong id="popup-title" style="color: #1ABC9C;"></strong>
+                <button id="popup-close" style="background: none; border: none; color: #FFFFFF; cursor: pointer; font-size: 16px;">Close</button>
+            </div>
+            <p id="popup-layer" style="margin: 5px 0;"></p>
+            <p id="popup-domain" style="margin: 5px 0;"></p>
+        `;
         popup.style.position = 'fixed';
         popup.style.zIndex = '10000';
         popup.style.background = 'rgba(0, 0, 0, 0.9)';
@@ -77,15 +85,7 @@ function initNetwork() {
         popup.style.fontSize = '12px';
         popup.style.maxWidth = '300px';
         popup.style.display = 'none';
-        popup.style.pointerEvents = 'auto'; // Allow clicks inside popup
-        popup.innerHTML = `
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                <strong id="popup-title" style="color: #1ABC9C;"></strong>
-                <button id="popup-close" style="background: none; border: none; color: #FFFFFF; cursor: pointer; font-size: 16px;">Close</button>
-            </div>
-            <p id="popup-layer" style="margin: 5px 0;"></p>
-            <p id="popup-domain" style="margin: 5px 0;"></p>
-        `;
+        popup.style.pointerEvents = 'auto';
         document.body.appendChild(popup);
 
         // Close popup when clicking the close button
@@ -95,7 +95,7 @@ function initNetwork() {
 
         // Close popup when clicking outside
         document.addEventListener('click', (e) => {
-            if (!popup.contains(e.target) && e.target !== canvas.node()) {
+            if (popup && !popup.contains(e.target) && e.target !== canvas.node()) {
                 popup.style.display = 'none';
             }
         });
@@ -117,11 +117,11 @@ function initNetwork() {
 
         ctx = canvas.node().getContext("2d");
 
-        // Initialize zoom (throttled on mobile)
+        // Initialize zoom with narrower range for smoother control
         zoom = d3.zoom()
-            .scaleExtent([0.01, 10])
+            .scaleExtent([0.1, 4]) // Narrower range for more precise zoom
             .on("zoom", () => {
-                if (isMobile && tickCount % 5 !== 0) return; // Throttle zoom redraws
+                if (isMobile && tickCount % 5 !== 0) return; // Throttle on mobile
                 drawCanvas();
             });
         networkContainer.call(zoom);
@@ -187,6 +187,7 @@ function handleNodeClick(event) {
         popup.style.left = `${event.clientX + 10}px`;
         popup.style.top = `${event.clientY + 10}px`;
         popup.style.display = 'block';
+        event.stopPropagation(); // Prevent immediate closure
     }
 }
 
@@ -212,7 +213,7 @@ function fitToViewport() {
     const centerX = (bounds.x1 + bounds.x2) / 2;
     const centerY = (bounds.y1 + bounds.y2) / 2;
 
-    const padding = Math.max(dx, dy) * 0.3; // 30% padding
+    const padding = Math.max(dx, dy) * 0.5; // Increased padding to 50%
     const scale = Math.min(
         canvas.node().width / (dx + padding),
         canvas.node().height / (dy + padding)
@@ -220,7 +221,7 @@ function fitToViewport() {
 
     const transform = d3.zoomIdentity
         .translate(canvas.node().width / 2, canvas.node().height / 2)
-        .scale(Math.max(scale, 0.01)) // Ensure minimum scale
+        .scale(Math.max(scale, 0.1)) // Minimum scale of 0.1
         .translate(-centerX, -centerY);
 
     d3.select("#network-container").call(zoom.transform, transform);
@@ -241,19 +242,17 @@ function drawCanvas() {
     ctx.scale(transform.k, transform.k);
 
     // Draw edges first (behind nodes)
-    if (!isMobile || links.length <= 500) { // Skip edges on mobile if too many
-        ctx.globalCompositeOperation = 'destination-over';
-        links.forEach(d => {
-            if (d.source?.x && d.source?.y && d.target?.x && d.target?.y) {
-                ctx.beginPath();
-                ctx.moveTo(d.source.x, d.source.y);
-                ctx.lineTo(d.target.x, d.target.y);
-                ctx.strokeStyle = edgeTypeColors[d.type] || "#FF00FF";
-                ctx.lineWidth = Math.max(0.5, d.weight / 10 * transform.k);
-                ctx.stroke();
-            }
-        });
-    }
+    ctx.globalCompositeOperation = 'destination-over';
+    links.forEach(d => {
+        if (d.source?.x && d.source?.y && d.target?.x && d.target?.y) {
+            ctx.beginPath();
+            ctx.moveTo(d.source.x, d.source.y);
+            ctx.lineTo(d.target.x, d.target.y);
+            ctx.strokeStyle = edgeTypeColors[d.type] || "#FF00FF";
+            ctx.lineWidth = Math.max(0.5, d.weight / 10 * transform.k);
+            ctx.stroke();
+        }
+    });
 
     // Draw nodes on top
     ctx.globalCompositeOperation = 'source-over';
@@ -383,18 +382,18 @@ function startSimulation() {
     const height = canvas.node().height;
 
     // Adaptive force parameters for mobile/desktop
-    const chargeStrength = isMobile ? -100 : -500; // Even weaker repulsion
+    const chargeStrength = isMobile ? -100 : -300; // Weaker repulsion
     const linkDistance = isMobile ? 80 : 120; // Shorter links
-    const collisionRadius = isMobile ? 10 : 25; // Larger collision radius
-    
+    const collisionRadius = isMobile ? 15 : 30; // Larger collision radius
+
     simulation = d3.forceSimulation(nodes)
         .force("link", d3.forceLink(links).id(d => d.id).distance(linkDistance))
         .force("charge", d3.forceManyBody().strength(chargeStrength))
-        .force("center", d3.forceCenter(width / 2, height / 2).strength(1.2)) // Stronger center
+        .force("center", d3.forceCenter(width / 2, height / 2).strength(1.2)) // Stronger center force
         .force("collision", d3.forceCollide().radius(collisionRadius))
-        .alphaDecay(0.05) // Slower cooling (more stable)
+        .alphaDecay(0.05) // Slower cooling for stability
         .velocityDecay(0.9); // More damping
-    
+
     tickCount = 0;
     simulation.nodes(nodes).on("tick", () => {
         tickCount++;
