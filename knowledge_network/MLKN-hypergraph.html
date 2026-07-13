@@ -183,6 +183,13 @@
                 <strong>Click on nodes</strong> to see details, <strong>hover</strong> to highlight connections.
             </p>
 
+            <!-- Ajoutez ceci JUSTE AVANT la div #network-container -->
+            <div style="margin-bottom: 10px; text-align: right;">
+              <button id="fullscreen-button" style="padding: 8px 15px; background: #1ABC9C; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                <i class="fas fa-expand"></i> Plein écran
+              </button>
+            </div>
+            
             <!-- Network Container -->
             <div id="network-container" style="width: 100%; height: 700px; border: 1px solid var(--border); border-radius: var(--r); margin-top: 20px; background: var(--panel); position: relative;">
                 <div id="network-placeholder" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: var(--text2);">
