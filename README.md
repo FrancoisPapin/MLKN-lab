@@ -1,7 +1,6 @@
 # MLKN.lab — Multi-Layered Knowledge Network Ideas Laboratory
 
 <!-- BADGES -->
-<p align="center">
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21363227.svg)](https://doi.org/10.5281/zenodo.21363227)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
@@ -9,7 +8,6 @@
 [![FAIR Compliant](https://img.shields.io/badge/FAIR-Data_Compliant-blueviolet.svg)](#)
 [![Website](https://img.shields.io/badge/Website-Visit-blue)](https://francoispapin.github.io/MLKN-lab/)
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-black)](https://github.com/FrancoisPapin/MLKN-lab)
-</p>
 
 <!-- NAVBAR (No title needed above this line) -->
 <p align="center">
