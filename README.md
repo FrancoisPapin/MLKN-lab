@@ -11,7 +11,7 @@
 
 **MLKN.lab** (*Multi-Layered Knowledge Network Ideas Laboratory*) is a **computational meta-science platform** that maps the **structural topology of human knowledge** through a **polyhierarchical, data-driven framework**. It models scientific knowledge as a **dynamic, multi-layered hypergraph**, revealing hidden structures, bridges, and gaps across disciplines.
 
-Built from **bibliometric analysis of large-scale scholarly metadata** (OpenAlex, Scopus, MeSH, IEEE Thesaurus), MLKN.lab operationalizes a **polyhierarchy** across:
+Built from **bibliometric analysis of large-scale scholarly metadata** (OpenAlex), MLKN.lab operationalizes a **polyhierarchy** across:
 - **5 Ontological Layers** (Core Domains → Concepts).
 - **6 Epistemological Core Domains** (Formal Sciences, Natural Sciences, Engineering & Technology, Life Sciences, Health & Medical Sciences, Social Sciences & Humanities).
 - **25 Academic Disciplines** (e.g., Computer Science, Neuroscience).
@@ -19,9 +19,11 @@ Built from **bibliometric analysis of large-scale scholarly metadata** (OpenAlex
 - **320K+ Interdisciplinary Connections**.
 
 MLKN.lab serves as:
--**Research Platform**: A living laboratory for testing hypotheses about the evolution of science.
--**Scientific Instrument**: A high-precision tool for graph-theoretic analysis of knowledge networks.
--**Cognitive Interface**: A generative system to augment human reasoning through interactive knowledge maps.
+- **Research Platform**: A living laboratory for testing hypotheses about the evolution of science.
+- **Scientific Instrument**: A high-precision tool for graph-theoretic analysis of knowledge networks.
+- **Cognitive Interface**: A generative system to augment human reasoning through interactive knowledge maps.
+
+Keywords: meta-science, science of science, computational epistemology, network science, systems science, interdisciplinary research, interdisciplinarity, knowledge network, hierarchy, complex systems, research mapping, knowledge diffusion, cognitive science, human-machine interaction, humain-ai interaction, unified theory of knowledge, graph topology, multilayer networks, hypergraphs, semantic web, collective intelligence, data science, knowledge graph, knowledge network graph, data visualization, graph visualization, interactive visualization, scientometrics, bibliometrics, polyhierarchy, epistemology, ontology, taxonomy, knowledge organization systems, scholarly knowledge graph, OpenAlex, SKOS, Frascati Classification, FAIR principles, D3.js, Python, NetworkX, open science, open source, open data, open education.
 
 ---
 
@@ -38,7 +40,7 @@ MLKN.lab serves as:
 - **Interactive Visualizations**: Powered by **D3.js** and **NetworkX** for dynamic exploration.
 
 ### **3. Data & Methodology**
-- **Data Source**: OpenAlex (March 2026 snapshot), supplemented by Scopus, MeSH, and IEEE Thesaurus.
+- **Data Source**: OpenAlex (March 2026 snapshot).
 - **Classification Logic**: Aligns with **OECD Frascati Manual** and **UNESCO Fields of Science**.
 - **Validation**: Network metrics (centrality, modularity) and expert review ensure accuracy.
 
@@ -92,6 +94,9 @@ MLKN-lab/
 │
 ├── css/                             # Stylesheets
 │   └── style.css                    # Main styles
+│
+├── citation/                        # Citation
+│   └── CITATION.cff                 # Cite on
 │
 └── README.md                        # This file
 ```
@@ -174,29 +179,33 @@ MLKN-lab/
 
 ---
 ## **Scientific References**
-MLKN.lab is grounded in **meta-science, network theory, computational epistemology, and cognitive science**. Key references include:
+MLKN.lab is grounded in **meta-science, computational epistemology, network theory, and cognitive science**. Explore **100+ scientific references** that fondate MLKN.lab, including:
 - Fortunato, S., et al. (2018). *Science of Science*. **Science**.
 - Barabási, A.-L., & Albert, R. (1999). *Emergence of Scaling in Random Networks*. **Science**.
 - Boccaletti, S., et al. (2014). *The Structure and Dynamics of Multilayer Networks*. **Physics Reports**.
 - Thagard, P. (2019). *How to Collaborate: A Computational Model of Scientific Knowledge Integration*. **Philosophical Explorations**.
 
-🔗 **[Full Bibliography](https://francoispapin.github.io/MLKN-lab/references/references.html)**
+🔗 **[Full Scientific References](https://francoispapin.github.io/MLKN-lab/references/references.html)**
 
 ---
 ## **Open Access Monographs**
-Explore **10+ open-access monographs** that inspire MLKN.lab, including:
+Explore **200+ open-access monographs** that inspire MLKN.lab, including:
 - Seibt, J., Hakli, R., & Nørskov, M. (Eds.). (2026). *Robophilosophy: Philosophy of, for, and by Social Robotics*. **MIT Press**.
 - Chirimuuta, M. (Ed.). (2024). *The Brain Abstracted: Simplification in the History and Philosophy of Neuroscience*. **MIT Press**.
 - Nersessian, N. J. (Ed.). (2022). *Interdisciplinarity in the Making: Models and Methods in Frontier Science*. **MIT Press**.
 
-🔗 **[Full Monographs Collection](https://francoispapin.github.io/MLKN-lab/references/open-access-monographs.html)**
+🔗 **[Full Open-Access Monographs Collection](https://francoispapin.github.io/MLKN-lab/monographs/monographs.html)**
 
 ---
 ## **Contributing**
 We welcome contributions! Here’s how you can help:
 1. **Report Issues**: Open an issue on GitHub for bugs or feature requests.
 2. **Suggest Improvements**: Propose enhancements to the hierarchy or visualizations.
-3. **Cite MLKN.lab**: If you use our data or tools, please cite:
+3. **Cite MLKN.lab**: If you use our website, please cite:
+   ```
+   Papin, F. (2026). MLKN.lab - Multi-Layered Knowledge Network Ideas Laboratory [Research Software]. URL. https://francoispapin.github.io/MLKN-lab/
+   ```
+4. **Cite MLKN.lab Dataset**: If you use our data or tools, please cite:
    ```
    Papin, F. (2026). MLKN.lab Hierarchy Master File and Knowledge Network Data (All Layers, All Details) [Dataset]. Zenodo. https://doi.org/10.5281/zenodo.21363227
    ```
@@ -213,7 +222,7 @@ This project is licensed under the **MIT License** – see the [LICENSE](LICENSE
 
 ---
 ## **Related Resources**
-- **[MLKN.labV1](https://francoispapin.github.io/MLKN-labV1/)** (Previous version)
+- **[MLKN.labV1](https://francoispapin.github.io/MLKN-labV1/)** (Previous experimental version)
 - **[Zenodo Dataset](https://doi.org/10.5281/zenodo.21363227)** (DOI: [10.5281/zenodo.21363227](https://doi.org/10.5281/zenodo.21363227))
 - **[OpenAlex](https://docs.openalex.org/)** (Data source)
-- **[OECD Frascati Manual](https://www.oecd.org/science/inno/38235147.pdf)** (Classification standard)
+- **[OECD Frascati Manual](https://www.oecd.org/en/publications/frascati-manual-2015_9789264239012-en.html)** (Classification standard)
