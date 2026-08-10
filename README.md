@@ -213,7 +213,9 @@ This project is licensed under the **MIT License** – see the [LICENSE](LICENSE
 
 ---
 ## **Related Resources**
+```
 🔗 - **[MLKN.labV1](https://francoispapin.github.io/MLKN-labV1/)** (Previous version)
 🔗 - **[Zenodo Dataset](https://doi.org/10.5281/zenodo.21363227)** (DOI: [10.5281/zenodo.21363227](https://doi.org/10.5281/zenodo.21363227))
 🔗 - **[OpenAlex](https://docs.openalex.org/)** (Data source)
 🔗 - **[OECD Frascati Manual](https://www.oecd.org/science/inno/38235147.pdf)** (Classification standard)
+```
