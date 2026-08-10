@@ -76,7 +76,7 @@ MLKN.lab serves as:
 
 ---
 
-### **Key Statistics**
+## **Key Statistics**
 - **326,862 rows** (CSV)
 - **31,590 nodes** (JSON)
 - **320,075 edges** (JSON)
