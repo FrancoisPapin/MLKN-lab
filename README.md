@@ -1,9 +1,39 @@
 # MLKN.lab — Multi-Layered Knowledge Network Ideas Laboratory
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<!-- BADGES -->
+<p align="center">
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21363227.svg)](https://doi.org/10.5281/zenodo.21363227)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
+[![OpenAlex](https://img.shields.io/badge/Data_Source-OpenAlex_2026-brightgreen.svg)](https://openalex.org)
+[![FAIR Compliant](https://img.shields.io/badge/FAIR-Data_Compliant-blueviolet.svg)](#)
 [![Website](https://img.shields.io/badge/Website-Visit-blue)](https://francoispapin.github.io/MLKN-lab/)
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-black)](https://github.com/FrancoisPapin/MLKN-lab)
+</p>
+
+<!-- NAVBAR (No title needed above this line) -->
+<p align="center">
+  <a href="https://francoispapin.github.io/MLKN-lab/"><b>[ Main Website ]</b></a> &nbsp;•&nbsp;
+  <a href="https://francoispapin.github.io/MLKN-lab/research/research.html"><b>[ Research ]</b></a>
+  <a href="https://francoispapin.github.io/MLKN-lab/polyhierarchy/polyhierarchy.html"><b>[ Data Structure ]</b></a> &nbsp;•&nbsp;
+  <a href="https://francoispapin.github.io/MLKN-lab/knowledge_network/MLKN-hypergraph.html"><b>[ Interactive Visualization ]</b></a> &nbsp;•&nbsp;
+  <a href="https://francoispapin.github.io/MLKN-lab/data/data.html"><b>[ Data & API ]</b></a> &nbsp;•&nbsp;
+</p>
+
+<!-- TABLE OF CONTENTS (Has a title inside <summary>) -->
+<details open>
+  <summary><b>Table of Contents</b></summary>
+  <ol>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#key-statistics">Key Statistics</a></li>
+    <li><a href="#key-features">Key Features</a></li>
+    <li><a href="#repository-structure">Repository Structure</a></li>
+    <li><a href="#getting-started">Getting Started & Quickstart</a></li>
+    <li><a href="#dataset-overview">Dataset Overview</a></li>
+    <li><a href="#use-cases">Use Cases</a></li>
+    <li><a href="#contributing">Citation & Contributing</a></li>
+  </ol>
+</details>
 
 ---
 
@@ -92,7 +122,7 @@ MLKN-lab/
 │
 ├── about/                           # About
 │   ├── about.html                   # About MLKN.lab
-│   └── inspirations.html  # Inspirations
+│   └── inspirations.html            # Inspirations
 │   └── normative-foundations.html   # Normative foundations
 │
 ├── data/                            # Datasets
@@ -101,7 +131,7 @@ MLKN-lab/
 │   └── MLKN_hypergraph_edges.json   # Edges for visualization (40.5 MB)
 │
 ├── tutorials/                       # Jupyter notebooks
-│   └── MLKN_tutorial.ipynb          # Quickstart guide
+│   └── MLKN_tutorial.ipynb          # Quickstart guide [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FrancoisPapin/MLKN-lab/blob/main/tutorials/MLKN_tutorial.ipynb)
 │
 ├── css/                             # Stylesheets
 │   └── style.css                    # Main styles
@@ -147,6 +177,8 @@ MLKN-lab/
   with open("data/MLKN_hypergraph_edges.json") as f:
       edges = json.load(f)
   ```
+- Explore the MLKN dataset interactively in your browser without local installation:
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FrancoisPapin/MLKN-lab/blob/main/tutorials/MLKN_tutorial.ipynb)
 
 ---
 
