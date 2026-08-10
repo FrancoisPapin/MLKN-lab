@@ -161,17 +161,17 @@ MLKN-lab/
 
 ## **Use Cases**
 
-### **1. Network Analysis**
-- Study the **topological structure** of scientific knowledge using **NetworkX** or **Gephi**.
-- Identify **key disciplines, bridges between fields, or emerging research areas**.
-
-### **2. Meta-Science Research**
+### **1. Meta-Science Research**
 - Analyze **interdisciplinarity, knowledge diffusion, or the evolution of scientific fields**.
 - Example: Track how concepts like *"Transformers"* diffuse from AI to neuroscience.
 
-### **3. Computational Epistemology**
+### **2. Computational Epistemology**
 - Model **how knowledge is structured, validated, and evolved** in computational systems.
 - Develop **AI systems** that reason over scientific knowledge.
+
+### **3. Network Analysis**
+- Study the **topological structure** of scientific knowledge using **NetworkX** or **Gephi**.
+- Identify **key disciplines, bridges between fields, or emerging research areas**.
 
 ### **4. Interactive Visualization**
 - Explore the **[MLKN.hypergraph](https://francoispapin.github.io/MLKN-lab/knowledge_network/MLKN-hypergraph.html)**.
