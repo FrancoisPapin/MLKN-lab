@@ -12,9 +12,9 @@
 <!-- NAVBAR (No title needed above this line) -->
 <p align="center">
   <a href="https://francoispapin.github.io/MLKN-lab/"><b>[ Main Website ]</b></a> &nbsp;•&nbsp;
-  <a href="https://francoispapin.github.io/MLKN-lab/research/research.html"><b>[ Research ]</b></a>
-  <a href="https://francoispapin.github.io/MLKN-lab/polyhierarchy/polyhierarchy.html"><b>[ Data Structure ]</b></a> &nbsp;•&nbsp;
+  <a href="https://francoispapin.github.io/MLKN-lab/research/research.html"><b>[ Research ]</b></a> &nbsp;•&nbsp;
   <a href="https://francoispapin.github.io/MLKN-lab/knowledge_network/MLKN-hypergraph.html"><b>[ Interactive Visualization ]</b></a> &nbsp;•&nbsp;
+  <a href="https://francoispapin.github.io/MLKN-lab/polyhierarchy/polyhierarchy.html"><b>[ Data Structure ]</b></a> &nbsp;•&nbsp;
   <a href="https://francoispapin.github.io/MLKN-lab/data/data.html"><b>[ Data & API ]</b></a> &nbsp;•&nbsp;
 </p>
 
