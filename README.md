@@ -51,7 +51,7 @@ MLKN.lab serves as:
 ---
 
 ## **Repository Structure**
-
+```
 MLKN-lab/
 │
 ├── index.html                       # Homepage
@@ -94,7 +94,7 @@ MLKN-lab/
 │   └── style.css                    # Main styles
 │
 └── README.md                        # This file
-
+```
 
 ---
 
