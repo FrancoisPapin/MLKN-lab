@@ -23,7 +23,18 @@ MLKN.lab serves as:
 - **Scientific Instrument**: A high-precision tool for graph-theoretic analysis of knowledge networks.
 - **Cognitive Interface**: A generative system to augment human reasoning through interactive knowledge maps.
 
-Keywords: meta-science, science of science, computational epistemology, network science, systems science, interdisciplinary research, interdisciplinarity, knowledge network, hierarchy, complex systems, research mapping, knowledge diffusion, cognitive science, human-machine interaction, humain-ai interaction, unified theory of knowledge, graph topology, multilayer networks, hypergraphs, semantic web, collective intelligence, data science, knowledge graph, knowledge network graph, data visualization, graph visualization, interactive visualization, scientometrics, bibliometrics, polyhierarchy, epistemology, ontology, taxonomy, knowledge organization systems, scholarly knowledge graph, OpenAlex, SKOS, Frascati Classification, FAIR principles, D3.js, Python, NetworkX, open science, open source, open data, open education.
+**Keywords**: ```meta-science```, ```science of science```, ```computational epistemology```, ```network science```, ```systems science```, ```interdisciplinary research```, ```interdisciplinarity```, ```knowledge network```, ```hierarchy```, ```complex systems```, ```research mapping```, ```knowledge diffusion```, ```cognitive science```, ```human-machine interaction```, ```human-ai interaction```, ```unified theory of knowledge```, ```graph topology```, ```multilayer networks```, ```hypergraphs```, ```semantic web```, ```collective intelligence```, ```data science```, ```knowledge graph```, ```knowledge network graph```, ```data visualization```, ```interactive visualization```, ```scientometrics```, ```bibliometrics```, ```polyhierarchy```, ```epistemology```, ```ontology```, ```taxonomy```, ```knowledge organization systems```, ```scholarly knowledge graph```, ```OpenAlex```, ```SKOS```, ```Frascati Classification```, ```FAIR principles```, ```D3.js```, ```Python```, ```NetworkX```, ```open science```, ```open source```, ```open data```, ```open education```.
+
+---
+
+### **Key Statistics**
+- **326,862 rows** (CSV)
+- **31,590 nodes** (JSON)
+- **320,075 edges** (JSON)
+- **5 Ontological Layers**
+- **6 Core Domains**
+- **25 Academic Disciplines**
+- **235 Subdisciplines**
 
 ---
 
@@ -81,7 +92,7 @@ MLKN-lab/
 │
 ├── about/                           # About
 │   ├── about.html                   # About MLKN.lab
-│   └── open-access-monographs.html  # Inspirations
+│   └── inspirations.html  # Inspirations
 │   └── normative-foundations.html   # Normative foundations
 │
 ├── data/                            # Datasets
@@ -147,15 +158,6 @@ MLKN-lab/
 | `MLKN_hypergraph_nodes.json`                                  | JSON       | 5.6 MB     | Nodes for interactive visualization   |
 | `MLKN_hypergraph_edges.json`                                  | JSON       | 40.5 MB    | Edges for interactive visualization   |
 | `MLKN_tutorial.ipynb`                                         | Jupyter    | 534 Bytes  | Quickstart guide                      |
-
-### **Key Statistics**
-- **326,862 rows** (CSV)
-- **31,590 nodes** (JSON)
-- **320,075 edges** (JSON)
-- **5 Ontological Layers**
-- **6 Core Domains**
-- **25 Academic Disciplines**
-- **235 Subdisciplines**
 
 ---
 
