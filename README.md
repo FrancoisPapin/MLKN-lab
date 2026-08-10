@@ -1,8 +1,8 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/logo-dark-mode.png">
-    <source media="(prefers-color-scheme: light)" srcset="assets/logo-light-mode.png">
-    <img alt="MLKN.lab Logo" src="assets/logo-light-mode.png" width="320">
+    <source media="(prefers-color-scheme: dark)" srcset="assets/images/logo-dark-mode.png">
+    <source media="(prefers-color-scheme: light)" srcset="assets/images/logo-light-mode.png">
+    <img alt="MLKN.lab Logo" src="assets/images/logo-light-mode.png" width="320">
   </picture>
 </p>
 
@@ -48,7 +48,7 @@
 <!-- 4. IMAGE PREVIEW (HERO BANNER) -->
 <p align="center">
   <a href="https://francoispapin.github.io/MLKN-lab/knowledge_network/MLKN-hypergraph.html">
-    <img src="assets/mlkn-hypergraph-preview.png" alt="MLKN.lab Knowledge Network Preview: MLKN.hypergraph Preview" width="100%">
+    <img src="assets/images/mlkn-hypergraph-preview.png" alt="MLKN.lab Knowledge Network Preview: MLKN.hypergraph Preview" width="100%">
   </a>
   <br>
   <em>Figure 1: Interactive MLKN.hypergraph mapping knowledge topology across 25 disciplines and 5 ontological layers. Click the image to launch the live interactive map.</em>
