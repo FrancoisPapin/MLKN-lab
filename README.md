@@ -54,46 +54,47 @@ MLKN.lab serves as:
 
 MLKN-lab/
 │
-├── index.html                                # Homepage
+├── index.html                       # Homepage
 │
-├── research/                                 # Research
-│   ├── research.html                         # Research focus
-│   ├── model.html                            # MLKN.model
+├── research/                        # Research
+│   ├── research.html                # Research focus
+│   ├── model.html                   # MLKN.model
 │   ├── model-mathematical-foundations.html   # MLKN.model - Mathematical Foundations
-│   └── method.html                           # Method
+│   └── method.html                  # Method
 │
-├── knowledge_network/                        # Knowledge network visualizations
-│   ├── polyhierarchy.html                    # Polyhierarchy
-│   ├── MLKN-hypergraph.html                  # Interactive hypergraph
-│   └── data.html                             # Data
+├── knowledge_network/               # Knowledge network visualizations
+│   ├── polyhierarchy.html           # Polyhierarchy
+│   ├── MLKN-hypergraph.html         # Interactive hypergraph
+│   └── data.html                    # Data
 │
-├── knowledge_library/                        # Bibliography and monographs
-│   ├── references.html                       # Scientific references
-│   └── open-access-monographs.html           # Open-access monographs
-│   └── normative-references.html             # Normative references
+├── knowledge_library/               # Bibliography and monographs
+│   ├── references.html              # Scientific references
+│   └── open-access-monographs.html  # Open-access monographs
+│   └── normative-references.html    # Normative references
 │
-├── applications/                             # Applications
-│   ├── applications.html                     # General applications
-│   └── essay.html                            # Essays & explorations
-│   └── normative-applications.html           # Normative applications
+├── applications/                    # Applications
+│   ├── applications.html            # General applications
+│   └── essay.html                   # Essays & explorations
+│   └── normative-applications.html  # Normative applications
 │
-├── about/                                    # About
-│   ├── about.html                            # About MLKN.lab
-│   └── open-access-monographs.html           # Inspirations
-│   └── normative-foundations.html             # Normative foundations
+├── about/                           # About
+│   ├── about.html                   # About MLKN.lab
+│   └── open-access-monographs.html  # Inspirations
+│   └── normative-foundations.html   # Normative foundations
 │
-├── data/                               # Datasets
+├── data/                            # Datasets
 │   ├── MLKN_Hierarchy_Master_File_All_layers_All_Details_Final.csv  # Master hierarchy (92.9 MB)
-│   ├── MLKN_hypergraph_nodes.json      # Nodes for visualization (5.6 MB)
-│   └── MLKN_hypergraph_edges.json      # Edges for visualization (40.5 MB)
+│   ├── MLKN_hypergraph_nodes.json   # Nodes for visualization (5.6 MB)
+│   └── MLKN_hypergraph_edges.json   # Edges for visualization (40.5 MB)
 │
-├── tutorials/                          # Jupyter notebooks
-│   └── MLKN_tutorial.ipynb              # Quickstart guide
+├── tutorials/                       # Jupyter notebooks
+│   └── MLKN_tutorial.ipynb          # Quickstart guide
 │
-├── css/                                # Stylesheets
-│   └── style.css                       # Main styles
+├── css/                             # Stylesheets
+│   └── style.css                    # Main styles
 │
-└── README.md                           # This file
+└── README.md                        # This file
+
 
 ---
 
