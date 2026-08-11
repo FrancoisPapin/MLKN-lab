@@ -231,7 +231,7 @@
                 </p>
                 <p style="font-size: 0.8em; color: var(--text2); margin-top: 10px;">
                     <strong>Data:</strong> MLKN.lab v1.0 |
-                    <strong>DOI:</strong> <a href="https://doi.org/10.5281/zenodo.20829289" target="_blank">10.5281/zenodo.20829289</a>
+                    <strong>DOI:</strong> <a href="https://doi.org/10.5281/zenodo.21363227" target="_blank">10.5281/zenodo.21363227</a>
                 </p>
             </div>
         </section>
@@ -243,6 +243,42 @@
             <h2 class="sec-h">Disciplinary Knowledge Networks</h2>
             <p class="sec-sub">Explore individual discipline networks</p>
             <div class="layers-grid">
+                <!-- Chemical Engineering -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #029E73;">⬢</div>
+                    <h3>Chemical Engineering</h3>
+                    <p>...</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('chemical_engineering')">
+                        <i class="fas fa-project-diagram"></i> View Network
+                    </button>
+                </div>
+                <!-- Energy -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #029E73;">⬢</div>
+                    <h3>Energy</h3>
+                    <p>...</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('energy')">
+                        <i class="fas fa-project-diagram"></i> View Network
+                    </button>
+                </div>
+                <!-- Engineering -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #029E73;">⬢</div>
+                    <h3>Engineering</h3>
+                    <p>...</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('engineering')">
+                        <i class="fas fa-project-diagram"></i> View Network
+                    </button>
+                </div>
+                <!-- Materials Science -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #029E73;">⬢</div>
+                    <h3>Materials Science</h3>
+                    <p>...</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('materials_science')">
+                        <i class="fas fa-project-diagram"></i> View Network
+                    </button>
+                </div>
                 <!-- Computer Science -->
                 <div class="layer-card">
                     <div class="licon" style="color: #029E73;">⬢</div>
@@ -252,34 +288,195 @@
                         <i class="fas fa-project-diagram"></i> View Network
                     </button>
                 </div>
+                <!-- Mathematics -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #029E73;">⬢</div>
+                    <h3>Mathematics</h3>
+                    <p>...</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('mathematics')">
+                        <i class="fas fa-project-diagram"></i> View Network
+                    </button>
+                </div>
+                <!-- Dentistry -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #029E73;">⬢</div>
+                    <h3>Dentistry</h3>
+                    <p>...</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('dentistry')">
+                        <i class="fas fa-project-diagram"></i> View Network
+                    </button>
+                </div>
+                <!-- Health Professions -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #029E73;">⬢</div>
+                    <h3>Health Professions</h3>
+                    <p>...</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('health_professions')">
+                        <i class="fas fa-project-diagram"></i> View Network
+                    </button>
+                </div>
+                <!-- Medicine -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #029E73;">⬢</div>
+                    <h3>Medicine</h3>
+                    <p>...</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('medicine')">
+                        <i class="fas fa-project-diagram"></i> View Network
+                    </button>
+                </div>
+                <!-- Nursing -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #029E73;">⬢</div>
+                    <h3>Nursing</h3>
+                    <p>...</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('nursing')">
+                        <i class="fas fa-project-diagram"></i> View Network
+                    </button>
+                </div>
+                <!-- Mathematics -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #029E73;">⬢</div>
+                    <h3>Mathematics</h3>
+                    <p>...</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('mathematics')">
+                        <i class="fas fa-project-diagram"></i> View Network
+                    </button>
+                </div>
+                <!-- Pharmacology, Toxicology and Pharmaceutics -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #029E73;">⬢</div>
+                    <h3>Pharmacology, Toxicology and Pharmaceutics</h3>
+                    <p>...</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('pharmacology_toxicology_and_pharmaceutics')">
+                        <i class="fas fa-project-diagram"></i> View Network
+                    </button>
+                </div>
+                <!-- Agricultural and Biological Sciences -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #029E73;">⬢</div>
+                    <h3>Agricultural and Biological Sciences</h3>
+                    <p>...</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('agricultural_and_biological_sciences')">
+                        <i class="fas fa-project-diagram"></i> View Network
+                    </button>
+                </div>
+                <!-- Biochemistry, Genetics and Molecular Biology -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #029E73;">⬢</div>
+                    <h3>Biochemistry, Genetics and Molecular Biology</h3>
+                    <p>...</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('biochemistry_genetics_and_molecular_biology')">
+                        <i class="fas fa-project-diagram"></i> View Network
+                    </button>
+                </div>
+                <!-- Immunology and Microbiology -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #029E73;">⬢</div>
+                    <h3>Immunology and Microbiology</h3>
+                    <p>...</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('immunology_and_microbiology')">
+                        <i class="fas fa-project-diagram"></i> View Network
+                    </button>
+                </div>
                 <!-- Neuroscience -->
                 <div class="layer-card">
-                    <div class="licon" style="color: #D55E00;">⬢</div>
+                    <div class="licon" style="color: #029E73;">⬢</div>
                     <h3>Neuroscience</h3>
                     <p>Molecular, cognitive, and systems neuroscience.</p>
                     <button class="btn btn-s" onclick="loadDisciplinaryNetwork('neuroscience')">
                         <i class="fas fa-project-diagram"></i> View Network
                     </button>
                 </div>
+                <!-- Veterinary -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #029E73;">⬢</div>
+                    <h3>Veterinary</h3>
+                    <p>...</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('veterinary')">
+                        <i class="fas fa-project-diagram"></i> View Network
+                    </button>
+                </div>
+                <!-- Chemistry -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #029E73;">⬢</div>
+                    <h3>Chemistry</h3>
+                    <p>...</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('chemistry')">
+                        <i class="fas fa-project-diagram"></i> View Network
+                    </button>
+                </div>
+                <!-- Earth and Planetary Sciences -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #029E73;">⬢</div>
+                    <h3>Earth and Planetary Sciences</h3>
+                    <p>...</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('earth_and_planetary_sciences')">
+                        <i class="fas fa-project-diagram"></i> View Network
+                    </button>
+                </div>
+                <!-- Environmental Science -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #029E73;">⬢</div>
+                    <h3>Environmental Science</h3>
+                    <p>...</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('environmental_science')">
+                        <i class="fas fa-project-diagram"></i> View Network
+                    </button>
+                </div>
+                <!-- Physics and Astronomy -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #029E73;">⬢</div>
+                    <h3>Physics and Astronomy</h3>
+                    <p>...</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('physics_and_astronomy')">
+                        <i class="fas fa-project-diagram"></i> View Network
+                    </button>
+                </div>
+                <!-- Arts and Humanities -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #029E73;">⬢</div>
+                    <h3>Arts and Humanities</h3>
+                    <p>...</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('arts_and_humanities')">
+                        <i class="fas fa-project-diagram"></i> View Network
+                    </button>
+                </div>
+                <!-- Decision Sciences -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #029E73;">⬢</div>
+                    <h3>Decision Sciences</h3>
+                    <p>...</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('decision_sciences')">
+                        <i class="fas fa-project-diagram"></i> View Network
+                    </button>
+                </div>
+                <!-- Economy, Econometrics and Finance -->
+                <div class="layer-card">
+                    <div class="licon" style="color: #029E73;">⬢</div>
+                    <h3>Economy, Econometrics and Finance</h3>
+                    <p>...</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('economy_econometrics_and_finance')">
+                        <i class="fas fa-project-diagram"></i> View Network
+                    </button>
+                </div>
                 <!-- Psychology -->
                 <div class="layer-card">
-                    <div class="licon" style="color: #CA9161;">⬢</div>
+                    <div class="licon" style="color: #029E73;">⬢</div>
                     <h3>Psychology</h3>
                     <p>Cognitive, social, clinical, and developmental psychology.</p>
                     <button class="btn btn-s" onclick="loadDisciplinaryNetwork('psychology')">
                         <i class="fas fa-project-diagram"></i> View Network
                     </button>
                 </div>
-                <!-- Biology -->
+                <!-- Social Sciences -->
                 <div class="layer-card">
-                    <div class="licon" style="color: #0173B2;">⬢</div>
-                    <h3>Biology</h3>
-                    <p>Genetics, ecology, evolution, and cell biology.</p>
-                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('biology')">
+                    <div class="licon" style="color: #029E73;">⬢</div>
+                    <h3>Social Sciences</h3>
+                    <p>...</p>
+                    <button class="btn btn-s" onclick="loadDisciplinaryNetwork('social_sciences')">
                         <i class="fas fa-project-diagram"></i> View Network
                     </button>
                 </div>
-                <!-- Add all 25 disciplines here -->
             </div>
         </section>
     </main>
