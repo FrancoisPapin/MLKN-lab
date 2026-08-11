@@ -28,6 +28,19 @@
 
 ---
 
+<!-- 4. IMAGE PREVIEW (HERO BANNER) -->
+<p align="center">
+  <a href="https://francoispapin.github.io/MLKN-lab/knowledge_network/MLKN-hypergraph.html">
+    <img src="assets/images/mlkn-hypergraph-preview.png" alt="MLKN.lab Knowledge Network Preview: MLKN.hypergraph Preview" width="100%">
+  </a>
+  <br>
+  <em>Figure 1: Interactive MLKN.hypergraph mapping knowledge topology across 25 disciplines and 5 ontological layers.</em> 
+  <br>
+    <em>Click the image to launch the live interactive map.</em>
+</p>
+
+---
+
 <!-- TABLE OF CONTENTS (Has a title inside <summary>) -->
 <details open>
   <summary><b>Table of Contents</b></summary>
@@ -42,17 +55,6 @@
     <li><a href="#contributing">Citation & Contributing</a></li>
   </ol>
 </details>
-
----
-
-<!-- 4. IMAGE PREVIEW (HERO BANNER) -->
-<p align="center">
-  <a href="https://francoispapin.github.io/MLKN-lab/knowledge_network/MLKN-hypergraph.html">
-    <img src="assets/images/mlkn-hypergraph-preview.png" alt="MLKN.lab Knowledge Network Preview: MLKN.hypergraph Preview" width="100%">
-  </a>
-  <br>
-  <em>Figure 1: Interactive MLKN.hypergraph mapping knowledge topology across 25 disciplines and 5 ontological layers. Click the image to launch the live interactive map.</em>
-</p>
 
 ---
 
