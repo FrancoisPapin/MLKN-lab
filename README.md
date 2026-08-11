@@ -135,13 +135,13 @@ MLKN.lab serves as:
 - **For Policymakers**: Inform science policy by visualizing gaps, silos, and opportunities.
 - **For AI Developers**: Enhance AI reasoning with structured knowledge networks.
 
-### **5. Why MLKN.lab Stands Out
+### **5. Why MLKN.lab Stands Out**
 ```
- | Feature                 | MLKN.lab                          | Traditional Approaches          |
+ | Feature                 | MLKN.lab                          | Traditional Approaches           |
  |-------------------------|-----------------------------------|----------------------------------|
  | **Hierarchy**           | 5 ontological layers              | Flat or 2–3 layers               |
- | **Interdisciplinarity** | 6 balanced core domains          | Biased toward STEM               |
- | **Validation**          | ARI benchmarking + expert review | Manual classification only       |
+ | **Interdisciplinarity** | 6 balanced core domains           | Biased toward STEM               |
+ | **Validation**          | ARI benchmarking + expert review  | Manual classification only       |
  | **Visualization**       | Interactive D3.js hypergraphs     | Static or limited to 2D networks |
 ```
  
