@@ -267,16 +267,19 @@ MLKN-lab/
 
 ---
 ## **Scientific References**
-MLKN.lab is grounded in **meta-science, computational epistemology, network theory, and cognitive science**. Explore **100+ scientific references** that fondation MLKN.lab, including:
+MLKN.lab is grounded in **meta-science, computational epistemology, network theory, and cognitive science**. Explore **100+ scientific references** that foundation MLKN.lab, including:
 #### Meta-Science
 - Fortunato, S., et al. (2018). *Science of Science*. **Science**.
+- Börner, K. (2015). *Atlas of science: Visualizing what we know*. **MIT Press**.
 #### Computational Epistemology
 - Thagard, P. (2019). *How to Collaborate: A Computational Model of Scientific Knowledge Integration*. **Philosophical Explorations**.
+- Zenil, H., et al. (2020). *A computational epistemology of science*. **Synthese**.
 #### Network Theory
 - Barabási, A.-L., & Albert, R. (1999). *Emergence of Scaling in Random Networks*. **Science**.
 - Boccaletti, S., et al. (2014). *The Structure and Dynamics of Multilayer Networks*. **Physics Reports**.
 #### Cognitive Science
-...
+- Anderson, J. R., & Lebiere, C. (1998). *The atomic components of thought*. **Psychological Review**.
+- Langley, P., Laird, J. E., & Rogers, S. (2009). *Cognitive Systems: Human Cognition as a Basis for the Design of Intelligent Systems*. **MIT Press**.
 
 🔗 **[Full Scientific References](https://francoispapin.github.io/MLKN-lab/references/references.html)**
 
