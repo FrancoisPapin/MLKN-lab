@@ -58,10 +58,6 @@
 
 ## **Overview**
 
-```
-MLKN.lab is a computational meta-science platform that maps the topology of human knowledge as a multi-layered hypergraph, revealing hidden structures, bridges, and gaps across 25 disciplines and 5 ontological layers. It operationalizes a polyhierarchy to model scientific knowledge as a dynamic, interconnected system.
-```
-
 **MLKN.lab** (*Multi-Layered Knowledge Network Ideas Laboratory*) is a **computational meta-science platform** that maps the **structural topology of human knowledge** through a **polyhierarchical, data-driven framework**. It models scientific knowledge as a **dynamic, multi-layered hypergraph**, revealing hidden structures, bridges, and gaps across disciplines.
 
 ### 🔹 Why It Matters
@@ -78,6 +74,7 @@ Built from **bibliometric analysis of large-scale scholarly metadata** (OpenAlex
 - **235 Subdisciplines** (e.g., AI, Cognitive Psychology).
 - **320K+ Interdisciplinary Connections**.
 
+### 🔹 Dimensions
 MLKN.lab serves as:
 - **Research Platform**: A living laboratory for testing hypotheses about the evolution of science.
 - **Scientific Instrument**: A high-precision tool for graph-theoretic analysis of knowledge networks.
