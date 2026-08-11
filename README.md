@@ -2,7 +2,7 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/images/logo-dark-mode.png">
     <source media="(prefers-color-scheme: light)" srcset="assets/images/logo-light-mode.png">
-    <img alt="MLKN.lab Logo" src="assets/images/logo-light-mode.png" width="200">
+    <img alt="MLKN.lab Logo" src="assets/logo-light-mode.png" width="240" style="border-radius: 12px; border: 1px solid #333;">
   </picture>
 </p>
 
