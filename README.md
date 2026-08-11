@@ -2,7 +2,7 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/images/logo-dark-mode.png">
     <source media="(prefers-color-scheme: light)" srcset="assets/images/logo-light-mode.png">
-    <img alt="MLKN.lab Logo" src="assets/images/logo-light-mode.png" width="240">
+    <img alt="MLKN.lab Logo" src="assets/images/logo-light-mode.png" width="200">
   </picture>
 </p>
 
@@ -36,7 +36,7 @@
     <li><a href="#key-statistics">Key Statistics</a></li>
     <li><a href="#key-features">Key Features</a></li>
     <li><a href="#repository-structure">Repository Structure</a></li>
-    <li><a href="#getting-started">Getting Started & Quickstart</a></li>
+    <li><a href="#getting-started">Getting Started & Quick Start</a></li>
     <li><a href="#dataset-overview">Dataset Overview</a></li>
     <li><a href="#use-cases">Use Cases</a></li>
     <li><a href="#contributing">Citation & Contributing</a></li>
@@ -58,8 +58,19 @@
 
 ## **Overview**
 
+```
+MLKN.lab is a computational meta-science platform that maps the topology of human knowledge as a multi-layered hypergraph, revealing hidden structures, bridges, and gaps across 25 disciplines and 5 ontological layers. It operationalizes a polyhierarchy to model scientific knowledge as a dynamic, interconnected system.
+```
+
 **MLKN.lab** (*Multi-Layered Knowledge Network Ideas Laboratory*) is a **computational meta-science platform** that maps the **structural topology of human knowledge** through a **polyhierarchical, data-driven framework**. It models scientific knowledge as a **dynamic, multi-layered hypergraph**, revealing hidden structures, bridges, and gaps across disciplines.
 
+### 🔹 Why It Matters
+Traditional flat classifications (e.g., OpenAlex’s 4 domains) **miss critical interdisciplinary connections**. Our **6-core-domain polyhierarchy** captures **emergent structures** in science, enabling:
+- **Discovery** of hidden knowledge bridges (e.g., how "Transformers" diffused from AI to Neuroscience).
+- **Validation** of meta-science hypotheses (e.g., ARI benchmarking).
+- **Augmentation** of human and AI reasoning (e.g., interactive knowledge maps).
+
+### 🔹 Ontology
 Built from **bibliometric analysis of large-scale scholarly metadata** (OpenAlex), MLKN.lab operationalizes a **polyhierarchy** across:
 - **5 Ontological Layers** (Core Domains → Concepts).
 - **6 Epistemological Core Domains** (Formal Sciences, Natural Sciences, Engineering & Technology, Life Sciences, Health & Medical Sciences, Social Sciences & Humanities).
@@ -72,7 +83,24 @@ MLKN.lab serves as:
 - **Scientific Instrument**: A high-precision tool for graph-theoretic analysis of knowledge networks.
 - **Cognitive Interface**: A generative system to augment human reasoning through interactive knowledge maps.
 
-**Keywords**: ```meta-science```, ```science of science```, ```computational epistemology```, ```network science```, ```systems science```, ```interdisciplinary research```, ```interdisciplinarity```, ```knowledge network```, ```hierarchy```, ```complex systems```, ```research mapping```, ```knowledge diffusion```, ```cognitive science```, ```human-machine interaction```, ```human-ai interaction```, ```unified theory of knowledge```, ```graph topology```, ```multilayer networks```, ```hypergraphs```, ```semantic web```, ```collective intelligence```, ```data science```, ```knowledge graph```, ```knowledge network graph```, ```data visualization```, ```interactive visualization```, ```scientometrics```, ```bibliometrics```, ```polyhierarchy```, ```epistemology```, ```ontology```, ```taxonomy```, ```knowledge organization systems```, ```scholarly knowledge graph```, ```OpenAlex```, ```SKOS```, ```Frascati Classification```, ```FAIR principles```, ```D3.js```, ```Python```, ```NetworkX```, ```open science```, ```open source```, ```open data```, ```open education```.
+---
+
+## **Keywords**
+
+**Core Paradigms & Domains**
+- `meta-science` · `science of science` · `computational epistemology` · `network science` · `systems science` · `interdisciplinary research` · `cognitive science` · `human-machine interaction` · `human-ai interaction` · `semantic web` · `collective intelligence` · `unified theory of knowledge`
+
+**Network Science & Complex Systems**:
+- `network science` · `complex systems` · `graph topology` · `multilayer networks` · `hypergraphs` · `knowledge network` · `polyhierarchy` · `knowledge graph`
+
+**Methods & Dynamics**:
+- `research mapping` · `knowledge diffusion` · `data science` · `data visualization` · `scientometrics` · `bibliometrics` 
+
+**Ontology & Knowledge Organization**:
+- `ontology` · `taxonomy` · `knowledge organization systems` · `SKOS` · `Frascati Classification` · `OpenAlex`
+
+**Interaction & Open Science Foundations**:
+- `human-machine interaction` · `human-ai interaction` · `open science` · `open source` · `open data` · `open education` · `FAIR principles`
 
 ---
 
@@ -110,6 +138,16 @@ MLKN.lab serves as:
 - **For Policymakers**: Inform science policy by visualizing gaps, silos, and opportunities.
 - **For AI Developers**: Enhance AI reasoning with structured knowledge networks.
 
+### **5. Why MLKN.lab Stands Out
+```
+ | Feature                 | MLKN.lab                          | Traditional Approaches          |
+ |-------------------------|-----------------------------------|----------------------------------|
+ | **Hierarchy**           | 5 ontological layers              | Flat or 2–3 layers               |
+ | **Interdisciplinarity** | 6 balanced core domains          | Biased toward STEM               |
+ | **Validation**          | ARI benchmarking + expert review | Manual classification only       |
+ | **Visualization**       | Interactive D3.js hypergraphs     | Static or limited to 2D networks |
+```
+ 
 ---
 
 ## **Repository Structure**
@@ -156,7 +194,7 @@ MLKN-lab/
 │   └── style.css                    # Main styles
 │
 ├── citation/                        # Citation
-│   └── CITATION.cff                 # Cite on
+│   └── CITATION.cff                 # Cite as
 │
 └── README.md                        # This file
 ```
@@ -181,7 +219,7 @@ MLKN-lab/
    pip install pandas networkx matplotlib
    ```
 
-### **Quickstart**
+### **Quick Start**
 - Load the **master hierarchy CSV** into a DataFrame:
   ```python
   import pandas as pd
@@ -202,14 +240,14 @@ MLKN-lab/
 ---
 
 ## **Dataset Overview**
-
+```
 | **File**                                                      | **Format** | **Size**   | **Purpose**                           |
 |---------------------------------------------------------------|------------|------------|---------------------------------------|
 | `MLKN_Hierarchy_Master_File_All_layers_All_Details_Final.csv` | CSV        | 92.9 MB    | Master hierarchy for analysis         |
 | `MLKN_hypergraph_nodes.json`                                  | JSON       | 5.6 MB     | Nodes for interactive visualization   |
 | `MLKN_hypergraph_edges.json`                                  | JSON       | 40.5 MB    | Edges for interactive visualization   |
 | `MLKN_tutorial.ipynb`                                         | Jupyter    | 534 Bytes  | Quickstart guide                      |
-
+```
 ---
 
 ## **Use Cases**
@@ -232,11 +270,16 @@ MLKN-lab/
 
 ---
 ## **Scientific References**
-MLKN.lab is grounded in **meta-science, computational epistemology, network theory, and cognitive science**. Explore **100+ scientific references** that fondate MLKN.lab, including:
+MLKN.lab is grounded in **meta-science, computational epistemology, network theory, and cognitive science**. Explore **100+ scientific references** that fondation MLKN.lab, including:
+#### Meta-Science
 - Fortunato, S., et al. (2018). *Science of Science*. **Science**.
+#### Computational Epistemology
+- Thagard, P. (2019). *How to Collaborate: A Computational Model of Scientific Knowledge Integration*. **Philosophical Explorations**.
+#### Network Theory
 - Barabási, A.-L., & Albert, R. (1999). *Emergence of Scaling in Random Networks*. **Science**.
 - Boccaletti, S., et al. (2014). *The Structure and Dynamics of Multilayer Networks*. **Physics Reports**.
-- Thagard, P. (2019). *How to Collaborate: A Computational Model of Scientific Knowledge Integration*. **Philosophical Explorations**.
+#### Cognitive Science
+...
 
 🔗 **[Full Scientific References](https://francoispapin.github.io/MLKN-lab/references/references.html)**
 
