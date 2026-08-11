@@ -47,10 +47,10 @@ const layerMap = {
 let nodesUrl, edgesUrl;
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
     nodesUrl = './data/MLKN_hypergraph_nodes.json';
-    edgesUrl = './data/MLKN_hypergraph_edges.json';
+    edgesUrl = './data/MLKN_hypergraph_data.json';
 } else {
     nodesUrl = '/MLKN-lab/knowledge_network/data/MLKN_hypergraph_nodes.json';
-    edgesUrl = '/MLKN-lab/knowledge_network/data/MLKN_hypergraph_edges.json';
+    edgesUrl = '/MLKN-lab/knowledge_network/data/MLKN_hypergraph_data.json';
 }
 
 // Initialize the network
