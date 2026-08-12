@@ -52,6 +52,8 @@
     <li><a href="#getting-started">Getting Started & Quick Start</a></li>
     <li><a href="#dataset-overview">Dataset Overview</a></li>
     <li><a href="#use-cases">Use Cases</a></li>
+    <li><a href="#scientific-references">Scientific References</a></li>
+    <li><a href="#open-access-monographs">Open Access Monographs</a></li>
     <li><a href="#contribution">Contribution</a></li>
     <li><a href="#contribution">Collaboration</a></li>
     <li><a href="#contact">Contact</a></li>
