@@ -39,6 +39,17 @@
     <em>Click the image to launch the live interactive map.</em>
 </p>
 
+<!-- 4. ANIMATED PREVIEW (HERO BANNER) -->
+<p align="center">
+  <a href="https://francoispapin.github.io/MLKN-lab/knowledge_network/MLKN-hypergraph.html">
+    <img src="assets/images/MLKN-hypergraph-animation.svg" alt="MLKN.lab Knowledge Network Preview: MLKN.hypergraph Animated Preview" width="100%">
+  </a>
+  <br>
+  <em>Figure 2: Animated preview for Interactive MLKN.hypergraph mapping knowledge topology across 25 disciplines and 5 ontological layers.</em> 
+  <br>
+    <em>Click the image to launch the live interactive map.</em>
+</p>
+
 ---
 
 <!-- TABLE OF CONTENTS (Has a title inside <summary>) -->
