@@ -233,8 +233,18 @@ MLKN-lab/
   with open("data/MLKN_hypergraph_edges.json") as f:
       edges = json.load(f)
   ```
+
+### **Interactive Quick Start**
 - Explore the MLKN dataset interactively in your browser without local installation:
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FrancoisPapin/MLKN-lab/blob/main/tutorials/MLKN_tutorial.ipynb)
+
+### **Collaboration &amp; Contributions**
+<p>The <strong>MLKN.lab</strong> project is an open-science initiative. We welcome contributions, feature requests, and domain ontology refinements!</p>
+<ul>
+<li><strong>Repository:</strong> <a href="https://github.com/francoispapin/MLKN-lab/" rel="noopener">https://github.com/francoispapin/MLKN-lab/</a></li>
+<li><strong>Interactive Visualization:</strong> <a href="https://francoispapin.github.io/MLKN-lab/" rel="noopener">https://github.com/francoispapin/MLKN-lab/</a></li>
+<li><strong>Get Involved:</strong> Open an issue or discussion on GitHub to collaborate on graph extensions, new mappings, or downstream applications.</li>
+</ul>
 
 ---
 
