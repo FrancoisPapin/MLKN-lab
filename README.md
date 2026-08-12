@@ -52,7 +52,11 @@
     <li><a href="#getting-started">Getting Started & Quick Start</a></li>
     <li><a href="#dataset-overview">Dataset Overview</a></li>
     <li><a href="#use-cases">Use Cases</a></li>
-    <li><a href="#contributing">Citation & Contributing</a></li>
+    <li><a href="#contribution">Contribution</a></li>
+    <li><a href="#contribution">Collaboration</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contribution">License</a></li>
+    <li><a href="#related-resources">Related Resources</a></li>
   </ol>
 </details>
 
@@ -233,18 +237,8 @@ MLKN-lab/
   with open("data/MLKN_hypergraph_edges.json") as f:
       edges = json.load(f)
   ```
-
-### **Interactive Quick Start**
 - Explore the MLKN dataset interactively in your browser without local installation:
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FrancoisPapin/MLKN-lab/blob/main/tutorials/MLKN_tutorial.ipynb)
-
-### **Collaboration &amp; Contributions**
-<p>The <strong>MLKN.lab</strong> project is an open-science initiative. We welcome contributions, feature requests, and domain ontology refinements!</p>
-<ul>
-<li><strong>Repository:</strong> <a href="https://github.com/francoispapin/MLKN-lab/" rel="noopener">https://github.com/francoispapin/MLKN-lab/</a></li>
-<li><strong>Interactive Visualization:</strong> <a href="https://francoispapin.github.io/MLKN-lab/" rel="noopener">https://github.com/francoispapin/MLKN-lab/</a></li>
-<li><strong>Get Involved:</strong> Open an issue or discussion on GitHub to collaborate on graph extensions, new mappings, or downstream applications.</li>
-</ul>
 
 ---
 
@@ -305,7 +299,7 @@ Explore **200+ open-access monographs** that inspire MLKN.lab, including:
 🔗 **[Full Open-Access Monographs Collection](https://francoispapin.github.io/MLKN-lab/monographs/monographs.html)**
 
 ---
-## **Contributing**
+## **Contribution**
 We welcome contributions! Here’s how you can help:
 1. **Report Issues**: Open an issue on GitHub for bugs or feature requests.
 2. **Suggest Improvements**: Propose enhancements to the hierarchy or visualizations.
@@ -319,14 +313,24 @@ We welcome contributions! Here’s how you can help:
    ```
 
 ---
-## **License**
-This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
+## **Collaboration**
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FrancoisPapin/MLKN-lab/blob/main/tutorials/MLKN_tutorial.ipynb)
+<p>The <strong>MLKN.lab</strong> project is an open-science initiative. We welcome contributions, feature requests, and domain ontology refinements!</p>
+<ul>
+<li><strong>Repository:</strong> <a href="https://github.com/francoispapin/MLKN-lab/" rel="noopener">https://github.com/francoispapin/MLKN-lab/</a></li>
+<li><strong>Interactive Visualization:</strong> <a href="https://francoispapin.github.io/MLKN-lab/" rel="noopener">https://github.com/francoispapin/MLKN-lab/</a></li>
+<li><strong>Get Involved:</strong> Open an issue or discussion on GitHub to collaborate on graph extensions, new mappings, or downstream applications.</li>
+</ul>
 
 ---
 ## **Contact**
 - **Author**: [François Papin](https://www.linkedin.com/in/francois-papin/)
 - **Website**: [https://francoispapin.github.io/MLKN-lab/](https://francoispapin.github.io/MLKN-lab/)
 - **GitHub**: [https://github.com/FrancoisPapin/MLKN-lab](https://github.com/FrancoisPapin/MLKN-lab)
+
+---
+## **License**
+This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
 
 ---
 ## **Related Resources**
