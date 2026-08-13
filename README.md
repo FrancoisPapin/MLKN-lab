@@ -307,11 +307,11 @@ We welcome contributions! Here’s how you can help:
 2. **Suggest Improvements**: Propose enhancements to the hierarchy or visualizations.
 3. **Cite MLKN.lab**: If you use our website, please cite:
    ```
-   Papin, F. (2026). MLKN.lab - Multi-Layered Knowledge Network Ideas Laboratory [Research Software]. URL. https://francoispapin.github.io/MLKN-lab/
+   Papin, F. (2026). MLKN.lab: A Polyhierarchical Framework for Modeling the Scientific Knowledge [Software]. https://francoispapin.github.io/MLKN-lab/
    ```
 4. **Cite MLKN.lab Dataset**: If you use our data or tools, please cite:
    ```
-   Papin, F. (2026). MLKN.lab Hierarchy Master File and Knowledge Network Data (All Layers, All Details) [Dataset]. Zenodo. https://doi.org/10.5281/zenodo.21363227
+   Papin, F. (2026). MLKN.lab: A Polyhierarchical Hypergraph of Scientific Knowledge for Meta-Science, Computational Epistemology, and Network Analysis [Dataset]. Zenodo. https://doi.org/10.5281/zenodo.21363227
    ```
 
 ---
