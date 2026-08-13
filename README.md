@@ -71,7 +71,7 @@
 ### 🔹 Why It Matters
 Traditional flat classifications (e.g., OpenAlex’s 4 domains) **miss critical interdisciplinary connections**. Our **6-core-domain polyhierarchy** captures **emergent structures** in science, enabling:
 - **Discovery** of hidden knowledge bridges (e.g., how "Transformers" diffused from AI to Neuroscience).
-- **Validation** of meta-science hypotheses (e.g., ARI benchmarking).
+- **Validation** of metascience hypotheses (e.g., ARI benchmarking).
 - **Augmentation** of human and AI reasoning (e.g., interactive knowledge maps).
 
 ### 🔹 Ontology
