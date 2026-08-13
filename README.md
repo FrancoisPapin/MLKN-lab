@@ -66,7 +66,7 @@
 
 ## **Overview**
 
-**MLKN.lab** (*Multi-Layered Knowledge Network Ideas Laboratory*) is a **computational meta-science platform** that maps the **structural topology of human knowledge** through a **polyhierarchical, data-driven framework**. It models scientific knowledge as a **dynamic, multi-layered hypergraph**, revealing hidden structures, bridges, and gaps across disciplines.
+**MLKN.lab** (*Multi-Layered Knowledge Network Ideas Laboratory*) is a **computational metascience platform** that maps the **structural topology of human knowledge** through a **polyhierarchical, data-driven framework**. It models scientific knowledge as a **dynamic, multi-layered hypergraph**, revealing hidden structures, bridges, and gaps across disciplines.
 
 ### 🔹 Why It Matters
 Traditional flat classifications (e.g., OpenAlex’s 4 domains) **miss critical interdisciplinary connections**. Our **6-core-domain polyhierarchy** captures **emergent structures** in science, enabling:
@@ -93,7 +93,7 @@ MLKN.lab serves as:
 ## **Keywords**
 
 **Core Paradigms & Domains**
-- `meta-science` · `science of science` · `computational epistemology` · `network science` · `systems science` · `interdisciplinary research` · `cognitive science` · `human-machine interaction` · `human-ai interaction` · `semantic web` · `collective intelligence` · `unified theory of knowledge`
+- `metascience` · `science of science` · `computational epistemology` · `network science` · `systems science` · `interdisciplinary research` · `cognitive science` · `human-machine interaction` · `human-ai interaction` · `semantic web` · `collective intelligence` · `unified theory of knowledge`
 
 **Network Science & Complex Systems**:
 - `network science` · `complex systems` · `graph topology` · `multilayer networks` · `hypergraphs` · `knowledge network` · `polyhierarchy` · `knowledge graph`
@@ -257,7 +257,7 @@ MLKN-lab/
 
 ## **Use Cases**
 
-### **1. Meta-Science Research**
+### **1. Metascience Research**
 - Analyze **interdisciplinarity, knowledge diffusion, or the evolution of scientific fields**.
 - Example: Track how concepts like *"Transformers"* diffuse from AI to neuroscience.
 
@@ -276,7 +276,7 @@ MLKN-lab/
 ---
 ## **Scientific References**
 MLKN.lab is grounded in **meta-science, computational epistemology, network theory, and cognitive science**. Explore **100+ scientific references** that foundation MLKN.lab, including:
-#### Meta-Science
+#### Metascience
 - Fortunato, S., et al. (2018). *Science of Science*. **Science**.
 - Börner, K. (2015). *Atlas of science: Visualizing what we know*. **MIT Press**.
 #### Computational Epistemology
@@ -311,7 +311,7 @@ We welcome contributions! Here’s how you can help:
    ```
 4. **Cite MLKN.lab Dataset**: If you use our data or tools, please cite:
    ```
-   Papin, F. (2026). MLKN.lab: A Polyhierarchical Hypergraph of Scientific Knowledge for Meta-Science, Computational Epistemology, and Network Analysis [Dataset]. Zenodo. https://doi.org/10.5281/zenodo.21363227
+   Papin, F. (2026). MLKN.lab: A Polyhierarchical Hypergraph of Scientific Knowledge for Metascience, Computational Epistemology, and Network Analysis [Dataset]. Zenodo. https://doi.org/10.5281/zenodo.21363227
    ```
 
 ---
