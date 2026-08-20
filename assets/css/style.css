@@ -34,7 +34,7 @@
 }
 
 /* =============================================
-   DESKTOP NAVIGATION (Unchanged)
+   DESKTOP NAVIGATION
    ============================================= */
 .topnav {
   position: sticky;
@@ -42,11 +42,21 @@
   z-index: 100;
   position: relative;
   background: var(--panel);
-  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
   box-shadow: var(--sh);
   height: 48px;
+}
+
+.topnav a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.topnav a {
+  font-weight: 500;
 }
 
 .topnav-inner {
@@ -60,12 +70,8 @@
   gap: 12px;
 }
 
-.topnav-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  flex-shrink: 0;
+.topnav-logo img {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 .logo-mark {
@@ -411,56 +417,101 @@ h1, h2, h3 {
 .hero {
   background: var(--bg);
   border-bottom: 1px solid var(--border);
-  padding: 58px 24px 50px;
+  padding: 64px 24px 56px; /* Légèrement plus d'espace pour aérer */
   text-align: center;
   position: relative;
   overflow: hidden;
 }
 
+/* Effet de fond radial (conservé mais ajusté pour plus de subtilité) */
 .hero::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 80% 60% at 50% 0%, #EBF4FB55, transparent);
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(235, 244, 251, 0.3), transparent);
   pointer-events: none;
 }
 
+/* Eyebrow (texte introductif) */
 .hero-eyebrow {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px; /* Légèrement plus lisible */
   color: var(--accent);
-  opacity: 0.7;
-  letter-spacing: 0.28em;
+  opacity: 0.8; /* Un peu plus visible */
+  letter-spacing: 0.25em;
   text-transform: uppercase;
-  margin-bottom: 14px;
+  margin-bottom: 16px; /* Espacement légèrement augmenté */
 }
 
+/* Titre principal (en noir comme demandé) */
 .hero-title {
-  font-size: clamp(30px, 5.5vw, 58px);
+  font-size: clamp(32px, 6vw, 60px); /* Légèrement plus grand pour un impact visuel */
   font-weight: 700;
-  color: var(--text);
+  color: #000000; /* Noir profond pour un rendu "encre" */
   line-height: 1.05;
-  letter-spacing: -0.025em;
-  margin: 0 auto 10px;
+  letter-spacing: -0.02em; /* Réduit pour un rendu plus serré */
+  margin: 0 auto 12px;
   text-align: center;
+  animation: fadeInDown 0.8s ease-out; /* Animation subtile au chargement */
 }
 
+/* Suppression du gradient pour le titre (puisque tu veux du noir) */
 .hero-title em {
   font-style: normal;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #000000; /* Noir pour cohérence */
 }
 
+/* Sous-titre */
 .hero-subtitle {
-  font-size: clamp(14px, 2vw, 17px);
+  font-size: clamp(15px, 2.1vw, 18px); /* Légèrement plus grand */
   color: var(--text2);
-  max-width: 640px;
-  margin: 0 auto 30px;
-  line-height: 1.65;
-  font-weight: 300;
+  max-width: 680px; /* Un peu plus large pour les écrans larges */
+  margin: 0 auto 32px; /* Espacement augmenté */
+  line-height: 1.7; /* Meilleure lisibilité */
+  font-weight: 400; /* Poids normal pour un contraste avec le titre */
   text-align: center;
+}
+
+/* Animation pour le titre */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation pour le sous-titre (optionnel) */
+.hero-subtitle {
+  animation: fadeIn 1s ease-out 0.3s both; /* Décalage pour une apparition progressive */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive pour mobile */
+@media (max-width: 768px) {
+  .hero {
+    padding: 48px 16px 40px; /* Réduction des espacements sur mobile */
+  }
+
+  .hero-title {
+    font-size: clamp(28px, 8vw, 44px); /* Taille adaptée pour mobile */
+  }
+
+  .hero-subtitle {
+    font-size: clamp(14px, 3vw, 16px);
+    max-width: 90%; /* Meilleure lisibilité sur petits écrans */
+  }
 }
 
 /* =============================================
