@@ -417,13 +417,13 @@ h1, h2, h3 {
 .hero {
   background: var(--bg);
   border-bottom: 1px solid var(--border);
-  padding: 64px 24px 56px; /* Légèrement plus d'espace pour aérer */
+  padding: 64px 24px 56px;
   text-align: center;
   position: relative;
   overflow: hidden;
 }
 
-/* Effet de fond radial (conservé mais ajusté pour plus de subtilité) */
+/* Effet de fond radial */
 .hero::before {
   content: '';
   position: absolute;
@@ -435,44 +435,44 @@ h1, h2, h3 {
 /* Eyebrow (texte introductif) */
 .hero-eyebrow {
   font-family: var(--mono);
-  font-size: 11px; /* Légèrement plus lisible */
+  font-size: 11px;
   color: var(--accent);
-  opacity: 0.8; /* Un peu plus visible */
+  opacity: 0.8;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  margin-bottom: 16px; /* Espacement légèrement augmenté */
+  margin-bottom: 16px;
 }
 
-/* Titre principal (en noir comme demandé) */
+/* Titre principal */
 .hero-title {
-  font-size: clamp(32px, 6vw, 60px); /* Légèrement plus grand pour un impact visuel */
+  font-size: clamp(32px, 6vw, 60px);
   font-weight: 700;
-  color: #000000; /* Noir profond pour un rendu "encre" */
+  color: #000000; /* Noir en mode clair */
   line-height: 1.05;
-  letter-spacing: -0.02em; /* Réduit pour un rendu plus serré */
+  letter-spacing: -0.02em;
   margin: 0 auto 12px;
   text-align: center;
-  animation: fadeInDown 0.8s ease-out; /* Animation subtile au chargement */
+  animation: fadeInDown 0.8s ease-out;
 }
 
-/* Suppression du gradient pour le titre (puisque tu veux du noir) */
 .hero-title em {
   font-style: normal;
-  color: #000000; /* Noir pour cohérence */
+  color: #000000; /* Noir en mode clair */
 }
 
 /* Sous-titre */
 .hero-subtitle {
-  font-size: clamp(15px, 2.1vw, 18px); /* Légèrement plus grand */
-  color: var(--text2);
-  max-width: 680px; /* Un peu plus large pour les écrans larges */
-  margin: 0 auto 32px; /* Espacement augmenté */
-  line-height: 1.7; /* Meilleure lisibilité */
-  font-weight: 400; /* Poids normal pour un contraste avec le titre */
+  font-size: clamp(15px, 2.1vw, 18px);
+  color: #000000; /* Noir en mode clair */
+  max-width: 680px;
+  margin: 0 auto 32px;
+  line-height: 1.7;
+  font-weight: 300; /* Police plus légère */
   text-align: center;
+  animation: fadeIn 1s ease-out 0.3s both;
 }
 
-/* Animation pour le titre */
+/* Animations */
 @keyframes fadeInDown {
   from {
     opacity: 0;
@@ -484,11 +484,6 @@ h1, h2, h3 {
   }
 }
 
-/* Animation pour le sous-titre (optionnel) */
-.hero-subtitle {
-  animation: fadeIn 1s ease-out 0.3s both; /* Décalage pour une apparition progressive */
-}
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -498,19 +493,39 @@ h1, h2, h3 {
   }
 }
 
+/* Mode sombre */
+@media (prefers-color-scheme: dark) {
+  .hero-title {
+    color: #FFFFFF; /* Blanc en mode sombre */
+  }
+
+  .hero-title em {
+    color: #FFFFFF; /* Blanc en mode sombre */
+  }
+
+  .hero-subtitle {
+    color: #FFFFFF; /* Blanc en mode sombre */
+  }
+
+  /* Ajustement du fond radial pour le mode sombre */
+  .hero::before {
+    background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(40, 40, 40, 0.3), transparent);
+  }
+}
+
 /* Responsive pour mobile */
 @media (max-width: 768px) {
   .hero {
-    padding: 48px 16px 40px; /* Réduction des espacements sur mobile */
+    padding: 48px 16px 40px;
   }
 
   .hero-title {
-    font-size: clamp(28px, 8vw, 44px); /* Taille adaptée pour mobile */
+    font-size: clamp(28px, 8vw, 44px);
   }
 
   .hero-subtitle {
     font-size: clamp(14px, 3vw, 16px);
-    max-width: 90%; /* Meilleure lisibilité sur petits écrans */
+    max-width: 90%;
   }
 }
 
