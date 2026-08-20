@@ -447,7 +447,7 @@ h1, h2, h3 {
 .hero-title {
   font-size: clamp(32px, 6vw, 60px);
   font-weight: 700;
-  color: #000000; /* Noir en mode clair */
+  color: var(--text); /* Utilise la variable --text pour s'adapter au mode clair/sombre */
   line-height: 1.05;
   letter-spacing: -0.02em;
   margin: 0 auto 12px;
@@ -457,13 +457,13 @@ h1, h2, h3 {
 
 .hero-title em {
   font-style: normal;
-  color: #000000; /* Noir en mode clair */
+  color: var(--text); /* Utilise la variable --text */
 }
 
 /* Sous-titre */
 .hero-subtitle {
   font-size: clamp(15px, 2.1vw, 18px);
-  color: #000000; /* Noir en mode clair */
+  color: var(--text2); /* Utilise la variable --text2 pour s'adapter au mode clair/sombre */
   max-width: 680px;
   margin: 0 auto 32px;
   line-height: 1.7;
@@ -493,21 +493,8 @@ h1, h2, h3 {
   }
 }
 
-/* Mode sombre */
+/* Ajustement du fond radial pour le mode sombre */
 @media (prefers-color-scheme: dark) {
-  .hero-title {
-    color: #FFFFFF; /* Blanc en mode sombre */
-  }
-
-  .hero-title em {
-    color: #FFFFFF; /* Blanc en mode sombre */
-  }
-
-  .hero-subtitle {
-    color: #FFFFFF; /* Blanc en mode sombre */
-  }
-
-  /* Ajustement du fond radial pour le mode sombre */
   .hero::before {
     background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(40, 40, 40, 0.3), transparent);
   }
