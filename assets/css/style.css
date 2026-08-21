@@ -2533,6 +2533,21 @@ sub, sup {
   text-decoration: none;
   border-bottom-color: var(--accent);
 }
+
+#citeon p {
+  margin: 0 0 16px 0; 
+}
+
+#citeon .essay-box {
+  border-top: none !important;
+  margin-top: 16px; 
+}
+
+.cite-card {
+  margin-top: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
 .copy-btn {
   display: inline-flex;
   align-items: center;
@@ -2583,6 +2598,7 @@ sub, sup {
   background-color: var(--panel);
   border: 1px solid var(--border);
   color: var(--text2);
+  z-index: 2;
 }
 
 .bibtex-container pre {
@@ -2617,13 +2633,6 @@ sub, sup {
 .bibtex-container {
   position: relative;
   padding-top: 36px;
-}
-
-.copy-bibtex {
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  z-index: 2;
 }
 
 /* Optional: Adjust for mobile */
