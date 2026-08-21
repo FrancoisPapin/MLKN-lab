@@ -188,9 +188,9 @@
 }
 
 /* =============================================
-   MOBILE NAVIGATION - SCROLLING VERSION (Vertical Only)
+   MOBILE NAVIGATION - UNIFIED (Vertical & Horizontal)
    ============================================= */
-@media only screen and (max-width: 768px) and (orientation: portrait) {
+@media only screen and (max-width: 768px) {
   /* Hide desktop nav, show hamburger */
   .desktop-nav {
     display: none !important;
@@ -237,21 +237,8 @@
     width: 100%;
   }
 
-  /* Fix for Home link (first item) - MUST BE BEFORE parent items rule */
-  .topnav.mobile-menu-active .primary-nav > li:first-child > a {
-    padding: 12px 15px;
-    font-size: 13px;
-    border-bottom: 1px solid var(--border);
-    display: block;
-    color: var(--text2) !important;
-    font-weight: 600;
-    background: rgba(26, 107, 170, 0.05);
-    cursor: pointer !important;
-    pointer-events: auto !important;
-  }
-
   /* Parent items (section headers - non-clickable) */
-  .topnav.mobile-menu-active .primary-nav > li:not(:first-child) > a {
+  .topnav.mobile-menu-active .primary-nav > li > a {
     padding: 12px 15px;
     font-size: 13px;
     border-bottom: 1px solid var(--border);
@@ -292,57 +279,6 @@
   .logo-mark {
     width: 32px !important;
     height: 32px !important;
-  }
-}
-
-
-/* =============================================
-   MOBILE HORIZONTAL - DESKTOP-LIKE NAVIGATION
-   ============================================= */
-@media only screen and (max-width: 768px) and (orientation: landscape) {
-  /* Hide hamburger, show desktop nav */
-  .mobile-menu-toggle {
-    display: none !important;
-  }
-
-  .desktop-nav {
-    display: flex !important;
-  }
-
-  /* Adjust for small screen */
-  .topnav {
-    height: 48px !important;
-  }
-
-  .topnav-inner {
-    padding: 0 10px !important;
-  }
-
-  .primary-nav {
-    flex-wrap: wrap;
-    gap: 2px;
-  }
-
-  .primary-nav > li > a {
-    padding: 8px 10px;
-    font-size: 11px;
-  }
-
-  /* Dropdowns work on hover */
-  .dropdown-menu {
-    position: absolute !important;
-    top: 100%;
-    left: 0;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: var(--r);
-    box-shadow: var(--sh2);
-    min-width: 180px;
-    z-index: 1001;
-  }
-
-  .has-dropdown:hover .dropdown-menu {
-    display: block !important;
   }
 }
 
