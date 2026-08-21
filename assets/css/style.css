@@ -1301,8 +1301,8 @@ a:hover {
 
   /* Body and Global Text */
   body {
-    background: var(--bg);
-    color: var(--text);
+    background: #000000 !important; /* Noir pur */
+    color: var(--text); /* Texte en blanc */
   }
 
   /* Navigation Bar */
@@ -1349,15 +1349,26 @@ a:hover {
     opacity: 0.8;
   }
 
-  .hero-title {
-    color: var(--text) !important; /* Blanc pur */
+  hero-title {
+    color: #FFFFFF !important; /* Blanc pur */
+    font-style: normal !important; /* Supprime l'italique */
+    font-weight: 700;
+    text-align: center;
+    margin: 0 auto 12px;
+    width: 100%; /* Évite le débordement */
+    overflow: visible !important; /* Évite la coupure */
+    white-space: normal !important; /* Permet le retour à la ligne */
+    text-overflow: clip !important; /* Évite la coupure avec "..." */
+    word-wrap: break-word !important; /* Permet la coupure des mots longs */
   }
 
   .hero-title em {
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-style: normal !important; /* Supprime l'italique */
+    color: #FFFFFF !important; /* Blanc pur */
+    background: none !important; /* Supprime le gradient */
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: unset !important;
+    background-clip: unset !important;
   }
 
   .hero-subtitle {
