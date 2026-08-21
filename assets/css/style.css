@@ -388,7 +388,7 @@ h1, h2, h3 {
 .hero-title {
   font-size: clamp(32px, 6vw, 60px);
   font-weight: 700;
-  color: var(--text); /* Utilise la variable --text pour s'adapter au mode clair/sombre */
+  color: var(--text) !important;
   line-height: 1.05;
   letter-spacing: -0.02em;
   margin: 0 auto 12px;
@@ -396,9 +396,13 @@ h1, h2, h3 {
   animation: fadeInDown 0.8s ease-out;
 }
 
-.hero-title em {
+..hero-title em {
+  color: var(--text) !important;
   font-style: normal;
-  color: var(--text); /* Utilise la variable --text */
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+  background-clip: unset !important;
 }
 
 /* Sous-titre */
@@ -1288,9 +1292,9 @@ a:hover {
     --bg: #121212;
     --panel: rgba(30, 30, 30, 0.97);
     --border: #333333;
-    --text: #FFFFFF; /* Blanc pur */
-    --text2: #FFFFFF; /* Blanc pur */
-    --muted: #FFFFFF; /* Blanc pur */
+    --text: #FFFFFF;
+    --text2: #FFFFFF;
+    --muted: #FFFFFF;
     --accent: #4ba3e3;
     --accent2: #64B5F6;
   }
@@ -1332,12 +1336,12 @@ a:hover {
 
   /* Hero Section */
   .hero {
-    background: var(--bg);
+    background: #000000 !important;
     border-bottom: 1px solid var(--border);
   }
 
   .hero::before {
-    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(235, 244, 251, 0.1), transparent);
+    background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(60, 60, 60, 0.3), transparent);
   }
 
   .hero-eyebrow {
