@@ -217,7 +217,7 @@
 
   /* Full-screen scrolling menu */
   .topnav.mobile-menu-active .desktop-nav {
-    display: block;
+    display: block !important;
     position: absolute;
     top: 100%;
     left: 0;
@@ -248,7 +248,7 @@
     font-size: 13px;
     border-bottom: 1px solid var(--border);
     display: block;
-    color: var(--text) !important;
+    color: var(--text) !important; /* Blanc pur en mode sombre, noir pur en mode clair */
     font-weight: 600;
     background: rgba(26, 107, 170, 0.05);
     cursor: default !important;
@@ -272,7 +272,7 @@
     font-size: 12px;
     border-bottom: 1px solid var(--border);
     display: block;
-    color: var(--text) !important;
+    color: var(--text) !important; /* Blanc pur en mode sombre, noir pur en mode clair */
     white-space: nowrap;
   }
 
@@ -1288,9 +1288,11 @@ a:hover {
     --bg: #121212;
     --panel: rgba(30, 30, 30, 0.97);
     --border: #333333;
-    --text: #e0e0e0;
-    --text2: #b0b0b0;
-    --muted: #8a8a8a;
+    --text: #FFFFFF; /* Blanc pur */
+    --text2: #FFFFFF; /* Blanc pur */
+    --muted: #FFFFFF; /* Blanc pur */
+    --accent: #4ba3e3;
+    --accent2: #64B5F6;
   }
 
   /* Body and Global Text */
@@ -1306,12 +1308,12 @@ a:hover {
   }
 
   .primary-nav > li > a {
-    color: var(--text2) !important;
+    color: var(--text) !important; /* Blanc pur */
   }
 
   .primary-nav > li > a:hover {
     background: rgba(255, 255, 255, 0.05) !important;
-    color: var(--text) !important;
+    color: var(--accent) !important;
   }
 
   .dropdown-menu {
@@ -1320,7 +1322,7 @@ a:hover {
   }
 
   .dropdown-menu a {
-    color: var(--text) !important;
+    color: var(--text) !important; /* Blanc pur */
   }
 
   .dropdown-menu a:hover {
@@ -1344,7 +1346,7 @@ a:hover {
   }
 
   .hero-title {
-    color: var(--text) !important;
+    color: var(--text) !important; /* Blanc pur */
   }
 
   .hero-title em {
@@ -1355,7 +1357,7 @@ a:hover {
   }
 
   .hero-subtitle {
-    color: var(--text2) !important;
+    color: var(--text) !important; /* Blanc pur */
   }
 
   /* Hero Stats Dark Mode */
@@ -1364,7 +1366,7 @@ a:hover {
   }
 
   .hstat-lbl {
-    color: var(--muted) !important;
+    color: var(--text) !important; /* Blanc pur */
   }
 
   .stat-circle {
@@ -1377,11 +1379,11 @@ a:hover {
   }
 
   .sec-h {
-    color: var(--text) !important;
+    color: var(--text) !important; /* Blanc pur */
   }
 
   .sec-sub {
-    color: var(--muted) !important;
+    color: var(--text) !important; /* Blanc pur */
   }
 
   /* Layer Cards */
@@ -1391,11 +1393,11 @@ a:hover {
   }
 
   .layer-card h3 {
-    color: var(--text) !important;
+    color: var(--text) !important; /* Blanc pur */
   }
 
   .layer-card p {
-    color: var(--text2) !important;
+    color: var(--text) !important; /* Blanc pur */
   }
 
   /* Featured and Essay Boxes */
@@ -1405,12 +1407,12 @@ a:hover {
   }
 
   .feat-eyebrow, .feat-title, .feat-desc {
-    color: var(--text) !important;
+    color: var(--text) !important; /* Blanc pur */
   }
 
   /* Chips */
   .chip {
-    color: var(--text) !important;
+    color: var(--text) !important; /* Blanc pur */
     border-color: var(--border) !important;
   }
 
@@ -1439,19 +1441,19 @@ a:hover {
   }
 
   .sf-logo {
-    color: var(--text) !important;
+    color: var(--text) !important; /* Blanc pur */
   }
 
   .sf-tag {
-    color: var(--muted) !important;
+    color: var(--text) !important; /* Blanc pur */
   }
 
   .sf-links {
-    color: var(--text2) !important;
+    color: var(--text) !important; /* Blanc pur */
   }
 
   .sf-legal {
-    color: var(--muted) !important;
+    color: var(--text) !important; /* Blanc pur */
   }
 
   /* Links */
@@ -1471,11 +1473,11 @@ a:hover {
   }
 
   .reference-meta, .monograph-year {
-    color: var(--muted) !important;
+    color: var(--text) !important; /* Blanc pur */
   }
 
   .reference-content, .monograph-title {
-    color: var(--text) !important;
+    color: var(--text) !important; /* Blanc pur */
   }
 
   .reference-links a, .monograph-links a {
@@ -1490,25 +1492,25 @@ a:hover {
   .search-box input, .monographs-search input {
     background: var(--panel);
     border: 1.5px solid var(--border);
-    color: var(--text);
+    color: var(--text); /* Blanc pur */
   }
 
   .filter-btn, .monographs-filter-btn {
     background: var(--panel);
     border: 1.5px solid var(--border);
-    color: var(--text2);
+    color: var(--text) !important; /* Blanc pur */
   }
 
   .filter-btn:hover, .filter-btn.active,
   .monographs-filter-btn:hover, .monographs-filter-btn.active {
     background: rgba(255, 255, 255, 0.05);
     border-color: var(--accent);
-    color: var(--accent);
+    color: var(--accent) !important;
   }
 
   /* Discipline List */
   .discipline-list li {
-    color: var(--text2) !important;
+    color: var(--text) !important; /* Blanc pur */
   }
 
   .discipline-square {
@@ -1526,15 +1528,15 @@ a:hover {
   }
 
   .nav-grid-case-title {
-    color: var(--text) !important;
+    color: var(--text) !important; /* Blanc pur */
   }
 
   .nav-grid-list a:first-child {
-    color: var(--text2) !important;
+    color: var(--text) !important; /* Blanc pur */
   }
 
   .nav-arrow {
-    color: var(--muted) !important;
+    color: var(--text) !important; /* Blanc pur */
   }
 
   /* WCAG AA Contrast for Dark Mode */
@@ -1542,14 +1544,14 @@ a:hover {
   .nav-grid-case-title,
   .sec-sub,
   .hstat-lbl {
-    color: #e0e0e0 !important;
+    color: var(--text) !important; /* Blanc pur */
   }
 
   .nav-arrow,
   .discipline-list li,
   .reference-meta,
   .monograph-year {
-    color: #b0b0b0 !important;
+    color: var(--text) !important; /* Blanc pur */
   }
 
   /* Restore colored borders in dark mode */
@@ -1560,7 +1562,6 @@ a:hover {
   .nav-grid-case:nth-child(5) { border-top: 3px solid #a55eea !important; }
   .nav-grid-case:nth-child(6) { border-top: 3px solid #ff9f43 !important; }
 }
-
 
 /* =============================================
    FINAL RESPONSIVE ADJUSTMENTS
