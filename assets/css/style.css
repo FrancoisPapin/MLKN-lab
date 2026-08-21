@@ -980,6 +980,11 @@ h1, h2, h3 {
   border: 1px solid var(--border);
 }
 
+.essay-box p:has(.cite-card) {
+  margin: 0;
+  padding: 0;
+}
+
 .featured {
   background: linear-gradient(135deg, #EBF4FB, #F5EEF8);
   border: 2px solid #BBCFE8;
@@ -2520,12 +2525,14 @@ sub, sup {
   color: var(--accent);
   text-decoration: none;
   word-break: break-all;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1); 
+  padding-bottom: 1px;
 }
 
 .cite-body a:hover {
-  text-decoration: underline;
+  text-decoration: none;
+  border-bottom-color: var(--accent);
 }
-
 .copy-btn {
   display: inline-flex;
   align-items: center;
@@ -2541,7 +2548,7 @@ sub, sup {
 }
 
 .copy-btn:hover {
-  background-color: var(--panel);
+  background-color: rgba(0, 0, 0, 0.05);
   color: var(--text);
   border-color: var(--accent);
 }
