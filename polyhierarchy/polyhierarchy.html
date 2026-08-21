@@ -34,11 +34,26 @@
 <body>
     <header class="topnav" role="banner">
   <div class="topnav-inner">
-    <!-- Logo with Home Link -->
-    <a href="../index.html" class="topnav-logo">
-      <div class="logo-mark">ML</div>
-      <span class="logo-text">MLKN.lab</span>
-    </a>
+      
+            <div style="display: flex; align-items: center; gap: 8px; justify-content: flex-end;">
+                  <!-- Logotype -->
+                  <a href="index.html" class="topnav-logo">
+                    <picture>
+                      <source media="(prefers-color-scheme: dark)" srcset="assets/images/logotype_black_1.png">
+                      <source media="(prefers-color-scheme: light)" srcset="assets/images/logotype_white_1.png">
+                      <img alt="MLKN.lab Logo" src="assets/logotype_light-mode.png" width="46" style="border-radius: 4px;">
+                    </picture>
+                  </a>
+        
+                  <!-- Monogram -->
+                  <a href="index.html" class="topnav-logo" style="margin-right: 0;">
+                    <picture>
+                      <source media="(prefers-color-scheme: dark)" srcset="assets/images/Monogram_black_1.png">
+                      <source media="(prefers-color-scheme: light)" srcset="assets/images/Monogram_white_1.png">
+                      <img alt="MLKN.lab Monogram" src="assets/Monogram_light-mode.png" width="140" style="border-radius: 4px;">
+                    </picture>
+                  </a>
+                </div>
 
     <!-- Desktop Navigation (Text-Based) -->
     <nav class="desktop-nav">
