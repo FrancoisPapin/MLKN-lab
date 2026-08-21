@@ -7,13 +7,13 @@
 
 :root {
   /* Base Colors */
-  --bg: #FAFAF8;
-  --panel: rgba(250, 250, 248, 0.97);
-  --border: #E0EAFF;
-  --text: #1A1E2E;
-  --text2: #4A5070;
-  --muted: #8090B0;
-  --accent: #1A6BAA;
+  --bg: #ffffff; /* Fond blanc */
+  --panel: #f8f9fa; /* Fond des cartes (peut rester gris clair pour le contraste) */
+  --border: #e0e0e0; /* Bordures (peut rester gris clair) */
+  --text: #000000; /* Texte principal en noir pur */
+  --text2: #000000; /* Texte secondaire en noir pur (pas de gris) */
+  --muted: #000000; /* Texte atténué en noir pur */
+  --accent: #0066cc; /* Couleur d'accent (liens, boutons) */
   --accent2: #0A7E8C;
 
   /* Fonts */
@@ -118,12 +118,17 @@
 .primary-nav > li > a {
   font-family: var(--mono);
   font-size: 12px;
-  color: var(--text2);
+  color: var(--text) !important;
+  font-weight: 600;
   text-decoration: none;
   padding: 12px 10px;
   border-radius: var(--r);
   transition: all 0.15s;
   display: block;
+}
+
+.primary-nav > li > a:hover {
+  color: var(--accent) !important;
 }
 
 /* Dropdown Menus (Desktop) */
@@ -153,7 +158,7 @@
 .dropdown-menu a {
   font-family: var(--mono);
   font-size: 11px;
-  color: var(--text);
+  color: var(--text) !important;
   text-decoration: none;
   padding: 8px 12px;
   display: block;
@@ -161,7 +166,7 @@
 }
 
 .dropdown-menu a:hover {
-  color: var(--accent);
+  color: var(--accent) !important;
   background: rgba(26, 107, 170, 0.05);
 }
 
@@ -212,7 +217,7 @@
 
   /* Full-screen scrolling menu */
   .topnav.mobile-menu-active .desktop-nav {
-    display: block !important;
+    display: block;
     position: absolute;
     top: 100%;
     left: 0;
@@ -243,7 +248,7 @@
     font-size: 13px;
     border-bottom: 1px solid var(--border);
     display: block;
-    color: var(--text2) !important;
+    color: var(--text) !important;
     font-weight: 600;
     background: rgba(26, 107, 170, 0.05);
     cursor: default !important;
@@ -429,10 +434,15 @@ h1, h2, h3 {
   }
 }
 
-/* Ajustement du fond radial pour le mode sombre */
 @media (prefers-color-scheme: dark) {
-  .hero::before {
-    background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(40, 40, 40, 0.3), transparent);
+  :root {
+    --bg: #121212;
+    --panel: rgba(30, 30, 30, 0.97);
+    --border: #333333;
+    --text: #ffffff; /* Texte principal en blanc pur */
+    --text2: #ffffff; /* Texte secondaire en blanc pur (pas de gris) */
+    --muted: #ffffff; /* Texte atténué en blanc pur */
+    --accent: #4ba3e3; /* Couleur d'accent (liens, boutons) */
   }
 }
 
@@ -572,17 +582,26 @@ h1, h2, h3 {
 .sec-h {
   font-size: 22px;
   font-weight: 700;
-  color: var(--text);
+  color: var(--text) !important;
   margin-bottom: 4px;
 }
 
 .sec-sub {
   font-family: var(--mono);
   font-size: 10px;
-  color: var(--muted);
+  color: var(--text) !important;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   margin-bottom: 26px;
+}
+
+/* Liens globaux */
+a {
+  color: var(--accent) !important;
+}
+
+a:hover {
+  color: var(--text) !important;
 }
 
 /* =============================================
@@ -699,7 +718,7 @@ h1, h2, h3 {
 .nav-grid-case-title {
   font-size: 14px;
   font-weight: 700;
-  color: var(--text);
+  color: var(--text) !important;
   margin-bottom: 10px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -731,7 +750,7 @@ h1, h2, h3 {
 }
 
 .nav-grid-list a:first-child {
-  color: var(--text2);
+  color: var(--text) !important;
   text-decoration: none;
   transition: color 0.2s;
   white-space: nowrap;
