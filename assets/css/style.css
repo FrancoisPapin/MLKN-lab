@@ -2623,4 +2623,36 @@ sub, sup {
     line-height: 1.4;
   }
 
+  /* Enable horizontal scrolling for BibTeX code blocks instead of word wrapping */
+.bibtex-container pre {
+  overflow-x: auto;
+  white-space: pre; /* Prevents text wrapping */
+  word-wrap: normal;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.bibtex-container code {
+  white-space: pre;
+}
+
+/* Ensure the floating copy button sits nicely above the code */
+.bibtex-container {
+  position: relative;
+  padding-top: 36px; /* Space for the top-right Copy button */
+}
+
+.copy-bibtex {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  z-index: 2;
+}
+
+/* Optional: Slightly reduce padding and font size on narrow mobile screens */
+@media (max-width: 480px) {
+  .bibtex-container code {
+    font-size: 0.75rem;
+  }
+}
+
 
