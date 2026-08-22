@@ -393,7 +393,7 @@ h1, h2, h3 {
   letter-spacing: -0.02em;
   margin: 0 auto 12px;
   text-align: center;
-  animation: fadeInDown 0.8s ease-out;
+  animation: none !important;
   opacity: 1 !important; /* Opacité à 100% */
   filter: none !important; /* Supprime tout filtre */
 }
