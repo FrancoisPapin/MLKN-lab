@@ -399,15 +399,15 @@ h1, h2, h3 {
 /* Sous-titre */
 .hero-subtitle {
   font-size: clamp(15px, 2.1vw, 18px);
-  color: var(--text2) !important; /* Noir en mode clair, blanc en mode sombre */
+  color: var(--text2);
   max-width: 680px;
   margin: 0 auto 32px;
   line-height: 1.7;
   font-weight: 300;
   text-align: center;
-  animation: fadeIn 1s ease-out 0.3s both;
-  opacity: 1 !important;
-  filter: none !important;
+  animation: fadeIn 1s ease-out 0.3s both !important; /* Force l'animation */
+  opacity: 1;
+  filter: none;
 }
 
 /* Animations avec couleur blanche forcée */
@@ -427,11 +427,11 @@ h1, h2, h3 {
 @keyframes fadeIn {
   from {
     opacity: 0;
-    color: var(--text2) !important; /* Noir en mode clair, blanc en mode sombre */
+    color: var(--text2) !important; /* Couleur initiale */
   }
   to {
     opacity: 1;
-    color: var(--text2) !important; /* Noir en mode clair, blanc en mode sombre */
+    color: var(--text2) !important; /* Couleur finale */
   }
 }
 
@@ -513,7 +513,7 @@ h1, h2, h3 {
 .hstat-lbl {
   font-family: var(--mono);
   font-size: 8px;
-  color: var(--muted);
+  color: var(--text) !important;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin-top: 3px;
@@ -538,6 +538,7 @@ h1, h2, h3 {
   .hstat-lbl {
     font-size: 11px !important;
     letter-spacing: 0.15em;
+    color: var(--text) !important;
   }
 
   .stat-circle {
@@ -1394,7 +1395,7 @@ a:hover {
   }
 
   .hstat-lbl {
-    color: var(--text) !important; /* Blanc pur */
+    color: #FFFFFF !important; /* Blanc pur */
   }
 
   .stat-circle {
