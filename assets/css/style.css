@@ -364,6 +364,17 @@ h1, h2, h3 {
   overflow: hidden;
 }
 
+/* Sous-titre au-dessus du titre (hero-eyebrow) */
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent) !important; /* Bleu #0066cc */
+  opacity: 0.8;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
 /* Effet de fond radial (désactivé en mode sombre si souhaité) */
 .hero::before {
   content: '';
@@ -1307,7 +1318,7 @@ a:hover {
     --text: #FFFFFF;
     --text2: #FFFFFF;
     --muted: #FFFFFF;
-    --accent: #4ba3e3;
+    --accent: #0066cc;
     --accent2: #64B5F6;
   }
 
@@ -1362,7 +1373,7 @@ a:hover {
   }
 
   .hero-title {
-    color: #FFFFFF !important; /* Blanc pur */
+    color: var(--accent) !important;
     font-style: normal !important; /* Supprime l'italique */
     font-weight: 700;
     text-shadow: none !important; /* Supprime toute ombre qui pourrait griser le texte */
