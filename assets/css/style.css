@@ -196,16 +196,17 @@
    MOBILE NAVIGATION - UNIFIED (Vertical & Horizontal)
    ============================================= */
 @media only screen and (max-width: 768px) {
-  /* Hide desktop nav, show hamburger */
+  /* Masque TOUT ce qui concerne la navigation desktop */
   .desktop-nav {
     display: none !important;
   }
 
+  /* Affiche le bouton hamburger */
   .mobile-menu-toggle {
     display: block !important;
   }
 
-  /* Adjust topnav for mobile */
+  /* Ajuste la barre de navigation pour mobile */
   .topnav {
     height: 56px !important;
   }
@@ -215,7 +216,7 @@
     justify-content: space-between !important;
   }
 
-  /* Full-screen scrolling menu */
+  /* Menu déroulant complet (affiché quand .mobile-menu-active est actif) */
   .topnav.mobile-menu-active .desktop-nav {
     display: block !important;
     position: absolute;
@@ -232,51 +233,51 @@
     overflow-y: auto;
   }
 
-  /* All links in a single column */
+  /* Tous les liens en colonne */
   .topnav.mobile-menu-active .primary-nav {
-    flex-direction: column;
-    gap: 0;
+    flex-direction: column !important;
+    gap: 0 !important;
   }
 
   .topnav.mobile-menu-active .primary-nav > li {
-    width: 100%;
+    width: 100% !important;
   }
 
-  /* Parent items (section headers - non-clickable) */
+  /* Éléments parents (non cliquables) */
   .topnav.mobile-menu-active .primary-nav > li > a {
-    padding: 12px 15px;
-    font-size: 13px;
-    border-bottom: 1px solid var(--border);
-    display: block;
-    color: var(--text) !important; /* Blanc pur en mode sombre, noir pur en mode clair */
-    font-weight: 600;
-    background: rgba(26, 107, 170, 0.05);
+    padding: 12px 15px !important;
+    font-size: 13px !important;
+    border-bottom: 1px solid var(--border) !important;
+    display: block !important;
+    color: var(--text) !important;
+    font-weight: 600 !important;
+    background: rgba(26, 107, 170, 0.05) !important;
     cursor: default !important;
     pointer-events: none !important;
   }
 
-  /* Child items (indented and clickable) */
+  /* Sous-menus (toujours visibles en mode mobile) */
   .topnav.mobile-menu-active .dropdown-menu {
     display: block !important;
-    position: static;
-    border: none;
-    border-left: none;
-    margin-left: 0;
-    padding-left: 30px;
-    background: transparent;
-    box-shadow: none;
+    position: static !important;
+    border: none !important;
+    border-left: none !important;
+    margin-left: 0 !important;
+    padding-left: 30px !important;
+    background: transparent !important;
+    box-shadow: none !important;
   }
 
   .topnav.mobile-menu-active .dropdown-menu a {
-    padding: 8px 15px;
-    font-size: 12px;
-    border-bottom: 1px solid var(--border);
-    display: block;
-    color: var(--text) !important; /* Blanc pur en mode sombre, noir pur en mode clair */
-    white-space: nowrap;
+    padding: 8px 15px !important;
+    font-size: 12px !important;
+    border-bottom: 1px solid var(--border) !important;
+    display: block !important;
+    color: var(--text) !important;
+    white-space: nowrap !important;
   }
 
-  /* Hide logo text */
+  /* Masque le texte du logo */
   .topnav.mobile-menu-active .logo-text {
     display: none !important;
   }
@@ -719,7 +720,7 @@ a:hover {
   background: var(--panel);
   border: 1px solid var(--border); /* Bordure fine */
   border-radius: var(--r);
-  box-shadow: none !important; /* Supprime les ombres */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   padding: 15px;
   transition: all 0.2s;
@@ -729,7 +730,7 @@ a:hover {
 
 .nav-grid-case:hover {
   border-color: var(--accent);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Ombre subtile au survol */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Ombre plus marquée au survol */
   transform: translateY(-4px); /* Légère élévation */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
