@@ -35,14 +35,14 @@
 
 
 /* =============================================
-   DEFAULT MOBILE STATE (Hidden Desktop Nav)
+   MOBILE-FIRST DEFAULT STATE
    ============================================= */
 .desktop-nav {
-  display: none; /* Masqué par défaut sur mobile */
+  display: none !important; /* Masqué par défaut sur mobile */
 }
 
 .mobile-menu-toggle {
-  display: block; /* Bouton hamburger visible par défaut sur mobile */
+  display: block !important; /* Bouton hamburger visible par défaut */
 }
 
 /* Desktop Override (Visible Desktop Nav) */
