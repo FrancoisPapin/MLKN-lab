@@ -33,19 +33,78 @@
   --layer5: #E0FFFF;
 }
 
-
 /* =============================================
-   MOBILE-FIRST DEFAULT STATE
+   NAVIGATION - FINAL FIX (Mobile & Desktop)
    ============================================= */
+
+/* État par défaut : Mobile (≤ 768px) */
 .desktop-nav {
-  display: none !important; /* Masqué par défaut sur mobile */
+  display: none; /* Masqué par défaut sur mobile */
 }
 
 .mobile-menu-toggle {
-  display: block !important; /* Bouton hamburger visible par défaut */
+  display: block; /* Bouton hamburger visible par défaut sur mobile */
 }
 
-/* Desktop Override (Visible Desktop Nav) */
+/* Menu déroulant mobile (quand activé) */
+.topnav.mobile-menu-active .desktop-nav {
+  display: block !important;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 0 0 var(--r) var(--r);
+  box-shadow: var(--sh2);
+  padding: 15px;
+  z-index: 1000;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* Style du menu déroulant mobile */
+.topnav.mobile-menu-active .primary-nav {
+  flex-direction: column !important;
+  gap: 0 !important;
+}
+
+.topnav.mobile-menu-active .primary-nav > li {
+  width: 100% !important;
+}
+
+.topnav.mobile-menu-active .primary-nav > li > a {
+  padding: 12px 15px !important;
+  font-size: 13px !important;
+  border-bottom: 1px solid var(--border) !important;
+  display: block !important;
+  color: var(--text) !important;
+  font-weight: 600 !important;
+  background: rgba(26, 107, 170, 0.05) !important;
+  cursor: default !important;
+  pointer-events: none !important;
+}
+
+.topnav.mobile-menu-active .dropdown-menu {
+  display: block !important;
+  position: static !important;
+  border: none !important;
+  margin-left: 0 !important;
+  padding-left: 30px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.topnav.mobile-menu-active .dropdown-menu a {
+  padding: 8px 15px !important;
+  font-size: 12px !important;
+  border-bottom: 1px solid var(--border) !important;
+  display: block !important;
+  color: var(--text) !important;
+  white-space: nowrap !important;
+}
+
+/* Desktop (> 768px) */
 @media (min-width: 769px) {
   .desktop-nav {
     display: flex !important; /* Visible sur desktop */
@@ -54,12 +113,8 @@
   .mobile-menu-toggle {
     display: none !important; /* Bouton hamburger masqué sur desktop */
   }
-}
 
-/* =============================================
-   DESKTOP NAVIGATION (ONLY FOR SCREENS > 768px)
-   ============================================= */
-@media (min-width: 769px) {
+  /* Styles desktop existants */
   .topnav {
     position: sticky;
     top: 0;
@@ -73,15 +128,6 @@
     height: 48px;
   }
 
-  .topnav a:hover {
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-
-  .topnav a {
-    font-weight: 500;
-  }
-
   .topnav-inner {
     max-width: 1400px;
     margin: 0 auto;
@@ -91,11 +137,6 @@
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-  }
-
-  .desktop-nav {
-    display: flex !important;
-    align-items: center;
   }
 
   .primary-nav {
@@ -108,22 +149,6 @@
 
   .primary-nav > li {
     position: relative;
-  }
-
-  .primary-nav > li > a {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--text) !important;
-    font-weight: 600;
-    text-decoration: none;
-    padding: 12px 10px;
-    border-radius: var(--r);
-    transition: all 0.15s;
-    display: block;
-  }
-
-  .primary-nav > li > a:hover {
-    color: var(--accent) !important;
   }
 
   .dropdown-menu {
@@ -142,137 +167,8 @@
   .has-dropdown:hover .dropdown-menu {
     display: block;
   }
-
-  .dropdown-menu li {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .dropdown-menu a {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text) !important;
-    text-decoration: none;
-    padding: 8px 12px;
-    display: block;
-    transition: all 0.15s;
-  }
-
-  .dropdown-menu a:hover {
-    color: var(--accent) !important;
-    background: rgba(26, 107, 170, 0.05);
-  }
-
-  .mobile-menu-toggle {
-    display: none !important;
-  }
-
-  .hamburger-line {
-    display: block;
-    width: 20px;
-    height: 2px;
-    background: var(--text2);
-    margin: 4px 0;
-    transition: all 0.2s;
-  }
 }
 
-/* =============================================
-   MOBILE NAVIGATION - UNIFIED (Vertical & Horizontal)
-   ============================================= */
-@media only screen and (max-width: 768px) {
-  /* Masque la navigation desktop */
-  .desktop-nav {
-    display: none !important;
-  }
-
-  /* Affiche le bouton hamburger */
-  .mobile-menu-toggle {
-    display: block !important;
-  }
-
-  /* Ajuste la barre de navigation pour mobile */
-  .topnav {
-    height: 56px !important;
-  }
-
-  .topnav-inner {
-    padding: 0 10px !important;
-    justify-content: space-between !important;
-  }
-
-  /* Menu déroulant complet (affiché quand .mobile-menu-active est actif) */
-  .topnav.mobile-menu-active .desktop-nav {
-    display: block !important;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 0 0 var(--r) var(--r);
-    box-shadow: var(--sh2);
-    padding: 15px;
-    z-index: 1000;
-    max-height: 80vh;
-    overflow-y: auto;
-  }
-
-  /* Tous les liens en colonne */
-  .topnav.mobile-menu-active .primary-nav {
-    flex-direction: column !important;
-    gap: 0 !important;
-  }
-
-  .topnav.mobile-menu-active .primary-nav > li {
-    width: 100% !important;
-  }
-
-  /* Éléments parents (non cliquables) */
-  .topnav.mobile-menu-active .primary-nav > li > a {
-    padding: 12px 15px !important;
-    font-size: 13px !important;
-    border-bottom: 1px solid var(--border) !important;
-    display: block !important;
-    color: var(--text) !important;
-    font-weight: 600 !important;
-    background: rgba(26, 107, 170, 0.05) !important;
-    cursor: default !important;
-    pointer-events: none !important;
-  }
-
-  /* Sous-menus (toujours visibles en mode mobile) */
-  .topnav.mobile-menu-active .dropdown-menu {
-    display: block !important;
-    position: static !important;
-    border: none !important;
-    border-left: none !important;
-    margin-left: 0 !important;
-    padding-left: 30px !important;
-    background: transparent !important;
-    box-shadow: none !important;
-  }
-
-  .topnav.mobile-menu-active .dropdown-menu a {
-    padding: 8px 15px !important;
-    font-size: 12px !important;
-    border-bottom: 1px solid var(--border) !important;
-    display: block !important;
-    color: var(--text) !important;
-    white-space: nowrap !important;
-  }
-
-  /* Masque le texte du logo */
-  .topnav.mobile-menu-active .logo-text {
-    display: none !important;
-  }
-
-  .logo-mark {
-    width: 32px !important;
-    height: 32px !important;
-  }
-}
 
 /* =============================================
    BASE STYLES
