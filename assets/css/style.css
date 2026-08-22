@@ -195,7 +195,7 @@
 /* =============================================
    MOBILE NAVIGATION - UNIFIED (Vertical & Horizontal)
    ============================================= */
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
   /* Masque TOUT ce qui concerne la navigation desktop */
   .desktop-nav {
     display: none !important;
