@@ -42,7 +42,6 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    position: relative;
     background: var(--panel);
     background-color: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(8px);
@@ -72,36 +71,8 @@
     gap: 12px;
   }
 
-  .topnav-logo img {
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-  }
-
-  .logo-mark {
-    width: 28px;
-    height: 28px;
-    border-radius: 7px;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--mono);
-    font-size: 9px;
-    font-weight: 700;
-    color: #fff;
-    flex-shrink: 0;
-  }
-
-  .logo-text {
-    font-family: var(--mono);
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: 0.04em;
-  }
-
-  /* Desktop Navigation */
   .desktop-nav {
-    display: flex;
+    display: flex !important; /* Force l'affichage sur desktop */
     align-items: center;
   }
 
@@ -174,15 +145,7 @@
 
   /* Mobile Menu Toggle (Hidden on Desktop) */
   .mobile-menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    width: 30px;
-    height: 30px;
-    padding: 0;
-    cursor: pointer;
-    position: relative;
-    z-index: 1002;
+    display: none !important;
   }
 
   .hamburger-line {
@@ -199,7 +162,7 @@
    MOBILE NAVIGATION - UNIFIED (Vertical & Horizontal)
    ============================================= */
 @media only screen and (max-width: 768px) {
-  /* Masque TOUT ce qui concerne la navigation desktop */
+  /* Masque la navigation desktop */
   .desktop-nav {
     display: none !important;
   }
