@@ -384,69 +384,84 @@ h1, h2, h3 {
   margin-bottom: 16px;
 }
 
-/* Titre principal */
+/* Titre principal - Blanc pur en mode sombre */
 .hero-title {
   font-size: clamp(32px, 6vw, 60px);
   font-weight: 700;
-  color: var(--text) !important;
+  color: #FFFFFF !important; /* Blanc pur par défaut */
   line-height: 1.05;
   letter-spacing: -0.02em;
   margin: 0 auto 12px;
   text-align: center;
   animation: fadeInDown 0.8s ease-out;
+  opacity: 1 !important; /* Opacité à 100% */
+  filter: none !important; /* Supprime tout filtre */
 }
 
-..hero-title em {
-  color: var(--text) !important;
-  font-style: normal;
+.hero-title em {
+  color: #FFFFFF !important;
+  font-style: normal !important;
   background: none !important;
   -webkit-background-clip: unset !important;
-  -webkit-text-fill-color: unset !important;
+  -webkit-text-fill-color: #FFFFFF !important;
   background-clip: unset !important;
 }
 
-/* Sous-titre */
+/* Sous-titre - Blanc pur en mode sombre */
 .hero-subtitle {
   font-size: clamp(15px, 2.1vw, 18px);
-  color: var(--text2); /* Utilise la variable --text2 pour s'adapter au mode clair/sombre */
+  color: #FFFFFF !important; /* Blanc pur par défaut */
   max-width: 680px;
   margin: 0 auto 32px;
   line-height: 1.7;
-  font-weight: 300; /* Police plus légère */
+  font-weight: 300;
   text-align: center;
   animation: fadeIn 1s ease-out 0.3s both;
+  opacity: 1 !important;
+  filter: none !important;
 }
 
-/* Animations */
+/* Animations - Blanc pur pendant toute la durée */
 @keyframes fadeInDown {
   from {
     opacity: 0;
     transform: translateY(-15px);
+    color: #FFFFFF !important; /* Blanc pur pendant l'animation */
   }
   to {
     opacity: 1;
     transform: translateY(0);
+    color: #FFFFFF !important; /* Blanc pur à la fin */
   }
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
+    color: #FFFFFF !important; /* Blanc pur pendant l'animation */
   }
   to {
     opacity: 1;
+    color: #FFFFFF !important; /* Blanc pur à la fin */
   }
 }
 
+/* Mode sombre */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #121212;
-    --panel: rgba(30, 30, 30, 0.97);
-    --border: #333333;
-    --text: #ffffff; /* Texte principal en blanc pur */
-    --text2: #ffffff; /* Texte secondaire en blanc pur (pas de gris) */
-    --muted: #ffffff; /* Texte atténué en blanc pur */
-    --accent: #4ba3e3; /* Couleur d'accent (liens, boutons) */
+  .hero {
+    background: #000000 !important;
+  }
+
+  .hero::before {
+    background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(60, 60, 60, 0.3), transparent);
+  }
+
+  .hero-title {
+    color: #FFFFFF !important; /* Blanc pur */
+  }
+
+  .hero-subtitle {
+    color: #FFFFFF !important; /* Blanc pur */
   }
 }
 
