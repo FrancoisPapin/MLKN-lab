@@ -1875,13 +1875,12 @@
         <p class="sf-legal">© François Papin · May 2026 · MIT License · MLKN.lab</p>
     </footer>
 
-    <!-- JavaScript for Navigation and Active Section Highlighting -->
-<script>
+    <script>
 document.addEventListener('DOMContentLoaded', function() {
   const topnav = document.querySelector('.topnav');
   const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
 
-  // Toggle mobile menu (vertical only)
+  // Toggle mobile menu for ALL mobile screens (≤ 768px)
   mobileMenuToggle.addEventListener('click', function(e) {
     e.stopPropagation();
     topnav.classList.toggle('mobile-menu-active');
@@ -1894,37 +1893,38 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Desktop: dropdowns on hover
-  if (window.innerWidth > 768) {
-    const hasDropdowns = document.querySelectorAll('.has-dropdown');
-    hasDropdowns.forEach(item => {
-      item.addEventListener('mouseenter', function() {
-        hasDropdowns.forEach(other => {
-          if (other !== item) other.classList.remove('active');
-        });
-        item.classList.add('active');
-      });
-      item.addEventListener('mouseleave', function() {
-        item.classList.remove('active');
+  // Disable dropdowns on hover for ALL mobile screens (≤ 768px)
+  if (window.innerWidth <= 768) {
+    const dropdowns = document.querySelectorAll('.has-dropdown');
+    dropdowns.forEach(dropdown => {
+      dropdown.addEventListener('mouseenter', function(e) {
+        e.preventDefault();
       });
     });
   }
 
-  // Mobile Horizontal: dropdowns on hover
-  if (window.innerWidth <= 768 && window.matchMedia("(orientation: landscape)").matches) {
-    const hasDropdowns = document.querySelectorAll('.has-dropdown');
-    hasDropdowns.forEach(item => {
-      item.addEventListener('mouseenter', function() {
-        hasDropdowns.forEach(other => {
-          if (other !== item) other.classList.remove('active');
-        });
-        item.classList.add('active');
+  // Desktop: Enable dropdowns on hover (ONLY for > 768px)
+  if (window.innerWidth > 768) {
+    const dropdowns = document.querySelectorAll('.has-dropdown');
+    dropdowns.forEach(dropdown => {
+      dropdown.addEventListener('mouseenter', function() {
+        dropdown.classList.add('active');
       });
-      item.addEventListener('mouseleave', function() {
-        item.classList.remove('active');
+      dropdown.addEventListener('mouseleave', function() {
+        dropdown.classList.remove('active');
       });
     });
   }
+
+  // Handle window resize
+  window.addEventListener('resize', function() {
+    if (window.innerWidth <= 768) {
+      const dropdowns = document.querySelectorAll('.has-dropdown');
+      dropdowns.forEach(dropdown => {
+        dropdown.classList.remove('active');
+      });
+    }
+  });
 });
 </script>
     
