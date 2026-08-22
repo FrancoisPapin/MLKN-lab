@@ -1168,7 +1168,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const topnav = document.querySelector('.topnav');
   const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
 
-  // Toggle mobile menu (vertical only)
+  // Toggle mobile menu (for ALL mobile orientations)
   mobileMenuToggle.addEventListener('click', function(e) {
     e.stopPropagation();
     topnav.classList.toggle('mobile-menu-active');
@@ -1181,7 +1181,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Desktop: dropdowns on hover
+  // Disable ALL dropdowns on hover for mobile (≤ 768px)
+  if (window.innerWidth <= 768) {
+    const hasDropdowns = document.querySelectorAll('.has-dropdown');
+    hasDropdowns.forEach(item => {
+      // Remove hover event listeners on mobile
+      item.removeEventListener('mouseenter', () => {});
+      item.removeEventListener('mouseleave', () => {});
+    });
+  }
+
+  // Desktop: dropdowns on hover (ONLY for > 768px)
   if (window.innerWidth > 768) {
     const hasDropdowns = document.querySelectorAll('.has-dropdown');
     hasDropdowns.forEach(item => {
@@ -1197,21 +1207,16 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Mobile Horizontal: dropdowns on hover
-  if (window.innerWidth <= 768 && window.matchMedia("(orientation: landscape)").matches) {
-    const hasDropdowns = document.querySelectorAll('.has-dropdown');
-    hasDropdowns.forEach(item => {
-      item.addEventListener('mouseenter', function() {
-        hasDropdowns.forEach(other => {
-          if (other !== item) other.classList.remove('active');
-        });
-        item.classList.add('active');
-      });
-      item.addEventListener('mouseleave', function() {
+  // Handle window resizing
+  window.addEventListener('resize', function() {
+    if (window.innerWidth <= 768) {
+      // On mobile, disable dropdowns on hover
+      const hasDropdowns = document.querySelectorAll('.has-dropdown');
+      hasDropdowns.forEach(item => {
         item.classList.remove('active');
       });
-    });
-  }
+    }
+  });
 });
 </script>
     
