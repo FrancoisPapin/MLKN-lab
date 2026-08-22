@@ -364,7 +364,7 @@ h1, h2, h3 {
   overflow: hidden;
 }
 
-/* Effet de fond radial */
+/* Effet de fond radial (désactivé en mode sombre si souhaité) */
 .hero::before {
   content: '';
   position: absolute;
@@ -373,44 +373,33 @@ h1, h2, h3 {
   pointer-events: none;
 }
 
-/* Eyebrow (texte introductif) */
-.hero-eyebrow {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--accent);
-  opacity: 0.8;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  margin-bottom: 16px;
-}
-
-/* Titre principal - Blanc pur en mode sombre */
+/* Titre principal */
 .hero-title {
   font-size: clamp(32px, 6vw, 60px);
   font-weight: 700;
-  color: #FFFFFF !important; /* Blanc pur par défaut */
+  color: var(--text) !important; /* Noir en mode clair, blanc en mode sombre */
   line-height: 1.05;
   letter-spacing: -0.02em;
   margin: 0 auto 12px;
   text-align: center;
-  animation: none !important;
+  animation: fadeInDown 0.8s ease-out;
   opacity: 1 !important; /* Opacité à 100% */
   filter: none !important; /* Supprime tout filtre */
 }
 
 .hero-title em {
-  color: #FFFFFF !important;
   font-style: normal !important;
+  color: var(--text) !important; /* Noir en mode clair, blanc en mode sombre */
   background: none !important;
   -webkit-background-clip: unset !important;
-  -webkit-text-fill-color: #FFFFFF !important;
+  -webkit-text-fill-color: unset !important;
   background-clip: unset !important;
 }
 
-/* Sous-titre - Blanc pur en mode sombre */
+/* Sous-titre */
 .hero-subtitle {
   font-size: clamp(15px, 2.1vw, 18px);
-  color: #FFFFFF !important; /* Blanc pur par défaut */
+  color: var(--text2) !important; /* Noir en mode clair, blanc en mode sombre */
   max-width: 680px;
   margin: 0 auto 32px;
   line-height: 1.7;
@@ -421,47 +410,50 @@ h1, h2, h3 {
   filter: none !important;
 }
 
-/* Animations - Blanc pur pendant toute la durée */
+/* Animations avec couleur blanche forcée */
 @keyframes fadeInDown {
   from {
     opacity: 0;
     transform: translateY(-15px);
-    color: #FFFFFF !important; /* Blanc pur pendant l'animation */
+    color: var(--text) !important; /* Noir en mode clair, blanc en mode sombre */
   }
   to {
     opacity: 1;
     transform: translateY(0);
-    color: #FFFFFF !important; /* Blanc pur à la fin */
+    color: var(--text) !important; /* Noir en mode clair, blanc en mode sombre */
   }
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    color: #FFFFFF !important; /* Blanc pur pendant l'animation */
+    color: var(--text2) !important; /* Noir en mode clair, blanc en mode sombre */
   }
   to {
     opacity: 1;
-    color: #FFFFFF !important; /* Blanc pur à la fin */
+    color: var(--text2) !important; /* Noir en mode clair, blanc en mode sombre */
   }
 }
 
 /* Mode sombre */
 @media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121212;
+    --text: #FFFFFF; /* Blanc pur */
+    --text2: #FFFFFF; /* Blanc pur */
+  }
+
+  body {
+    background: #000000 !important; /* Fond global noir */
+  }
+
   .hero {
-    background: #000000 !important;
+    background: #000000 !important; /* Fond Hero Section noir */
   }
 
+  /* Désactive le fond radial en mode sombre (optionnel) */
   .hero::before {
-    background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(60, 60, 60, 0.3), transparent);
-  }
-
-  .hero-title {
-    color: #FFFFFF !important; /* Blanc pur */
-  }
-
-  .hero-subtitle {
-    color: #FFFFFF !important; /* Blanc pur */
+    display: none !important;
   }
 }
 
