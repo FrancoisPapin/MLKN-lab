@@ -580,7 +580,7 @@ h1, h2, h3 {
 .section {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 44px 24px;
+  padding: 48px 0;
 }
 
 .sec-h {
@@ -698,8 +698,10 @@ a:hover {
 
 .nav-grid-case {
   background: var(--panel);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border); /* Bordure fine */
   border-radius: var(--r);
+  box-shadow: none !important; /* Supprime les ombres */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   padding: 15px;
   transition: all 0.2s;
   min-height: 100px;
@@ -708,7 +710,9 @@ a:hover {
 
 .nav-grid-case:hover {
   border-color: var(--accent);
-  box-shadow: var(--sh2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Ombre subtile au survol */
+  transform: translateY(-4px); /* Légère élévation */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Colored top borders */
@@ -1349,10 +1353,12 @@ a:hover {
     opacity: 0.8;
   }
 
-  hero-title {
+  .hero-title {
     color: #FFFFFF !important; /* Blanc pur */
     font-style: normal !important; /* Supprime l'italique */
     font-weight: 700;
+    text-shadow: none !important; /* Supprime toute ombre qui pourrait griser le texte */
+    -webkit-text-fill-color: #FFFFFF !important; /* Force le remplissage en blanc */
     text-align: center;
     margin: 0 auto 12px;
     width: 100%; /* Évite le débordement */
@@ -1601,7 +1607,12 @@ a:hover {
   .disciplinary-card h4 {
     font-size: 0.9rem;
   }
+   
+  .hero::before {
+      display: none !important; /* Supprime le dégradé en mode mobile */
+  }
 }
+  
 
 /* =============================================
    PRINT STYLES
