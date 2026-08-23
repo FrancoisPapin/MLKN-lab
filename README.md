@@ -327,7 +327,7 @@ We welcome contributions! Here’s how you can help:
 ---
 ## **Contact**
 - **Author**: [François Papin](https://www.linkedin.com/in/francois-papin/)
-- **ORCID**: [![ORCID iD](https://img.shields.io/badge/ORCID-0009--0002--1805--0746-green?style=flat-square&logo=orcid)](https://orcid.org/0009-0009-XXXX-XXXX)
+- **ORCID**: [![ORCID iD](https://img.shields.io/badge/ORCID-0009--0002--1805--0746-green?style=flat-square&logo=orcid)](https://orcid.org/0009-0002-1805-0746)
 - **Website**: [https://francoispapin.github.io/MLKN-lab/](https://francoispapin.github.io/MLKN-lab/)
 - **GitHub**: [https://github.com/FrancoisPapin/MLKN-lab](https://github.com/FrancoisPapin/MLKN-lab)
 
