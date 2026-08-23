@@ -2713,3 +2713,83 @@ sub, sup {
     filter: invert(1) brightness(1.5);
 }
 
+/* =============================================
+   THEME TOGGLE STYLES
+   ============================================= */
+.theme-toggle {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    margin-left: 15px;
+}
+
+.theme-toggle input[type="radio"] {
+    display: none;
+}
+
+.theme-toggle label {
+    cursor: pointer;
+    font-size: 20px;
+    padding: 5px;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.theme-toggle label:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* =============================================
+   THEME VARIABLES AND STYLES FOR THEME TOGGLE
+   ============================================= */
+:root {
+    --bg: #ffffff;
+    --text: #121212;
+    --text2: #4a4a4a;
+    --panel: #f8f9fa;
+    --border: #e0e0e0;
+    --accent: #1a6ba6;
+    --accent2: #0d5b8c;
+    --sh: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --sh2: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --r: 8px;
+}
+
+[data-theme="dark"] {
+    --bg: #121212;
+    --text: #f8f9fa;
+    --text2: #b0b0b0;
+    --panel: #1e1e1e;
+    --border: #333333;
+    --sh: 0 2px 10px rgba(0, 0, 0, 0.3);
+    --sh2: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="light"] {
+    --bg: #ffffff;
+    --text: #121212;
+    --text2: #4a4a4a;
+    --panel: #f8f9fa;
+    --border: #e0e0e0;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Applique le thème par défaut (adaptatif) */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --bg: #121212;
+        --text: #f8f9fa;
+        --text2: #b0b0b0;
+        --panel: #1e1e1e;
+        --border: #333333;
+        --sh: 0 2px 10px rgba(0, 0, 0, 0.3);
+        --sh2: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+}
+
+
