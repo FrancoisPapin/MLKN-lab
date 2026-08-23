@@ -2661,6 +2661,34 @@ sub, sup {
    INDEXATIONS SPECIFICATIONS
    ============================================= */
 
+.indexation-highlight {
+  background: rgba(235, 244, 251, 0.5);
+  border-left: 4px solid var(--accent);
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.indexation-highlight h2 {
+  color: var(--accent);
+  margin-top: 0;
+}
+
+.indexation-highlight .button {
+  display: inline-block;
+  background: var(--accent);
+  color: white;
+  padding: 8px 16px;
+  margin: 10px 10px 10px 0;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.indexation-highlight .button:hover {
+  background: var(--accent2);
+}
+
 .indexations {
   background: rgba(240, 248, 255, 0.5);
   padding: 20px;
