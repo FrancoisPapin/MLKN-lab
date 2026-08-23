@@ -2661,26 +2661,7 @@ sub, sup {
    INDEXATIONS SPECIFICATIONS
    ============================================= */
 
-/* Conteneur principal de la section */
-#indexations {
-    padding: 20px 0;
-}
-
-/* Description avec fond coloré */
-.indexation-description {
-    background: rgba(235, 244, 251, 0.3);
-    border-left: 4px solid var(--accent);
-    padding: 20px;
-    margin: 20px 0;
-    border-radius: 0 8px 8px 0;
-}
-
-.indexation-description p {
-    margin: 0 0 15px 0;
-    line-height: 1.6;
-}
-
-/* Boutons */
+/* Boutons dans la card */
 .indexation-buttons {
     display: flex;
     flex-wrap: wrap;
@@ -2688,33 +2669,7 @@ sub, sup {
     margin-top: 15px;
 }
 
-.index-button {
-    display: inline-block;
-    background: var(--accent);
-    color: white;
-    padding: 8px 16px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
-    transition: background 0.2s;
-}
-
-.index-button:hover {
-    background: var(--accent2);
-}
-
 /* Liste des plateformes */
-.indexation-platforms {
-    margin-top: 30px;
-    text-align: center;
-}
-
-.indexation-platforms p {
-    margin-bottom: 15px;
-    font-weight: 600;
-}
-
 .platform-list {
     display: flex;
     justify-content: center;
@@ -2722,6 +2677,7 @@ sub, sup {
     gap: 20px;
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .platform-list li {
@@ -2743,10 +2699,11 @@ sub, sup {
 }
 
 .platform-list a:hover {
-    background: rgba(235, 244, 251, 0.5);
+    background: rgba(255, 255, 255, 0.1);
     color: var(--accent);
 }
 
+/* Inversion des couleurs des logos pour le dark mode */
 .platform-list img {
     height: 24px;
     width: 24px;
