@@ -2703,7 +2703,6 @@ sub, sup {
     color: var(--accent);
 }
 
-/* Inversion des couleurs des logos pour le dark mode */
 .platform-list img {
     height: 24px;
     width: 24px;
