@@ -320,13 +320,14 @@ We welcome contributions! Here’s how you can help:
 <p>The <strong>MLKN.lab</strong> project is an open-science initiative. We welcome contributions, feature requests, and domain ontology refinements!</p>
 <ul>
 <li><strong>Repository:</strong> <a href="https://github.com/francoispapin/MLKN-lab/" rel="noopener">https://github.com/francoispapin/MLKN-lab/</a></li>
-<li><strong>Interactive Visualization:</strong> <a href="https://francoispapin.github.io/MLKN-lab/" rel="noopener">https://github.com/francoispapin/MLKN-lab/</a></li>
+<li><strong>Interactive Visualization:</strong> <a href="https://francoispapin.github.io/MLKN-lab/" rel="noopener">https://francoispapin.github.io/MLKN-lab/</a></li>
 <li><strong>Get Involved:</strong> Open an issue or discussion on GitHub to collaborate on graph extensions, new mappings, or downstream applications.</li>
 </ul>
 
 ---
 ## **Contact**
 - **Author**: [François Papin](https://www.linkedin.com/in/francois-papin/)
+- **ORCID**: [![ORCID iD](https://img.shields.io/badge/ORCID-0009--0002--1805--0746-green?style=flat-square&logo=orcid)](https://orcid.org/0009-0009-XXXX-XXXX)
 - **Website**: [https://francoispapin.github.io/MLKN-lab/](https://francoispapin.github.io/MLKN-lab/)
 - **GitHub**: [https://github.com/FrancoisPapin/MLKN-lab](https://github.com/FrancoisPapin/MLKN-lab)
 
@@ -340,3 +341,4 @@ This project is licensed under the **MIT License** – see the [LICENSE](LICENSE
 - **[Zenodo Dataset](https://doi.org/10.5281/zenodo.21363227)** (DOI: [10.5281/zenodo.21363227](https://doi.org/10.5281/zenodo.21363227))
 - **[OpenAlex](https://docs.openalex.org/)** (Data source)
 - **[OECD Frascati Manual](https://www.oecd.org/en/publications/frascati-manual-2015_9789264239012-en.html)** (Classification standard)
+- **[ORCID Profile](https://orcid.org/0009-0002-1805-0746)** (Author identifier)
