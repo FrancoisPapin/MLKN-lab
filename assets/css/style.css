@@ -2656,3 +2656,41 @@ sub, sup {
     color: #a9b7c6;
   }
 }
+
+/* =============================================
+   INDEXATIONS SPECIFICATIONS
+   ============================================= */
+
+.indexations {
+  background: rgba(240, 248, 255, 0.5);
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.indexations ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.indexations li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.indexations a {
+  text-decoration: none;
+  color: var(--text);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.indexations a:hover {
+  color: var(--accent);
+}
