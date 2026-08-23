@@ -59,6 +59,17 @@
       </a>
     </div>
 
+    <div class="theme-toggle">
+    <input type="radio" id="theme-adaptive" name="theme" value="adaptive" checked>
+    <label for="theme-adaptive" title="Adaptive (default)">🌍</label>
+
+    <input type="radio" id="theme-light" name="theme" value="light">
+    <label for="theme-light" title="Light mode">☀️</label>
+
+    <input type="radio" id="theme-dark" name="theme" value="dark">
+    <label for="theme-dark" title="Dark mode">🌙</label>
+    </div>
+      
     <!-- Desktop Navigation (Text-Based) -->
     <nav class="desktop-nav">
       <ul class="primary-nav">
@@ -1941,6 +1952,27 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   }
+});
+</script>
+
+// Script for Theme Mode Toggle: Light, Dark, Adaptative
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Récupère la préférence sauvegardée ou utilise "adaptive" par défaut
+    const savedTheme = localStorage.getItem('theme') || 'adaptive';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    // Met à jour le radio button sélectionné
+    document.querySelector(`input[name="theme"][value="${savedTheme}"]`).checked = true;
+
+    // Écoute les changements de thème
+    document.querySelectorAll('input[name="theme"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            const theme = this.value;
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        });
+    });
 });
 </script>
     
