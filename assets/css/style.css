@@ -1116,6 +1116,14 @@ a:hover {
   border-color: var(--accent);
 }
 
+.nav-box a:visited {
+  color: var(--text); /* Garde la couleur normale du texte */
+}
+
+.nav-box a.active:visited {
+  color: white; /* Texte blanc pour les liens actifs ET visités */
+}
+
 /* =============================================
    BOTTOM BAR WITH ICONS
    ============================================= */
