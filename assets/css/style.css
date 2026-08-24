@@ -871,7 +871,7 @@ a:hover {
 /* Style par défaut (mode light) */
 .btn-p {
   background: var(--accent);
-  color: #000000; /* Texte NOIR */
+  color: #000000 !important; /* Texte NOIR en mode light */
   border-color: var(--accent);
 }
 
@@ -1447,9 +1447,9 @@ a:hover {
   }
 
   /* Buttons */
-  .btn-p {
+    .btn-p {
     background: var(--accent) !important;
-    color: #fff !important;
+    color: #fff !important; /* Texte BLANC en mode dark */
     border-color: var(--accent) !important;
   }
 
