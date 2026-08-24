@@ -1022,7 +1022,7 @@ a:hover {
 }
 
 .layer-card {
-  background: #fff;
+  background: var(--panel);
   border: 1.5px solid var(--border);
   border-radius: 10px;
   padding: 18px;
