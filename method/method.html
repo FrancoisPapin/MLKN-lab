@@ -263,6 +263,396 @@
             </div>
         </section>
 
+            <!-- =============================================
+                 SECTION 3: TECHNICAL STACK (NOUVELLE SECTION)
+                 ============================================= -->
+                 <section id="technical-stack" class="section" aria-labelledby="technical-stack-title">
+                     <h2 class="sec-h" id="technical-stack-title">Technical Stack: Applications & Libraries</h2>
+                     <p class="sec-sub">The tools powering MLKN.lab’s data processing, analysis, and visualization.</p>
+
+                     <!-- Python -->
+                     <div class="card">
+                         <h3>🔹 Python: The Backbone of Data Processing</h3>
+                         <p><strong>Definition:</strong> Python is a high-level, open-source programming language widely used in data science, machine learning, and network analysis due to its readability, extensibility, and rich ecosystem of libraries.</p>
+
+                         <p><strong>Why Python?</strong></p>
+                         <ul>
+                             <li><strong>Ecosystem:</strong> Libraries like Pandas, NetworkX, and Matplotlib are industry standards for data manipulation and analysis.</li>
+                             <li><strong>Compatibility:</strong> Seamless integration with OpenAlex API and other data sources.</li>
+                             <li><strong>Reproducibility:</strong> Scripts can be easily shared and reused (via Jupyter Notebooks or GitHub).</li>
+                         </ul>
+
+                         <p><strong>Key Features Used in MLKN.lab:</strong></p>
+                         <table>
+                             <tr>
+                                 <th>Feature</th>
+                                 <th>Use Case in MLKN.lab</th>
+                                 <th>Example Libraries/Tools</th>
+                             </tr>
+                             <tr>
+                                 <td>Data Cleaning</td>
+                                 <td>Normalizing OpenAlex metadata (e.g., author names, discipline labels).</td>
+                                 <td>Pandas, NumPy</td>
+                             </tr>
+                             <tr>
+                                 <td>Automation</td>
+                                 <td>Batch processing of large datasets.</td>
+                                 <td>Python scripts, Cron jobs</td>
+                             </tr>
+                             <tr>
+                                 <td>API Interactions</td>
+                                 <td>Fetching data from OpenAlex, ORKG, Wikidata.</td>
+                                 <td><code>requests</code>, <code>aiohttp</code></td>
+                             </tr>
+                             <tr>
+                                 <td>Modularity</td>
+                                 <td>Organizing code into reusable functions.</td>
+                                 <td>Custom Python modules</td>
+                             </tr>
+                         </table>
+
+                         <p><strong>Example Code Snippet:</strong></p>
+                         <pre><code>import pandas as pd
+import requests
+
+# Fetch data from OpenAlex API
+response = requests.get("https://api.openalex.org/works?filter=publication_year:2020")
+data = response.json()
+df = pd.DataFrame(data["results"])  # Convert to DataFrame for analysis</code></pre>
+
+                         <p><strong>Learn More:</strong> <a href="https://www.python.org/" target="_blank">Python Official Website</a> | <a href="https://pandas.pydata.org/" target="_blank">Pandas for Data Science</a></p>
+                     </div>
+
+                     <!-- Pandas -->
+                     <div class="card">
+                         <h3>🔹 Pandas: Data Cleaning & Transformation</h3>
+                         <p><strong>Definition:</strong> Pandas is a Python library for data manipulation and analysis, offering high-performance, easy-to-use data structures (e.g., DataFrames) and tools.</p>
+
+                         <p><strong>Why Pandas?</strong></p>
+                         <ul>
+                             <li><strong>Efficiency:</strong> Optimized for large datasets (e.g., OpenAlex’s 200M+ works).</li>
+                             <li><strong>Flexibility:</strong> Handles missing data, duplicates, and complex transformations seamlessly.</li>
+                             <li><strong>Integration:</strong> Works with NetworkX, Matplotlib, and PyVis for end-to-end workflows.</li>
+                         </ul>
+
+                         <p><strong>Key Features Used in MLKN.lab:</strong></p>
+                         <table>
+                             <tr>
+                                 <th>Feature</th>
+                                 <th>Use Case in MLKN.lab</th>
+                                 <th>Example Code</th>
+                             </tr>
+                             <tr>
+                                 <td>Data Cleaning</td>
+                                 <td>Removing duplicates, standardizing labels.</td>
+                                 <td><code>df.drop_duplicates()</code></td>
+                             </tr>
+                             <tr>
+                                 <td>Filtering</td>
+                                 <td>Extracting relevant disciplines/subfields.</td>
+                                 <td><code>df[df["discipline"] == "AI"]</code></td>
+                             </tr>
+                             <tr>
+                                 <td>Aggregation</td>
+                                 <td>Counting papers per discipline.</td>
+                                 <td><code>df.groupby("discipline").size()</code></td>
+                             </tr>
+                             <tr>
+                                 <td>Merging</td>
+                                 <td>Combining datasets (e.g., OpenAlex + Scopus).</td>
+                                 <td><code>pd.merge(df1, df2, on="id")</code></td>
+                             </tr>
+                         </table>
+
+                         <p><strong>Example Workflow:</strong></p>
+                         <ol>
+                             <li>Load raw OpenAlex data into a DataFrame.</li>
+                             <li>Clean (remove duplicates, normalize text).</li>
+                             <li>Transform (extract disciplines, count co-occurrences).</li>
+                             <li>Export to NetworkX for graph analysis.</li>
+                         </ol>
+
+                         <p><strong>Learn More:</strong> <a href="https://pandas.pydata.org/docs/" target="_blank">Pandas Documentation</a></p>
+                     </div>
+
+                     <!-- NetworkX -->
+                     <div class="card">
+                         <h3>🔹 NetworkX: Network Construction & Analysis</h3>
+                         <p><strong>Definition:</strong> NetworkX is a Python library for creating, manipulating, and studying the structure, dynamics, and functions of complex networks.</p>
+
+                         <p><strong>Why NetworkX?</strong></p>
+                         <ul>
+                             <li><strong>Standard for Network Science:</strong> Used in academic research and industry.</li>
+                             <li><strong>Algorithms:</strong> Built-in functions for centrality, clustering, and path analysis.</li>
+                             <li><strong>Visualization:</strong> Basic plotting capabilities (complemented by D3.js for interactivity).</li>
+                         </ul>
+
+                         <p><strong>Key Features Used in MLKN.lab:</strong></p>
+                         <table>
+                             <tr>
+                                 <th>Feature</th>
+                                 <th>Use Case in MLKN.lab</th>
+                                 <th>Example Code</th>
+                             </tr>
+                             <tr>
+                                 <td>Graph Construction</td>
+                                 <td>Creating nodes (disciplines) and edges (relationships).</td>
+                                 <td><code>G = nx.DiGraph()</code></td>
+                             </tr>
+                             <tr>
+                                 <td>Centrality Metrics</td>
+                                 <td>Identifying key disciplines (e.g., hubs).</td>
+                                 <td><code>nx.degree_centrality(G)</code></td>
+                             </tr>
+                             <tr>
+                                 <td>Community Detection</td>
+                                 <td>Finding clusters of related disciplines.</td>
+                                 <td><code>nx.algorithms.community.greedy_modularity_communities(G)</code></td>
+                             </tr>
+                             <tr>
+                                 <td>Path Analysis</td>
+                                 <td>Tracing connections between fields.</td>
+                                 <td><code>nx.shortest_path(G, "AI", "Ethics")</code></td>
+                             </tr>
+                         </table>
+
+                         <p><strong>Example: Building a Knowledge Graph</strong></p>
+                         <pre><code>import networkx as nx
+
+# Create a directed graph
+G = nx.DiGraph()
+
+# Add nodes (disciplines)
+G.add_node("Computer Science", type="domain")
+G.add_node("AI", type="discipline", parent="Computer Science")
+
+# Add edges (relationships)
+G.add_edge("Computer Science", "AI", relationship="hierarchical")
+
+# Calculate centrality
+centrality = nx.degree_centrality(G)
+print(f"Most central discipline: {max(centrality, key=centrality.get)}")</code></pre>
+
+                         <p><strong>Learn More:</strong> <a href="https://networkx.org/documentation/stable/" target="_blank">NetworkX Documentation</a></p>
+                     </div>
+
+                     <!-- Matplotlib/Seaborn -->
+                     <div class="card">
+                         <h3>🔹 Matplotlib/Seaborn: Static Visualization</h3>
+                         <p><strong>Definition:</strong> Matplotlib is a Python library for creating static, publication-quality visualizations, while Seaborn provides a high-level interface for statistical graphics.</p>
+
+                         <p><strong>Why Matplotlib/Seaborn?</strong></p>
+                         <ul>
+                             <li><strong>Exploratory Analysis:</strong> Quickly visualize distributions, correlations, and trends in the data.</li>
+                             <li><strong>Publication-Ready:</strong> Export graphs in high resolution (PNG, SVG, PDF).</li>
+                             <li><strong>Complement to D3.js:</strong> Used for static analyses (e.g., histograms of discipline sizes), while D3.js handles interactivity.</li>
+                         </ul>
+
+                         <p><strong>Key Features Used in MLKN.lab:</strong></p>
+                         <table>
+                             <tr>
+                                 <th>Feature</th>
+                                 <th>Use Case in MLKN.lab</th>
+                                 <th>Example Code</th>
+                             </tr>
+                             <tr>
+                                 <td>Histograms</td>
+                                 <td>Distribution of papers per discipline.</td>
+                                 <td><code>plt.hist(df["discipline"])</code></td>
+                             </tr>
+                             <tr>
+                                 <td>Heatmaps</td>
+                                 <td>Co-occurrence matrices between disciplines.</td>
+                                 <td><code>sns.heatmap(co_occurrence_matrix)</code></td>
+                             </tr>
+                             <tr>
+                                 <td>Network Plots</td>
+                                 <td>Basic static graphs (before D3.js).</td>
+                                 <td><code>nx.draw(G, with_labels=True)</code></td>
+                             </tr>
+                         </table>
+
+                         <p><strong>Example: Discipline Distribution</strong></p>
+                         <pre><code>import matplotlib.pyplot as plt
+
+df["discipline"].value_counts().plot(kind="bar", title="Papers per Discipline")
+plt.xlabel("Discipline")
+plt.ylabel("Number of Papers")
+plt.show()</code></pre>
+
+                         <p><strong>Learn More:</strong> <a href="https://matplotlib.org/stable/gallery/index.html" target="_blank">Matplotlib Gallery</a> | <a href="https://seaborn.pydata.org/tutorial.html" target="_blank">Seaborn Tutorial</a></p>
+                     </div>
+
+                     <!-- PyVis -->
+                     <div class="card">
+                         <h3>🔹 PyVis: Interactive Network Visualization (Python Side)</h3>
+                         <p><strong>Definition:</strong> PyVis is a Python library that generates interactive network visualizations in HTML/JS using Vis.js (complementary to D3.js).</p>
+
+                         <p><strong>Why PyVis?</strong></p>
+                         <ul>
+                             <li><strong>Rapid Prototyping:</strong> Generates interactive visualizations in a few lines of code.</li>
+                             <li><strong>Exportable:</strong> Produces standalone HTML files (no server required).</li>
+                             <li><strong>Complement to D3.js:</strong> Used for quick visualizations during development.</li>
+                         </ul>
+
+                         <p><strong>Key Features Used in MLKN.lab:</strong></p>
+                         <table>
+                             <tr>
+                                 <th>Feature</th>
+                                 <th>Use Case in MLKN.lab</th>
+                                 <th>Example Code</th>
+                             </tr>
+                             <tr>
+                                 <td>Interactive Graphs</td>
+                                 <td>Visualizing small/medium networks.</td>
+                                 <td><code>net.show("network.html")</code></td>
+                             </tr>
+                             <tr>
+                                 <td>Node Customization</td>
+                                 <td>Color nodes by domain/discipline.</td>
+                                 <td><code>net.show_buttons(filter_=["physics"])</code></td>
+                             </tr>
+                             <tr>
+                                 <td>Edge Customization</td>
+                                 <td>Style edges by relationship type.</td>
+                                 <td><code>net.show_edges(labels=True)</code></td>
+                             </tr>
+                         </table>
+
+                         <p><strong>Example: Visualizing a Sub-Network</strong></p>
+                         <pre><code>from pyvis.network import Network
+
+net = Network(notebook=True, height="750px", width="100%")
+net.from_nx(G)  # Convert NetworkX graph to PyVis
+net.show("knowledge_network.html")</code></pre>
+
+                         <p><strong>Learn More:</strong> <a href="https://pyvis.readthedocs.io/en/latest/" target="_blank">PyVis Documentation</a></p>
+                     </div>
+
+                     <!-- D3.js -->
+                     <div class="card">
+                         <h3>🔹 D3.js: The Heart of MLKN.hypergraph’s Interactive Visualization</h3>
+                         <p><strong>Definition:</strong> D3.js (Data-Driven Documents) is a JavaScript library for producing dynamic, interactive data visualizations in web browsers. It binds data to DOM elements and applies transformations to the document based on that data.</p>
+
+                         <p><strong>Why D3.js?</strong></p>
+                         <ul>
+                             <li><strong>Flexibility:</strong> Full control over every pixel (unlike PyVis, which is more limited).</li>
+                             <li><strong>Performance:</strong> Optimized for large graphs (320K+ connections in MLKN.hypergraph).</li>
+                             <li><strong>Interactivity:</strong> Supports zoom, drag-and-drop, tooltips, and clicks to explore the data.</li>
+                             <li><strong>Force-Directed Layout:</strong> Ideal algorithm for visualizing complex networks (e.g., scientific knowledge).</li>
+                         </ul>
+
+                         <p><strong>Key Concepts in MLKN.hypergraph:</strong></p>
+                         <table>
+                             <tr>
+                                 <th>Concept</th>
+                                 <th>Description</th>
+                                 <th>Implementation in D3.js</th>
+                             </tr>
+                             <tr>
+                                 <td><strong>Force-Directed Layout</strong></td>
+                                 <td>Simulates a physical system where nodes repel each other and links attract.</td>
+                                 <td><code>d3.forceSimulation() + d3.forceLink()</code></td>
+                             </tr>
+                             <tr>
+                                 <td><strong>Nodes</strong></td>
+                                 <td>Represent domains/disciplines.</td>
+                                 <td><code>circle</code> SVG elements with <code>r</code> (radius) based on centrality.</td>
+                             </tr>
+                             <tr>
+                                 <td><strong>Edges</strong></td>
+                                 <td>Represent hierarchical/semantic relationships.</td>
+                                 <td><code>line</code> SVG elements with <code>stroke-width</code> based on weight.</td>
+                             </tr>
+                             <tr>
+                                 <td><strong>Tooltips</strong></td>
+                                 <td>Show metadata on hover (e.g., name, number of subdisciplines).</td>
+                                 <td><code>d3.tip()</code> or custom HTML tooltips.</td>
+                             </tr>
+                             <tr>
+                                 <td><strong>Zoom/Pan</strong></td>
+                                 <td>Explore the graph at different scales.</td>
+                                 <td><code>d3.zoom() + d3.drag()</code></td>
+                             </tr>
+                             <tr>
+                                 <td><strong>Color Coding</strong></td>
+                                 <td>Nodes colored by domain (e.g., red for Cognitive Sciences).</td>
+                                 <td><code>d3.scaleOrdinal()</code> for domain colors.</td>
+                             </tr>
+                         </table>
+
+                         <p><strong>How the Force-Directed Layout Works:</strong></p>
+                         <ol>
+                             <li><strong>Initialization:</strong> Nodes are placed randomly in the SVG space. Links are represented as springs (shorter links = stronger forces).</li>
+                             <li><strong>Simulation:</strong>
+                                 <ul>
+                                     <li><strong><code>forceManyBody</code>:</strong> Repulsion between all nodes (avoids overlaps). <strong>Key Parameter:</strong> <code>strength</code> (e.g., <code>-100</code> for strong repulsion).</li>
+                                     <li><strong><code>forceLink</code>:</strong> Attraction along links (simulates springs). <strong>Key Parameter:</strong> <code>distance</code> (e.g., <code>50</code> for ideal node spacing).</li>
+                                     <li><strong><code>forceCenter</code>:</strong> Attracts all nodes to the SVG center. <strong>Key Parameter:</strong> <code>x</code> and <code>y</code> (center coordinates).</li>
+                                 </ul>
+                             </li>
+                             <li><strong>Stabilization:</strong> The simulation balances out after a few iterations (nodes stabilize). <strong>Key Parameter:</strong> <code>alphaTarget</code> (lower = faster stabilization).</li>
+                         </ol>
+
+                         <p><strong>Example Code (Simplified):</strong></p>
+            <pre><code>// 1. Set up the SVG
+const svg = d3.select("body").append("svg")
+    .attr("width", 800)
+    .attr("height", 600);
+
+// 2. Load the data (nodes and links)
+d3.json("data/knowledge-network.json").then(data => {
+    const nodes = data.nodes;
+    const links = data.links;
+
+    // 3. Create the simulation
+    const simulation = d3.forceSimulation(nodes)
+        .force("link", d3.forceLink(links).id(d => d.id).distance(50))
+        .force("charge", d3.forceManyBody().strength(-100))
+        .force("center", d3.forceCenter(400, 300));
+
+    // 4. Draw the links
+    const link = svg.append("g")
+        .selectAll("line")
+        .data(links)
+        .enter().append("line")
+        .attr("stroke", "#999")
+        .attr("stroke-width", 1);
+
+    // 5. Draw the nodes
+    const node = svg.append("g")
+        .selectAll("circle")
+        .data(nodes)
+        .enter().append("circle")
+        .attr("r", d => Math.sqrt(d.size) * 5) // Size based on centrality
+        .attr("fill", d => color(d.domain)); // Color by domain
+
+    // 6. Update positions on each tick
+    simulation.on("tick", () => {
+        link
+            .attr("x1", d => d.source.x)
+            .attr("y1", d => d.source.y)
+            .attr("x2", d => d.target.x)
+            .attr("y2", d => d.target.y);
+
+        node
+            .attr("cx", d => d.x)
+            .attr("cy", d => d.y);
+    });
+});</code></pre>
+
+                         <p><strong>Advantages for MLKN.hypergraph:</strong></p>
+                         <ul>
+                             <li><strong>Scalability:</strong> Handles hundreds of thousands of nodes/links without lag.</li>
+                             <li><strong>Customization:</strong> Allows adding labels, legends, and custom interactions.</li>
+                             <li><strong>Integration:</strong> Works with React, Vue.js, or vanilla JS (compatible with your current site).</li>
+                         </ul>
+
+                         <p><strong>Learn More:</strong> <a href="https://d3js.org/" target="_blank">D3.js Official Website</a> | <a href="https://observablehq.com/@d3/force-directed-graph" target="_blank">Force-Directed Layout Tutorial</a></p>
+                     </div>
+                 </section>
+
+        
         <!-- Tools and Techniques -->
         <section id="toolsandtechniques" class="section" aria-labelledby="toolsandtechniques-title">
           <br>
