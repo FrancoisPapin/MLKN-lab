@@ -1326,7 +1326,7 @@ a:hover {
   }
 
   /* Body and Global Text */
-  body {
+  .body {
     background: #000000 !important; /* Noir pur */
     color: var(--text); /* Texte en blanc */
   }
@@ -1453,6 +1453,18 @@ a:hover {
     color: var(--text) !important; /* Blanc pur */
   }
 
+  .featured-caption,
+  .featured-caption em {
+    color: #ffffff !important;
+  }
+
+  /* Navbox active */
+  .nav-box a.active {
+    background: var(--accent) !important;
+    color: #ffffff !important;
+    border-color: var(--accent) !important;
+  }
+   
   /* Chips */
   .chip {
     color: var(--text) !important; /* Blanc pur */
