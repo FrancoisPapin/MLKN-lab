@@ -314,12 +314,12 @@
 
                          <p><strong>Example Code Snippet:</strong></p>
                          <pre><code>import pandas as pd
-import requests
+    import requests
 
-# Fetch data from OpenAlex API
-response = requests.get("https://api.openalex.org/works?filter=publication_year:2020")
-data = response.json()
-df = pd.DataFrame(data["results"])  # Convert to DataFrame for analysis</code></pre>
+    # Fetch data from OpenAlex API
+    response = requests.get("https://api.openalex.org/works?filter=publication_year:2020")
+    data = response.json()
+    df = pd.DataFrame(data["results"])  # Convert to DataFrame for analysis</code></pre>
 
                          <p><strong>Learn More:</strong> <a href="https://www.python.org/" target="_blank">Python Official Website</a> | <a href="https://pandas.pydata.org/" target="_blank">Pandas for Data Science</a></p>
                      </div>
@@ -422,19 +422,19 @@ df = pd.DataFrame(data["results"])  # Convert to DataFrame for analysis</code></
                          <p><strong>Example: Building a Knowledge Graph</strong></p>
                          <pre><code>import networkx as nx
 
-# Create a directed graph
-G = nx.DiGraph()
+    # Create a directed graph
+    G = nx.DiGraph()
 
-# Add nodes (disciplines)
-G.add_node("Computer Science", type="domain")
-G.add_node("AI", type="discipline", parent="Computer Science")
+    # Add nodes (disciplines)
+    G.add_node("Computer Science", type="domain")
+    G.add_node("AI", type="discipline", parent="Computer Science")
 
-# Add edges (relationships)
-G.add_edge("Computer Science", "AI", relationship="hierarchical")
+    # Add edges (relationships)
+    G.add_edge("Computer Science", "AI", relationship="hierarchical")
 
-# Calculate centrality
-centrality = nx.degree_centrality(G)
-print(f"Most central discipline: {max(centrality, key=centrality.get)}")</code></pre>
+    # Calculate centrality
+    centrality = nx.degree_centrality(G)
+    print(f"Most central discipline: {max(centrality, key=centrality.get)}")</code></pre>
 
                          <p><strong>Learn More:</strong> <a href="https://networkx.org/documentation/stable/" target="_blank">NetworkX Documentation</a></p>
                      </div>
@@ -479,10 +479,10 @@ print(f"Most central discipline: {max(centrality, key=centrality.get)}")</code><
                          <p><strong>Example: Discipline Distribution</strong></p>
                          <pre><code>import matplotlib.pyplot as plt
 
-df["discipline"].value_counts().plot(kind="bar", title="Papers per Discipline")
-plt.xlabel("Discipline")
-plt.ylabel("Number of Papers")
-plt.show()</code></pre>
+    df["discipline"].value_counts().plot(kind="bar", title="Papers per Discipline")
+    plt.xlabel("Discipline")
+    plt.ylabel("Number of Papers")
+    plt.show()</code></pre>
 
                          <p><strong>Learn More:</strong> <a href="https://matplotlib.org/stable/gallery/index.html" target="_blank">Matplotlib Gallery</a> | <a href="https://seaborn.pydata.org/tutorial.html" target="_blank">Seaborn Tutorial</a></p>
                      </div>
@@ -527,9 +527,9 @@ plt.show()</code></pre>
                          <p><strong>Example: Visualizing a Sub-Network</strong></p>
                          <pre><code>from pyvis.network import Network
 
-net = Network(notebook=True, height="750px", width="100%")
-net.from_nx(G)  # Convert NetworkX graph to PyVis
-net.show("knowledge_network.html")</code></pre>
+    net = Network(notebook=True, height="750px", width="100%")
+    net.from_nx(G)  # Convert NetworkX graph to PyVis
+    net.show("knowledge_network.html")</code></pre>
 
                          <p><strong>Learn More:</strong> <a href="https://pyvis.readthedocs.io/en/latest/" target="_blank">PyVis Documentation</a></p>
                      </div>
@@ -602,50 +602,50 @@ net.show("knowledge_network.html")</code></pre>
 
                          <p><strong>Example Code (Simplified):</strong></p>
             <pre><code>// 1. Set up the SVG
-const svg = d3.select("body").append("svg")
-    .attr("width", 800)
-    .attr("height", 600);
+    const svg = d3.select("body").append("svg")
+        .attr("width", 800)
+        .attr("height", 600);
 
-// 2. Load the data (nodes and links)
-d3.json("data/knowledge-network.json").then(data => {
-    const nodes = data.nodes;
-    const links = data.links;
+    // 2. Load the data (nodes and links)
+    d3.json("data/knowledge-network.json").then(data => {
+        const nodes = data.nodes;
+        const links = data.links;
 
-    // 3. Create the simulation
-    const simulation = d3.forceSimulation(nodes)
-        .force("link", d3.forceLink(links).id(d => d.id).distance(50))
-        .force("charge", d3.forceManyBody().strength(-100))
-        .force("center", d3.forceCenter(400, 300));
+        // 3. Create the simulation
+        const simulation = d3.forceSimulation(nodes)
+            .force("link", d3.forceLink(links).id(d => d.id).distance(50))
+            .force("charge", d3.forceManyBody().strength(-100))
+            .force("center", d3.forceCenter(400, 300));
 
-    // 4. Draw the links
-    const link = svg.append("g")
-        .selectAll("line")
-        .data(links)
-        .enter().append("line")
-        .attr("stroke", "#999")
-        .attr("stroke-width", 1);
+        // 4. Draw the links
+        const link = svg.append("g")
+            .selectAll("line")
+            .data(links)
+            .enter().append("line")
+            .attr("stroke", "#999")
+            .attr("stroke-width", 1);
 
-    // 5. Draw the nodes
-    const node = svg.append("g")
-        .selectAll("circle")
-        .data(nodes)
-        .enter().append("circle")
-        .attr("r", d => Math.sqrt(d.size) * 5) // Size based on centrality
-        .attr("fill", d => color(d.domain)); // Color by domain
+        // 5. Draw the nodes
+        const node = svg.append("g")
+            .selectAll("circle")
+            .data(nodes)
+            .enter().append("circle")
+            .attr("r", d => Math.sqrt(d.size) * 5) // Size based on centrality
+            .attr("fill", d => color(d.domain)); // Color by domain
 
-    // 6. Update positions on each tick
-    simulation.on("tick", () => {
-        link
-            .attr("x1", d => d.source.x)
-            .attr("y1", d => d.source.y)
-            .attr("x2", d => d.target.x)
-            .attr("y2", d => d.target.y);
+        // 6. Update positions on each tick
+        simulation.on("tick", () => {
+            link
+                .attr("x1", d => d.source.x)
+                .attr("y1", d => d.source.y)
+                .attr("x2", d => d.target.x)
+                .attr("y2", d => d.target.y);
 
-        node
-            .attr("cx", d => d.x)
-            .attr("cy", d => d.y);
-    });
-});</code></pre>
+            node
+                .attr("cx", d => d.x)
+                .attr("cy", d => d.y);
+        });
+    });</code></pre>
 
                          <p><strong>Advantages for MLKN.hypergraph:</strong></p>
                          <ul>
@@ -808,6 +808,67 @@ d3.json("data/knowledge-network.json").then(data => {
             </div>
         </section>
 
+        <!-- =============================================
+             SECTION 6: DATA PROCESSING & ANALYSIS (NOUVELLE SECTION)
+             ============================================= -->
+        <section id="data-processing" class="section" aria-labelledby="data-processing-title">
+            <h2 class="sec-h" id="data-processing-title">Data Processing & Analysis</h2>
+            <p class="sec-sub">FROM RAW DATA TO STRUCTURED KNOWLEDGE NETWORKS</p>
+
+            <div class="layer-card">
+                <p>The <strong>data processing pipeline</strong> transforms raw OpenAlex data into a <strong>structured, polyhierarchical knowledge network</strong> ready for analysis and visualization.</p>
+
+                <p><strong>Key Steps:</strong></p>
+                <ol>
+                    <li><strong>Data Ingestion:</strong>
+                        <ul>
+                            <li>Fetching data from <strong>OpenAlex API</strong> (e.g., works, authors, concepts).</li>
+                            <li>Supplementary sources: <strong>Scopus, MeSH, IEEE Thesaurus</strong> (to enrich classifications).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Cleaning & Normalization:</strong>
+                        <ul>
+                            <li><strong>Deduplication:</strong> Removing duplicate entries (e.g., same paper in multiple sources).</li>
+                            <li><strong>Standardization:</strong> Normalizing discipline names (e.g., "AI" → "Artificial Intelligence").</li>
+                            <li><strong>Disambiguation:</strong> Resolving ambiguous author names (e.g., "J. Smith" → "John Smith, Harvard").</li>
+                        </ul>
+                    </li>
+                    <li><strong>Transformation:</strong>
+                        <ul>
+                            <li><strong>Extracting Hierarchies:</strong> Identifying parent-child relationships (e.g., "Neuroscience" → "Cognitive Neuroscience").</li>
+                            <li><strong>Co-Occurrence Analysis:</strong> Counting how often disciplines/concepts appear together.</li>
+                            <li><strong>Network Construction:</strong> Converting cleaned data into a <strong>graph structure</strong> (nodes = disciplines, edges = relationships).</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <p><strong>Tools Used:</strong></p>
+                <ul>
+                    <li><strong>Python + Pandas:</strong> For cleaning and transformation.</li>
+                    <li><strong>NetworkX:</strong> For building the graph.</li>
+                    <li><strong>Jupyter Notebooks:</strong> For documenting each step (reproducibility).</li>
+                </ul>
+
+                <p><strong>Example Workflow:</strong></p>
+                <pre><code># 1. Load raw data
+    df = pd.read_csv("data/raw/openalex_works.csv")
+
+    # 2. Clean duplicates
+    df = df.drop_duplicates(subset=["doi"])
+
+    # 3. Normalize discipline names
+    discipline_mapping = {"AI": "Artificial Intelligence", "CS": "Computer Science"}
+    df["discipline"] = df["discipline"].replace(discipline_mapping)
+
+    # 4. Extract co-occurrences
+    co_occurrence = pd.crosstab(df["discipline1"], df["discipline2"])
+
+    # 5. Save processed data
+    df.to_csv("data/processed/disciplines_clean.csv", index=False)</code></pre>
+            </div>
+        </section>
+
+        
         <!-- Classification -->
         <section id="classification" class="section" aria-labelledby="classification-title">
           <br>
