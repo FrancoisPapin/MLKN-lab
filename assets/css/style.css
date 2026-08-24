@@ -868,12 +868,19 @@ a:hover {
   border: 2px solid;
 }
 
+/* Style par défaut (mode light) */
 .btn-p {
   background: var(--accent);
-  color: #fff;
+  color: #000000; /* Texte NOIR */
   border-color: var(--accent);
 }
 
+/* Style en mode dark */
+.dark-mode .btn-p {
+  color: #ffffff; /* Texte BLANC */
+}
+
+/* Hover */
 .btn-p:hover {
   background: #1558A0;
   border-color: #1558A0;
@@ -882,25 +889,6 @@ a:hover {
   opacity: 1;
   transform: translateY(-1px);
   box-shadow: 0 4px 18px rgba(26, 107, 170, 0.3);
-}
-
-.btn-s {
-  background: transparent;
-  color: var(--accent);
-  border-color: #BBCFE8;
-}
-
-.btn-s:hover {
-  background: #EBF4FB;
-  border-color: var(--accent);
-  text-decoration: none;
-  opacity: 1;
-  transform: translateY(-1px);
-}
-
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* =============================================
