@@ -1464,6 +1464,13 @@ a:hover {
     color: #ffffff !important;
     border-color: var(--accent) !important;
   }
+
+  /* Navbox survol */
+  .nav-box a:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--accent);
+    color: var(--text) !important;
+  }
    
   /* Chips */
   .chip {
