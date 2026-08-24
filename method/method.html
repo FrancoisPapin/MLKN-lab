@@ -1009,10 +1009,147 @@
             </div>
         </section>
 
-        <!-- Tools and Code a -->
+        <!-- =============================================
+             SECTION 10: REPRODUCIBILITY & OPEN SCIENCE (NOUVELLE SECTION)
+              ============================================= -->
+        <section id="reproducibility" class="section" aria-labelledby="reproducibility-title">
+            <h2 class="sec-h" id="reproducibility-title">Reproducibility & Open Science</h2>
+            <p class="sec-sub">COMMITMENT TO TRANSPARENCY AND ACCESSIBILITY</p>
+
+            <div class="layer-card">
+                <p>At MLKN.lab, we are committed to <strong>open science principles</strong>: <strong>transparency, reproducibility, and accessibility</strong>. All our <strong>data, code, and methodologies</strong> are publicly available.</p>
+
+                <p><strong>Key Components:</strong></p>
+                <ol>
+                    <li><strong>Open Data:</strong>
+                        <ul>
+                            <li><strong>Zenodo:</strong> Datasets with <strong>DOI</strong> for citation (e.g., <a href="https://doi.org/10.5281/zenodo.21363227" target="_blank">10.5281/zenodo.21363227</a>).</li>
+                            <li><strong>GitHub:</strong> Raw and processed data (via <strong>Git LFS</strong> for large files).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Open Code:</strong>
+                        <ul>
+                            <li><strong>GitHub Repository:</strong> <a href="https://github.com/FrancoisPapin/MLKN-lab" target="_blank">FrancoisPapin/MLKN-lab</a>.</li>
+                            <li><strong>Jupyter Notebooks:</strong> Step-by-step tutorials for <strong>data cleaning, analysis, and visualization</strong>.</li>
+                            <li><strong>License:</strong> MIT (allows <strong>free reuse</strong>).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Open Methodology:</strong>
+                        <ul>
+                            <li><strong>Documentation:</strong> Detailed explanations of <strong>every step</strong> (from data collection to visualization).</li>
+                            <li><strong>Tutorials:</strong> Guides for <strong>reproducing our results</strong> (e.g., <code>README.md</code>, <code>tutorials/</code> folder).</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <p><strong>How to Reproduce Our Results:</strong></p>
+                <ol>
+                    <li><strong>Clone the Repository:</strong>
+                        <pre><code>git clone https://github.com/FrancoisPapin/MLKN-lab.git
+    cd MLKN-lab</code></pre>
+                    </li>
+                    <li><strong>Install Dependencies:</strong>
+                        <pre><code>pip install -r requirements.txt</code></pre>
+                    </li>
+                    <li><strong>Download Data:</strong>
+                        <ul>
+                            <li>Download datasets from <a href="https://doi.org/10.5281/zenodo.21363227" target="_blank">Zenodo</a> or use <code>git lfs pull</code> for Git LFS files.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Run Notebooks:</strong>
+                        <ul>
+                            <li>Open <code>notebooks/data_cleaning.ipynb</code> in Jupyter to reproduce the data processing.</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <p><strong>Learn More:</strong> <a href="https://openscience.org/" target="_blank">Open Science Principles</a> | <a href="https://www.go-fair.org/fair-principles/" target="_blank">FAIR Principles</a></p>
+            </div>
+        </section>
+        
+        <!-- =============================================
+             SECTION 11: CODE & I%PLEMENTATION
+              ============================================= -->
+        <section id="code-implementation" class="section" aria-labelledby="code-implementation-title">
+            <h2 class="sec-h" id="code-implementation-title">Code & Implementation: Putting It All Together</h2>
+            <p class="sec-sub">FROM RAW DATA TO INTERACTIVE VISUALIZATION</p>
+
+            <div class="layer-card">
+                <h3>🔹 Repository Structure</h3>
+                <pre><code>MLKN-lab/
+    ├── data/                  # Raw and processed data (Git LFS)
+    │   ├── raw/               # Raw OpenAlex data
+    │   └── processed/         # Cleaned data (CSV/JSON)
+    ├── notebooks/             # Jupyter Notebooks (step-by-step tutorials)
+    │   ├── data_cleaning.ipynb
+    │   └── network_analysis.ipynb
+    ├── src/                   # Source code
+    │   ├── python/            # Data processing (Pandas, NetworkX)
+    │   └── js/                # D3.js code for MLKN.hypergraph
+    ├── docs/                 # Documentation
+    └── README.md              # Setup instructions</code></pre>
+            </div>
+            <br>
+
+            <div class="layer-card">
+                <h3>🔹 How to Contribute</h3>
+                <ol>
+                    <li><strong>Fork the Repository:</strong> Create your own copy on GitHub.</li>
+                    <li><strong>Clone Locally:</strong>
+                        <pre><code>git clone https://github.com/FrancoisPapin/MLKN-lab.git</code></pre>
+                    </li>
+                    <li><strong>Create a Branch:</strong>
+                        <pre><code>git checkout -b new-feature</code></pre>
+                    </li>
+                    <li><strong>Commit Changes:</strong>
+                        <pre><code>git commit -m "Add new classification layer"</code></pre>
+                    </li>
+                    <li><strong>Submit a Pull Request:</strong> Propose your changes for review.</li>
+                </ol>
+            </div>
+            <br>
+
+            <div class="layer-card">
+                <h3>🔹 Key Files</h3>
+                <table>
+                    <tr>
+                        <th>File/Folder</th>
+                        <th>Description</th>
+                        <th>Link</th>
+                    </tr>
+                    <tr>
+                        <td><code>data/raw/</code></td>
+                        <td>Raw OpenAlex data (via Git LFS).</td>
+                        <td><a href="https://doi.org/10.5281/zenodo.21363227" target="_blank">Zenodo Dataset</a></td>
+                    </tr>
+                    <tr>
+                        <td><code>notebooks/</code></td>
+                        <td>Jupyter Notebooks for data cleaning and analysis.</td>
+                        <td><a href="https://github.com/FrancoisPapin/MLKN-lab/tree/main/notebooks" target="_blank">View on GitHub</a></td>
+                    </tr>
+                    <tr>
+                        <td><code>src/python/</code></td>
+                        <td>Python scripts (Pandas, NetworkX).</td>
+                        <td><a href="https://github.com/FrancoisPapin/MLKN-lab/tree/main/src/python" target="_blank">View on GitHub</a></td>
+                    </tr>
+                    <tr>
+                        <td><code>src/js/</code></td>
+                        <td>D3.js code for MLKN.hypergraph.</td>
+                        <td><a href="https://github.com/FrancoisPapin/MLKN-lab/tree/main/src/js" target="_blank">View on GitHub</a></td>
+                    </tr>
+                    <tr>
+                        <td><code>README.md</code></td>
+                        <td>Instructions for setup and usage.</td>
+                        <td><a href="https://github.com/FrancoisPapin/MLKN-lab#readme" target="_blank">View on GitHub</a></td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Tools and Code-->
         <section id="tools" class="section" aria-labelledby="tools-title">
           <br>
-            <h2 class="sec-h" id="tools-title">Tools and Code</h2>
+            <h2 class="sec-h" id="tools-title">Code & Implementation</h2>
             <p class="sec-sub">Software for Building and Analyzing Knowledge Networks</p>
             
             <div class="layers-grid">
