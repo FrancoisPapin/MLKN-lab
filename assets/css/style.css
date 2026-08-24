@@ -872,7 +872,7 @@ a:hover {
 .btn-p {
   justify-content: center; /* Centre horizontalement */
   min-width: 100px; /* Largeur minimale */
-  flex: 1 1 auto;
+  flex: 0 1 auto;
   text-align: center;
   background: var(--accent);
   color: #000000 !important; /* Texte NOIR en mode light */
