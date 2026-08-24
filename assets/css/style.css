@@ -871,7 +871,7 @@ a:hover {
 /* Style par défaut (mode light) */
 .btn-p {
   justify-content: center; /* Centre horizontalement */
-  min-width: 100px; /* Largeur minimale */
+  min-width: 120px; /* Largeur minimale */
   flex: 0 1 auto;
   text-align: center;
   background: var(--accent);
