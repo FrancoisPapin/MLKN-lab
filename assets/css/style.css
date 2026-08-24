@@ -639,9 +639,8 @@ a:hover {
   padding: 32px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
   align-items: center;
-  justify-content: center;
   text-align: center;
   margin-bottom: 28px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -653,33 +652,50 @@ a:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+.featured-content {
+  max-width: 600px; /* Limite la largeur du texte */
+  width: 100%;
+}
+
 .feat-icon {
   width: 68px;
   height: 68px;
   border-radius: 12px;
-  flex-shrink: 0;
   background: linear-gradient(135deg, var(--accent), var(--accent2));
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.feat-eyebrow, .feat-title, .feat-desc {
-  margin-left: 0; /* Supprime les marges à gauche */
-  margin-right: 0;
+.feat-icon svg {
+  width: 34px;
+  height: 34px;
+  color: #fff;
 }
 
-.feat-desc {
-  max-width: 600px;
-  margin: 0 auto;
+/* Légende de l'image */
+.featured-image {
+  margin-top: 20px;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
-/* Style pour l'image */
-#insights img {
+.featured-image img {
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   max-width: 100%;
-  margin-top: 20px;
+  transition: transform 0.2s;
+}
+
+.featured-image:hover img {
+  transform: scale(1.02);
+}
+
+.featured-caption {
+  margin-top: 12px;
+  font-size: 0.9em;
+  color: #555;
+  line-height: 1.5;
 }
 
 /* =============================================
