@@ -662,13 +662,14 @@
                          </ol>
 
                          <p><strong>Example Code (Simplified):</strong></p>
-            <pre><code>// 1. Set up the SVG
-    const svg = d3.select("body").append("svg")
-        .attr("width", 800)
-        .attr("height", 600);
+            <pre><code>
+        // 1. Set up the SVG
+        const svg = d3.select("body").append("svg")
+            .attr("width", 800)
+            .attr("height", 600);
 
-    // 2. Load the data (nodes and links)
-    d3.json("data/knowledge-network.json").then(data => {
+        // 2. Load the data (nodes and links)
+        d3.json("data/knowledge-network.json").then(data => {
         const nodes = data.nodes;
         const links = data.links;
 
@@ -722,7 +723,7 @@
         
         <!-- =============================================
              SECTION 4: TOOLS AND TECHNIQUES
-              ============================================= -->>
+              ============================================= -->
         <section id="toolsandtechniques" class="section" aria-labelledby="toolsandtechniques-title">
           <br>
             <h2 class="sec-h" id="toolsandtechniques-title">Tools and Techniques</h2>
@@ -1388,7 +1389,7 @@
 
             <div class="layer-card">
                 <h3>🔹 How to Contribute</h3>
-                <ul>
+                <ol>
                     <li><strong>Fork the Repository:</strong> Create your own copy on GitHub.</li>
                     <li><strong>Clone Locally:</strong>
                         <pre><code>git clone https://github.com/FrancoisPapin/MLKN-lab.git</code></pre>
@@ -1400,7 +1401,7 @@
                         <pre><code>git commit -m "Add new classification layer"</code></pre>
                     </li>
                     <li><strong>Submit a Pull Request:</strong> Propose your changes for review.</li>
-                </ul>
+                </ol>
             </div>
             <br>
 
