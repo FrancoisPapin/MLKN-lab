@@ -58,17 +58,6 @@
         </picture>
       </a>
     </div>
-
-    <div class="theme-selector">
-    <button class="theme-toggle-button" aria-label="Toggle theme">
-        <i class="fas fa-palette"></i> <!-- Icône géométrique pour le thème -->
-    </button>
-    <div class="theme-dropdown">
-        <button class="theme-option" data-theme="adaptive">Adaptive</button>
-        <button class="theme-option" data-theme="light">Light</button>
-        <button class="theme-option" data-theme="dark">Dark</button>
-    </div>
-    </div>
       
     <!-- Desktop Navigation (Text-Based) -->
     <nav class="desktop-nav">
@@ -2010,33 +1999,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<!-- JavaScript for Script for Theme Mode Toggle: Light, Dark, Adaptative -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Récupère la préférence sauvegardée ou utilise "adaptive" par défaut
-    const savedTheme = localStorage.getItem('theme') || 'adaptive';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-
-    // Applique le thème par défaut (adaptatif) si aucun n'est sauvegardé
-    if (savedTheme === 'adaptive') {
-        document.documentElement.removeAttribute('data-theme');
-    }
-
-    // Écoute les clics sur les options de thème
-    document.querySelectorAll('.theme-option').forEach(option => {
-        option.addEventListener('click', function() {
-            const theme = this.getAttribute('data-theme');
-            localStorage.setItem('theme', theme);
-
-            if (theme === 'adaptive') {
-                document.documentElement.removeAttribute('data-theme');
-            } else {
-                document.documentElement.setAttribute('data-theme', theme);
-            }
-        });
-    });
-});
-</script>
     
 </body>
 </html>
