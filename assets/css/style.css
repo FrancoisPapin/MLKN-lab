@@ -1028,11 +1028,12 @@ a:hover {
   border-radius: 10px;
   padding: 22px; /* Espacement interne augmenté */
   margin-bottom: 16px; /* Espace entre les cards en mode mobile/grille */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .layer-card h3 {
   font-weight: 700;
-  font-size: 15px; /* Légèrement plus grand pour les titres */
+  font-size: 16px; /* Légèrement plus grand pour les titres */
   color: var(--text);
   margin-bottom: 10px; /* Plus d'espace sous le titre */
 }
@@ -1049,15 +1050,30 @@ a:hover {
   margin-bottom: 0; /* Pas de marge en bas pour le dernier paragraphe */
 }
 
+.layer-card a:hover {
+    text-decoration: underline;
+}
+
 .licon {
   font-size: 20px;
   margin-bottom: 8px; /* Légèrement plus d'espace sous l'icône */
+  line-height: 1; /* Alignement vertical parfait */ 
+}
+
+.layer-card .btn-s,
+.layer-card .btn-p {
+    font-size: 13px; /* Cohérent avec le texte des cards */
+    padding: 6px 12px;
+    margin-top: 10px;
 }
 
 /* =============================================
    LISTES ET TABLEAUX DANS LES LAYER-CARD
    ============================================= */
-.layer-card ul,
+.layer-card ul {
+    margin-bottom: 15px;
+}
+
 .layer-card ol {
   font-size: 13px; /* Taille cohérente avec les paragraphes */
   color: var(--text2);
@@ -1076,6 +1092,8 @@ a:hover {
   font-size: 12px; /* Taille réduite pour les tableaux */
   margin: 15px 0;
   color: var(--text2);
+  overflow-x: auto;
+  display: block;
 }
 
 .layer-card th,
