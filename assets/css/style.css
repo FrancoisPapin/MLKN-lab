@@ -1014,43 +1014,109 @@ a:hover {
 }
 
 /* =============================================
-   LAYERS GRID
+   LAYERS GRID & CARDS
    ============================================= */
 .layers-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Cards légèrement plus larges pour plus d'espace */
+  gap: 20px; /* Espacement entre les cards */
 }
 
 .layer-card {
   background: var(--panel);
   border: 1.5px solid var(--border);
   border-radius: 10px;
-  padding: 18px;
+  padding: 22px; /* Espacement interne augmenté */
+  margin-bottom: 16px; /* Espace entre les cards en mode mobile/grille */
 }
 
 .layer-card h3 {
   font-weight: 700;
-  font-size: 14px;
+  font-size: 15px; /* Légèrement plus grand pour les titres */
   color: var(--text);
-  margin-bottom: 5px;
+  margin-bottom: 10px; /* Plus d'espace sous le titre */
 }
 
 .layer-card p {
-  font-size: 12px;
+  font-size: 13px; /* Taille légèrement augmentée pour la lisibilité */
   color: var(--text2);
-  line-height: 1.55;
+  line-height: 1.6; /* Meilleure aération */
+  max-width: 65ch;
+  margin: 0 auto 15px; /* Espace après chaque paragraphe */
 }
 
-.layer-card p,
-.essay-box p {
-  max-width: 65ch;
-  margin: 0 auto;
+.layer-card p:last-child {
+  margin-bottom: 0; /* Pas de marge en bas pour le dernier paragraphe */
 }
 
 .licon {
   font-size: 20px;
-  margin-bottom: 7px;
+  margin-bottom: 8px; /* Légèrement plus d'espace sous l'icône */
+}
+
+/* =============================================
+   LISTES ET TABLEAUX DANS LES LAYER-CARD
+   ============================================= */
+.layer-card ul,
+.layer-card ol {
+  font-size: 13px; /* Taille cohérente avec les paragraphes */
+  color: var(--text2);
+  margin-bottom: 15px;
+  padding-left: 20px; /* Alignement des listes */
+}
+
+.layer-card li {
+  margin-bottom: 8px; /* Espace entre les éléments de liste */
+  line-height: 1.5;
+}
+
+.layer-card table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px; /* Taille réduite pour les tableaux */
+  margin: 15px 0;
+  color: var(--text2);
+}
+
+.layer-card th,
+.layer-card td {
+  border: 1px solid var(--border);
+  padding: 10px;
+  text-align: left;
+}
+
+.layer-card th {
+  background: rgba(0, 0, 0, 0.03); /* Fond très léger pour les en-têtes */
+  font-weight: 600;
+}
+
+/* =============================================
+   STYLE POUR LE CODE (PYTHON, D3.JS, ETC.)
+   ============================================= */
+.layer-card pre code,
+.layer-card code {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8em; /* Taille réduite pour les exemples de code */
+  line-height: 1.4;
+  background: rgba(0, 0, 0, 0.05); /* Fond gris très léger */
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 10px;
+  display: block;
+  overflow-x: auto; /* Barre de défilement horizontale si nécessaire */
+  white-space: pre;
+  margin: 12px 0; /* Espace vertical autour du code */
+  color: var(--text); /* Couleur du texte cohérente avec le thème */
+}
+
+/* Style pour les blocs de code en ligne (ex: <code>nx.DiGraph()</code>) */
+.layer-card code:not(pre code) {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85em;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 2px 4px;
+  border-radius: 3px;
+  color: var(--text);
 }
 
 /* =============================================
