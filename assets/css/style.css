@@ -1223,8 +1223,10 @@ a:hover {
    ============================================= */
 .nav-box {
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  gap: 8px;
+  flex-wrap: nowrap;
+  scroll-snap-type: x mandatory;
+  padding: 5px 0;
   justify-content: center;
   margin-top: 20px;
 }
@@ -1242,6 +1244,8 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 6px;
+  scroll-snap-align: start;
+  white-space: nowrap; 
 }
 
 .nav-box a:hover {
