@@ -1224,10 +1224,12 @@ a:hover {
 .nav-box {
   display: flex;
   gap: 8px;
+  overflow-x: auto;
   flex-wrap: nowrap;
   scroll-snap-type: x mandatory;
   padding: 5px 0;
   justify-content: center;
+  margin-bottom: 20px;
   margin-top: 20px;
 }
 
