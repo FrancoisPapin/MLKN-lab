@@ -1571,6 +1571,51 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Sélectionne tous les blocs de code dans .layer-card
+    const codeBlocks = document.querySelectorAll('.layer-card pre code');
+
+    codeBlocks.forEach(block => {
+        // Crée un conteneur pour le code + le bouton
+        const container = document.createElement('div');
+        container.className = 'code-container';
+
+        // Crée le bouton de copie
+        const copyBtn = document.createElement('button');
+        copyBtn.className = 'copy-btn';
+        copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
+        copyBtn.title = 'Copy to clipboard';
+
+        // Insère le bouton avant le bloc de code
+        block.parentNode.insertBefore(copyBtn, block);
+        container.appendChild(copyBtn);
+        container.appendChild(block.parentNode.removeChild(block));
+        block.parentNode.appendChild(container);
+
+        // Ajoute l'événement de clic
+        copyBtn.addEventListener('click', () => {
+            const code = block.textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                // Feedback visuel : change l'icône et la couleur
+                copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+                copyBtn.classList.add('copied');
+                copyBtn.title = 'Copied!';
+
+                // Réinitialise après 2 secondes
+                setTimeout(() => {
+                    copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
+                    copyBtn.classList.remove('copied');
+                    copyBtn.title = 'Copy to clipboard';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        });
+    });
+});
+</script>
     
 </body>
 </html>
