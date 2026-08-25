@@ -1070,15 +1070,13 @@ a:hover {
 /* =============================================
    LISTES ET TABLEAUX DANS LES LAYER-CARD
    ============================================= */
-.layer-card ul {
-    margin-bottom: 15px;
-}
-
+.layer-card ul,
 .layer-card ol {
   font-size: 13px; /* Taille cohérente avec les paragraphes */
   color: var(--text2);
+  margin-left: 0;
   margin-bottom: 15px;
-  padding-left: 20px; /* Alignement des listes */
+  padding-left: 30px; /* Alignement des listes */
 }
 
 .layer-card li {
@@ -1106,6 +1104,14 @@ a:hover {
 .layer-card th {
   background: rgba(0, 0, 0, 0.03); /* Fond très léger pour les en-têtes */
   font-weight: 600;
+}
+
+/* Pour aligner les listes avec le texte principal (optionnel) */
+.layer-card p,
+.layer-card ul,
+.layer-card ol {
+  text-indent: 0; /* Évite les indentations indésirables */
+  margin-left: 0; /* Alignement cohérent avec le texte */
 }
 
 /* =============================================
