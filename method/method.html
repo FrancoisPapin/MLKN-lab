@@ -152,7 +152,7 @@
            <div class="mobile-alert">
               <i class="fas fa-exclamation-triangle" style="color: #FFC107;"></i>
                  <span>
-                    <strong>Note:</strong> This page contains codes for programming langage. For optimal readability, we recommend viewing this page on a <strong>desktop, laptop computer or tablet</strong>.
+                    <strong>Note:</strong> This page contains lists, tables, and codes for Python programming langage. For optimal readability, we recommend viewing this page on a <strong>desktop, laptop computer or tablet</strong>.
                     On mobile devices, we recommend to switch to landscape orientation.
                  </span>
            </div>
@@ -1002,20 +1002,20 @@ node
 
                 <p><strong>Example Workflow:</strong></p>
                 <pre><code># 1. Load raw data
-    df = pd.read_csv("data/raw/openalex_works.csv")
+df = pd.read_csv("data/raw/openalex_works.csv")
 
-    # 2. Clean duplicates
-    df = df.drop_duplicates(subset=["doi"])
+# 2. Clean duplicates
+df = df.drop_duplicates(subset=["doi"])
 
-    # 3. Normalize discipline names
-    discipline_mapping = {"AI": "Artificial Intelligence", "CS": "Computer Science"}
-    df["discipline"] = df["discipline"].replace(discipline_mapping)
+# 3. Normalize discipline names
+discipline_mapping = {"AI": "Artificial Intelligence", "CS": "Computer Science"}
+df["discipline"] = df["discipline"].replace(discipline_mapping)
 
-    # 4. Extract co-occurrences
-    co_occurrence = pd.crosstab(df["discipline1"], df["discipline2"])
+# 4. Extract co-occurrences
+co_occurrence = pd.crosstab(df["discipline1"], df["discipline2"])
 
-    # 5. Save processed data
-    df.to_csv("data/processed/disciplines_clean.csv", index=False)</code></pre>
+# 5. Save processed data
+df.to_csv("data/processed/disciplines_clean.csv", index=False)</code></pre>
             </div>
         </section>
 
@@ -1089,7 +1089,7 @@ node
         </section>
 
         <!-- =============================================
-             SECTION 9: NETXORK CONSTRUCTION
+             SECTION 9: NETWORK CONSTRUCTION
               ============================================= -->
         <section id="network" class="section" aria-labelledby="network-title">
           <br>
@@ -1357,7 +1357,7 @@ node
         </section>
         
         <!-- =============================================
-             SECTION 13: CODE & I%PLEMENTATION
+             SECTION 13: CODE & IMPLEMENTATION
               ============================================= -->
         <section id="code-implementation" class="section" aria-labelledby="code-implementation-title">
             <h2 class="sec-h" id="code-implementation-title">Code & Implementation</h2>
