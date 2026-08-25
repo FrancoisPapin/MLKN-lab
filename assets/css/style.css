@@ -915,7 +915,7 @@ a:hover {
     cursor: pointer;
     font-size: 12px;
     color: var(--text);
-    transition: all 0.2s;
+    transition: all 0.3s ease;
     z-index: 1; /* Assure que le bouton reste au-dessus du code */
 }
 
@@ -923,6 +923,11 @@ a:hover {
     background: var(--accent);
     color: white;
     border-color: var(--accent);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.copy-btn:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .copy-btn.copied {
@@ -1174,7 +1179,7 @@ a:hover {
   background: rgba(0, 0, 0, 0.05); /* Fond gris très léger */
   border: 1px solid var(--border);
   border-radius: 4px;
-  padding: 10px;
+  padding: 10px 2.5rem 10px 10px;
   display: block;
   overflow-x: auto; /* Barre de défilement horizontale si nécessaire */
   white-space: pre;
